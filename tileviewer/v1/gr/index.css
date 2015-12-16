@@ -1,0 +1,304 @@
+/* Style CSS for map */
+html, body, div, pre { 
+  margin: 0;
+  padding: 0;
+}
+
+html { 
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  padding: 20px;
+  padding-top: 45px;
+  padding-right: 270px;
+  overflow:auto;
+  font-family: "OpenSans", Arial, sans-serif;
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  color: #333;
+}
+
+a{
+  color: #e37900;
+}
+
+a img {border:0;}
+
+a:hover {
+  opacity:0.8;
+}
+
+hr {
+  margin:35px -35px;
+  border:none;
+  border-bottom: 1px solid #ececec;
+}
+
+h1 {
+  padding:0; margin:20px 35px 10px;
+  font-weight: normal;
+  font-size: 24px;
+}
+
+h2 {
+  padding:0; margin:20px 35px 10px;
+  font-weight: bold;
+  font-size: 18px;
+  color: #e37900;
+}
+h3 {
+  padding:0; margin: 0 0 5px 0;
+  font-weight: bold;
+  font-size: 14px;
+  line-height:20px;
+}
+.desc {
+  color: #ccc;
+  margin-top:-10px;
+  margin-bottom:5px;
+}
+
+#map {
+  position: absolute;
+  background-color:#ddd;
+  top:46px;
+  left:0;
+  right:370px;
+  bottom:0;
+  z-index:1000;
+  display:none;
+}
+
+#map > iframe {
+  position:absolute;
+  width: 100%;
+  height: 100%;
+}
+
+#code { 
+  overflow: auto;
+  padding:20px;
+  position: absolute;
+  bottom:0;
+  left:0;
+  right:370px;
+  top:46px;
+  z-index:1050;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  display:none;
+  word-wrap:break-word;
+}
+
+#header {
+  position: absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height: 46px;
+  z-index:1700;
+  overflow:hidden;
+  background-color: #e37900;
+  background-image: url('//tileserver.com/v1/gr/georeferencer-header.png');
+  background-repeat: repeat-x;
+}
+
+#header #logo {
+  width:248px;
+  height:46px;
+  position: absolute;
+  top:0; left:50px;
+}
+
+#header #strap {
+  display:block;
+  position:absolute;
+  top:16px;
+  left:348px;
+  margin:0; padding:0;
+  white-space: nowrap;
+  font-size: 13px/20px;
+  font-weight:normal;
+  color:#fff;
+}
+
+#sidebar {
+  position: absolute;
+  overflow-x: hidden;
+  overflow-y: auto;
+  top:46px;
+  right:0;
+  bottom:0;
+  text-align: left;
+  padding: 35px 0;
+  width: 370px;
+  z-index:1450;
+  border: 0px;
+  background: #f8f8f8;
+  border-left: 1px solid #ccc;
+  font-size:12px;
+}
+
+#maptiler { position:relative; top:35px; left:-35px; }
+#maptiler img { width:370px; height:150px; }
+
+#sidebar ul, #sidebar li {
+  list-style-type: none;
+  margin-left: 0px;
+  padding-left: 0px;
+  margin-bottom: 10px;
+}
+
+#sidebar > ul > li {
+  font-weight:bold;
+}
+
+#sidebarfooter img {
+  margin-left: 35px;
+  width: 207px;
+  height: 50px;
+}
+
+.sidebarbox{
+  padding: 7px 35px 10px 35px;
+}
+
+.sidebarbox.active, .sidebarbox:hover{
+  background-color: #e6e6e6;
+}
+
+#walllink img {
+  width: 15px; height: 15px;
+  padding-right:8px;
+  vertical-align: middle;
+}
+
+#walllink {
+  margin: 35px;
+  line-height:15px;
+  color:#000;
+
+}
+
+#wall {
+  padding-top:5%;
+  overflow-y: auto; 
+  position:absolute; 
+  top:46px;
+  left:0;
+  right:0;
+  bottom:0;
+  text-align:center;
+  background-color: #fff;
+  z-index:1500;
+  color: #ddd;
+  font-weight:bold;
+  text-shadow: 0px 1px 0px black;
+  font:0px/0px;
+  text-align:center;
+}
+#wallfooter {
+  clear:both;
+  padding-top:25px;
+  display:block;
+  border:none;
+}
+#wallfooter img {
+  width:207px;
+  height:50px;
+}
+#wall > span {
+  font:13px/20px;
+  display:inline-block;
+  text-align:center;
+  width:238px;
+  height:238px;
+  border:1px solid #ccc;
+  margin:0px 5px 10px;
+  position:relative;
+  overflow:hidden;
+  box-shadow:rgba(0,0,0,.1) 0px 1px 3px;
+}
+
+#wall span a,
+#wall span span { 
+  display:block;
+  text-decoration: none;
+}
+
+.thumb {
+  width:238px;
+  height:238px;
+  display:block;
+  background: #fff;
+  position:relative;
+}
+
+.thumb .thumb-layer {
+  position:absolute;
+  top:0px;
+  left:0px;
+  right:0px;
+  bottom:0px;
+  background-position:50% 50%;
+  background-repeat:no-repeat;
+}
+
+.thumb .thumb-name {
+  position:absolute;
+  left:0px;
+  right:0px;
+  bottom:0px;
+  background: #666;
+  background: rgba(100, 100, 100, 0.7);
+  color: white;
+  padding:5px 10px;
+  min-height:20px;
+  overflow:hidden;
+}
+
+.fullscreen{
+  position: absolute !important;
+  top: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
+}
+
+.hidden{
+  display: none !important;
+}
+
+/* Pretty printing styles. Used with prettify.js. */
+
+.str { color: #080; }
+.kwd { color: #008; }
+.com { color: #800; }
+.typ { color: #606; }
+.lit { color: #066; }
+.pun { color: #660; }
+.pln { color: #000; }
+.tag { color: #008; }
+.atn { color: #606; }
+.atv { color: #080; }
+.dec { color: #606; }
+
+pre.prettyprint {
+  padding: 2px;
+  border: 1px solid #888;
+}
+
+@media print {
+  .str { color: #060; }
+  .kwd { color: #006; font-weight: bold; }
+  .com { color: #600; font-style: italic; }
+  .typ { color: #404; font-weight: bold; }
+  .lit { color: #044; }
+  .pun { color: #440; }
+  .pln { color: #000; }
+  .tag { color: #006; font-weight: bold; }
+  .atn { color: #404; }
+  .atv { color: #060; }
+}
