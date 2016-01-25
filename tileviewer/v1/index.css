@@ -1,10 +1,10 @@
 /* Style CSS for map */
-html, body, div, pre { 
+html, body, div, pre {
   margin: 0;
   padding: 0;
 }
 
-html { 
+html {
   width: 100%;
   height: 100%;
 }
@@ -20,11 +20,17 @@ body {
   color: #333;
 }
 
-a img {border:0;}
+a{
+  color: #175d93;
+  text-decoration: none;
+}
 
 a:hover {
   opacity:0.8;
+  text-decoration: underline;
 }
+
+a img {border:0;}
 
 hr {
   margin:35px 0;
@@ -33,7 +39,7 @@ hr {
 }
 
 h1 {
-  padding:0; margin:20px 35px 10px;
+  padding:0; margin: 20px 35px 0 35px;
   font-weight: normal;
   font-size: 24px;
 }
@@ -56,6 +62,14 @@ h3 {
   margin-bottom:5px;
 }
 
+.sep{
+  display: inline-block;
+  width: 1px;
+  height: 10px;
+  background-color: #c8c8c8;
+  margin: 0 3px 0 8px;
+}
+
 #map {
   position: absolute;
   background-color:#ddd;
@@ -73,7 +87,7 @@ h3 {
   height: 100%;
 }
 
-#code { 
+#code {
   overflow: auto;
   padding:20px;
   position: absolute;
@@ -127,7 +141,7 @@ h3 {
   right:0;
   bottom:0;
   text-align: left;
-  padding: 35px 0;
+  padding: 35px 0 0 0;
   width: 370px;
   z-index:1450;
   border: 0px;
@@ -150,6 +164,13 @@ h3 {
   font-weight:bold;
 }
 
+#sidebarfooter{
+  display: inline-block;
+  width: 100%;
+  border-top: 1px solid #ececec;
+  padding-top: 5px;
+}
+
 #sidebarfooter img {
   margin-left: 35px;
   width: 207px;
@@ -157,11 +178,60 @@ h3 {
 }
 
 .sidebarbox{
-  padding: 7px 35px 10px 35px;
+  padding: 12px 35px 12px 35px;
 }
 
-.sidebarbox.active, .sidebarbox:hover{
+.sidebarbox.hoverable.active, .sidebarbox.hoverable:hover{
   background-color: #e6e6e6;
+}
+
+#btn-xyz{
+  cursor: pointer;
+}
+
+#input-xyz{
+  display: none;
+}
+
+#input-xyz.active{
+  display: block;
+}
+
+#btn-web{
+  margin-left: 17px;
+}
+
+#btn-desktop, #btn-web{
+  display: inline-block;
+  cursor: pointer;
+  padding: 8px 18px 8px 18px;
+  margin-bottom: -1px;
+  font-size: 15px;
+}
+
+#btn-desktop.active, #btn-web.active{
+  padding: 7px 17px 7px 17px;
+  background-color: #fff;
+  border-top: 1px solid #ececec;
+  border-right: 1px solid #ececec;
+  border-bottom: 1px solid #fff;
+  border-left: 1px solid #ececec;
+}
+
+#btn-desktop.active:hover, #btn-web.active:hover{
+  text-decoration: none;
+  color: #175d93;
+}
+
+#tab-desktop, #tab-web{
+  display: none;
+}
+
+#tab-desktop.active, #tab-web.active{
+  display: block;
+  background-color: #fff;
+  border-top: 1px solid #ececec;
+  border-bottom: 1px solid #ececec;
 }
 
 #walllink img {
@@ -179,8 +249,8 @@ h3 {
 
 #wall {
   padding-top:10%;
-  overflow-y: auto; 
-  position:absolute; 
+  overflow-y: auto;
+  position:absolute;
   top:72px;
   left:0;
   right:0;
@@ -218,7 +288,7 @@ h3 {
 }
 
 #wall span a,
-#wall span span { 
+#wall span span {
   display:block;
   text-decoration: none;
 }
