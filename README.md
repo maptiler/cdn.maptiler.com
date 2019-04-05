@@ -1,4 +1,4 @@
-# KlokanTech CDN
+# MapTiler CDN
 
 - File structure:
   - `/{project_name}/v{major}.{minor}/{filename}.{ext}`
