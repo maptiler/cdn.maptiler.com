@@ -666,7 +666,7 @@
 	    } else {
 	      defs[name] = def;
 	    }
-	    global.proj4 && global.ol && ol.proj && ol.proj.proj4 && ol.proj.proj4.register(proj4);
+	    window.proj4 && window.ol && ol.proj && ol.proj.proj4 && ol.proj.proj4.register(window.proj4);
 	  }
 	  else if (arguments.length === 1) {
 	    if (Array.isArray(name)) {
