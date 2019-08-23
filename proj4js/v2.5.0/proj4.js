@@ -666,6 +666,7 @@
 	    } else {
 	      defs[name] = def;
 	    }
+	    window.ol && ol.proj && ol.proj.proj4 && ol.proj.proj4.register(proj4);
 	  }
 	  else if (arguments.length === 1) {
 	    if (Array.isArray(name)) {
@@ -695,7 +696,6 @@
 	    else {
 	      console.log(name);
 	    }
-      window.ol && ol.proj && ol.proj.proj4 && ol.proj.proj4.register(proj4);
 	    return;
 	  }
 
