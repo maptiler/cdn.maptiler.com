@@ -1,0 +1,190 @@
+import type { Feature as FeatureType } from "geojson";
+export type Feature = FeatureType & {
+    id: string;
+    text: string;
+    place_name: string;
+    place_type: string[];
+    center: [number, number];
+    bbox: [number, number, number, number];
+    address?: string;
+    matching_text?: string;
+};
+export type FeatureCollection = {
+    type: "FeatureCollection";
+    features: Feature[];
+};
+export type MapEvent = {
+    type: "proximityChange";
+    proximity: [number, number] | undefined;
+} | {
+    type: "mapClick";
+    coordinates: [number, number];
+} | {
+    type: "markerClick";
+    id: string;
+} | {
+    type: "markerMouseEnter";
+    id: string;
+} | {
+    type: "markerMouseLeave";
+    id: string;
+};
+export type MapController = {
+    setEventHandler(handler: undefined | ((e: MapEvent) => void)): void;
+    flyTo(center: [number, number], zoom: number): void;
+    fitBounds(bbox: [number, number, number, number], padding: number): void;
+    indicateReverse(reverse: boolean): void;
+    setMarkers(features: Feature[] | undefined, picked: Feature | undefined): void;
+    setReverseMarker(coordinates?: [number, number]): void;
+    setSelectedMarker(index: number): void;
+};
+export type Proximity = [number, number] | undefined;
+export type ControlOptions = {
+    /**
+     * Maptiler API key
+     */
+    apiKey: string;
+    /**
+     * Sets the amount of time, in milliseconds, to wait before querying the server when a user types into the Geocoder input box.
+     * This parameter may be useful for reducing the total number of API calls made for a single query.
+     *
+     * @default 200
+     */
+    debounceSearch?: number;
+    /**
+     * A proximity argument: this is a geographical point given as an object with latitude and longitude properties.
+     * Search results closer to this point will be given higher priority.
+     */
+    proximity?: [number, number];
+    /**
+     * Override the default placeholder attribute value.
+     *
+     * @default "Search"
+     */
+    placeholder?: string;
+    /**
+     * Override the default error message.
+     *
+     * @default "Searching failed"
+     */
+    errorMessage?: string;
+    /**
+     * Override the default message if no results are found.
+     *
+     * @default "No results found"
+     */
+    noResultsMessage?: string;
+    /**
+     * If true, the geocoder proximity will automatically update based on the map view.
+     *
+     * @default true
+     */
+    trackProximity?: boolean;
+    /**
+     * Minimum number of characters to enter before results are shown.
+     *
+     * @default 2
+     */
+    minLength?: number;
+    /**
+     * A bounding box argument: this is a bounding box given as an array in the format [minX, minY, maxX, maxY].
+     * Search results will be limited to the bounding box.
+     */
+    bbox?: [number, number, number, number];
+    /**
+     * Maximum number of results to show.
+     *
+     * @default 5
+     */
+    limit?: number;
+    /**
+     * Specify the language to use for response text and query result weighting.
+     * Options are IETF language tags comprised of a mandatory ISO 639-1 language code and optionally one or more IETF subtags for country or script.
+     * More than one value can also be specified, separated by commas.
+     * Defaults to the browser's language settings.
+     */
+    language?: string | string[];
+    /**
+     * If `false`, indicates that search will only occur on enter key press.
+     * If `true`, indicates that the Geocoder will search on the input box being updated above the minLength option.
+     *
+     * @default false
+     */
+    showResultsWhileTyping?: boolean;
+    /**
+     * Set to `false` to disable fuzzy search.
+     *
+     * @default true
+     */
+    fuzzyMatch?: boolean;
+    /**
+     * On geocoded result what zoom level should the map animate to when a bbox isn't found in the response.
+     * If a bbox is found the map will fit to the bbox.
+     *
+     * @default 16
+     */
+    zoom?: number;
+    /**
+     * If `true`, the geocoder control will collapse until hovered or in focus.
+     *
+     * @default false
+     */
+    collapsed?: boolean;
+    /**
+     * If true, the geocoder control will clear its value when the input blurs.
+     *
+     * @default false
+     */
+    clearOnBlur?: boolean;
+    /**
+     * A function which accepts a Feature in the Carmen GeoJSON format to filter out results from the Geocoding API response before they are included in the suggestions list.
+     * Return true to keep the item, false otherwise.
+     */
+    filter?: (feature: Feature) => boolean;
+    /**
+     * Class of the root element.
+     */
+    class?: string;
+    /**
+     * Set to `true` to enable reverse geocoding button with title. Set to `"always"` to reverse geocoding be always active.
+     *
+     * @default false
+     */
+    enableReverse?: boolean | "always";
+    /**
+     * Reverse toggle button title.
+     *
+     * @default "toggle reverse geocoding"
+     */
+    reverseButtonTitle?: string;
+    /**
+     * Clear button title.
+     *
+     * @default "clear"
+     */
+    clearButtonTitle?: string;
+    /**
+     * Set to `true` to show place type.
+     *
+     * @default false
+     */
+    showPlaceType?: boolean;
+    /**
+     * Set to `true` to show full feature geometry of the chosen result. Otherwise only marker will be shown.
+     *
+     * @default true
+     */
+    showFullGeometry?: boolean;
+    /**
+     * Limit search to specified country(ies).
+     *
+     * @default undefined use all countries
+     */
+    country?: string | string[];
+    /**
+     * Filter of feature types to return.
+     *
+     * @default undefined all available feature types are returned
+     */
+    types?: string[];
+};
