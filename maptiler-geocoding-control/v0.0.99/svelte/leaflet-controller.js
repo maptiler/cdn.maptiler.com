@@ -57,7 +57,7 @@ export function createLeafletMapController(map, marker = true, showResultMarkers
             }),
         });
     }
-    const ctrl = {
+    return {
         setEventHandler(handler) {
             if (handler) {
                 eventHandler = handler;
@@ -202,5 +202,4 @@ export function createLeafletMapController(map, marker = true, showResultMarkers
             selectedMarker?.getElement()?.classList.toggle("marker-selected", true);
         },
     };
-    return ctrl;
 }

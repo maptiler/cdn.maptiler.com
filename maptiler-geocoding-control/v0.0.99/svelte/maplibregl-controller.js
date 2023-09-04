@@ -92,7 +92,7 @@ export function createMapLibreGlMapController(map, maplibregl, marker = true, sh
         });
         return new maplibregl.Marker({ element, offset: [1, -13] });
     }
-    const ctrl = {
+    return {
         setEventHandler(handler) {
             if (handler) {
                 eventHandler = handler;
@@ -242,5 +242,4 @@ export function createMapLibreGlMapController(map, maplibregl, marker = true, sh
             selectedMarker?.getElement().classList.toggle("marker-selected", true);
         },
     };
-    return ctrl;
 }

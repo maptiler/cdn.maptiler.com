@@ -647,30 +647,30 @@ var Ka = Hr * Hr, Po = function(t, e) {
         var g = r.comparePoint(e.leftSE.point);
         if (g !== 0)
           return g;
-        var y = e.comparePoint(r.rightSE.point);
-        return y < 0 ? 1 : y > 0 ? -1 : 1;
+        var m = e.comparePoint(r.rightSE.point);
+        return m < 0 ? 1 : m > 0 ? -1 : 1;
       }
       if (u < l)
         return -1;
       if (u > l)
         return 1;
       if (s < a) {
-        var m = r.comparePoint(e.rightSE.point);
-        if (m !== 0)
-          return m;
+        var v = r.comparePoint(e.rightSE.point);
+        if (v !== 0)
+          return v;
       }
       if (s > a) {
-        var _ = e.comparePoint(r.rightSE.point);
-        if (_ < 0)
+        var E = e.comparePoint(r.rightSE.point);
+        if (E < 0)
           return 1;
-        if (_ > 0)
+        if (E > 0)
           return -1;
       }
       if (s !== a) {
-        var I = c - u, C = s - i, x = f - l, b = a - o;
-        if (I > C && x < b)
+        var I = c - u, C = s - i, x = f - l, P = a - o;
+        if (I > C && x < P)
           return 1;
-        if (I < C && x > b)
+        if (I < C && x > P)
           return -1;
       }
       return s > a ? 1 : s < a || c < f ? -1 : c > f ? 1 : e.id < r.id ? -1 : e.id > r.id ? 1 : 0;
@@ -875,14 +875,14 @@ var Ka = Hr * Hr, Po = function(t, e) {
       }
       for (var f = [], h = [], p = 0, g = r.length; p < g; p++)
         if (i[p] !== 0) {
-          var y = r[p], m = y.poly;
-          if (h.indexOf(m) === -1)
-            if (y.isExterior)
-              f.push(m);
+          var m = r[p], v = m.poly;
+          if (h.indexOf(v) === -1)
+            if (m.isExterior)
+              f.push(v);
             else {
-              h.indexOf(m) === -1 && h.push(m);
-              var _ = f.indexOf(y.poly);
-              _ !== -1 && f.splice(_, 1);
+              h.indexOf(v) === -1 && h.push(v);
+              var E = f.indexOf(m.poly);
+              E !== -1 && f.splice(E, 1);
             }
         }
       for (var I = 0, C = f.length; I < C; I++) {
@@ -1052,20 +1052,20 @@ var Ka = Hr * Hr, Po = function(t, e) {
             for (; ; ) {
               var p = u.getAvailableLinkedEvents();
               if (p.length === 0) {
-                var g = c[0].point, y = c[c.length - 1].point;
-                throw new Error("Unable to complete output ring starting at [".concat(g.x, ",") + " ".concat(g.y, "]. Last matching segment found ends at") + " [".concat(y.x, ", ").concat(y.y, "]."));
+                var g = c[0].point, m = c[c.length - 1].point;
+                throw new Error("Unable to complete output ring starting at [".concat(g.x, ",") + " ".concat(g.y, "]. Last matching segment found ends at") + " [".concat(m.x, ", ").concat(m.y, "]."));
               }
               if (p.length === 1) {
                 l = p[0].otherSE;
                 break;
               }
-              for (var m = null, _ = 0, I = h.length; _ < I; _++)
-                if (h[_].point === u.point) {
-                  m = _;
+              for (var v = null, E = 0, I = h.length; E < I; E++)
+                if (h[E].point === u.point) {
+                  v = E;
                   break;
                 }
-              if (m !== null) {
-                var C = h.splice(m)[0], x = c.splice(C.index);
+              if (v !== null) {
+                var C = h.splice(v)[0], x = c.splice(C.index);
                 x.unshift(x[0].otherSE), r.push(new n(x.reverse()));
                 continue;
               }
@@ -1073,8 +1073,8 @@ var Ka = Hr * Hr, Po = function(t, e) {
                 index: c.length,
                 point: u.point
               });
-              var b = u.getLeftmostComparator(a);
-              l = p.sort(b)[0].otherSE;
+              var P = u.getLeftmostComparator(a);
+              l = p.sort(P)[0].otherSE;
               break;
             }
           r.push(new n(c));
@@ -1214,37 +1214,37 @@ var Ka = Hr * Hr, Po = function(t, e) {
             for (var h = this._splitSafely(u, f), p = 0, g = h.length; p < g; p++)
               i.push(h[p]);
         }
-        var y = null;
+        var m = null;
         if (l) {
-          var m = l.getIntersection(r);
-          if (m !== null && (r.isAnEndpoint(m) || (y = m), !l.isAnEndpoint(m)))
-            for (var _ = this._splitSafely(l, m), I = 0, C = _.length; I < C; I++)
-              i.push(_[I]);
+          var v = l.getIntersection(r);
+          if (v !== null && (r.isAnEndpoint(v) || (m = v), !l.isAnEndpoint(v)))
+            for (var E = this._splitSafely(l, v), I = 0, C = E.length; I < C; I++)
+              i.push(E[I]);
         }
-        if (c !== null || y !== null) {
+        if (c !== null || m !== null) {
           var x = null;
           if (c === null)
-            x = y;
-          else if (y === null)
+            x = m;
+          else if (m === null)
             x = c;
           else {
-            var b = vr.comparePoints(c, y);
-            x = b <= 0 ? c : y;
+            var P = vr.comparePoints(c, m);
+            x = P <= 0 ? c : m;
           }
           this.queue.remove(r.rightSE), i.push(r.rightSE);
-          for (var P = r.split(x), D = 0, G = P.length; D < G; D++)
-            i.push(P[D]);
+          for (var R = r.split(x), F = 0, G = R.length; F < G; F++)
+            i.push(R[F]);
         }
         i.length > 0 ? (this.tree.remove(r), i.push(e)) : (this.segments.push(r), r.prev = u);
       } else {
         if (u && l) {
-          var A = u.getIntersection(l);
-          if (A !== null) {
-            if (!u.isAnEndpoint(A))
-              for (var et = this._splitSafely(u, A), K = 0, nt = et.length; K < nt; K++)
+          var M = u.getIntersection(l);
+          if (M !== null) {
+            if (!u.isAnEndpoint(M))
+              for (var et = this._splitSafely(u, M), K = 0, nt = et.length; K < nt; K++)
                 i.push(et[K]);
-            if (!l.isAnEndpoint(A))
-              for (var ct = this._splitSafely(l, A), w = 0, X = ct.length; w < X; w++)
+            if (!l.isAnEndpoint(M))
+              for (var ct = this._splitSafely(l, M), w = 0, X = ct.length; w < X; w++)
                 i.push(ct[w]);
           }
         }
@@ -1283,28 +1283,28 @@ var Ka = Hr * Hr, Po = function(t, e) {
             if (wo(h.bbox, o[p].bbox) === null)
               return [];
       }
-      for (var y = new Vo(vr.compare), m = 0, _ = o.length; m < _; m++)
-        for (var I = o[m].getSweepEvents(), C = 0, x = I.length; C < x; C++)
-          if (y.insert(I[C]), y.size > hs)
+      for (var m = new Vo(vr.compare), v = 0, E = o.length; v < E; v++)
+        for (var I = o[v].getSweepEvents(), C = 0, x = I.length; C < x; C++)
+          if (m.insert(I[C]), m.size > hs)
             throw new Error("Infinite loop when putting segment endpoints in a priority queue (queue size too big). Please file a bug report.");
-      for (var b = new iu(y), P = y.size, D = y.pop(); D; ) {
-        var G = D.key;
-        if (y.size === P) {
-          var A = G.segment;
-          throw new Error("Unable to pop() ".concat(G.isLeft ? "left" : "right", " SweepEvent ") + "[".concat(G.point.x, ", ").concat(G.point.y, "] from segment #").concat(A.id, " ") + "[".concat(A.leftSE.point.x, ", ").concat(A.leftSE.point.y, "] -> ") + "[".concat(A.rightSE.point.x, ", ").concat(A.rightSE.point.y, "] from queue. ") + "Please file a bug report.");
+      for (var P = new iu(m), R = m.size, F = m.pop(); F; ) {
+        var G = F.key;
+        if (m.size === R) {
+          var M = G.segment;
+          throw new Error("Unable to pop() ".concat(G.isLeft ? "left" : "right", " SweepEvent ") + "[".concat(G.point.x, ", ").concat(G.point.y, "] from segment #").concat(M.id, " ") + "[".concat(M.leftSE.point.x, ", ").concat(M.leftSE.point.y, "] -> ") + "[".concat(M.rightSE.point.x, ", ").concat(M.rightSE.point.y, "] from queue. ") + "Please file a bug report.");
         }
-        if (y.size > hs)
+        if (m.size > hs)
           throw new Error("Infinite loop when passing sweep line over endpoints (queue size too big). Please file a bug report.");
-        if (b.segments.length > ou)
+        if (P.segments.length > ou)
           throw new Error("Infinite loop when passing sweep line over endpoints (too many sweep line segments). Please file a bug report.");
-        for (var et = b.process(G), K = 0, nt = et.length; K < nt; K++) {
+        for (var et = P.process(G), K = 0, nt = et.length; K < nt; K++) {
           var ct = et[K];
-          ct.consumedBy === void 0 && y.insert(ct);
+          ct.consumedBy === void 0 && m.insert(ct);
         }
-        P = y.size, D = y.pop();
+        R = m.size, F = m.pop();
       }
       fi.reset();
-      var w = ru.factory(b.segments), X = new nu(w);
+      var w = ru.factory(P.segments), X = new nu(w);
       return X.getGeom();
     }
   }]), n;
@@ -1675,21 +1675,21 @@ class Mu extends Ru {
 }
 function Js(n, t, e) {
   if (n !== null)
-    for (var r, i, o, s, a, u, l, c = 0, f = 0, h, p = n.type, g = p === "FeatureCollection", y = p === "Feature", m = g ? n.features.length : 1, _ = 0; _ < m; _++) {
-      l = g ? n.features[_].geometry : y ? n.geometry : n, h = l ? l.type === "GeometryCollection" : !1, a = h ? l.geometries.length : 1;
+    for (var r, i, o, s, a, u, l, c = 0, f = 0, h, p = n.type, g = p === "FeatureCollection", m = p === "Feature", v = g ? n.features.length : 1, E = 0; E < v; E++) {
+      l = g ? n.features[E].geometry : m ? n.geometry : n, h = l ? l.type === "GeometryCollection" : !1, a = h ? l.geometries.length : 1;
       for (var I = 0; I < a; I++) {
         var C = 0, x = 0;
         if (s = h ? l.geometries[I] : l, s !== null) {
           u = s.coordinates;
-          var b = s.type;
-          switch (c = e && (b === "Polygon" || b === "MultiPolygon") ? 1 : 0, b) {
+          var P = s.type;
+          switch (c = e && (P === "Polygon" || P === "MultiPolygon") ? 1 : 0, P) {
             case null:
               break;
             case "Point":
               if (t(
                 u,
                 f,
-                _,
+                E,
                 C,
                 x
               ) === !1)
@@ -1702,14 +1702,14 @@ function Js(n, t, e) {
                 if (t(
                   u[r],
                   f,
-                  _,
+                  E,
                   C,
                   x
                 ) === !1)
                   return !1;
-                f++, b === "MultiPoint" && C++;
+                f++, P === "MultiPoint" && C++;
               }
-              b === "LineString" && C++;
+              P === "LineString" && C++;
               break;
             case "Polygon":
             case "MultiLineString":
@@ -1718,16 +1718,16 @@ function Js(n, t, e) {
                   if (t(
                     u[r][i],
                     f,
-                    _,
+                    E,
                     C,
                     x
                   ) === !1)
                     return !1;
                   f++;
                 }
-                b === "MultiLineString" && C++, b === "Polygon" && x++;
+                P === "MultiLineString" && C++, P === "Polygon" && x++;
               }
-              b === "Polygon" && C++;
+              P === "Polygon" && C++;
               break;
             case "MultiPolygon":
               for (r = 0; r < u.length; r++) {
@@ -1736,7 +1736,7 @@ function Js(n, t, e) {
                     if (t(
                       u[r][i][o],
                       f,
-                      _,
+                      E,
                       C,
                       x
                     ) === !1)
@@ -1768,8 +1768,8 @@ function ms(n, t) {
       ;
 }
 function Zs(n, t) {
-  var e, r, i, o, s, a, u, l, c, f, h = 0, p = n.type === "FeatureCollection", g = n.type === "Feature", y = p ? n.features.length : 1;
-  for (e = 0; e < y; e++) {
+  var e, r, i, o, s, a, u, l, c, f, h = 0, p = n.type === "FeatureCollection", g = n.type === "Feature", m = p ? n.features.length : 1;
+  for (e = 0; e < m; e++) {
     for (a = p ? n.features[e].geometry : g ? n.geometry : n, l = p ? n.features[e].properties : g ? n.properties : {}, c = p ? n.features[e].bbox : g ? n.bbox : void 0, f = p ? n.features[e].id : g ? n.id : void 0, u = a ? a.type === "GeometryCollection" : !1, s = u ? a.geometries.length : 1, i = 0; i < s; i++) {
       if (o = u ? a.geometries[i] : a, o === null) {
         if (t(
@@ -1873,24 +1873,24 @@ var it = function(n) {
     n.call(this, e), this.name = "IllegalArgumentException", this.message = e, this.stack = new n().stack;
   }
   return n && (t.__proto__ = n), t.prototype = Object.create(n && n.prototype), t.prototype.constructor = t, t;
-}(Error), F = function() {
+}(Error), A = function() {
 }, $s = { MAX_VALUE: { configurable: !0 } };
-F.isNaN = function(t) {
+A.isNaN = function(t) {
   return Number.isNaN(t);
 };
-F.doubleToLongBits = function(t) {
+A.doubleToLongBits = function(t) {
   return t;
 };
-F.longBitsToDouble = function(t) {
+A.longBitsToDouble = function(t) {
   return t;
 };
-F.isInfinite = function(t) {
+A.isInfinite = function(t) {
   return !Number.isFinite(t);
 };
 $s.MAX_VALUE.get = function() {
   return Number.MAX_VALUE;
 };
-Object.defineProperties(F, $s);
+Object.defineProperties(A, $s);
 var Ee = function() {
 }, io = function() {
 }, Dn = function() {
@@ -1942,7 +1942,7 @@ d.prototype.getOrdinate = function(t) {
   throw new it("Invalid ordinate index: " + t);
 };
 d.prototype.equals3D = function(t) {
-  return this.x === t.x && this.y === t.y && (this.z === t.z || F.isNaN(this.z)) && F.isNaN(t.z);
+  return this.x === t.x && this.y === t.y && (this.z === t.z || A.isNaN(this.z)) && A.isNaN(t.z);
 };
 d.prototype.equals = function(t) {
   return t instanceof d ? this.equals2D(t) : !1;
@@ -1985,7 +1985,7 @@ d.prototype.getClass = function() {
 };
 d.hashCode = function() {
   if (arguments.length === 1) {
-    var t = arguments[0], e = F.doubleToLongBits(t);
+    var t = arguments[0], e = A.doubleToLongBits(t);
     return Math.trunc((e ^ e) >>> 32);
   }
 };
@@ -1996,7 +1996,7 @@ Cn.serialVersionUID.get = function() {
   return 6683108902428367e3;
 };
 Cn.NULL_ORDINATE.get = function() {
-  return F.NaN;
+  return A.NaN;
 };
 Cn.X.get = function() {
   return 0;
@@ -2037,7 +2037,7 @@ Rr.prototype.getClass = function() {
   return Rr;
 };
 Rr.compare = function(t, e) {
-  return t < e ? -1 : t > e ? 1 : F.isNaN(t) ? F.isNaN(e) ? 0 : -1 : F.isNaN(e) ? 1 : 0;
+  return t < e ? -1 : t > e ? 1 : A.isNaN(t) ? A.isNaN(e) ? 0 : -1 : A.isNaN(e) ? 1 : 0;
 };
 var Tn = function() {
 };
@@ -2049,23 +2049,23 @@ Tn.prototype.interfaces_ = function() {
 Tn.prototype.getClass = function() {
   return Tn;
 };
-var v = function() {
+var y = function() {
 }, wi = { INTERIOR: { configurable: !0 }, BOUNDARY: { configurable: !0 }, EXTERIOR: { configurable: !0 }, NONE: { configurable: !0 } };
-v.prototype.interfaces_ = function() {
+y.prototype.interfaces_ = function() {
   return [];
 };
-v.prototype.getClass = function() {
-  return v;
+y.prototype.getClass = function() {
+  return y;
 };
-v.toLocationSymbol = function(t) {
+y.toLocationSymbol = function(t) {
   switch (t) {
-    case v.EXTERIOR:
+    case y.EXTERIOR:
       return "e";
-    case v.BOUNDARY:
+    case y.BOUNDARY:
       return "b";
-    case v.INTERIOR:
+    case y.INTERIOR:
       return "i";
-    case v.NONE:
+    case y.NONE:
       return "-";
   }
   throw new it("Unknown location value: " + t);
@@ -2082,8 +2082,8 @@ wi.EXTERIOR.get = function() {
 wi.NONE.get = function() {
   return -1;
 };
-Object.defineProperties(v, wi);
-var M = function(n, t) {
+Object.defineProperties(y, wi);
+var T = function(n, t) {
   return n.interfaces_ && n.interfaces_().indexOf(t) > -1;
 }, ue = function() {
 }, ta = { LOG_10: { configurable: !0 } };
@@ -2095,7 +2095,7 @@ ue.prototype.getClass = function() {
 };
 ue.log10 = function(t) {
   var e = Math.log(t);
-  return F.isInfinite(e) || F.isNaN(e) ? e : e / ue.LOG_10;
+  return A.isInfinite(e) || A.isNaN(e) ? e : e / ue.LOG_10;
 };
 ue.min = function(t, e, r, i) {
   var o = t;
@@ -2161,7 +2161,7 @@ pi.isWhitespace = function(t) {
 pi.toUpperCase = function(t) {
   return t.toUpperCase();
 };
-var E = function n() {
+var _ = function n() {
   if (this._hi = 0, this._lo = 0, arguments.length === 0)
     this.init(0);
   else if (arguments.length === 1) {
@@ -2180,33 +2180,33 @@ var E = function n() {
     this.init(i, o);
   }
 }, Oe = { PI: { configurable: !0 }, TWO_PI: { configurable: !0 }, PI_2: { configurable: !0 }, E: { configurable: !0 }, NaN: { configurable: !0 }, EPS: { configurable: !0 }, SPLIT: { configurable: !0 }, MAX_PRINT_DIGITS: { configurable: !0 }, TEN: { configurable: !0 }, ONE: { configurable: !0 }, SCI_NOT_EXPONENT_CHAR: { configurable: !0 }, SCI_NOT_ZERO: { configurable: !0 } };
-E.prototype.le = function(t) {
+_.prototype.le = function(t) {
   return (this._hi < t._hi || this._hi === t._hi) && this._lo <= t._lo;
 };
-E.prototype.extractSignificantDigits = function(t, e) {
-  var r = this.abs(), i = E.magnitude(r._hi), o = E.TEN.pow(i);
-  r = r.divide(o), r.gt(E.TEN) ? (r = r.divide(E.TEN), i += 1) : r.lt(E.ONE) && (r = r.multiply(E.TEN), i -= 1);
-  for (var s = i + 1, a = new Je(), u = E.MAX_PRINT_DIGITS - 1, l = 0; l <= u; l++) {
+_.prototype.extractSignificantDigits = function(t, e) {
+  var r = this.abs(), i = _.magnitude(r._hi), o = _.TEN.pow(i);
+  r = r.divide(o), r.gt(_.TEN) ? (r = r.divide(_.TEN), i += 1) : r.lt(_.ONE) && (r = r.multiply(_.TEN), i -= 1);
+  for (var s = i + 1, a = new Je(), u = _.MAX_PRINT_DIGITS - 1, l = 0; l <= u; l++) {
     t && l === s && a.append(".");
     var c = Math.trunc(r._hi);
     if (c < 0)
       break;
     var f = !1, h = 0;
-    c > 9 ? (f = !0, h = "9") : h = "0" + c, a.append(h), r = r.subtract(E.valueOf(c)).multiply(E.TEN), f && r.selfAdd(E.TEN);
-    var p = !0, g = E.magnitude(r._hi);
+    c > 9 ? (f = !0, h = "9") : h = "0" + c, a.append(h), r = r.subtract(_.valueOf(c)).multiply(_.TEN), f && r.selfAdd(_.TEN);
+    var p = !0, g = _.magnitude(r._hi);
     if (g < 0 && Math.abs(g) >= u - l && (p = !1), !p)
       break;
   }
   return e[0] = i, a.toString();
 };
-E.prototype.sqr = function() {
+_.prototype.sqr = function() {
   return this.multiply(this);
 };
-E.prototype.doubleValue = function() {
+_.prototype.doubleValue = function() {
   return this._hi + this._lo;
 };
-E.prototype.subtract = function() {
-  if (arguments[0] instanceof E) {
+_.prototype.subtract = function() {
+  if (arguments[0] instanceof _) {
     var t = arguments[0];
     return this.add(t.negate());
   } else if (typeof arguments[0] == "number") {
@@ -2214,17 +2214,17 @@ E.prototype.subtract = function() {
     return this.add(-e);
   }
 };
-E.prototype.equals = function() {
+_.prototype.equals = function() {
   if (arguments.length === 1) {
     var t = arguments[0];
     return this._hi === t._hi && this._lo === t._lo;
   }
 };
-E.prototype.isZero = function() {
+_.prototype.isZero = function() {
   return this._hi === 0 && this._lo === 0;
 };
-E.prototype.selfSubtract = function() {
-  if (arguments[0] instanceof E) {
+_.prototype.selfSubtract = function() {
+  if (arguments[0] instanceof _) {
     var t = arguments[0];
     return this.isNaN() ? this : this.selfAdd(-t._hi, -t._lo);
   } else if (typeof arguments[0] == "number") {
@@ -2232,15 +2232,15 @@ E.prototype.selfSubtract = function() {
     return this.isNaN() ? this : this.selfAdd(-e, 0);
   }
 };
-E.prototype.getSpecialNumberString = function() {
+_.prototype.getSpecialNumberString = function() {
   return this.isZero() ? "0.0" : this.isNaN() ? "NaN " : null;
 };
-E.prototype.min = function(t) {
+_.prototype.min = function(t) {
   return this.le(t) ? this : t;
 };
-E.prototype.selfDivide = function() {
+_.prototype.selfDivide = function() {
   if (arguments.length === 1) {
-    if (arguments[0] instanceof E) {
+    if (arguments[0] instanceof _) {
       var t = arguments[0];
       return this.selfDivide(t._hi, t._lo);
     } else if (typeof arguments[0] == "number") {
@@ -2249,30 +2249,30 @@ E.prototype.selfDivide = function() {
     }
   } else if (arguments.length === 2) {
     var r = arguments[0], i = arguments[1], o = null, s = null, a = null, u = null, l = null, c = null, f = null, h = null;
-    return l = this._hi / r, c = E.SPLIT * l, o = c - l, h = E.SPLIT * r, o = c - o, s = l - o, a = h - r, f = l * r, a = h - a, u = r - a, h = o * a - f + o * u + s * a + s * u, c = (this._hi - f - h + this._lo - l * i) / r, h = l + c, this._hi = h, this._lo = l - h + c, this;
+    return l = this._hi / r, c = _.SPLIT * l, o = c - l, h = _.SPLIT * r, o = c - o, s = l - o, a = h - r, f = l * r, a = h - a, u = r - a, h = o * a - f + o * u + s * a + s * u, c = (this._hi - f - h + this._lo - l * i) / r, h = l + c, this._hi = h, this._lo = l - h + c, this;
   }
 };
-E.prototype.dump = function() {
+_.prototype.dump = function() {
   return "DD<" + this._hi + ", " + this._lo + ">";
 };
-E.prototype.divide = function() {
-  if (arguments[0] instanceof E) {
+_.prototype.divide = function() {
+  if (arguments[0] instanceof _) {
     var t = arguments[0], e = null, r = null, i = null, o = null, s = null, a = null, u = null, l = null;
-    s = this._hi / t._hi, a = E.SPLIT * s, e = a - s, l = E.SPLIT * t._hi, e = a - e, r = s - e, i = l - t._hi, u = s * t._hi, i = l - i, o = t._hi - i, l = e * i - u + e * o + r * i + r * o, a = (this._hi - u - l + this._lo - s * t._lo) / t._hi, l = s + a;
+    s = this._hi / t._hi, a = _.SPLIT * s, e = a - s, l = _.SPLIT * t._hi, e = a - e, r = s - e, i = l - t._hi, u = s * t._hi, i = l - i, o = t._hi - i, l = e * i - u + e * o + r * i + r * o, a = (this._hi - u - l + this._lo - s * t._lo) / t._hi, l = s + a;
     var c = l, f = s - l + a;
-    return new E(c, f);
+    return new _(c, f);
   } else if (typeof arguments[0] == "number") {
     var h = arguments[0];
-    return F.isNaN(h) ? E.createNaN() : E.copy(this).selfDivide(h, 0);
+    return A.isNaN(h) ? _.createNaN() : _.copy(this).selfDivide(h, 0);
   }
 };
-E.prototype.ge = function(t) {
+_.prototype.ge = function(t) {
   return (this._hi > t._hi || this._hi === t._hi) && this._lo >= t._lo;
 };
-E.prototype.pow = function(t) {
+_.prototype.pow = function(t) {
   if (t === 0)
-    return E.valueOf(1);
-  var e = new E(this), r = E.valueOf(1), i = Math.abs(t);
+    return _.valueOf(1);
+  var e = new _(this), r = _.valueOf(1), i = Math.abs(t);
   if (i > 1)
     for (; i > 0; )
       i % 2 === 1 && r.selfMultiply(e), i /= 2, i > 0 && (e = e.sqr());
@@ -2280,24 +2280,24 @@ E.prototype.pow = function(t) {
     r = e;
   return t < 0 ? r.reciprocal() : r;
 };
-E.prototype.ceil = function() {
+_.prototype.ceil = function() {
   if (this.isNaN())
-    return E.NaN;
+    return _.NaN;
   var t = Math.ceil(this._hi), e = 0;
-  return t === this._hi && (e = Math.ceil(this._lo)), new E(t, e);
+  return t === this._hi && (e = Math.ceil(this._lo)), new _(t, e);
 };
-E.prototype.compareTo = function(t) {
+_.prototype.compareTo = function(t) {
   var e = t;
   return this._hi < e._hi ? -1 : this._hi > e._hi ? 1 : this._lo < e._lo ? -1 : this._lo > e._lo ? 1 : 0;
 };
-E.prototype.rint = function() {
+_.prototype.rint = function() {
   if (this.isNaN())
     return this;
   var t = this.add(0.5);
   return t.floor();
 };
-E.prototype.setValue = function() {
-  if (arguments[0] instanceof E) {
+_.prototype.setValue = function() {
+  if (arguments[0] instanceof _) {
     var t = arguments[0];
     return this.init(t), this;
   } else if (typeof arguments[0] == "number") {
@@ -2305,20 +2305,20 @@ E.prototype.setValue = function() {
     return this.init(e), this;
   }
 };
-E.prototype.max = function(t) {
+_.prototype.max = function(t) {
   return this.ge(t) ? this : t;
 };
-E.prototype.sqrt = function() {
+_.prototype.sqrt = function() {
   if (this.isZero())
-    return E.valueOf(0);
+    return _.valueOf(0);
   if (this.isNegative())
-    return E.NaN;
-  var t = 1 / Math.sqrt(this._hi), e = this._hi * t, r = E.valueOf(e), i = this.subtract(r.sqr()), o = i._hi * (t * 0.5);
+    return _.NaN;
+  var t = 1 / Math.sqrt(this._hi), e = this._hi * t, r = _.valueOf(e), i = this.subtract(r.sqr()), o = i._hi * (t * 0.5);
   return r.add(o);
 };
-E.prototype.selfAdd = function() {
+_.prototype.selfAdd = function() {
   if (arguments.length === 1) {
-    if (arguments[0] instanceof E) {
+    if (arguments[0] instanceof _) {
       var t = arguments[0];
       return this.selfAdd(t._hi, t._lo);
     } else if (typeof arguments[0] == "number") {
@@ -2326,15 +2326,15 @@ E.prototype.selfAdd = function() {
       return o = this._hi + e, a = o - this._hi, s = o - a, s = e - a + (this._hi - s), u = s + this._lo, r = o + u, i = u + (o - r), this._hi = r + i, this._lo = i + (r - this._hi), this;
     }
   } else if (arguments.length === 2) {
-    var l = arguments[0], c = arguments[1], f = null, h = null, p = null, g = null, y = null, m = null, _ = null, I = null;
-    y = this._hi + l, p = this._lo + c, _ = y - this._hi, I = p - this._lo, m = y - _, g = p - I, m = l - _ + (this._hi - m), g = c - I + (this._lo - g), _ = m + p, f = y + _, h = _ + (y - f), _ = g + h;
-    var C = f + _, x = _ + (f - C);
+    var l = arguments[0], c = arguments[1], f = null, h = null, p = null, g = null, m = null, v = null, E = null, I = null;
+    m = this._hi + l, p = this._lo + c, E = m - this._hi, I = p - this._lo, v = m - E, g = p - I, v = l - E + (this._hi - v), g = c - I + (this._lo - g), E = v + p, f = m + E, h = E + (m - f), E = g + h;
+    var C = f + E, x = E + (f - C);
     return this._hi = C, this._lo = x, this;
   }
 };
-E.prototype.selfMultiply = function() {
+_.prototype.selfMultiply = function() {
   if (arguments.length === 1) {
-    if (arguments[0] instanceof E) {
+    if (arguments[0] instanceof _) {
       var t = arguments[0];
       return this.selfMultiply(t._hi, t._lo);
     } else if (typeof arguments[0] == "number") {
@@ -2343,47 +2343,47 @@ E.prototype.selfMultiply = function() {
     }
   } else if (arguments.length === 2) {
     var r = arguments[0], i = arguments[1], o = null, s = null, a = null, u = null, l = null, c = null;
-    l = E.SPLIT * this._hi, o = l - this._hi, c = E.SPLIT * r, o = l - o, s = this._hi - o, a = c - r, l = this._hi * r, a = c - a, u = r - a, c = o * a - l + o * u + s * a + s * u + (this._hi * i + this._lo * r);
+    l = _.SPLIT * this._hi, o = l - this._hi, c = _.SPLIT * r, o = l - o, s = this._hi - o, a = c - r, l = this._hi * r, a = c - a, u = r - a, c = o * a - l + o * u + s * a + s * u + (this._hi * i + this._lo * r);
     var f = l + c;
     o = l - f;
     var h = c + o;
     return this._hi = f, this._lo = h, this;
   }
 };
-E.prototype.selfSqr = function() {
+_.prototype.selfSqr = function() {
   return this.selfMultiply(this);
 };
-E.prototype.floor = function() {
+_.prototype.floor = function() {
   if (this.isNaN())
-    return E.NaN;
+    return _.NaN;
   var t = Math.floor(this._hi), e = 0;
-  return t === this._hi && (e = Math.floor(this._lo)), new E(t, e);
+  return t === this._hi && (e = Math.floor(this._lo)), new _(t, e);
 };
-E.prototype.negate = function() {
-  return this.isNaN() ? this : new E(-this._hi, -this._lo);
+_.prototype.negate = function() {
+  return this.isNaN() ? this : new _(-this._hi, -this._lo);
 };
-E.prototype.clone = function() {
+_.prototype.clone = function() {
 };
-E.prototype.multiply = function() {
-  if (arguments[0] instanceof E) {
+_.prototype.multiply = function() {
+  if (arguments[0] instanceof _) {
     var t = arguments[0];
-    return t.isNaN() ? E.createNaN() : E.copy(this).selfMultiply(t);
+    return t.isNaN() ? _.createNaN() : _.copy(this).selfMultiply(t);
   } else if (typeof arguments[0] == "number") {
     var e = arguments[0];
-    return F.isNaN(e) ? E.createNaN() : E.copy(this).selfMultiply(e, 0);
+    return A.isNaN(e) ? _.createNaN() : _.copy(this).selfMultiply(e, 0);
   }
 };
-E.prototype.isNaN = function() {
-  return F.isNaN(this._hi);
+_.prototype.isNaN = function() {
+  return A.isNaN(this._hi);
 };
-E.prototype.intValue = function() {
+_.prototype.intValue = function() {
   return Math.trunc(this._hi);
 };
-E.prototype.toString = function() {
-  var t = E.magnitude(this._hi);
+_.prototype.toString = function() {
+  var t = _.magnitude(this._hi);
   return t >= -3 && t <= 20 ? this.toStandardNotation() : this.toSciNotation();
 };
-E.prototype.toStandardNotation = function() {
+_.prototype.toStandardNotation = function() {
   var t = this.getSpecialNumberString();
   if (t !== null)
     return t;
@@ -2391,26 +2391,26 @@ E.prototype.toStandardNotation = function() {
   if (r.charAt(0) === ".")
     o = "0" + r;
   else if (i < 0)
-    o = "0." + E.stringOfChar("0", -i) + r;
+    o = "0." + _.stringOfChar("0", -i) + r;
   else if (r.indexOf(".") === -1) {
-    var s = i - r.length, a = E.stringOfChar("0", s);
+    var s = i - r.length, a = _.stringOfChar("0", s);
     o = r + a + ".0";
   }
   return this.isNegative() ? "-" + o : o;
 };
-E.prototype.reciprocal = function() {
+_.prototype.reciprocal = function() {
   var t = null, e = null, r = null, i = null, o = null, s = null, a = null, u = null;
-  o = 1 / this._hi, s = E.SPLIT * o, t = s - o, u = E.SPLIT * this._hi, t = s - t, e = o - t, r = u - this._hi, a = o * this._hi, r = u - r, i = this._hi - r, u = t * r - a + t * i + e * r + e * i, s = (1 - a - u - o * this._lo) / this._hi;
+  o = 1 / this._hi, s = _.SPLIT * o, t = s - o, u = _.SPLIT * this._hi, t = s - t, e = o - t, r = u - this._hi, a = o * this._hi, r = u - r, i = this._hi - r, u = t * r - a + t * i + e * r + e * i, s = (1 - a - u - o * this._lo) / this._hi;
   var l = o + s, c = o - l + s;
-  return new E(l, c);
+  return new _(l, c);
 };
-E.prototype.toSciNotation = function() {
+_.prototype.toSciNotation = function() {
   if (this.isZero())
-    return E.SCI_NOT_ZERO;
+    return _.SCI_NOT_ZERO;
   var t = this.getSpecialNumberString();
   if (t !== null)
     return t;
-  var e = new Array(1).fill(null), r = this.extractSignificantDigits(!1, e), i = E.SCI_NOT_EXPONENT_CHAR + e[0];
+  var e = new Array(1).fill(null), r = this.extractSignificantDigits(!1, e), i = _.SCI_NOT_EXPONENT_CHAR + e[0];
   if (r.charAt(0) === "0")
     throw new Error("Found leading zero: " + r);
   var o = "";
@@ -2418,30 +2418,30 @@ E.prototype.toSciNotation = function() {
   var s = r.charAt(0) + "." + o;
   return this.isNegative() ? "-" + s + i : s + i;
 };
-E.prototype.abs = function() {
-  return this.isNaN() ? E.NaN : this.isNegative() ? this.negate() : new E(this);
+_.prototype.abs = function() {
+  return this.isNaN() ? _.NaN : this.isNegative() ? this.negate() : new _(this);
 };
-E.prototype.isPositive = function() {
+_.prototype.isPositive = function() {
   return (this._hi > 0 || this._hi === 0) && this._lo > 0;
 };
-E.prototype.lt = function(t) {
+_.prototype.lt = function(t) {
   return (this._hi < t._hi || this._hi === t._hi) && this._lo < t._lo;
 };
-E.prototype.add = function() {
-  if (arguments[0] instanceof E) {
+_.prototype.add = function() {
+  if (arguments[0] instanceof _) {
     var t = arguments[0];
-    return E.copy(this).selfAdd(t);
+    return _.copy(this).selfAdd(t);
   } else if (typeof arguments[0] == "number") {
     var e = arguments[0];
-    return E.copy(this).selfAdd(e);
+    return _.copy(this).selfAdd(e);
   }
 };
-E.prototype.init = function() {
+_.prototype.init = function() {
   if (arguments.length === 1) {
     if (typeof arguments[0] == "number") {
       var t = arguments[0];
       this._hi = t, this._lo = 0;
-    } else if (arguments[0] instanceof E) {
+    } else if (arguments[0] instanceof _) {
       var e = arguments[0];
       this._hi = e._hi, this._lo = e._lo;
     }
@@ -2450,40 +2450,40 @@ E.prototype.init = function() {
     this._hi = r, this._lo = i;
   }
 };
-E.prototype.gt = function(t) {
+_.prototype.gt = function(t) {
   return (this._hi > t._hi || this._hi === t._hi) && this._lo > t._lo;
 };
-E.prototype.isNegative = function() {
+_.prototype.isNegative = function() {
   return (this._hi < 0 || this._hi === 0) && this._lo < 0;
 };
-E.prototype.trunc = function() {
-  return this.isNaN() ? E.NaN : this.isPositive() ? this.floor() : this.ceil();
+_.prototype.trunc = function() {
+  return this.isNaN() ? _.NaN : this.isPositive() ? this.floor() : this.ceil();
 };
-E.prototype.signum = function() {
+_.prototype.signum = function() {
   return this._hi > 0 ? 1 : this._hi < 0 ? -1 : this._lo > 0 ? 1 : this._lo < 0 ? -1 : 0;
 };
-E.prototype.interfaces_ = function() {
+_.prototype.interfaces_ = function() {
   return [Ie, Ee, io];
 };
-E.prototype.getClass = function() {
-  return E;
+_.prototype.getClass = function() {
+  return _;
 };
-E.sqr = function(t) {
-  return E.valueOf(t).selfMultiply(t);
+_.sqr = function(t) {
+  return _.valueOf(t).selfMultiply(t);
 };
-E.valueOf = function() {
+_.valueOf = function() {
   if (typeof arguments[0] == "string") {
     var t = arguments[0];
-    return E.parse(t);
+    return _.parse(t);
   } else if (typeof arguments[0] == "number") {
     var e = arguments[0];
-    return new E(e);
+    return new _(e);
   }
 };
-E.sqrt = function(t) {
-  return E.valueOf(t).sqrt();
+_.sqrt = function(t) {
+  return _.valueOf(t).sqrt();
 };
-E.parse = function(t) {
+_.parse = function(t) {
   for (var e = 0, r = t.length; pi.isWhitespace(t.charAt(e)); )
     e++;
   var i = !1;
@@ -2491,11 +2491,11 @@ E.parse = function(t) {
     var o = t.charAt(e);
     (o === "-" || o === "+") && (e++, o === "-" && (i = !0));
   }
-  for (var s = new E(), a = 0, u = 0, l = 0; !(e >= r); ) {
+  for (var s = new _(), a = 0, u = 0, l = 0; !(e >= r); ) {
     var c = t.charAt(e);
     if (e++, pi.isDigit(c)) {
       var f = c - "0";
-      s.selfMultiply(E.TEN), s.selfAdd(f), a++;
+      s.selfMultiply(_.TEN), s.selfAdd(f), a++;
       continue;
     }
     if (c === ".") {
@@ -2506,8 +2506,8 @@ E.parse = function(t) {
       var h = t.substring(e);
       try {
         l = ke.parseInt(h);
-      } catch (_) {
-        throw _ instanceof Error ? new Error("Invalid exponent " + h + " in string " + t) : _;
+      } catch (E) {
+        throw E instanceof Error ? new Error("Invalid exponent " + h + " in string " + t) : E;
       } finally {
       }
       break;
@@ -2518,43 +2518,43 @@ E.parse = function(t) {
   if (g === 0)
     p = s;
   else if (g > 0) {
-    var y = E.TEN.pow(g);
-    p = s.divide(y);
+    var m = _.TEN.pow(g);
+    p = s.divide(m);
   } else if (g < 0) {
-    var m = E.TEN.pow(-g);
-    p = s.multiply(m);
+    var v = _.TEN.pow(-g);
+    p = s.multiply(v);
   }
   return i ? p.negate() : p;
 };
-E.createNaN = function() {
-  return new E(F.NaN, F.NaN);
+_.createNaN = function() {
+  return new _(A.NaN, A.NaN);
 };
-E.copy = function(t) {
-  return new E(t);
+_.copy = function(t) {
+  return new _(t);
 };
-E.magnitude = function(t) {
+_.magnitude = function(t) {
   var e = Math.abs(t), r = Math.log(e) / Math.log(10), i = Math.trunc(Math.floor(r)), o = Math.pow(10, i);
   return o * 10 <= e && (i += 1), i;
 };
-E.stringOfChar = function(t, e) {
+_.stringOfChar = function(t, e) {
   for (var r = new Je(), i = 0; i < e; i++)
     r.append(t);
   return r.toString();
 };
 Oe.PI.get = function() {
-  return new E(3.141592653589793, 12246467991473532e-32);
+  return new _(3.141592653589793, 12246467991473532e-32);
 };
 Oe.TWO_PI.get = function() {
-  return new E(6.283185307179586, 24492935982947064e-32);
+  return new _(6.283185307179586, 24492935982947064e-32);
 };
 Oe.PI_2.get = function() {
-  return new E(1.5707963267948966, 6123233995736766e-32);
+  return new _(1.5707963267948966, 6123233995736766e-32);
 };
 Oe.E.get = function() {
-  return new E(2.718281828459045, 14456468917292502e-32);
+  return new _(2.718281828459045, 14456468917292502e-32);
 };
 Oe.NaN.get = function() {
-  return new E(F.NaN, F.NaN);
+  return new _(A.NaN, A.NaN);
 };
 Oe.EPS.get = function() {
   return 123259516440783e-46;
@@ -2566,10 +2566,10 @@ Oe.MAX_PRINT_DIGITS.get = function() {
   return 32;
 };
 Oe.TEN.get = function() {
-  return E.valueOf(10);
+  return _.valueOf(10);
 };
 Oe.ONE.get = function() {
-  return E.valueOf(1);
+  return _.valueOf(1);
 };
 Oe.SCI_NOT_EXPONENT_CHAR.get = function() {
   return "E";
@@ -2577,7 +2577,7 @@ Oe.SCI_NOT_EXPONENT_CHAR.get = function() {
 Oe.SCI_NOT_ZERO.get = function() {
   return "0.0E0";
 };
-Object.defineProperties(E, Oe);
+Object.defineProperties(_, Oe);
 var Kt = function() {
 }, ea = { DP_SAFE_EPSILON: { configurable: !0 } };
 Kt.prototype.interfaces_ = function() {
@@ -2590,7 +2590,7 @@ Kt.orientationIndex = function(t, e, r) {
   var i = Kt.orientationIndexFilter(t, e, r);
   if (i <= 1)
     return i;
-  var o = E.valueOf(e.x).selfAdd(-t.x), s = E.valueOf(e.y).selfAdd(-t.y), a = E.valueOf(r.x).selfAdd(-e.x), u = E.valueOf(r.y).selfAdd(-e.y);
+  var o = _.valueOf(e.x).selfAdd(-t.x), s = _.valueOf(e.y).selfAdd(-t.y), a = _.valueOf(r.x).selfAdd(-e.x), u = _.valueOf(r.y).selfAdd(-e.y);
   return o.selfMultiply(u).selfSubtract(s.selfMultiply(a)).signum();
 };
 Kt.signOfDet2x2 = function(t, e, r, i) {
@@ -2598,8 +2598,8 @@ Kt.signOfDet2x2 = function(t, e, r, i) {
   return o.signum();
 };
 Kt.intersection = function(t, e, r, i) {
-  var o = E.valueOf(i.y).selfSubtract(r.y).selfMultiply(E.valueOf(e.x).selfSubtract(t.x)), s = E.valueOf(i.x).selfSubtract(r.x).selfMultiply(E.valueOf(e.y).selfSubtract(t.y)), a = o.subtract(s), u = E.valueOf(i.x).selfSubtract(r.x).selfMultiply(E.valueOf(t.y).selfSubtract(r.y)), l = E.valueOf(i.y).selfSubtract(r.y).selfMultiply(E.valueOf(t.x).selfSubtract(r.x)), c = u.subtract(l), f = c.selfDivide(a).doubleValue(), h = E.valueOf(t.x).selfAdd(E.valueOf(e.x).selfSubtract(t.x).selfMultiply(f)).doubleValue(), p = E.valueOf(e.x).selfSubtract(t.x).selfMultiply(E.valueOf(t.y).selfSubtract(r.y)), g = E.valueOf(e.y).selfSubtract(t.y).selfMultiply(E.valueOf(t.x).selfSubtract(r.x)), y = p.subtract(g), m = y.selfDivide(a).doubleValue(), _ = E.valueOf(r.y).selfAdd(E.valueOf(i.y).selfSubtract(r.y).selfMultiply(m)).doubleValue();
-  return new d(h, _);
+  var o = _.valueOf(i.y).selfSubtract(r.y).selfMultiply(_.valueOf(e.x).selfSubtract(t.x)), s = _.valueOf(i.x).selfSubtract(r.x).selfMultiply(_.valueOf(e.y).selfSubtract(t.y)), a = o.subtract(s), u = _.valueOf(i.x).selfSubtract(r.x).selfMultiply(_.valueOf(t.y).selfSubtract(r.y)), l = _.valueOf(i.y).selfSubtract(r.y).selfMultiply(_.valueOf(t.x).selfSubtract(r.x)), c = u.subtract(l), f = c.selfDivide(a).doubleValue(), h = _.valueOf(t.x).selfAdd(_.valueOf(e.x).selfSubtract(t.x).selfMultiply(f)).doubleValue(), p = _.valueOf(e.x).selfSubtract(t.x).selfMultiply(_.valueOf(t.y).selfSubtract(r.y)), g = _.valueOf(e.y).selfSubtract(t.y).selfMultiply(_.valueOf(t.x).selfSubtract(r.x)), m = p.subtract(g), v = m.selfDivide(a).doubleValue(), E = _.valueOf(r.y).selfAdd(_.valueOf(i.y).selfSubtract(r.y).selfMultiply(v)).doubleValue();
+  return new d(h, E);
 };
 Kt.orientationIndexFilter = function(t, e, r) {
   var i = null, o = (t.x - r.x) * (e.y - r.y), s = (t.y - r.y) * (e.x - r.x), a = o - s;
@@ -2711,19 +2711,19 @@ var Ce = function n() {
     var u = arguments[0], l = arguments[1], c = arguments[2];
     this.x = u, this.y = l, this.w = c;
   } else if (arguments.length === 4) {
-    var f = arguments[0], h = arguments[1], p = arguments[2], g = arguments[3], y = f.y - h.y, m = h.x - f.x, _ = f.x * h.y - h.x * f.y, I = p.y - g.y, C = g.x - p.x, x = p.x * g.y - g.x * p.y;
-    this.x = m * x - C * _, this.y = I * _ - y * x, this.w = y * C - I * m;
+    var f = arguments[0], h = arguments[1], p = arguments[2], g = arguments[3], m = f.y - h.y, v = h.x - f.x, E = f.x * h.y - h.x * f.y, I = p.y - g.y, C = g.x - p.x, x = p.x * g.y - g.x * p.y;
+    this.x = v * x - C * E, this.y = I * E - m * x, this.w = m * C - I * v;
   }
 };
 Ce.prototype.getY = function() {
   var t = this.y / this.w;
-  if (F.isNaN(t) || F.isInfinite(t))
+  if (A.isNaN(t) || A.isInfinite(t))
     throw new $n();
   return t;
 };
 Ce.prototype.getX = function() {
   var t = this.x / this.w;
-  if (F.isNaN(t) || F.isInfinite(t))
+  if (A.isNaN(t) || A.isInfinite(t))
     throw new $n();
   return t;
 };
@@ -2738,12 +2738,12 @@ Ce.prototype.getClass = function() {
   return Ce;
 };
 Ce.intersection = function(t, e, r, i) {
-  var o = t.y - e.y, s = e.x - t.x, a = t.x * e.y - e.x * t.y, u = r.y - i.y, l = i.x - r.x, c = r.x * i.y - i.x * r.y, f = s * c - l * a, h = u * a - o * c, p = o * l - u * s, g = f / p, y = h / p;
-  if (F.isNaN(g) || F.isInfinite(g) || F.isNaN(y) || F.isInfinite(y))
+  var o = t.y - e.y, s = e.x - t.x, a = t.x * e.y - e.x * t.y, u = r.y - i.y, l = i.x - r.x, c = r.x * i.y - i.x * r.y, f = s * c - l * a, h = u * a - o * c, p = o * l - u * s, g = f / p, m = h / p;
+  if (A.isNaN(g) || A.isInfinite(g) || A.isNaN(m) || A.isInfinite(m))
     throw new $n();
-  return new d(g, y);
+  return new d(g, m);
 };
-var R = function n() {
+var b = function n() {
   if (this._minx = null, this._maxx = null, this._miny = null, this._maxy = null, arguments.length === 0)
     this.init();
   else if (arguments.length === 1) {
@@ -2762,33 +2762,33 @@ var R = function n() {
     this.init(o, s, a, u);
   }
 }, na = { serialVersionUID: { configurable: !0 } };
-R.prototype.getArea = function() {
+b.prototype.getArea = function() {
   return this.getWidth() * this.getHeight();
 };
-R.prototype.equals = function(t) {
-  if (!(t instanceof R))
+b.prototype.equals = function(t) {
+  if (!(t instanceof b))
     return !1;
   var e = t;
   return this.isNull() ? e.isNull() : this._maxx === e.getMaxX() && this._maxy === e.getMaxY() && this._minx === e.getMinX() && this._miny === e.getMinY();
 };
-R.prototype.intersection = function(t) {
+b.prototype.intersection = function(t) {
   if (this.isNull() || t.isNull() || !this.intersects(t))
-    return new R();
+    return new b();
   var e = this._minx > t._minx ? this._minx : t._minx, r = this._miny > t._miny ? this._miny : t._miny, i = this._maxx < t._maxx ? this._maxx : t._maxx, o = this._maxy < t._maxy ? this._maxy : t._maxy;
-  return new R(e, i, r, o);
+  return new b(e, i, r, o);
 };
-R.prototype.isNull = function() {
+b.prototype.isNull = function() {
   return this._maxx < this._minx;
 };
-R.prototype.getMaxX = function() {
+b.prototype.getMaxX = function() {
   return this._maxx;
 };
-R.prototype.covers = function() {
+b.prototype.covers = function() {
   if (arguments.length === 1) {
     if (arguments[0] instanceof d) {
       var t = arguments[0];
       return this.covers(t.x, t.y);
-    } else if (arguments[0] instanceof R) {
+    } else if (arguments[0] instanceof b) {
       var e = arguments[0];
       return this.isNull() || e.isNull() ? !1 : e.getMinX() >= this._minx && e.getMaxX() <= this._maxx && e.getMinY() >= this._miny && e.getMaxY() <= this._maxy;
     }
@@ -2797,9 +2797,9 @@ R.prototype.covers = function() {
     return this.isNull() ? !1 : r >= this._minx && r <= this._maxx && i >= this._miny && i <= this._maxy;
   }
 };
-R.prototype.intersects = function() {
+b.prototype.intersects = function() {
   if (arguments.length === 1) {
-    if (arguments[0] instanceof R) {
+    if (arguments[0] instanceof b) {
       var t = arguments[0];
       return this.isNull() || t.isNull() ? !1 : !(t._minx > this._maxx || t._maxx < this._minx || t._miny > this._maxy || t._maxy < this._miny);
     } else if (arguments[0] instanceof d) {
@@ -2811,18 +2811,18 @@ R.prototype.intersects = function() {
     return this.isNull() ? !1 : !(r > this._maxx || r < this._minx || i > this._maxy || i < this._miny);
   }
 };
-R.prototype.getMinY = function() {
+b.prototype.getMinY = function() {
   return this._miny;
 };
-R.prototype.getMinX = function() {
+b.prototype.getMinX = function() {
   return this._minx;
 };
-R.prototype.expandToInclude = function() {
+b.prototype.expandToInclude = function() {
   if (arguments.length === 1) {
     if (arguments[0] instanceof d) {
       var t = arguments[0];
       this.expandToInclude(t.x, t.y);
-    } else if (arguments[0] instanceof R) {
+    } else if (arguments[0] instanceof b) {
       var e = arguments[0];
       if (e.isNull())
         return null;
@@ -2833,40 +2833,40 @@ R.prototype.expandToInclude = function() {
     this.isNull() ? (this._minx = r, this._maxx = r, this._miny = i, this._maxy = i) : (r < this._minx && (this._minx = r), r > this._maxx && (this._maxx = r), i < this._miny && (this._miny = i), i > this._maxy && (this._maxy = i));
   }
 };
-R.prototype.minExtent = function() {
+b.prototype.minExtent = function() {
   if (this.isNull())
     return 0;
   var t = this.getWidth(), e = this.getHeight();
   return t < e ? t : e;
 };
-R.prototype.getWidth = function() {
+b.prototype.getWidth = function() {
   return this.isNull() ? 0 : this._maxx - this._minx;
 };
-R.prototype.compareTo = function(t) {
+b.prototype.compareTo = function(t) {
   var e = t;
   return this.isNull() ? e.isNull() ? 0 : -1 : e.isNull() ? 1 : this._minx < e._minx ? -1 : this._minx > e._minx ? 1 : this._miny < e._miny ? -1 : this._miny > e._miny ? 1 : this._maxx < e._maxx ? -1 : this._maxx > e._maxx ? 1 : this._maxy < e._maxy ? -1 : this._maxy > e._maxy ? 1 : 0;
 };
-R.prototype.translate = function(t, e) {
+b.prototype.translate = function(t, e) {
   if (this.isNull())
     return null;
   this.init(this.getMinX() + t, this.getMaxX() + t, this.getMinY() + e, this.getMaxY() + e);
 };
-R.prototype.toString = function() {
+b.prototype.toString = function() {
   return "Env[" + this._minx + " : " + this._maxx + ", " + this._miny + " : " + this._maxy + "]";
 };
-R.prototype.setToNull = function() {
+b.prototype.setToNull = function() {
   this._minx = 0, this._maxx = -1, this._miny = 0, this._maxy = -1;
 };
-R.prototype.getHeight = function() {
+b.prototype.getHeight = function() {
   return this.isNull() ? 0 : this._maxy - this._miny;
 };
-R.prototype.maxExtent = function() {
+b.prototype.maxExtent = function() {
   if (this.isNull())
     return 0;
   var t = this.getWidth(), e = this.getHeight();
   return t > e ? t : e;
 };
-R.prototype.expandBy = function() {
+b.prototype.expandBy = function() {
   if (arguments.length === 1) {
     var t = arguments[0];
     this.expandBy(t, t);
@@ -2877,9 +2877,9 @@ R.prototype.expandBy = function() {
     this._minx -= e, this._maxx += e, this._miny -= r, this._maxy += r, (this._minx > this._maxx || this._miny > this._maxy) && this.setToNull();
   }
 };
-R.prototype.contains = function() {
+b.prototype.contains = function() {
   if (arguments.length === 1) {
-    if (arguments[0] instanceof R) {
+    if (arguments[0] instanceof b) {
       var t = arguments[0];
       return this.covers(t);
     } else if (arguments[0] instanceof d) {
@@ -2891,17 +2891,17 @@ R.prototype.contains = function() {
     return this.covers(r, i);
   }
 };
-R.prototype.centre = function() {
+b.prototype.centre = function() {
   return this.isNull() ? null : new d((this.getMinX() + this.getMaxX()) / 2, (this.getMinY() + this.getMaxY()) / 2);
 };
-R.prototype.init = function() {
+b.prototype.init = function() {
   if (arguments.length === 0)
     this.setToNull();
   else if (arguments.length === 1) {
     if (arguments[0] instanceof d) {
       var t = arguments[0];
       this.init(t.x, t.x, t.y, t.y);
-    } else if (arguments[0] instanceof R) {
+    } else if (arguments[0] instanceof b) {
       var e = arguments[0];
       this._minx = e._minx, this._maxx = e._maxx, this._miny = e._miny, this._maxy = e._maxy;
     }
@@ -2913,10 +2913,10 @@ R.prototype.init = function() {
     o < s ? (this._minx = o, this._maxx = s) : (this._minx = s, this._maxx = o), a < u ? (this._miny = a, this._maxy = u) : (this._miny = u, this._maxy = a);
   }
 };
-R.prototype.getMaxY = function() {
+b.prototype.getMaxY = function() {
   return this._maxy;
 };
-R.prototype.distance = function(t) {
+b.prototype.distance = function(t) {
   if (this.intersects(t))
     return 0;
   var e = 0;
@@ -2924,17 +2924,17 @@ R.prototype.distance = function(t) {
   var r = 0;
   return this._maxy < t._miny ? r = t._miny - this._maxy : this._miny > t._maxy && (r = this._miny - t._maxy), e === 0 ? r : r === 0 ? e : Math.sqrt(e * e + r * r);
 };
-R.prototype.hashCode = function() {
+b.prototype.hashCode = function() {
   var t = 17;
   return t = 37 * t + d.hashCode(this._minx), t = 37 * t + d.hashCode(this._maxx), t = 37 * t + d.hashCode(this._miny), t = 37 * t + d.hashCode(this._maxy), t;
 };
-R.prototype.interfaces_ = function() {
+b.prototype.interfaces_ = function() {
   return [Ee, Ie];
 };
-R.prototype.getClass = function() {
-  return R;
+b.prototype.getClass = function() {
+  return b;
 };
-R.intersects = function() {
+b.intersects = function() {
   if (arguments.length === 3) {
     var t = arguments[0], e = arguments[1], r = arguments[2];
     return r.x >= (t.x < e.x ? t.x : e.x) && r.x <= (t.x > e.x ? t.x : e.x) && r.y >= (t.y < e.y ? t.y : e.y) && r.y <= (t.y > e.y ? t.y : e.y);
@@ -2946,7 +2946,7 @@ R.intersects = function() {
 na.serialVersionUID.get = function() {
   return 5873921885273102e3;
 };
-Object.defineProperties(R, na);
+Object.defineProperties(b, na);
 var Me = {
   typeStr: /^\s*(\w+)\s*\(\s*(.*)\s*\)\s*$/,
   emptyTypeStr: /^\s*(\w+)\s*EMPTY\s*$/,
@@ -3370,12 +3370,12 @@ var sn = function(n) {
     n.apply(this, arguments);
   }
   return n && (t.__proto__ = n), t.prototype = Object.create(n && n.prototype), t.prototype.constructor = t, t.prototype.isInSegmentEnvelopes = function(r) {
-    var i = new R(this._inputLines[0][0], this._inputLines[0][1]), o = new R(this._inputLines[1][0], this._inputLines[1][1]);
+    var i = new b(this._inputLines[0][0], this._inputLines[0][1]), o = new b(this._inputLines[1][0], this._inputLines[1][1]);
     return i.contains(r) && o.contains(r);
   }, t.prototype.computeIntersection = function() {
     if (arguments.length === 3) {
       var r = arguments[0], i = arguments[1], o = arguments[2];
-      if (this._isProper = !1, R.intersects(i, o, r) && L.orientationIndex(i, o, r) === 0 && L.orientationIndex(o, i, r) === 0)
+      if (this._isProper = !1, b.intersects(i, o, r) && L.orientationIndex(i, o, r) === 0 && L.orientationIndex(o, i, r) === 0)
         return this._isProper = !0, (r.equals(i) || r.equals(o)) && (this._isProper = !1), this._result = n.POINT_INTERSECTION, null;
       this._result = n.NO_INTERSECTION;
     } else
@@ -3409,13 +3409,13 @@ var sn = function(n) {
     var h = this.safeHCoordinateIntersection(a, u, l, c);
     return h.x += f.x, h.y += f.y, h;
   }, t.prototype.computeCollinearIntersection = function(r, i, o, s) {
-    var a = R.intersects(r, i, o), u = R.intersects(r, i, s), l = R.intersects(o, s, r), c = R.intersects(o, s, i);
+    var a = b.intersects(r, i, o), u = b.intersects(r, i, s), l = b.intersects(o, s, r), c = b.intersects(o, s, i);
     return a && u ? (this._intPt[0] = o, this._intPt[1] = s, n.COLLINEAR_INTERSECTION) : l && c ? (this._intPt[0] = r, this._intPt[1] = i, n.COLLINEAR_INTERSECTION) : a && l ? (this._intPt[0] = o, this._intPt[1] = r, o.equals(r) && !u && !c ? n.POINT_INTERSECTION : n.COLLINEAR_INTERSECTION) : a && c ? (this._intPt[0] = o, this._intPt[1] = i, o.equals(i) && !u && !l ? n.POINT_INTERSECTION : n.COLLINEAR_INTERSECTION) : u && l ? (this._intPt[0] = s, this._intPt[1] = r, s.equals(r) && !a && !c ? n.POINT_INTERSECTION : n.COLLINEAR_INTERSECTION) : u && c ? (this._intPt[0] = s, this._intPt[1] = i, s.equals(i) && !a && !l ? n.POINT_INTERSECTION : n.COLLINEAR_INTERSECTION) : n.NO_INTERSECTION;
   }, t.prototype.normalizeToEnvCentre = function(r, i, o, s, a) {
-    var u = r.x < i.x ? r.x : i.x, l = r.y < i.y ? r.y : i.y, c = r.x > i.x ? r.x : i.x, f = r.y > i.y ? r.y : i.y, h = o.x < s.x ? o.x : s.x, p = o.y < s.y ? o.y : s.y, g = o.x > s.x ? o.x : s.x, y = o.y > s.y ? o.y : s.y, m = u > h ? u : h, _ = c < g ? c : g, I = l > p ? l : p, C = f < y ? f : y, x = (m + _) / 2, b = (I + C) / 2;
-    a.x = x, a.y = b, r.x -= a.x, r.y -= a.y, i.x -= a.x, i.y -= a.y, o.x -= a.x, o.y -= a.y, s.x -= a.x, s.y -= a.y;
+    var u = r.x < i.x ? r.x : i.x, l = r.y < i.y ? r.y : i.y, c = r.x > i.x ? r.x : i.x, f = r.y > i.y ? r.y : i.y, h = o.x < s.x ? o.x : s.x, p = o.y < s.y ? o.y : s.y, g = o.x > s.x ? o.x : s.x, m = o.y > s.y ? o.y : s.y, v = u > h ? u : h, E = c < g ? c : g, I = l > p ? l : p, C = f < m ? f : m, x = (v + E) / 2, P = (I + C) / 2;
+    a.x = x, a.y = P, r.x -= a.x, r.y -= a.y, i.x -= a.x, i.y -= a.y, o.x -= a.x, o.y -= a.y, s.x -= a.x, s.y -= a.y;
   }, t.prototype.computeIntersect = function(r, i, o, s) {
-    if (this._isProper = !1, !R.intersects(r, i, o, s))
+    if (this._isProper = !1, !b.intersects(r, i, o, s))
       return n.NO_INTERSECTION;
     var a = L.orientationIndex(r, i, o), u = L.orientationIndex(r, i, s);
     if (a > 0 && u > 0 || a < 0 && u < 0)
@@ -3520,10 +3520,10 @@ Ge.prototype.countSegment = function(t, e) {
   }
 };
 Ge.prototype.isPointInPolygon = function() {
-  return this.getLocation() !== v.EXTERIOR;
+  return this.getLocation() !== y.EXTERIOR;
 };
 Ge.prototype.getLocation = function() {
-  return this._isPointOnSegment ? v.BOUNDARY : this._crossingCount % 2 === 1 ? v.INTERIOR : v.EXTERIOR;
+  return this._isPointOnSegment ? y.BOUNDARY : this._crossingCount % 2 === 1 ? y.INTERIOR : y.EXTERIOR;
 };
 Ge.prototype.isOnSegment = function() {
   return this._isPointOnSegment;
@@ -3535,7 +3535,7 @@ Ge.prototype.getClass = function() {
   return Ge;
 };
 Ge.locatePointInRing = function() {
-  if (arguments[0] instanceof d && M(arguments[1], q)) {
+  if (arguments[0] instanceof d && T(arguments[1], q)) {
     for (var t = arguments[0], e = arguments[1], r = new Ge(t), i = new d(), o = new d(), s = 1; s < e.size(); s++)
       if (e.getCoordinate(s, i), e.getCoordinate(s - 1, o), r.countSegment(i, o), r.isOnSegment())
         return r.getLocation();
@@ -3570,7 +3570,7 @@ L.signedArea = function() {
       e += o * (a - s);
     }
     return e / 2;
-  } else if (M(arguments[0], q)) {
+  } else if (T(arguments[0], q)) {
     var u = arguments[0], l = u.size();
     if (l < 3)
       return 0;
@@ -3578,8 +3578,8 @@ L.signedArea = function() {
     u.getCoordinate(0, f), u.getCoordinate(1, h);
     var p = f.x;
     h.x -= p;
-    for (var g = 0, y = 1; y < l - 1; y++)
-      c.y = f.y, f.x = h.x, f.y = h.y, u.getCoordinate(y + 1, h), h.x -= p, g += f.x * (c.y - h.y);
+    for (var g = 0, m = 1; m < l - 1; m++)
+      c.y = f.y, f.x = h.x, f.y = h.y, u.getCoordinate(m + 1, h), h.x -= p, g += f.x * (c.y - h.y);
     return g / 2;
   }
 };
@@ -3589,7 +3589,7 @@ L.distanceLineLine = function(t, e, r, i) {
   if (r.equals(i))
     return L.distancePointLine(i, t, e);
   var o = !1;
-  if (!R.intersects(t, e, r, i))
+  if (!b.intersects(t, e, r, i))
     o = !0;
   else {
     var s = (e.x - t.x) * (i.y - r.y) - (e.y - t.y) * (i.x - r.x);
@@ -3603,7 +3603,7 @@ L.distanceLineLine = function(t, e, r, i) {
   return o ? ue.min(L.distancePointLine(t, r, i), L.distancePointLine(e, r, i), L.distancePointLine(r, t, e), L.distancePointLine(i, t, e)) : 0;
 };
 L.isPointInRing = function(t, e) {
-  return L.locatePointInRing(t, e) !== v.EXTERIOR;
+  return L.locatePointInRing(t, e) !== y.EXTERIOR;
 };
 L.computeLength = function(t) {
   var e = t.size();
@@ -3710,56 +3710,56 @@ Ir.prototype.interfaces_ = function() {
 Ir.prototype.getClass = function() {
   return Ir;
 };
-var T = function() {
+var D = function() {
   var t = arguments[0];
   this._envelope = null, this._factory = null, this._SRID = null, this._userData = null, this._factory = t, this._SRID = t.getSRID();
 }, hr = { serialVersionUID: { configurable: !0 }, SORTINDEX_POINT: { configurable: !0 }, SORTINDEX_MULTIPOINT: { configurable: !0 }, SORTINDEX_LINESTRING: { configurable: !0 }, SORTINDEX_LINEARRING: { configurable: !0 }, SORTINDEX_MULTILINESTRING: { configurable: !0 }, SORTINDEX_POLYGON: { configurable: !0 }, SORTINDEX_MULTIPOLYGON: { configurable: !0 }, SORTINDEX_GEOMETRYCOLLECTION: { configurable: !0 }, geometryChangedFilter: { configurable: !0 } };
-T.prototype.isGeometryCollection = function() {
-  return this.getSortIndex() === T.SORTINDEX_GEOMETRYCOLLECTION;
+D.prototype.isGeometryCollection = function() {
+  return this.getSortIndex() === D.SORTINDEX_GEOMETRYCOLLECTION;
 };
-T.prototype.getFactory = function() {
+D.prototype.getFactory = function() {
   return this._factory;
 };
-T.prototype.getGeometryN = function(t) {
+D.prototype.getGeometryN = function(t) {
   return this;
 };
-T.prototype.getArea = function() {
+D.prototype.getArea = function() {
   return 0;
 };
-T.prototype.isRectangle = function() {
+D.prototype.isRectangle = function() {
   return !1;
 };
-T.prototype.equals = function() {
-  if (arguments[0] instanceof T) {
+D.prototype.equals = function() {
+  if (arguments[0] instanceof D) {
     var t = arguments[0];
     return t === null ? !1 : this.equalsTopo(t);
   } else if (arguments[0] instanceof Object) {
     var e = arguments[0];
-    if (!(e instanceof T))
+    if (!(e instanceof D))
       return !1;
     var r = e;
     return this.equalsExact(r);
   }
 };
-T.prototype.equalsExact = function(t) {
+D.prototype.equalsExact = function(t) {
   return this === t || this.equalsExact(t, 0);
 };
-T.prototype.geometryChanged = function() {
-  this.apply(T.geometryChangedFilter);
+D.prototype.geometryChanged = function() {
+  this.apply(D.geometryChangedFilter);
 };
-T.prototype.geometryChangedAction = function() {
+D.prototype.geometryChangedAction = function() {
   this._envelope = null;
 };
-T.prototype.equalsNorm = function(t) {
+D.prototype.equalsNorm = function(t) {
   return t === null ? !1 : this.norm().equalsExact(t.norm());
 };
-T.prototype.getLength = function() {
+D.prototype.getLength = function() {
   return 0;
 };
-T.prototype.getNumGeometries = function() {
+D.prototype.getNumGeometries = function() {
   return 1;
 };
-T.prototype.compareTo = function() {
+D.prototype.compareTo = function() {
   if (arguments.length === 1) {
     var t = arguments[0], e = t;
     return this.getSortIndex() !== e.getSortIndex() ? this.getSortIndex() - e.getSortIndex() : this.isEmpty() && e.isEmpty() ? 0 : this.isEmpty() ? -1 : e.isEmpty() ? 1 : this.compareToSameClass(t);
@@ -3768,39 +3768,39 @@ T.prototype.compareTo = function() {
     return this.getSortIndex() !== r.getSortIndex() ? this.getSortIndex() - r.getSortIndex() : this.isEmpty() && r.isEmpty() ? 0 : this.isEmpty() ? -1 : r.isEmpty() ? 1 : this.compareToSameClass(r, i);
   }
 };
-T.prototype.getUserData = function() {
+D.prototype.getUserData = function() {
   return this._userData;
 };
-T.prototype.getSRID = function() {
+D.prototype.getSRID = function() {
   return this._SRID;
 };
-T.prototype.getEnvelope = function() {
+D.prototype.getEnvelope = function() {
   return this.getFactory().toGeometry(this.getEnvelopeInternal());
 };
-T.prototype.checkNotGeometryCollection = function(t) {
-  if (t.getSortIndex() === T.SORTINDEX_GEOMETRYCOLLECTION)
+D.prototype.checkNotGeometryCollection = function(t) {
+  if (t.getSortIndex() === D.SORTINDEX_GEOMETRYCOLLECTION)
     throw new it("This method does not support GeometryCollection arguments");
 };
-T.prototype.equal = function(t, e, r) {
+D.prototype.equal = function(t, e, r) {
   return r === 0 ? t.equals(e) : t.distance(e) <= r;
 };
-T.prototype.norm = function() {
+D.prototype.norm = function() {
   var t = this.copy();
   return t.normalize(), t;
 };
-T.prototype.getPrecisionModel = function() {
+D.prototype.getPrecisionModel = function() {
   return this._factory.getPrecisionModel();
 };
-T.prototype.getEnvelopeInternal = function() {
-  return this._envelope === null && (this._envelope = this.computeEnvelopeInternal()), new R(this._envelope);
+D.prototype.getEnvelopeInternal = function() {
+  return this._envelope === null && (this._envelope = this.computeEnvelopeInternal()), new b(this._envelope);
 };
-T.prototype.setSRID = function(t) {
+D.prototype.setSRID = function(t) {
   this._SRID = t;
 };
-T.prototype.setUserData = function(t) {
+D.prototype.setUserData = function(t) {
   this._userData = t;
 };
-T.prototype.compare = function(t, e) {
+D.prototype.compare = function(t, e) {
   for (var r = t.iterator(), i = e.iterator(); r.hasNext() && i.hasNext(); ) {
     var o = r.next(), s = i.next(), a = o.compareTo(s);
     if (a !== 0)
@@ -3808,25 +3808,25 @@ T.prototype.compare = function(t, e) {
   }
   return r.hasNext() ? 1 : i.hasNext() ? -1 : 0;
 };
-T.prototype.hashCode = function() {
+D.prototype.hashCode = function() {
   return this.getEnvelopeInternal().hashCode();
 };
-T.prototype.isGeometryCollectionOrDerived = function() {
-  return this.getSortIndex() === T.SORTINDEX_GEOMETRYCOLLECTION || this.getSortIndex() === T.SORTINDEX_MULTIPOINT || this.getSortIndex() === T.SORTINDEX_MULTILINESTRING || this.getSortIndex() === T.SORTINDEX_MULTIPOLYGON;
+D.prototype.isGeometryCollectionOrDerived = function() {
+  return this.getSortIndex() === D.SORTINDEX_GEOMETRYCOLLECTION || this.getSortIndex() === D.SORTINDEX_MULTIPOINT || this.getSortIndex() === D.SORTINDEX_MULTILINESTRING || this.getSortIndex() === D.SORTINDEX_MULTIPOLYGON;
 };
-T.prototype.interfaces_ = function() {
+D.prototype.interfaces_ = function() {
   return [io, Ee, Ie];
 };
-T.prototype.getClass = function() {
-  return T;
+D.prototype.getClass = function() {
+  return D;
 };
-T.hasNonEmptyElements = function(t) {
+D.hasNonEmptyElements = function(t) {
   for (var e = 0; e < t.length; e++)
     if (!t[e].isEmpty())
       return !0;
   return !1;
 };
-T.hasNullElements = function(t) {
+D.hasNullElements = function(t) {
   for (var e = 0; e < t.length; e++)
     if (t[e] === null)
       return !0;
@@ -3862,7 +3862,7 @@ hr.SORTINDEX_GEOMETRYCOLLECTION.get = function() {
 hr.geometryChangedFilter.get = function() {
   return zo;
 };
-Object.defineProperties(T, hr);
+Object.defineProperties(D, hr);
 var zo = function() {
 };
 zo.interfaces_ = function() {
@@ -4116,27 +4116,27 @@ var S = function(n) {
       }
     } else if (arguments.length === 3) {
       if (typeof arguments[2] == "boolean" && arguments[0] instanceof Array && typeof arguments[1] == "boolean") {
-        var p = arguments[0], g = arguments[1], y = arguments[2];
-        if (y)
-          for (var m = 0; m < p.length; m++)
-            i.add(p[m], g);
+        var p = arguments[0], g = arguments[1], m = arguments[2];
+        if (m)
+          for (var v = 0; v < p.length; v++)
+            i.add(p[v], g);
         else
-          for (var _ = p.length - 1; _ >= 0; _--)
-            i.add(p[_], g);
+          for (var E = p.length - 1; E >= 0; E--)
+            i.add(p[E], g);
         return !0;
       } else if (typeof arguments[2] == "boolean" && Number.isInteger(arguments[0]) && arguments[1] instanceof d) {
         var I = arguments[0], C = arguments[1], x = arguments[2];
         if (!x) {
-          var b = this.size();
-          if (b > 0) {
+          var P = this.size();
+          if (P > 0) {
             if (I > 0) {
-              var P = this.get(I - 1);
-              if (P.equals2D(C))
+              var R = this.get(I - 1);
+              if (R.equals2D(C))
                 return null;
             }
-            if (I < b) {
-              var D = this.get(I);
-              if (D.equals2D(C))
+            if (I < P) {
+              var F = this.get(I);
+              if (F.equals2D(C))
                 return null;
             }
           }
@@ -4144,10 +4144,10 @@ var S = function(n) {
         n.prototype.add.call(this, I, C);
       }
     } else if (arguments.length === 4) {
-      var G = arguments[0], A = arguments[1], et = arguments[2], K = arguments[3], nt = 1;
+      var G = arguments[0], M = arguments[1], et = arguments[2], K = arguments[3], nt = 1;
       et > K && (nt = -1);
       for (var ct = et; ct !== K; ct += nt)
-        i.add(G[ct], A);
+        i.add(G[ct], M);
       return !0;
     }
   }, t.prototype.closeRing = function() {
@@ -4266,7 +4266,7 @@ z.isEqualReversed = function(t, e) {
   return !0;
 };
 z.envelope = function(t) {
-  for (var e = new R(), r = 0; r < t.length; r++)
+  for (var e = new b(), r = 0; r < t.length; r++)
     e.expandToInclude(t[r]);
   return e;
 };
@@ -4779,7 +4779,7 @@ var Xt = function(n) {
   n && (t.__proto__ = n), t.prototype = Object.create(n && n.prototype), t.prototype.constructor = t;
   var e = { serialVersionUID: { configurable: !0 } };
   return t.prototype.computeEnvelopeInternal = function() {
-    for (var i = this, o = new R(), s = 0; s < this._geometries.length; s++)
+    for (var i = this, o = new b(), s = 0; s < this._geometries.length; s++)
       o.expandToInclude(i._geometries[s].getEnvelopeInternal());
     return o;
   }, t.prototype.getGeometryN = function(i) {
@@ -4845,31 +4845,31 @@ var Xt = function(n) {
       return this.compare(s, a);
     } else if (arguments.length === 2) {
       for (var u = arguments[0], l = arguments[1], c = u, f = this.getNumGeometries(), h = c.getNumGeometries(), p = 0; p < f && p < h; ) {
-        var g = i.getGeometryN(p), y = c.getGeometryN(p), m = g.compareToSameClass(y, l);
-        if (m !== 0)
-          return m;
+        var g = i.getGeometryN(p), m = c.getGeometryN(p), v = g.compareToSameClass(m, l);
+        if (v !== 0)
+          return v;
         p++;
       }
       return p < f ? 1 : p < h ? -1 : 0;
     }
   }, t.prototype.apply = function() {
     var i = this;
-    if (M(arguments[0], nr))
+    if (T(arguments[0], nr))
       for (var o = arguments[0], s = 0; s < this._geometries.length; s++)
         i._geometries[s].apply(o);
-    else if (M(arguments[0], Se)) {
+    else if (T(arguments[0], Se)) {
       var a = arguments[0];
       if (this._geometries.length === 0)
         return null;
       for (var u = 0; u < this._geometries.length && (i._geometries[u].apply(a), !a.isDone()); u++)
         ;
       a.isGeometryChanged() && this.geometryChanged();
-    } else if (M(arguments[0], Ue)) {
+    } else if (T(arguments[0], Ue)) {
       var l = arguments[0];
       l.filter(this);
       for (var c = 0; c < this._geometries.length; c++)
         i._geometries[c].apply(l);
-    } else if (M(arguments[0], Ir)) {
+    } else if (T(arguments[0], Ir)) {
       var f = arguments[0];
       f.filter(this);
       for (var h = 0; h < this._geometries.length; h++)
@@ -4901,14 +4901,14 @@ var Xt = function(n) {
   }, e.serialVersionUID.get = function() {
     return -5694727726395021e3;
   }, Object.defineProperties(t, e), t;
-}(T), Qr = function(n) {
+}(D), Qr = function(n) {
   function t() {
     n.apply(this, arguments);
   }
   n && (t.__proto__ = n), t.prototype = Object.create(n && n.prototype), t.prototype.constructor = t;
   var e = { serialVersionUID: { configurable: !0 } };
   return t.prototype.getSortIndex = function() {
-    return T.SORTINDEX_MULTILINESTRING;
+    return D.SORTINDEX_MULTILINESTRING;
   }, t.prototype.equalsExact = function() {
     if (arguments.length === 2) {
       var i = arguments[0], o = arguments[1];
@@ -5111,7 +5111,7 @@ gt.isEqual = function(t, e) {
   for (var o = Math.min(t.getDimension(), e.getDimension()), s = 0; s < r; s++)
     for (var a = 0; a < o; a++) {
       var u = t.getOrdinate(s, a), l = e.getOrdinate(s, a);
-      if (t.getOrdinate(s, a) !== e.getOrdinate(s, a) && !(F.isNaN(u) && F.isNaN(l)))
+      if (t.getOrdinate(s, a) !== e.getOrdinate(s, a) && !(A.isNaN(u) && A.isNaN(l)))
         return !1;
     }
   return !0;
@@ -5177,7 +5177,7 @@ var ut = function(n) {
   n && (t.__proto__ = n), t.prototype = Object.create(n && n.prototype), t.prototype.constructor = t;
   var e = { serialVersionUID: { configurable: !0 } };
   return t.prototype.computeEnvelopeInternal = function() {
-    return this.isEmpty() ? new R() : this._points.expandEnvelope(new R());
+    return this.isEmpty() ? new b() : this._points.expandEnvelope(new b());
   }, t.prototype.isRing = function() {
     return this.isClosed() && this.isSimple();
   }, t.prototype.getSortIndex = function() {
@@ -5240,20 +5240,20 @@ var ut = function(n) {
     }
   }, t.prototype.apply = function() {
     var i = this;
-    if (M(arguments[0], nr))
+    if (T(arguments[0], nr))
       for (var o = arguments[0], s = 0; s < this._points.size(); s++)
         o.filter(i._points.getCoordinate(s));
-    else if (M(arguments[0], Se)) {
+    else if (T(arguments[0], Se)) {
       var a = arguments[0];
       if (this._points.size() === 0)
         return null;
       for (var u = 0; u < this._points.size() && (a.filter(i._points, u), !a.isDone()); u++)
         ;
       a.isGeometryChanged() && this.geometryChanged();
-    } else if (M(arguments[0], Ue)) {
+    } else if (T(arguments[0], Ue)) {
       var l = arguments[0];
       l.filter(this);
-    } else if (M(arguments[0], Ir)) {
+    } else if (T(arguments[0], Ir)) {
       var c = arguments[0];
       c.filter(this);
     }
@@ -5294,7 +5294,7 @@ var ut = function(n) {
   }, e.serialVersionUID.get = function() {
     return 3110669828065365500;
   }, Object.defineProperties(t, e), t;
-}(T), vi = function() {
+}(D), vi = function() {
 };
 vi.prototype.interfaces_ = function() {
   return [];
@@ -5310,8 +5310,8 @@ var te = function(n) {
   var e = { serialVersionUID: { configurable: !0 } };
   return t.prototype.computeEnvelopeInternal = function() {
     if (this.isEmpty())
-      return new R();
-    var i = new R();
+      return new b();
+    var i = new b();
     return i.expandToInclude(this._coordinates.getX(0), this._coordinates.getY(0)), i;
   }, t.prototype.getSortIndex = function() {
     return n.SORTINDEX_POINT;
@@ -5347,20 +5347,20 @@ var te = function(n) {
       return a.compare(this._coordinates, u._coordinates);
     }
   }, t.prototype.apply = function() {
-    if (M(arguments[0], nr)) {
+    if (T(arguments[0], nr)) {
       var i = arguments[0];
       if (this.isEmpty())
         return null;
       i.filter(this.getCoordinate());
-    } else if (M(arguments[0], Se)) {
+    } else if (T(arguments[0], Se)) {
       var o = arguments[0];
       if (this.isEmpty())
         return null;
       o.filter(this._coordinates, 0), o.isGeometryChanged() && this.geometryChanged();
-    } else if (M(arguments[0], Ue)) {
+    } else if (T(arguments[0], Ue)) {
       var s = arguments[0];
       s.filter(this);
-    } else if (M(arguments[0], Ir)) {
+    } else if (T(arguments[0], Ir)) {
       var a = arguments[0];
       a.filter(this);
     }
@@ -5392,7 +5392,7 @@ var te = function(n) {
   }, e.serialVersionUID.get = function() {
     return 4902022702746615e3;
   }, Object.defineProperties(t, e), t;
-}(T), Tr = function() {
+}(D), Tr = function() {
 };
 Tr.prototype.interfaces_ = function() {
   return [];
@@ -5442,8 +5442,8 @@ var Nt = function(n) {
         return !1;
     }
     for (var l = i.getX(0), c = i.getY(0), f = 1; f <= 4; f++) {
-      var h = i.getX(f), p = i.getY(f), g = h !== l, y = p !== c;
-      if (g === y)
+      var h = i.getX(f), p = i.getY(f), g = h !== l, m = p !== c;
+      if (g === m)
         return !1;
       l = h, c = p;
     }
@@ -5514,28 +5514,28 @@ var Nt = function(n) {
       var u = arguments[0], l = arguments[1], c = u, f = this._shell, h = c._shell, p = f.compareToSameClass(h, l);
       if (p !== 0)
         return p;
-      for (var g = this.getNumInteriorRing(), y = c.getNumInteriorRing(), m = 0; m < g && m < y; ) {
-        var _ = i.getInteriorRingN(m), I = c.getInteriorRingN(m), C = _.compareToSameClass(I, l);
+      for (var g = this.getNumInteriorRing(), m = c.getNumInteriorRing(), v = 0; v < g && v < m; ) {
+        var E = i.getInteriorRingN(v), I = c.getInteriorRingN(v), C = E.compareToSameClass(I, l);
         if (C !== 0)
           return C;
-        m++;
+        v++;
       }
-      return m < g ? 1 : m < y ? -1 : 0;
+      return v < g ? 1 : v < m ? -1 : 0;
     }
   }, t.prototype.apply = function(i) {
     var o = this;
-    if (M(i, nr)) {
+    if (T(i, nr)) {
       this._shell.apply(i);
       for (var s = 0; s < this._holes.length; s++)
         o._holes[s].apply(i);
-    } else if (M(i, Se)) {
+    } else if (T(i, Se)) {
       if (this._shell.apply(i), !i.isDone())
         for (var a = 0; a < this._holes.length && (o._holes[a].apply(i), !i.isDone()); a++)
           ;
       i.isGeometryChanged() && this.geometryChanged();
-    } else if (M(i, Ue))
+    } else if (T(i, Ue))
       i.filter(this);
-    else if (M(i, Ir)) {
+    else if (T(i, Ir)) {
       i.filter(this), this._shell.apply(i);
       for (var u = 0; u < this._holes.length; u++)
         o._holes[u].apply(i);
@@ -5574,14 +5574,14 @@ var Nt = function(n) {
   }, e.serialVersionUID.get = function() {
     return -3494792200821764600;
   }, Object.defineProperties(t, e), t;
-}(T), Vn = function(n) {
+}(D), Vn = function(n) {
   function t() {
     n.apply(this, arguments);
   }
   n && (t.__proto__ = n), t.prototype = Object.create(n && n.prototype), t.prototype.constructor = t;
   var e = { serialVersionUID: { configurable: !0 } };
   return t.prototype.getSortIndex = function() {
-    return T.SORTINDEX_MULTIPOINT;
+    return D.SORTINDEX_MULTIPOINT;
   }, t.prototype.isValid = function() {
     return !0;
   }, t.prototype.equalsExact = function() {
@@ -5622,7 +5622,7 @@ var Nt = function(n) {
   n && (t.__proto__ = n), t.prototype = Object.create(n && n.prototype), t.prototype.constructor = t;
   var e = { MINIMUM_VALID_SIZE: { configurable: !0 }, serialVersionUID: { configurable: !0 } };
   return t.prototype.getSortIndex = function() {
-    return T.SORTINDEX_LINEARRING;
+    return D.SORTINDEX_LINEARRING;
   }, t.prototype.getBoundaryDimension = function() {
     return Y.FALSE;
   }, t.prototype.isClosed = function() {
@@ -5657,7 +5657,7 @@ var Nt = function(n) {
   n && (t.__proto__ = n), t.prototype = Object.create(n && n.prototype), t.prototype.constructor = t;
   var e = { serialVersionUID: { configurable: !0 } };
   return t.prototype.getSortIndex = function() {
-    return T.SORTINDEX_MULTIPOLYGON;
+    return D.SORTINDEX_MULTIPOLYGON;
   }, t.prototype.equalsExact = function() {
     if (arguments.length === 2) {
       var i = arguments[0], o = arguments[1];
@@ -5791,7 +5791,7 @@ var ht = function() {
       this._coordinates = new Array(e).fill(null);
       for (var r = 0; r < e; r++)
         t._coordinates[r] = new d();
-    } else if (M(arguments[0], q)) {
+    } else if (T(arguments[0], q)) {
       var i = arguments[0];
       if (i === null)
         return this._coordinates = new Array(0).fill(null), null;
@@ -5838,7 +5838,7 @@ ht.prototype.getOrdinate = function(t, e) {
     case q.Z:
       return this._coordinates[t].z;
   }
-  return F.NaN;
+  return A.NaN;
 };
 ht.prototype.getCoordinate = function() {
   if (arguments.length === 1) {
@@ -5910,7 +5910,7 @@ or.prototype.create = function() {
     if (arguments[0] instanceof Array) {
       var t = arguments[0];
       return new ht(t);
-    } else if (M(arguments[0], q)) {
+    } else if (T(arguments[0], q)) {
       var e = arguments[0];
       return new ht(e);
     }
@@ -5997,7 +5997,7 @@ W.prototype.toString = function() {
 W.prototype.makePrecise = function() {
   if (typeof arguments[0] == "number") {
     var t = arguments[0];
-    if (F.isNaN(t))
+    if (A.isNaN(t))
       return t;
     if (this._modelType === W.FLOATING_SINGLE) {
       var e = t;
@@ -6061,7 +6061,7 @@ W.FIXED = new qe("FIXED");
 W.FLOATING = new qe("FLOATING");
 W.FLOATING_SINGLE = new qe("FLOATING SINGLE");
 var k = function n() {
-  this._precisionModel = new W(), this._SRID = 0, this._coordinateSequenceFactory = n.getDefaultCoordinateSequenceFactory(), arguments.length === 0 || (arguments.length === 1 ? M(arguments[0], Tn) ? this._coordinateSequenceFactory = arguments[0] : arguments[0] instanceof W && (this._precisionModel = arguments[0]) : arguments.length === 2 ? (this._precisionModel = arguments[0], this._SRID = arguments[1]) : arguments.length === 3 && (this._precisionModel = arguments[0], this._SRID = arguments[1], this._coordinateSequenceFactory = arguments[2]));
+  this._precisionModel = new W(), this._SRID = 0, this._coordinateSequenceFactory = n.getDefaultCoordinateSequenceFactory(), arguments.length === 0 || (arguments.length === 1 ? T(arguments[0], Tn) ? this._coordinateSequenceFactory = arguments[0] : arguments[0] instanceof W && (this._precisionModel = arguments[0]) : arguments.length === 2 ? (this._precisionModel = arguments[0], this._SRID = arguments[1]) : arguments.length === 3 && (this._precisionModel = arguments[0], this._SRID = arguments[1], this._coordinateSequenceFactory = arguments[2]));
 }, aa = { serialVersionUID: { configurable: !0 } };
 k.prototype.toGeometry = function(t) {
   return t.isNull() ? this.createPoint(null) : t.getMinX() === t.getMaxX() && t.getMinY() === t.getMaxY() ? this.createPoint(new d(t.getMinX(), t.getMinY())) : t.getMinX() === t.getMaxX() || t.getMinY() === t.getMaxY() ? this.createLineString([new d(t.getMinX(), t.getMinY()), new d(t.getMaxX(), t.getMaxY())]) : this.createPolygon(this.createLinearRing([new d(t.getMinX(), t.getMinY()), new d(t.getMinX(), t.getMaxY()), new d(t.getMaxX(), t.getMaxY()), new d(t.getMaxX(), t.getMinY()), new d(t.getMinX(), t.getMinY())]), null);
@@ -6070,7 +6070,7 @@ k.prototype.createLineString = function(t) {
   if (t) {
     if (t instanceof Array)
       return new ut(this.getCoordinateSequenceFactory().create(t), this);
-    if (M(t, q))
+    if (T(t, q))
       return new ut(t, this);
   } else
     return new ut(this.getCoordinateSequenceFactory().create([]), this);
@@ -6114,7 +6114,7 @@ k.prototype.createPoint = function() {
     if (arguments[0] instanceof d) {
       var t = arguments[0];
       return this.createPoint(t !== null ? this.getCoordinateSequenceFactory().create([t]) : null);
-    } else if (M(arguments[0], q)) {
+    } else if (T(arguments[0], q)) {
       var e = arguments[0];
       return new te(e, this);
     }
@@ -6127,7 +6127,7 @@ k.prototype.createPolygon = function() {
   if (arguments.length === 0)
     return new Nt(null, null, this);
   if (arguments.length === 1) {
-    if (M(arguments[0], q)) {
+    if (T(arguments[0], q)) {
       var t = arguments[0];
       return this.createPolygon(this.createLinearRing(t));
     } else if (arguments[0] instanceof Array) {
@@ -6174,7 +6174,7 @@ k.prototype.createLinearRing = function() {
     if (arguments[0] instanceof Array) {
       var t = arguments[0];
       return this.createLinearRing(t !== null ? this.getCoordinateSequenceFactory().create(t) : null);
-    } else if (M(arguments[0], q)) {
+    } else if (T(arguments[0], q)) {
       var e = arguments[0];
       return new ir(e, this);
     }
@@ -6199,7 +6199,7 @@ k.prototype.createMultiPoint = function() {
     } else if (arguments[0] instanceof Array) {
       var r = arguments[0];
       return this.createMultiPoint(r !== null ? this.getCoordinateSequenceFactory().create(r) : null);
-    } else if (M(arguments[0], q)) {
+    } else if (T(arguments[0], q)) {
       var i = arguments[0];
       if (i === null)
         return this.createMultiPoint(new Array(0).fill(null));
@@ -6808,7 +6808,7 @@ Yt.prototype.compareTo = function(t) {
 };
 Yt.prototype.getEnvelope = function() {
   if (this._env === null) {
-    for (var t = new R(), e = this._dirEdgeList.iterator(); e.hasNext(); )
+    for (var t = new b(), e = this._dirEdgeList.iterator(); e.hasNext(); )
       for (var r = e.next(), i = r.getEdge().getCoordinates(), o = 0; o < i.length - 1; o++)
         t.expandToInclude(i[o]);
     this._env = t;
@@ -6874,13 +6874,13 @@ tt.prototype.setAllLocations = function(t) {
 };
 tt.prototype.isNull = function() {
   for (var t = this, e = 0; e < this.location.length; e++)
-    if (t.location[e] !== v.NONE)
+    if (t.location[e] !== y.NONE)
       return !1;
   return !0;
 };
 tt.prototype.setAllLocationsIfNull = function(t) {
   for (var e = this, r = 0; r < this.location.length; r++)
-    e.location[r] === v.NONE && (e.location[r] = t);
+    e.location[r] === y.NONE && (e.location[r] = t);
 };
 tt.prototype.isLine = function() {
   return this.location.length === 1;
@@ -6889,10 +6889,10 @@ tt.prototype.merge = function(t) {
   var e = this;
   if (t.location.length > this.location.length) {
     var r = new Array(3).fill(null);
-    r[N.ON] = this.location[N.ON], r[N.LEFT] = v.NONE, r[N.RIGHT] = v.NONE, this.location = r;
+    r[N.ON] = this.location[N.ON], r[N.LEFT] = y.NONE, r[N.RIGHT] = y.NONE, this.location = r;
   }
   for (var i = 0; i < this.location.length; i++)
-    e.location[i] === v.NONE && i < t.location.length && (e.location[i] = t.location[i]);
+    e.location[i] === y.NONE && i < t.location.length && (e.location[i] = t.location[i]);
 };
 tt.prototype.getLocations = function() {
   return this.location;
@@ -6905,20 +6905,20 @@ tt.prototype.flip = function() {
 };
 tt.prototype.toString = function() {
   var t = new Je();
-  return this.location.length > 1 && t.append(v.toLocationSymbol(this.location[N.LEFT])), t.append(v.toLocationSymbol(this.location[N.ON])), this.location.length > 1 && t.append(v.toLocationSymbol(this.location[N.RIGHT])), t.toString();
+  return this.location.length > 1 && t.append(y.toLocationSymbol(this.location[N.LEFT])), t.append(y.toLocationSymbol(this.location[N.ON])), this.location.length > 1 && t.append(y.toLocationSymbol(this.location[N.RIGHT])), t.toString();
 };
 tt.prototype.setLocations = function(t, e, r) {
   this.location[N.ON] = t, this.location[N.LEFT] = e, this.location[N.RIGHT] = r;
 };
 tt.prototype.get = function(t) {
-  return t < this.location.length ? this.location[t] : v.NONE;
+  return t < this.location.length ? this.location[t] : y.NONE;
 };
 tt.prototype.isArea = function() {
   return this.location.length > 1;
 };
 tt.prototype.isAnyNull = function() {
   for (var t = this, e = 0; e < this.location.length; e++)
-    if (t.location[e] === v.NONE)
+    if (t.location[e] === y.NONE)
       return !0;
   return !1;
 };
@@ -6932,7 +6932,7 @@ tt.prototype.setLocation = function() {
   }
 };
 tt.prototype.init = function(t) {
-  this.location = new Array(t).fill(null), this.setAllLocations(v.NONE);
+  this.location = new Array(t).fill(null), this.setAllLocations(y.NONE);
 };
 tt.prototype.isEqualOnSide = function(t, e) {
   return this.location[e] === t.location[e];
@@ -6960,13 +6960,13 @@ var Q = function n() {
     }
   } else if (arguments.length === 2) {
     var r = arguments[0], i = arguments[1];
-    this.elt[0] = new tt(v.NONE), this.elt[1] = new tt(v.NONE), this.elt[r].setLocation(i);
+    this.elt[0] = new tt(y.NONE), this.elt[1] = new tt(y.NONE), this.elt[r].setLocation(i);
   } else if (arguments.length === 3) {
     var o = arguments[0], s = arguments[1], a = arguments[2];
     this.elt[0] = new tt(o, s, a), this.elt[1] = new tt(o, s, a);
   } else if (arguments.length === 4) {
     var u = arguments[0], l = arguments[1], c = arguments[2], f = arguments[3];
-    this.elt[0] = new tt(v.NONE, v.NONE, v.NONE), this.elt[1] = new tt(v.NONE, v.NONE, v.NONE), this.elt[u].setLocations(l, c, f);
+    this.elt[0] = new tt(y.NONE, y.NONE, y.NONE), this.elt[1] = new tt(y.NONE, y.NONE, y.NONE), this.elt[u].setLocations(l, c, f);
   }
 };
 Q.prototype.getGeometryCount = function() {
@@ -7047,12 +7047,12 @@ Q.prototype.getClass = function() {
   return Q;
 };
 Q.toLineLabel = function(t) {
-  for (var e = new Q(v.NONE), r = 0; r < 2; r++)
+  for (var e = new Q(y.NONE), r = 0; r < 2; r++)
     e.setLocation(r, t.getLocation(r));
   return e;
 };
 var mt = function() {
-  this._startDe = null, this._maxNodeDegree = -1, this._edges = new S(), this._pts = new S(), this._label = new Q(v.NONE), this._ring = null, this._isHole = null, this._shell = null, this._holes = new S(), this._geometryFactory = null;
+  this._startDe = null, this._maxNodeDegree = -1, this._edges = new S(), this._pts = new S(), this._label = new Q(y.NONE), this._ring = null, this._isHole = null, this._shell = null, this._holes = new S(), this._geometryFactory = null;
   var t = arguments[0], e = arguments[1];
   this._geometryFactory = e, this.computePoints(t), this.computeRing();
 };
@@ -7155,9 +7155,9 @@ mt.prototype.mergeLabel = function() {
     this.mergeLabel(t, 0), this.mergeLabel(t, 1);
   } else if (arguments.length === 2) {
     var e = arguments[0], r = arguments[1], i = e.getLocation(r, N.RIGHT);
-    if (i === v.NONE)
+    if (i === y.NONE)
       return null;
-    if (this._label.getLocation(r) === v.NONE)
+    if (this._label.getLocation(r) === y.NONE)
       return this._label.setLocation(r, i), null;
   }
 };
@@ -7268,7 +7268,7 @@ var go = function(n) {
   function t() {
     n.call(this), this._coord = null, this._edges = null;
     var e = arguments[0], r = arguments[1];
-    this._coord = e, this._edges = r, this._label = new Q(0, v.NONE);
+    this._coord = e, this._edges = r, this._label = new Q(0, y.NONE);
   }
   return n && (t.__proto__ = n), t.prototype = Object.create(n && n.prototype), t.prototype.constructor = t, t.prototype.isIncidentEdgeInResult = function() {
     for (var r = this.getEdges().getEdges().iterator(); r.hasNext(); ) {
@@ -7285,10 +7285,10 @@ var go = function(n) {
     r.println("node " + this._coord + " lbl: " + this._label);
   }, t.prototype.computeIM = function(r) {
   }, t.prototype.computeMergedLocation = function(r, i) {
-    var o = v.NONE;
+    var o = y.NONE;
     if (o = this._label.getLocation(i), !r.isNull(i)) {
       var s = r.getLocation(i);
-      o !== v.BOUNDARY && (o = s);
+      o !== y.BOUNDARY && (o = s);
     }
     return o;
   }, t.prototype.setLabel = function() {
@@ -7307,25 +7307,25 @@ var go = function(n) {
     } else if (arguments[0] instanceof Q)
       for (var o = arguments[0], s = 0; s < 2; s++) {
         var a = r.computeMergedLocation(o, s), u = r._label.getLocation(s);
-        u === v.NONE && r._label.setLocation(s, a);
+        u === y.NONE && r._label.setLocation(s, a);
       }
   }, t.prototype.add = function(r) {
     this._edges.insert(r), r.setNode(this);
   }, t.prototype.setLabelBoundary = function(r) {
     if (this._label === null)
       return null;
-    var i = v.NONE;
+    var i = y.NONE;
     this._label !== null && (i = this._label.getLocation(r));
     var o = null;
     switch (i) {
-      case v.BOUNDARY:
-        o = v.INTERIOR;
+      case y.BOUNDARY:
+        o = y.INTERIOR;
         break;
-      case v.INTERIOR:
-        o = v.BOUNDARY;
+      case y.INTERIOR:
+        o = y.BOUNDARY;
         break;
       default:
-        o = v.BOUNDARY;
+        o = y.BOUNDARY;
         break;
     }
     this._label.setLocation(r, o);
@@ -7366,7 +7366,7 @@ Ye.prototype.values = function() {
 Ye.prototype.getBoundaryNodes = function(t) {
   for (var e = new S(), r = this.iterator(); r.hasNext(); ) {
     var i = r.next();
-    i.getLabel().getLocation(t) === v.BOUNDARY && e.add(i);
+    i.getLabel().getLocation(t) === y.BOUNDARY && e.add(i);
   }
   return e;
 };
@@ -7527,7 +7527,7 @@ var To = function(n) {
     this._depth[r] = i;
   }, t.prototype.isInteriorAreaEdge = function() {
     for (var r = this, i = !0, o = 0; o < 2; o++)
-      r._label.isArea(o) && r._label.getLocation(o, N.LEFT) === v.INTERIOR && r._label.getLocation(o, N.RIGHT) === v.INTERIOR || (i = !1);
+      r._label.isArea(o) && r._label.getLocation(o, N.LEFT) === y.INTERIOR && r._label.getLocation(o, N.RIGHT) === y.INTERIOR || (i = !1);
     return i;
   }, t.prototype.setNextMin = function(r) {
     this._nextMin = r;
@@ -7536,7 +7536,7 @@ var To = function(n) {
   }, t.prototype.setMinEdgeRing = function(r) {
     this._minEdgeRing = r;
   }, t.prototype.isLineEdge = function() {
-    var r = this._label.isLine(0) || this._label.isLine(1), i = !this._label.isArea(0) || this._label.allPositionsEqual(0, v.EXTERIOR), o = !this._label.isArea(1) || this._label.allPositionsEqual(1, v.EXTERIOR);
+    var r = this._label.isLine(0) || this._label.isLine(1), i = !this._label.isArea(0) || this._label.allPositionsEqual(0, y.EXTERIOR), o = !this._label.isArea(1) || this._label.allPositionsEqual(1, y.EXTERIOR);
     return r && i && o;
   }, t.prototype.setEdgeRing = function(r) {
     this._edgeRing = r;
@@ -7579,7 +7579,7 @@ var To = function(n) {
   }, t.prototype.getClass = function() {
     return t;
   }, t.depthFactor = function(r, i) {
-    return r === v.EXTERIOR && i === v.INTERIOR ? 1 : r === v.INTERIOR && i === v.EXTERIOR ? -1 : 0;
+    return r === y.EXTERIOR && i === y.INTERIOR ? 1 : r === y.INTERIOR && i === y.EXTERIOR ? -1 : 0;
   }, t;
 }(Ft), kn = function() {
 };
@@ -7638,7 +7638,7 @@ st.prototype.isBoundaryNode = function(t, e) {
   if (r === null)
     return !1;
   var i = r.getLabel();
-  return i !== null && i.getLocation(t) === v.BOUNDARY;
+  return i !== null && i.getLocation(t) === y.BOUNDARY;
 };
 st.prototype.linkAllDirectedEdges = function() {
   for (var t = this._nodes.iterator(); t.hasNext(); ) {
@@ -8092,15 +8092,15 @@ xt.prototype.query = function() {
       return null;
     this.getIntersectsOp().intersects(this._root.getBounds(), i) && this.query(i, this._root, o);
   } else if (arguments.length === 3) {
-    if (M(arguments[2], Mr) && arguments[0] instanceof Object && arguments[1] instanceof Ct)
+    if (T(arguments[2], Mr) && arguments[0] instanceof Object && arguments[1] instanceof Ct)
       for (var s = arguments[0], a = arguments[1], u = arguments[2], l = a.getChildBoundables(), c = 0; c < l.size(); c++) {
         var f = l.get(c);
         t.getIntersectsOp().intersects(f.getBounds(), s) && (f instanceof Ct ? t.query(s, f, u) : f instanceof Le ? u.visitItem(f.getItem()) : V.shouldNeverReachHere());
       }
-    else if (M(arguments[2], Ne) && arguments[0] instanceof Object && arguments[1] instanceof Ct)
-      for (var h = arguments[0], p = arguments[1], g = arguments[2], y = p.getChildBoundables(), m = 0; m < y.size(); m++) {
-        var _ = y.get(m);
-        t.getIntersectsOp().intersects(_.getBounds(), h) && (_ instanceof Ct ? t.query(h, _, g) : _ instanceof Le ? g.add(_.getItem()) : V.shouldNeverReachHere());
+    else if (T(arguments[2], Ne) && arguments[0] instanceof Object && arguments[1] instanceof Ct)
+      for (var h = arguments[0], p = arguments[1], g = arguments[2], m = p.getChildBoundables(), v = 0; v < m.size(); v++) {
+        var E = m.get(v);
+        t.getIntersectsOp().intersects(E.getBounds(), h) && (E instanceof Ct ? t.query(h, E, g) : E instanceof Le ? g.add(E.getItem()) : V.shouldNeverReachHere());
       }
   }
 };
@@ -8240,10 +8240,10 @@ var ca = function(n) {
       var o = arguments[0], s = arguments[1];
       n.prototype.query.call(this, o, s);
     } else if (arguments.length === 3) {
-      if (M(arguments[2], Mr) && arguments[0] instanceof Object && arguments[1] instanceof Ct) {
+      if (T(arguments[2], Mr) && arguments[0] instanceof Object && arguments[1] instanceof Ct) {
         var a = arguments[0], u = arguments[1], l = arguments[2];
         n.prototype.query.call(this, a, u, l);
-      } else if (M(arguments[2], Ne) && arguments[0] instanceof Object && arguments[1] instanceof Ct) {
+      } else if (T(arguments[2], Ne) && arguments[0] instanceof Object && arguments[1] instanceof Ct) {
         var c = arguments[0], f = arguments[1], h = arguments[2];
         n.prototype.query.call(this, c, f, h);
       }
@@ -8268,30 +8268,30 @@ var ca = function(n) {
     return this.createParentBoundablesFromVerticalSlices(u, o);
   }, t.prototype.nearestNeighbour = function() {
     if (arguments.length === 1) {
-      if (M(arguments[0], Un)) {
+      if (T(arguments[0], Un)) {
         var i = arguments[0], o = new vt(this.getRoot(), this.getRoot(), i);
         return this.nearestNeighbour(o);
       } else if (arguments[0] instanceof vt) {
         var s = arguments[0];
-        return this.nearestNeighbour(s, F.POSITIVE_INFINITY);
+        return this.nearestNeighbour(s, A.POSITIVE_INFINITY);
       }
     } else if (arguments.length === 2) {
-      if (arguments[0] instanceof t && M(arguments[1], Un)) {
+      if (arguments[0] instanceof t && T(arguments[1], Un)) {
         var a = arguments[0], u = arguments[1], l = new vt(this.getRoot(), a.getRoot(), u);
         return this.nearestNeighbour(l);
       } else if (arguments[0] instanceof vt && typeof arguments[1] == "number") {
         var c = arguments[0], f = arguments[1], h = f, p = null, g = new Nr();
         for (g.add(c); !g.isEmpty() && h > 0; ) {
-          var y = g.poll(), m = y.getDistance();
-          if (m >= h)
+          var m = g.poll(), v = m.getDistance();
+          if (v >= h)
             break;
-          y.isLeaves() ? (h = m, p = y) : y.expandToQueue(g, h);
+          m.isLeaves() ? (h = v, p = m) : m.expandToQueue(g, h);
         }
         return [p.getBoundable(0).getItem(), p.getBoundable(1).getItem()];
       }
     } else if (arguments.length === 3) {
-      var _ = arguments[0], I = arguments[1], C = arguments[2], x = new Le(_, I), b = new vt(this.getRoot(), x, C);
-      return this.nearestNeighbour(b)[0];
+      var E = arguments[0], I = arguments[1], C = arguments[2], x = new Le(E, I), P = new vt(this.getRoot(), x, C);
+      return this.nearestNeighbour(P)[0];
     }
   }, t.prototype.interfaces_ = function() {
     return [fn, Ie];
@@ -8345,7 +8345,7 @@ var ca = function(n) {
   return n && (t.__proto__ = n), t.prototype = Object.create(n && n.prototype), t.prototype.constructor = t, t.prototype.computeBounds = function() {
     for (var r = null, i = this.getChildBoundables().iterator(); i.hasNext(); ) {
       var o = i.next();
-      r === null ? r = new R(o.getBounds()) : r.expandToInclude(o.getBounds());
+      r === null ? r = new b(o.getBounds()) : r.expandToInclude(o.getBounds());
     }
     return r;
   }, t.prototype.interfaces_ = function() {
@@ -8725,7 +8725,7 @@ O.prototype.projectionFactor = function(t) {
     return 1;
   var e = this.p1.x - this.p0.x, r = this.p1.y - this.p0.y, i = e * e + r * r;
   if (i <= 0)
-    return F.NaN;
+    return A.NaN;
   var o = ((t.x - this.p0.x) * e + (t.y - this.p0.y) * r) / i;
   return o;
 };
@@ -8733,7 +8733,7 @@ O.prototype.closestPoints = function(t) {
   var e = this.intersection(t);
   if (e !== null)
     return [e, e];
-  var r = new Array(2).fill(null), i = F.MAX_VALUE, o = null, s = this.closestPoint(t.p0);
+  var r = new Array(2).fill(null), i = A.MAX_VALUE, o = null, s = this.closestPoint(t.p0);
   i = s.distance(t.p0), r[0] = s, r[1] = t.p0;
   var a = this.closestPoint(t.p1);
   o = a.distance(t.p1), o < i && (i = o, r[0] = a, r[1] = t.p1);
@@ -8801,7 +8801,7 @@ O.prototype.setCoordinates = function() {
 };
 O.prototype.segmentFraction = function(t) {
   var e = this.projectionFactor(t);
-  return e < 0 ? e = 0 : (e > 1 || F.isNaN(e)) && (e = 1), e;
+  return e < 0 ? e = 0 : (e > 1 || A.isNaN(e)) && (e = 1), e;
 };
 O.prototype.toString = function() {
   return "LINESTRING( " + this.p0.x + " " + this.p0.y + ", " + this.p1.x + " " + this.p1.y + ")";
@@ -8823,10 +8823,10 @@ O.prototype.pointAlong = function(t) {
   return e.x = this.p0.x + t * (this.p1.x - this.p0.x), e.y = this.p0.y + t * (this.p1.y - this.p0.y), e;
 };
 O.prototype.hashCode = function() {
-  var t = F.doubleToLongBits(this.p0.x);
-  t ^= F.doubleToLongBits(this.p0.y) * 31;
-  var e = Math.trunc(t) ^ Math.trunc(t >> 32), r = F.doubleToLongBits(this.p1.x);
-  r ^= F.doubleToLongBits(this.p1.y) * 31;
+  var t = A.doubleToLongBits(this.p0.x);
+  t ^= A.doubleToLongBits(this.p0.y) * 31;
+  var e = Math.trunc(t) ^ Math.trunc(t >> 32), r = A.doubleToLongBits(this.p1.x);
+  r ^= A.doubleToLongBits(this.p1.y) * 31;
   var i = Math.trunc(r) ^ Math.trunc(r >> 32);
   return e ^ i;
 };
@@ -8844,7 +8844,7 @@ fa.serialVersionUID.get = function() {
 };
 Object.defineProperties(O, fa);
 var Ii = function() {
-  this.tempEnv1 = new R(), this.tempEnv2 = new R(), this._overlapSeg1 = new O(), this._overlapSeg2 = new O();
+  this.tempEnv1 = new b(), this.tempEnv2 = new b(), this._overlapSeg1 = new O(), this._overlapSeg2 = new O();
 };
 Ii.prototype.overlap = function() {
   if (arguments.length !== 2) {
@@ -8894,7 +8894,7 @@ re.prototype.select = function(t, e) {
 re.prototype.getEnvelope = function() {
   if (this._env === null) {
     var t = this._pts[this._start], e = this._pts[this._end];
-    this._env = new R(t, e);
+    this._env = new b(t, e);
   }
   return this._env;
 };
@@ -9448,7 +9448,7 @@ rt.prototype.initSideSegments = function(t, e, r) {
   this._s1 = t, this._s2 = e, this._side = r, this._seg1.setCoordinates(t, e), this.computeOffsetSegment(this._seg1, r, this._distance, this._offset1);
 };
 rt.prototype.addLimitedMitreJoin = function(t, e, r, i) {
-  var o = this._seg0.p1, s = U.angle(o, this._seg0.p0), a = U.angleBetweenOriented(this._seg0.p0, o, this._seg1.p1), u = a / 2, l = U.normalize(s + u), c = U.normalize(l + Math.PI), f = i * r, h = f * Math.abs(Math.sin(u)), p = r - h, g = o.x + f * Math.cos(c), y = o.y + f * Math.sin(c), m = new d(g, y), _ = new O(o, m), I = _.pointAlongOffset(1, p), C = _.pointAlongOffset(1, -p);
+  var o = this._seg0.p1, s = U.angle(o, this._seg0.p0), a = U.angleBetweenOriented(this._seg0.p0, o, this._seg1.p1), u = a / 2, l = U.normalize(s + u), c = U.normalize(l + Math.PI), f = i * r, h = f * Math.abs(Math.sin(u)), p = r - h, g = o.x + f * Math.cos(c), m = o.y + f * Math.sin(c), v = new d(g, m), E = new O(o, v), I = E.pointAlongOffset(1, p), C = E.pointAlongOffset(1, -p);
   this._side === N.LEFT ? (this._segList.addPt(I), this._segList.addPt(C)) : (this._segList.addPt(C), this._segList.addPt(I));
 };
 rt.prototype.computeOffsetSegment = function(t, e, r, i) {
@@ -9654,7 +9654,7 @@ pn.prototype.findStabbedSegments = function() {
     }
     return r;
   } else if (arguments.length === 3) {
-    if (M(arguments[2], Ne) && arguments[0] instanceof d && arguments[1] instanceof To)
+    if (T(arguments[2], Ne) && arguments[0] instanceof d && arguments[1] instanceof To)
       for (var a = arguments[0], u = arguments[1], l = arguments[2], c = u.getEdge().getCoordinates(), f = 0; f < c.length - 1; f++) {
         t._seg.p0 = c[f], t._seg.p1 = c[f + 1], t._seg.p0.y > t._seg.p1.y && t._seg.reverse();
         var h = Math.max(t._seg.p0.x, t._seg.p1.x);
@@ -9665,10 +9665,10 @@ pn.prototype.findStabbedSegments = function() {
           l.add(g);
         }
       }
-    else if (M(arguments[2], Ne) && arguments[0] instanceof d && M(arguments[1], Ne))
-      for (var y = arguments[0], m = arguments[1], _ = arguments[2], I = m.iterator(); I.hasNext(); ) {
+    else if (T(arguments[2], Ne) && arguments[0] instanceof d && T(arguments[1], Ne))
+      for (var m = arguments[0], v = arguments[1], E = arguments[2], I = v.iterator(); I.hasNext(); ) {
         var C = I.next();
-        C.isForward() && t.findStabbedSegments(y, C, _);
+        C.isForward() && t.findStabbedSegments(m, C, E);
       }
   }
 };
@@ -9764,8 +9764,8 @@ j.det = function(t, e, r, i) {
   return t * i - e * r;
 };
 j.interpolateZ = function(t, e, r, i) {
-  var o = e.x, s = e.y, a = r.x - o, u = i.x - o, l = r.y - s, c = i.y - s, f = a * c - u * l, h = t.x - o, p = t.y - s, g = (c * h - u * p) / f, y = (-l * h + a * p) / f, m = e.z + g * (r.z - e.z) + y * (i.z - e.z);
-  return m;
+  var o = e.x, s = e.y, a = r.x - o, u = i.x - o, l = r.y - s, c = i.y - s, f = a * c - u * l, h = t.x - o, p = t.y - s, g = (c * h - u * p) / f, m = (-l * h + a * p) / f, v = e.z + g * (r.z - e.z) + m * (i.z - e.z);
+  return v;
 };
 j.longestSideLength = function(t, e, r) {
   var i = t.distance(e), o = e.distance(r), s = r.distance(t), a = i;
@@ -9807,7 +9807,7 @@ _e.prototype.addPoint = function(t) {
   if (this._distance <= 0)
     return null;
   var e = t.getCoordinates(), r = this._curveBuilder.getLineCurve(e, this._distance);
-  this.addCurve(r, v.EXTERIOR, v.INTERIOR);
+  this.addCurve(r, y.EXTERIOR, y.INTERIOR);
 };
 _e.prototype.addPolygon = function(t) {
   var e = this, r = this._distance, i = N.LEFT;
@@ -9815,10 +9815,10 @@ _e.prototype.addPolygon = function(t) {
   var o = t.getExteriorRing(), s = z.removeRepeatedPoints(o.getCoordinates());
   if (this._distance < 0 && this.isErodedCompletely(o, this._distance) || this._distance <= 0 && s.length < 3)
     return null;
-  this.addPolygonRing(s, r, i, v.EXTERIOR, v.INTERIOR);
+  this.addPolygonRing(s, r, i, y.EXTERIOR, y.INTERIOR);
   for (var a = 0; a < t.getNumInteriorRing(); a++) {
     var u = t.getInteriorRingN(a), l = z.removeRepeatedPoints(u.getCoordinates());
-    e._distance > 0 && e.isErodedCompletely(u, -e._distance) || e.addPolygonRing(l, r, N.opposite(i), v.INTERIOR, v.EXTERIOR);
+    e._distance > 0 && e.isErodedCompletely(u, -e._distance) || e.addPolygonRing(l, r, N.opposite(i), y.INTERIOR, y.EXTERIOR);
   }
 };
 _e.prototype.isTriangleErodedCompletely = function(t, e) {
@@ -9829,12 +9829,12 @@ _e.prototype.addLineString = function(t) {
   if (this._distance <= 0 && !this._curveBuilder.getBufferParameters().isSingleSided())
     return null;
   var e = z.removeRepeatedPoints(t.getCoordinates()), r = this._curveBuilder.getLineCurve(e, this._distance);
-  this.addCurve(r, v.EXTERIOR, v.INTERIOR);
+  this.addCurve(r, y.EXTERIOR, y.INTERIOR);
 };
 _e.prototype.addCurve = function(t, e, r) {
   if (t === null || t.length < 2)
     return null;
-  var i = new dt(t, new Q(0, v.BOUNDARY, e, r));
+  var i = new dt(t, new Q(0, y.BOUNDARY, e, r));
   this._curveList.add(i);
 };
 _e.prototype.getCurves = function() {
@@ -9966,10 +9966,10 @@ se.containsPoint = function(t, e) {
   return !1;
 };
 se.locate = function(t, e) {
-  return e.isEmpty() ? v.EXTERIOR : se.containsPoint(t, e) ? v.INTERIOR : v.EXTERIOR;
+  return e.isEmpty() ? y.EXTERIOR : se.containsPoint(t, e) ? y.INTERIOR : y.EXTERIOR;
 };
 var Bt = function() {
-  this._edgeMap = new At(), this._edgeList = null, this._ptInAreaLocation = [v.NONE, v.NONE];
+  this._edgeMap = new At(), this._edgeList = null, this._ptInAreaLocation = [y.NONE, y.NONE];
 };
 Bt.prototype.getNextCW = function(t) {
   this.getEdges();
@@ -9977,22 +9977,22 @@ Bt.prototype.getNextCW = function(t) {
   return e === 0 && (r = this._edgeList.size() - 1), this._edgeList.get(r);
 };
 Bt.prototype.propagateSideLabels = function(t) {
-  for (var e = v.NONE, r = this.iterator(); r.hasNext(); ) {
+  for (var e = y.NONE, r = this.iterator(); r.hasNext(); ) {
     var i = r.next(), o = i.getLabel();
-    o.isArea(t) && o.getLocation(t, N.LEFT) !== v.NONE && (e = o.getLocation(t, N.LEFT));
+    o.isArea(t) && o.getLocation(t, N.LEFT) !== y.NONE && (e = o.getLocation(t, N.LEFT));
   }
-  if (e === v.NONE)
+  if (e === y.NONE)
     return null;
   for (var s = e, a = this.iterator(); a.hasNext(); ) {
     var u = a.next(), l = u.getLabel();
-    if (l.getLocation(t, N.ON) === v.NONE && l.setLocation(t, N.ON, s), l.isArea(t)) {
+    if (l.getLocation(t, N.ON) === y.NONE && l.setLocation(t, N.ON, s), l.isArea(t)) {
       var c = l.getLocation(t, N.LEFT), f = l.getLocation(t, N.RIGHT);
-      if (f !== v.NONE) {
+      if (f !== y.NONE) {
         if (f !== s)
           throw new Cr("side location conflict", u.getCoordinate());
-        c === v.NONE && V.shouldNeverReachHere("found single null side (at " + u.getCoordinate() + ")"), s = c;
+        c === y.NONE && V.shouldNeverReachHere("found single null side (at " + u.getCoordinate() + ")"), s = c;
       } else
-        V.isTrue(l.getLocation(t, N.LEFT) === v.NONE, "found single null side"), l.setLocation(t, N.RIGHT, s), l.setLocation(t, N.LEFT, s);
+        V.isTrue(l.getLocation(t, N.LEFT) === y.NONE, "found single null side"), l.setLocation(t, N.RIGHT, s), l.setLocation(t, N.LEFT, s);
     }
   }
 };
@@ -10018,7 +10018,7 @@ Bt.prototype.checkAreaLabelsConsistent = function(t) {
   if (e.size() <= 0)
     return !0;
   var r = e.size() - 1, i = e.get(r).getLabel(), o = i.getLocation(t, N.LEFT);
-  V.isTrue(o !== v.NONE, "Found unlabelled area edge");
+  V.isTrue(o !== y.NONE, "Found unlabelled area edge");
   for (var s = o, a = this.iterator(); a.hasNext(); ) {
     var u = a.next(), l = u.getLabel();
     V.isTrue(l.isArea(t), "Found non-area edge");
@@ -10046,7 +10046,7 @@ Bt.prototype.getEdges = function() {
   return this._edgeList === null && (this._edgeList = new S(this._edgeMap.values())), this._edgeList;
 };
 Bt.prototype.getLocation = function(t, e, r) {
-  return this._ptInAreaLocation[t] === v.NONE && (this._ptInAreaLocation[t] = se.locate(e, r[t].getGeometry())), this._ptInAreaLocation[t];
+  return this._ptInAreaLocation[t] === y.NONE && (this._ptInAreaLocation[t] = se.locate(e, r[t].getGeometry())), this._ptInAreaLocation[t];
 };
 Bt.prototype.toString = function() {
   var t = new Je();
@@ -10070,13 +10070,13 @@ Bt.prototype.computeLabelling = function(t) {
   this.computeEdgeEndLabels(t[0].getBoundaryNodeRule()), this.propagateSideLabels(0), this.propagateSideLabels(1);
   for (var r = [!1, !1], i = this.iterator(); i.hasNext(); )
     for (var o = i.next(), s = o.getLabel(), a = 0; a < 2; a++)
-      s.isLine(a) && s.getLocation(a) === v.BOUNDARY && (r[a] = !0);
+      s.isLine(a) && s.getLocation(a) === y.BOUNDARY && (r[a] = !0);
   for (var u = this.iterator(); u.hasNext(); )
     for (var l = u.next(), c = l.getLabel(), f = 0; f < 2; f++)
       if (c.isAnyNull(f)) {
-        var h = v.NONE;
+        var h = y.NONE;
         if (r[f])
-          h = v.EXTERIOR;
+          h = y.EXTERIOR;
         else {
           var p = l.getCoordinate();
           h = e.getLocation(f, p, t);
@@ -10173,8 +10173,8 @@ var Ku = function(n) {
         throw new Cr("depth mismatch at " + i.getCoordinate());
     } else if (arguments.length === 3) {
       for (var c = arguments[0], f = arguments[1], h = arguments[2], p = h, g = c; g < f; g++) {
-        var y = r._edgeList.get(g);
-        y.setEdgeDepths(N.RIGHT, p), p = y.getDepth(N.LEFT);
+        var m = r._edgeList.get(g);
+        m.setEdgeDepths(N.RIGHT, p), p = m.getDepth(N.LEFT);
       }
       return p;
     }
@@ -10217,32 +10217,32 @@ var Ku = function(n) {
   }, t.prototype.getLabel = function() {
     return this._label;
   }, t.prototype.findCoveredLineEdges = function() {
-    for (var r = v.NONE, i = this.iterator(); i.hasNext(); ) {
+    for (var r = y.NONE, i = this.iterator(); i.hasNext(); ) {
       var o = i.next(), s = o.getSym();
       if (!o.isLineEdge()) {
         if (o.isInResult()) {
-          r = v.INTERIOR;
+          r = y.INTERIOR;
           break;
         }
         if (s.isInResult()) {
-          r = v.EXTERIOR;
+          r = y.EXTERIOR;
           break;
         }
       }
     }
-    if (r === v.NONE)
+    if (r === y.NONE)
       return null;
     for (var a = r, u = this.iterator(); u.hasNext(); ) {
       var l = u.next(), c = l.getSym();
-      l.isLineEdge() ? l.getEdge().setCovered(a === v.INTERIOR) : (l.isInResult() && (a = v.EXTERIOR), c.isInResult() && (a = v.INTERIOR));
+      l.isLineEdge() ? l.getEdge().setCovered(a === y.INTERIOR) : (l.isInResult() && (a = y.EXTERIOR), c.isInResult() && (a = y.INTERIOR));
     }
   }, t.prototype.computeLabelling = function(r) {
     var i = this;
-    n.prototype.computeLabelling.call(this, r), this._label = new Q(v.NONE);
+    n.prototype.computeLabelling.call(this, r), this._label = new Q(y.NONE);
     for (var o = this.iterator(); o.hasNext(); )
       for (var s = o.next(), a = s.getEdge(), u = a.getLabel(), l = 0; l < 2; l++) {
         var c = u.getLocation(l);
-        (c === v.INTERIOR || c === v.BOUNDARY) && i._label.setLocation(l, v.INTERIOR);
+        (c === y.INTERIOR || c === y.BOUNDARY) && i._label.setLocation(l, y.INTERIOR);
       }
   }, t.prototype.interfaces_ = function() {
     return [];
@@ -10531,7 +10531,7 @@ tn.toIntArray = function(t) {
   return e;
 };
 var xr = function() {
-  this.e = null, this.pts = null, this.startIndex = null, this.env1 = new R(), this.env2 = new R();
+  this.e = null, this.pts = null, this.startIndex = null, this.env1 = new b(), this.env2 = new b();
   var t = arguments[0];
   this.e = t, this.pts = t.getCoordinates();
   var e = new tn();
@@ -10558,8 +10558,8 @@ xr.prototype.computeIntersectsForChain = function() {
       return c.addIntersections(this.e, o, a.e, u), null;
     if (this.env1.init(f, h), this.env2.init(p, g), !this.env1.intersects(this.env2))
       return null;
-    var y = Math.trunc((o + s) / 2), m = Math.trunc((u + l) / 2);
-    o < y && (u < m && this.computeIntersectsForChain(o, y, a, u, m, c), m < l && this.computeIntersectsForChain(o, y, a, m, l, c)), y < s && (u < m && this.computeIntersectsForChain(y, s, a, u, m, c), m < l && this.computeIntersectsForChain(y, s, a, m, l, c));
+    var m = Math.trunc((o + s) / 2), v = Math.trunc((u + l) / 2);
+    o < m && (u < v && this.computeIntersectsForChain(o, m, a, u, v, c), v < l && this.computeIntersectsForChain(o, m, a, v, l, c)), m < s && (u < v && this.computeIntersectsForChain(m, s, a, u, v, c), v < l && this.computeIntersectsForChain(m, s, a, v, l, c));
   }
 };
 xr.prototype.getStartIndexes = function() {
@@ -10622,7 +10622,7 @@ bt.prototype.getDelta = function(t) {
   return this._depth[t][N.RIGHT] - this._depth[t][N.LEFT];
 };
 bt.prototype.getLocation = function(t, e) {
-  return this._depth[t][e] <= 0 ? v.EXTERIOR : v.INTERIOR;
+  return this._depth[t][e] <= 0 ? y.EXTERIOR : y.INTERIOR;
 };
 bt.prototype.toString = function() {
   return "A: " + this._depth[0][1] + "," + this._depth[0][2] + " B: " + this._depth[1][1] + "," + this._depth[1][2];
@@ -10633,11 +10633,11 @@ bt.prototype.add = function() {
     for (var e = arguments[0], r = 0; r < 2; r++)
       for (var i = 1; i < 3; i++) {
         var o = e.getLocation(r, i);
-        (o === v.EXTERIOR || o === v.INTERIOR) && (t.isNull(r, i) ? t._depth[r][i] = bt.depthAtLocation(o) : t._depth[r][i] += bt.depthAtLocation(o));
+        (o === y.EXTERIOR || o === y.INTERIOR) && (t.isNull(r, i) ? t._depth[r][i] = bt.depthAtLocation(o) : t._depth[r][i] += bt.depthAtLocation(o));
       }
   else if (arguments.length === 3) {
     var s = arguments[0], a = arguments[1], u = arguments[2];
-    u === v.INTERIOR && this._depth[s][a]++;
+    u === y.INTERIOR && this._depth[s][a]++;
   }
 };
 bt.prototype.interfaces_ = function() {
@@ -10647,7 +10647,7 @@ bt.prototype.getClass = function() {
   return bt;
 };
 bt.depthAtLocation = function(t) {
-  return t === v.EXTERIOR ? 0 : t === v.INTERIOR ? 1 : bt.NULL_VALUE;
+  return t === y.EXTERIOR ? 0 : t === y.INTERIOR ? 1 : bt.NULL_VALUE;
 };
 da.NULL_VALUE.get = function() {
   return -1;
@@ -10725,7 +10725,7 @@ var ji = function(n) {
   }, t.prototype.getEnvelope = function() {
     var r = this;
     if (this._env === null) {
-      this._env = new R();
+      this._env = new b();
       for (var i = 0; i < this.pts.length; i++)
         r._env.expandToInclude(r.pts[i]);
     }
@@ -10848,7 +10848,7 @@ qt.prototype.getClass = function() {
 };
 qt.depthDelta = function(t) {
   var e = t.getLocation(0, N.LEFT), r = t.getLocation(0, N.RIGHT);
-  return e === v.INTERIOR && r === v.EXTERIOR ? 1 : e === v.EXTERIOR && r === v.INTERIOR ? -1 : 0;
+  return e === y.INTERIOR && r === y.EXTERIOR ? 1 : e === y.EXTERIOR && r === y.INTERIOR ? -1 : 0;
 };
 qt.convertSegStrings = function(t) {
   for (var e = new k(), r = new S(); t.hasNext(); ) {
@@ -10868,7 +10868,7 @@ var Br = function() {
 };
 Br.prototype.rescale = function() {
   var t = this;
-  if (M(arguments[0], _t))
+  if (T(arguments[0], _t))
     for (var e = arguments[0], r = e.iterator(); r.hasNext(); ) {
       var i = r.next();
       t.rescale(i.getCoordinates());
@@ -10881,7 +10881,7 @@ Br.prototype.rescale = function() {
 };
 Br.prototype.scale = function() {
   var t = this;
-  if (M(arguments[0], _t)) {
+  if (T(arguments[0], _t)) {
     for (var e = arguments[0], r = new S(), i = e.iterator(); i.hasNext(); ) {
       var o = i.next();
       r.add(new dt(t.scale(o.getCoordinates()), o.getData()));
@@ -10943,12 +10943,12 @@ We.prototype.checkInteriorIntersections = function() {
       for (var f = 0; f < l.length - 1; f++)
         t.checkInteriorIntersections(s, c, a, f);
   else if (arguments.length === 4) {
-    var h = arguments[0], p = arguments[1], g = arguments[2], y = arguments[3];
-    if (h === g && p === y)
+    var h = arguments[0], p = arguments[1], g = arguments[2], m = arguments[3];
+    if (h === g && p === m)
       return null;
-    var m = h.getCoordinates()[p], _ = h.getCoordinates()[p + 1], I = g.getCoordinates()[y], C = g.getCoordinates()[y + 1];
-    if (this._li.computeIntersection(m, _, I, C), this._li.hasIntersection() && (this._li.isProper() || this.hasInteriorIntersection(this._li, m, _) || this.hasInteriorIntersection(this._li, I, C)))
-      throw new Er("found non-noded intersection at " + m + "-" + _ + " and " + I + "-" + C);
+    var v = h.getCoordinates()[p], E = h.getCoordinates()[p + 1], I = g.getCoordinates()[m], C = g.getCoordinates()[m + 1];
+    if (this._li.computeIntersection(v, E, I, C), this._li.hasIntersection() && (this._li.isProper() || this.hasInteriorIntersection(this._li, v, E) || this.hasInteriorIntersection(this._li, I, C)))
+      throw new Er("found non-noded intersection at " + v + "-" + E + " and " + I + "-" + C);
   }
 };
 We.prototype.checkValid = function() {
@@ -11020,7 +11020,7 @@ Jt.prototype.copyScaled = function(t, e) {
 Jt.prototype.getSafeEnvelope = function() {
   if (this._safeEnv === null) {
     var t = Jt.SAFE_ENV_EXPANSION_FACTOR / this._scaleFactor;
-    this._safeEnv = new R(this._originalPt.x - t, this._originalPt.x + t, this._originalPt.y - t, this._originalPt.y + t);
+    this._safeEnv = new b(this._originalPt.x - t, this._originalPt.x + t, this._originalPt.y - t, this._originalPt.y + t);
   }
   return this._safeEnv;
 };
@@ -11046,7 +11046,7 @@ ya.SAFE_ENV_EXPANSION_FACTOR.get = function() {
 };
 Object.defineProperties(Jt, ya);
 var Ni = function() {
-  this.tempEnv1 = new R(), this.selectedSegment = new O();
+  this.tempEnv1 = new b(), this.selectedSegment = new O();
 };
 Ni.prototype.select = function() {
   if (arguments.length !== 1) {
@@ -11173,7 +11173,7 @@ ur.prototype.findInteriorIntersections = function(t, e) {
 };
 ur.prototype.computeVertexSnaps = function() {
   var t = this;
-  if (M(arguments[0], _t))
+  if (T(arguments[0], _t))
     for (var e = arguments[0], r = e.iterator(); r.hasNext(); ) {
       var i = r.next();
       t.computeVertexSnaps(i);
@@ -11272,19 +11272,19 @@ Pt.bufferOp = function() {
     var t = arguments[0], e = arguments[1], r = new Pt(t), i = r.getResultGeometry(e);
     return i;
   } else if (arguments.length === 3) {
-    if (Number.isInteger(arguments[2]) && arguments[0] instanceof T && typeof arguments[1] == "number") {
+    if (Number.isInteger(arguments[2]) && arguments[0] instanceof D && typeof arguments[1] == "number") {
       var o = arguments[0], s = arguments[1], a = arguments[2], u = new Pt(o);
       u.setQuadrantSegments(a);
       var l = u.getResultGeometry(s);
       return l;
-    } else if (arguments[2] instanceof H && arguments[0] instanceof T && typeof arguments[1] == "number") {
+    } else if (arguments[2] instanceof H && arguments[0] instanceof D && typeof arguments[1] == "number") {
       var c = arguments[0], f = arguments[1], h = arguments[2], p = new Pt(c, h), g = p.getResultGeometry(f);
       return g;
     }
   } else if (arguments.length === 4) {
-    var y = arguments[0], m = arguments[1], _ = arguments[2], I = arguments[3], C = new Pt(y);
-    C.setQuadrantSegments(_), C.setEndCapStyle(I);
-    var x = C.getResultGeometry(m);
+    var m = arguments[0], v = arguments[1], E = arguments[2], I = arguments[3], C = new Pt(m);
+    C.setQuadrantSegments(E), C.setEndCapStyle(I);
+    var x = C.getResultGeometry(v);
     return x;
   }
 };
@@ -11309,7 +11309,7 @@ ri.MAX_PRECISION_DIGITS.get = function() {
 };
 Object.defineProperties(Pt, ri);
 var kt = function() {
-  this._pt = [new d(), new d()], this._distance = F.NaN, this._isNull = !0;
+  this._pt = [new d(), new d()], this._distance = A.NaN, this._isNull = !0;
 };
 kt.prototype.getCoordinates = function() {
   return this._pt;
@@ -11381,22 +11381,22 @@ $e.computeDistance = function() {
     $e.computeDistance(u.getExteriorRing(), l, c);
     for (var f = 0; f < u.getNumInteriorRing(); f++)
       $e.computeDistance(u.getInteriorRingN(f), l, c);
-  } else if (arguments[2] instanceof kt && arguments[0] instanceof T && arguments[1] instanceof d) {
+  } else if (arguments[2] instanceof kt && arguments[0] instanceof D && arguments[1] instanceof d) {
     var h = arguments[0], p = arguments[1], g = arguments[2];
     if (h instanceof ut)
       $e.computeDistance(h, p, g);
     else if (h instanceof Nt)
       $e.computeDistance(h, p, g);
     else if (h instanceof Xt)
-      for (var y = h, m = 0; m < y.getNumGeometries(); m++) {
-        var _ = y.getGeometryN(m);
-        $e.computeDistance(_, p, g);
+      for (var m = h, v = 0; v < m.getNumGeometries(); v++) {
+        var E = m.getGeometryN(v);
+        $e.computeDistance(E, p, g);
       }
     else
       g.setMinimum(h.getCoordinate(), p);
   } else if (arguments[2] instanceof kt && arguments[0] instanceof O && arguments[1] instanceof d) {
-    var I = arguments[0], C = arguments[1], x = arguments[2], b = I.closestPoint(C);
-    x.setMinimum(b, C);
+    var I = arguments[0], C = arguments[1], x = arguments[2], P = I.closestPoint(C);
+    x.setMinimum(P, C);
   }
 };
 var en = function(t) {
@@ -11528,29 +11528,29 @@ wt.getLines = function() {
     var t = arguments[0];
     return wt.getLines(t, !1);
   } else if (arguments.length === 2) {
-    if (M(arguments[0], _t) && M(arguments[1], _t)) {
+    if (T(arguments[0], _t) && T(arguments[1], _t)) {
       for (var e = arguments[0], r = arguments[1], i = e.iterator(); i.hasNext(); ) {
         var o = i.next();
         wt.getLines(o, r);
       }
       return r;
-    } else if (arguments[0] instanceof T && typeof arguments[1] == "boolean") {
+    } else if (arguments[0] instanceof D && typeof arguments[1] == "boolean") {
       var s = arguments[0], a = arguments[1], u = new S();
       return s.apply(new wt(u, a)), u;
-    } else if (arguments[0] instanceof T && M(arguments[1], _t)) {
+    } else if (arguments[0] instanceof D && T(arguments[1], _t)) {
       var l = arguments[0], c = arguments[1];
       return l instanceof ut ? c.add(l) : l.apply(new wt(c)), c;
     }
   } else if (arguments.length === 3) {
-    if (typeof arguments[2] == "boolean" && M(arguments[0], _t) && M(arguments[1], _t)) {
+    if (typeof arguments[2] == "boolean" && T(arguments[0], _t) && T(arguments[1], _t)) {
       for (var f = arguments[0], h = arguments[1], p = arguments[2], g = f.iterator(); g.hasNext(); ) {
-        var y = g.next();
-        wt.getLines(y, h, p);
+        var m = g.next();
+        wt.getLines(m, h, p);
       }
       return h;
-    } else if (typeof arguments[2] == "boolean" && arguments[0] instanceof T && M(arguments[1], _t)) {
-      var m = arguments[0], _ = arguments[1], I = arguments[2];
-      return m.apply(new wt(_, I)), _;
+    } else if (typeof arguments[2] == "boolean" && arguments[0] instanceof D && T(arguments[1], _t)) {
+      var v = arguments[0], E = arguments[1], I = arguments[2];
+      return v.apply(new wt(E, I)), E;
     }
   }
 };
@@ -11569,39 +11569,39 @@ be.prototype.locateInternal = function() {
   if (arguments[0] instanceof d && arguments[1] instanceof Nt) {
     var e = arguments[0], r = arguments[1];
     if (r.isEmpty())
-      return v.EXTERIOR;
+      return y.EXTERIOR;
     var i = r.getExteriorRing(), o = this.locateInPolygonRing(e, i);
-    if (o === v.EXTERIOR)
-      return v.EXTERIOR;
-    if (o === v.BOUNDARY)
-      return v.BOUNDARY;
+    if (o === y.EXTERIOR)
+      return y.EXTERIOR;
+    if (o === y.BOUNDARY)
+      return y.BOUNDARY;
     for (var s = 0; s < r.getNumInteriorRing(); s++) {
       var a = r.getInteriorRingN(s), u = t.locateInPolygonRing(e, a);
-      if (u === v.INTERIOR)
-        return v.EXTERIOR;
-      if (u === v.BOUNDARY)
-        return v.BOUNDARY;
+      if (u === y.INTERIOR)
+        return y.EXTERIOR;
+      if (u === y.BOUNDARY)
+        return y.BOUNDARY;
     }
-    return v.INTERIOR;
+    return y.INTERIOR;
   } else if (arguments[0] instanceof d && arguments[1] instanceof ut) {
     var l = arguments[0], c = arguments[1];
     if (!c.getEnvelopeInternal().intersects(l))
-      return v.EXTERIOR;
+      return y.EXTERIOR;
     var f = c.getCoordinates();
-    return !c.isClosed() && (l.equals(f[0]) || l.equals(f[f.length - 1])) ? v.BOUNDARY : L.isOnLine(l, f) ? v.INTERIOR : v.EXTERIOR;
+    return !c.isClosed() && (l.equals(f[0]) || l.equals(f[f.length - 1])) ? y.BOUNDARY : L.isOnLine(l, f) ? y.INTERIOR : y.EXTERIOR;
   } else if (arguments[0] instanceof d && arguments[1] instanceof te) {
     var h = arguments[0], p = arguments[1], g = p.getCoordinate();
-    return g.equals2D(h) ? v.INTERIOR : v.EXTERIOR;
+    return g.equals2D(h) ? y.INTERIOR : y.EXTERIOR;
   }
 };
 be.prototype.locateInPolygonRing = function(t, e) {
-  return e.getEnvelopeInternal().intersects(t) ? L.locatePointInRing(t, e.getCoordinates()) : v.EXTERIOR;
+  return e.getEnvelopeInternal().intersects(t) ? L.locatePointInRing(t, e.getCoordinates()) : y.EXTERIOR;
 };
 be.prototype.intersects = function(t, e) {
-  return this.locate(t, e) !== v.EXTERIOR;
+  return this.locate(t, e) !== y.EXTERIOR;
 };
 be.prototype.updateLocationInfo = function(t) {
-  t === v.INTERIOR && (this._isIn = !0), t === v.BOUNDARY && this._numBoundaries++;
+  t === y.INTERIOR && (this._isIn = !0), t === y.BOUNDARY && this._numBoundaries++;
 };
 be.prototype.computeLocation = function(t, e) {
   var r = this;
@@ -11626,7 +11626,7 @@ be.prototype.computeLocation = function(t, e) {
     }
 };
 be.prototype.locate = function(t, e) {
-  return e.isEmpty() ? v.EXTERIOR : e instanceof ut ? this.locateInternal(t, e) : e instanceof Nt ? this.locateInternal(t, e) : (this._isIn = !1, this._numBoundaries = 0, this.computeLocation(t, e), this._boundaryRule.isInBoundary(this._numBoundaries) ? v.BOUNDARY : this._numBoundaries > 0 || this._isIn ? v.INTERIOR : v.EXTERIOR);
+  return e.isEmpty() ? y.EXTERIOR : e instanceof ut ? this.locateInternal(t, e) : e instanceof Nt ? this.locateInternal(t, e) : (this._isIn = !1, this._numBoundaries = 0, this.computeLocation(t, e), this._boundaryRule.isInBoundary(this._numBoundaries) ? y.BOUNDARY : this._numBoundaries > 0 || this._isIn ? y.INTERIOR : y.EXTERIOR);
 };
 be.prototype.interfaces_ = function() {
   return [];
@@ -11705,7 +11705,7 @@ vn.getLocations = function(t) {
   return t.apply(new vn(e)), e;
 };
 var Ot = function() {
-  if (this._geom = null, this._terminateDistance = 0, this._ptLocator = new be(), this._minDistanceLocation = null, this._minDistance = F.MAX_VALUE, arguments.length === 2) {
+  if (this._geom = null, this._terminateDistance = 0, this._ptLocator = new be(), this._minDistanceLocation = null, this._minDistance = A.MAX_VALUE, arguments.length === 2) {
     var t = arguments[0], e = arguments[1];
     this._geom = [t, e], this._terminateDistance = 0;
   } else if (arguments.length === 3) {
@@ -11728,15 +11728,15 @@ Ot.prototype.computeContainmentDistance = function() {
         return this._minDistanceLocation[o] = i[0], this._minDistanceLocation[r] = i[1], null;
     }
   } else if (arguments.length === 3) {
-    if (arguments[2] instanceof Array && M(arguments[0], Ne) && M(arguments[1], Ne)) {
+    if (arguments[2] instanceof Array && T(arguments[0], Ne) && T(arguments[1], Ne)) {
       for (var u = arguments[0], l = arguments[1], c = arguments[2], f = 0; f < u.size(); f++)
         for (var h = u.get(f), p = 0; p < l.size(); p++)
           if (t.computeContainmentDistance(h, l.get(p), c), t._minDistance <= t._terminateDistance)
             return null;
     } else if (arguments[2] instanceof Array && arguments[0] instanceof zt && arguments[1] instanceof Nt) {
-      var g = arguments[0], y = arguments[1], m = arguments[2], _ = g.getCoordinate();
-      if (v.EXTERIOR !== this._ptLocator.locate(_, y))
-        return this._minDistance = 0, m[0] = g, m[1] = new zt(y, _), null;
+      var g = arguments[0], m = arguments[1], v = arguments[2], E = g.getCoordinate();
+      if (y.EXTERIOR !== this._ptLocator.locate(E, m))
+        return this._minDistance = 0, v[0] = g, v[1] = new zt(m, E), null;
     }
   }
 };
@@ -11792,13 +11792,13 @@ Ot.prototype.computeMinDistance = function() {
       var f = arguments[0], h = arguments[1], p = arguments[2];
       if (f.getEnvelopeInternal().distance(h.getEnvelopeInternal()) > this._minDistance)
         return null;
-      for (var g = f.getCoordinates(), y = h.getCoordinates(), m = 0; m < g.length - 1; m++)
-        for (var _ = 0; _ < y.length - 1; _++) {
-          var I = L.distanceLineLine(g[m], g[m + 1], y[_], y[_ + 1]);
+      for (var g = f.getCoordinates(), m = h.getCoordinates(), v = 0; v < g.length - 1; v++)
+        for (var E = 0; E < m.length - 1; E++) {
+          var I = L.distanceLineLine(g[v], g[v + 1], m[E], m[E + 1]);
           if (I < t._minDistance) {
             t._minDistance = I;
-            var C = new O(g[m], g[m + 1]), x = new O(y[_], y[_ + 1]), b = C.closestPoints(x);
-            p[0] = new zt(f, m, b[0]), p[1] = new zt(h, _, b[1]);
+            var C = new O(g[v], g[v + 1]), x = new O(m[E], m[E + 1]), P = C.closestPoints(x);
+            p[0] = new zt(f, v, P[0]), p[1] = new zt(h, E, P[1]);
           }
           if (t._minDistance <= t._terminateDistance)
             return null;
@@ -11846,7 +11846,7 @@ Ot.nearestPoints = function(t, e) {
   return r.nearestPoints();
 };
 var Mt = function() {
-  this._pt = [new d(), new d()], this._distance = F.NaN, this._isNull = !0;
+  this._pt = [new d(), new d()], this._distance = A.NaN, this._isNull = !0;
 };
 Mt.prototype.getCoordinates = function() {
   return this._pt;
@@ -11921,22 +11921,22 @@ Be.computeDistance = function() {
     Be.computeDistance(u.getExteriorRing(), l, c);
     for (var f = 0; f < u.getNumInteriorRing(); f++)
       Be.computeDistance(u.getInteriorRingN(f), l, c);
-  } else if (arguments[2] instanceof Mt && arguments[0] instanceof T && arguments[1] instanceof d) {
+  } else if (arguments[2] instanceof Mt && arguments[0] instanceof D && arguments[1] instanceof d) {
     var h = arguments[0], p = arguments[1], g = arguments[2];
     if (h instanceof ut)
       Be.computeDistance(h, p, g);
     else if (h instanceof Nt)
       Be.computeDistance(h, p, g);
     else if (h instanceof Xt)
-      for (var y = h, m = 0; m < y.getNumGeometries(); m++) {
-        var _ = y.getGeometryN(m);
-        Be.computeDistance(_, p, g);
+      for (var m = h, v = 0; v < m.getNumGeometries(); v++) {
+        var E = m.getGeometryN(v);
+        Be.computeDistance(E, p, g);
       }
     else
       g.setMinimum(h.getCoordinate(), p);
   } else if (arguments[2] instanceof Mt && arguments[0] instanceof O && arguments[1] instanceof d) {
-    var I = arguments[0], C = arguments[1], x = arguments[2], b = I.closestPoint(C);
-    x.setMinimum(b, C);
+    var I = arguments[0], C = arguments[1], x = arguments[2], P = I.closestPoint(C);
+    x.setMinimum(P, C);
   }
 };
 var ve = function() {
@@ -12113,9 +12113,9 @@ Dt.prototype.checkEnvelope = function() {
     return null;
   var t = this._distance * Dt.MAX_ENV_DIFF_FRAC;
   t === 0 && (t = 1e-3);
-  var e = new R(this._input.getEnvelopeInternal());
+  var e = new b(this._input.getEnvelopeInternal());
   e.expandBy(this._distance);
-  var r = new R(this._result.getEnvelopeInternal());
+  var r = new b(this._result.getEnvelopeInternal());
   r.expandBy(t), r.contains(e) || (this._isValid = !1, this._errorMsg = "Buffer envelope is incorrect", this._errorIndicator = this._input.getFactory().toGeometry(r)), this.report("Envelope");
 };
 Dt.prototype.checkDistance = function() {
@@ -12581,7 +12581,7 @@ lr.prototype.snapSegments = function(t, e) {
   }
 };
 lr.prototype.findSegmentIndexToSnap = function(t, e) {
-  for (var r = this, i = F.MAX_VALUE, o = -1, s = 0; s < e.size() - 1; s++) {
+  for (var r = this, i = A.MAX_VALUE, o = -1, s = 0; s < e.size() - 1; s++) {
     if (r._seg.p0 = e.get(s), r._seg.p1 = e.get(s + 1), r._seg.p0.equals2D(t) || r._seg.p1.equals2D(t)) {
       if (r._allowSnappingToSourceVertices)
         continue;
@@ -12613,7 +12613,7 @@ pt.prototype.snapTo = function(t, e) {
 };
 pt.prototype.snapToSelf = function(t, e) {
   var r = this.extractTargetCoordinates(this._srcGeom), i = new Ca(t, r, !0), o = i.transform(this._srcGeom), s = o;
-  return e && M(s, Tr) && (s = o.buffer(0)), s;
+  return e && T(s, Tr) && (s = o.buffer(0)), s;
 };
 pt.prototype.computeSnapTolerance = function(t) {
   var e = this.computeMinimumSegmentLength(t), r = e / 10;
@@ -12625,7 +12625,7 @@ pt.prototype.extractTargetCoordinates = function(t) {
   return e.toArray(new Array(0).fill(null));
 };
 pt.prototype.computeMinimumSegmentLength = function(t) {
-  for (var e = F.MAX_VALUE, r = 0; r < t.length - 1; r++) {
+  for (var e = A.MAX_VALUE, r = 0; r < t.length - 1; r++) {
     var i = t[r].distance(t[r + 1]);
     i < e && (e = i);
   }
@@ -12687,10 +12687,10 @@ var Ca = function(n) {
   this._isFirst = !0, this._commonMantissaBitsCount = 53, this._commonBits = 0, this._commonSignExp = null;
 };
 Vt.prototype.getCommon = function() {
-  return F.longBitsToDouble(this._commonBits);
+  return A.longBitsToDouble(this._commonBits);
 };
 Vt.prototype.add = function(t) {
-  var e = F.doubleToLongBits(t);
+  var e = A.doubleToLongBits(t);
   if (this._isFirst)
     return this._commonBits = e, this._commonSignExp = Vt.signExpBits(this._commonBits), this._isFirst = !1, null;
   var r = Vt.signExpBits(e);
@@ -12700,7 +12700,7 @@ Vt.prototype.add = function(t) {
 };
 Vt.prototype.toString = function() {
   if (arguments.length === 1) {
-    var t = arguments[0], e = F.longBitsToDouble(t), r = F.toBinaryString(t), i = "0000000000000000000000000000000000000000000000000000000000000000" + r, o = i.substring(i.length - 64), s = o.substring(0, 1) + "  " + o.substring(1, 12) + "(exp) " + o.substring(12) + " [ " + e + " ]";
+    var t = arguments[0], e = A.longBitsToDouble(t), r = A.toBinaryString(t), i = "0000000000000000000000000000000000000000000000000000000000000000" + r, o = i.substring(i.length - 64), s = o.substring(0, 1) + "  " + o.substring(1, 12) + "(exp) " + o.substring(12) + " [ " + e + " ]";
     return s;
   }
 };
@@ -13053,10 +13053,10 @@ var Qu = function(n) {
           break;
       }
     } else if (arguments.length === 3) {
-      if (arguments[2] instanceof Tt && M(arguments[0], Ne) && M(arguments[1], Ne)) {
+      if (arguments[2] instanceof Tt && T(arguments[0], Ne) && T(arguments[1], Ne)) {
         var a = arguments[0], u = arguments[1], l = arguments[2];
         this.addEdges(a, a), this.addEdges(u, u), this.computeIntersections(l);
-      } else if (typeof arguments[2] == "boolean" && M(arguments[0], Ne) && arguments[1] instanceof Tt) {
+      } else if (typeof arguments[2] == "boolean" && T(arguments[0], Ne) && arguments[1] instanceof Tt) {
         var c = arguments[0], f = arguments[1], h = arguments[2];
         h ? this.addEdges(c, null) : this.addEdges(c), this.computeIntersections(f);
       }
@@ -13092,7 +13092,7 @@ var Qu = function(n) {
     return t;
   }, t;
 }(Ki), cr = function() {
-  this._min = F.POSITIVE_INFINITY, this._max = F.NEGATIVE_INFINITY;
+  this._min = A.POSITIVE_INFINITY, this._max = A.NEGATIVE_INFINITY;
 }, Na = { NodeComparator: { configurable: !0 } };
 cr.prototype.getMin = function() {
   return this._min;
@@ -13229,7 +13229,7 @@ Yn.prototype.getClass = function() {
 var Hn = function() {
   this._index = null;
   var t = arguments[0];
-  if (!M(t, Tr))
+  if (!T(t, Tr))
     throw new it("Argument must be Polygonal");
   this._index = new nn(t);
 }, rs = { SegmentVisitor: { configurable: !0 }, IntervalIndexedGeometry: { configurable: !0 } };
@@ -13308,8 +13308,8 @@ var si = function(n) {
     }
   }
   return n && (t.__proto__ = n), t.prototype = Object.create(n && n.prototype), t.prototype.constructor = t, t.prototype.insertBoundaryPoint = function(r, i) {
-    var o = this._nodes.addNode(i), s = o.getLabel(), a = 1, u = v.NONE;
-    u = s.getLocation(r, N.ON), u === v.BOUNDARY && a++;
+    var o = this._nodes.addNode(i), s = o.getLabel(), a = 1, u = y.NONE;
+    u = s.getLocation(r, N.ON), u === y.BOUNDARY && a++;
     var l = t.determineBoundary(this._boundaryNodeRule, a);
     s.setLocation(r, l);
   }, t.prototype.computeSelfNodes = function() {
@@ -13341,27 +13341,27 @@ var si = function(n) {
   }, t.prototype.addPoint = function() {
     if (arguments[0] instanceof te) {
       var r = arguments[0], i = r.getCoordinate();
-      this.insertPoint(this._argIndex, i, v.INTERIOR);
+      this.insertPoint(this._argIndex, i, y.INTERIOR);
     } else if (arguments[0] instanceof d) {
       var o = arguments[0];
-      this.insertPoint(this._argIndex, o, v.INTERIOR);
+      this.insertPoint(this._argIndex, o, y.INTERIOR);
     }
   }, t.prototype.addPolygon = function(r) {
     var i = this;
-    this.addPolygonRing(r.getExteriorRing(), v.EXTERIOR, v.INTERIOR);
+    this.addPolygonRing(r.getExteriorRing(), y.EXTERIOR, y.INTERIOR);
     for (var o = 0; o < r.getNumInteriorRing(); o++) {
       var s = r.getInteriorRingN(o);
-      i.addPolygonRing(s, v.INTERIOR, v.EXTERIOR);
+      i.addPolygonRing(s, y.INTERIOR, y.EXTERIOR);
     }
   }, t.prototype.addEdge = function(r) {
     this.insertEdge(r);
     var i = r.getCoordinates();
-    this.insertPoint(this._argIndex, i[0], v.BOUNDARY), this.insertPoint(this._argIndex, i[i.length - 1], v.BOUNDARY);
+    this.insertPoint(this._argIndex, i[0], y.BOUNDARY), this.insertPoint(this._argIndex, i[i.length - 1], y.BOUNDARY);
   }, t.prototype.addLineString = function(r) {
     var i = z.removeRepeatedPoints(r.getCoordinates());
     if (i.length < 2)
       return this._hasTooFewPoints = !0, this._invalidPoint = i[0], null;
-    var o = new ji(i, new Q(this._argIndex, v.INTERIOR));
+    var o = new ji(i, new Q(this._argIndex, y.INTERIOR));
     this._lineEdgeMap.put(r, o), this.insertEdge(o), V.isTrue(i.length >= 2, "found LineString with single point"), this.insertBoundaryPoint(this._argIndex, i[0]), this.insertBoundaryPoint(this._argIndex, i[i.length - 1]);
   }, t.prototype.getInvalidPoint = function() {
     return this._invalidPoint;
@@ -13376,7 +13376,7 @@ var si = function(n) {
   }, t.prototype.addSelfIntersectionNode = function(r, i, o) {
     if (this.isBoundaryNode(r, i))
       return null;
-    o === v.BOUNDARY && this._useBoundaryDeterminationRule ? this.insertBoundaryPoint(r, i) : this.insertPoint(r, i, o);
+    o === y.BOUNDARY && this._useBoundaryDeterminationRule ? this.insertBoundaryPoint(r, i) : this.insertPoint(r, i, o);
   }, t.prototype.addPolygonRing = function(r, i, o) {
     if (r.isEmpty())
       return null;
@@ -13385,8 +13385,8 @@ var si = function(n) {
       return this._hasTooFewPoints = !0, this._invalidPoint = s[0], null;
     var a = i, u = o;
     L.isCCW(s) && (a = o, u = i);
-    var l = new ji(s, new Q(this._argIndex, v.BOUNDARY, a, u));
-    this._lineEdgeMap.put(r, l), this.insertEdge(l), this.insertPoint(this._argIndex, s[0], v.BOUNDARY);
+    var l = new ji(s, new Q(this._argIndex, y.BOUNDARY, a, u));
+    this._lineEdgeMap.put(r, l), this.insertEdge(l), this.insertPoint(this._argIndex, s[0], y.BOUNDARY);
   }, t.prototype.insertPoint = function(r, i, o) {
     var s = this._nodes.addNode(i), a = s.getLabel();
     a === null ? s._label = new Q(r, o) : a.setLocation(r, o);
@@ -13427,7 +13427,7 @@ var si = function(n) {
       i.add(s);
     }
   }, t.prototype.locate = function(r) {
-    return M(this._parentGeom, Tr) && this._parentGeom.getNumGeometries() > 50 ? (this._areaPtLocator === null && (this._areaPtLocator = new Hn(this._parentGeom)), this._areaPtLocator.locate(r)) : this._ptLocator.locate(r, this._parentGeom);
+    return T(this._parentGeom, Tr) && this._parentGeom.getNumGeometries() > 50 ? (this._areaPtLocator === null && (this._areaPtLocator = new Hn(this._parentGeom)), this._areaPtLocator.locate(r)) : this._ptLocator.locate(r, this._parentGeom);
   }, t.prototype.findEdge = function() {
     if (arguments.length === 1) {
       var r = arguments[0];
@@ -13439,7 +13439,7 @@ var si = function(n) {
   }, t.prototype.getClass = function() {
     return t;
   }, t.determineBoundary = function(r, i) {
-    return r.isInBoundary(i) ? v.BOUNDARY : v.INTERIOR;
+    return r.isInBoundary(i) ? y.BOUNDARY : y.INTERIOR;
   }, t;
 }(st), jn = function() {
   if (this._li = new sn(), this._resultPrecisionModel = null, this._arg = null, arguments.length === 1) {
@@ -13474,13 +13474,13 @@ jr.prototype.getClass = function() {
   return jr;
 };
 jr.map = function() {
-  if (arguments[0] instanceof T && M(arguments[1], jr.MapOp)) {
+  if (arguments[0] instanceof D && T(arguments[1], jr.MapOp)) {
     for (var t = arguments[0], e = arguments[1], r = new S(), i = 0; i < t.getNumGeometries(); i++) {
       var o = e.map(t.getGeometryN(i));
       o !== null && r.add(o);
     }
     return t.getFactory().buildGeometry(r);
-  } else if (M(arguments[0], _t) && M(arguments[1], jr.MapOp)) {
+  } else if (T(arguments[0], _t) && T(arguments[1], jr.MapOp)) {
     for (var s = arguments[0], a = arguments[1], u = new S(), l = s.iterator(); l.hasNext(); ) {
       var c = l.next(), f = a.map(c);
       f !== null && u.add(f);
@@ -13524,7 +13524,7 @@ var B = function(n) {
   }, t.prototype.isCovered = function(r, i) {
     for (var o = this, s = i.iterator(); s.hasNext(); ) {
       var a = s.next(), u = o._ptLocator.locate(r, a);
-      if (u !== v.EXTERIOR)
+      if (u !== y.EXTERIOR)
         return !0;
     }
     return !1;
@@ -13673,15 +13673,15 @@ B.isResultOfOp = function() {
     return B.isResultOfOp(e, r, t);
   } else if (arguments.length === 3) {
     var i = arguments[0], o = arguments[1], s = arguments[2];
-    switch (i === v.BOUNDARY && (i = v.INTERIOR), o === v.BOUNDARY && (o = v.INTERIOR), s) {
+    switch (i === y.BOUNDARY && (i = y.INTERIOR), o === y.BOUNDARY && (o = y.INTERIOR), s) {
       case B.INTERSECTION:
-        return i === v.INTERIOR && o === v.INTERIOR;
+        return i === y.INTERIOR && o === y.INTERIOR;
       case B.UNION:
-        return i === v.INTERIOR || o === v.INTERIOR;
+        return i === y.INTERIOR || o === y.INTERIOR;
       case B.DIFFERENCE:
-        return i === v.INTERIOR && o !== v.INTERIOR;
+        return i === y.INTERIOR && o !== y.INTERIOR;
       case B.SYMDIFFERENCE:
-        return i === v.INTERIOR && o !== v.INTERIOR || i !== v.INTERIOR && o === v.INTERIOR;
+        return i === y.INTERIOR && o !== y.INTERIOR || i !== y.INTERIOR && o === y.INTERIOR;
     }
     return !1;
   }
@@ -13706,7 +13706,7 @@ Dr.prototype.isWithinToleranceOfBoundary = function(t) {
   return !1;
 };
 Dr.prototype.getLocation = function(t) {
-  return this.isWithinToleranceOfBoundary(t) ? v.BOUNDARY : this._ptLocator.locate(t, this._g);
+  return this.isWithinToleranceOfBoundary(t) ? y.BOUNDARY : this._ptLocator.locate(t, this._g);
 };
 Dr.prototype.extractLinework = function(t) {
   var e = new Kn();
@@ -13783,7 +13783,7 @@ var he = function n() {
   this._boundaryDistanceTolerance = n.computeBoundaryDistanceTolerance(t, e), this._geom = [t, e, r], this._locFinder = [new Dr(this._geom[0], this._boundaryDistanceTolerance), new Dr(this._geom[1], this._boundaryDistanceTolerance), new Dr(this._geom[2], this._boundaryDistanceTolerance)];
 }, xa = { TOLERANCE: { configurable: !0 } };
 he.prototype.reportResult = function(t, e, r) {
-  Rt.out.println("Overlay result invalid - A:" + v.toLocationSymbol(e[0]) + " B:" + v.toLocationSymbol(e[1]) + " expected:" + (r ? "i" : "e") + " actual:" + v.toLocationSymbol(e[2]));
+  Rt.out.println("Overlay result invalid - A:" + y.toLocationSymbol(e[0]) + " B:" + y.toLocationSymbol(e[1]) + " expected:" + (r ? "i" : "e") + " actual:" + y.toLocationSymbol(e[2]));
 };
 he.prototype.isValid = function(t) {
   this.addTestPts(this._geom[0]), this.addTestPts(this._geom[1]);
@@ -13801,7 +13801,7 @@ he.prototype.checkValid = function() {
     return !0;
   } else if (arguments.length === 2) {
     var o = arguments[0], s = arguments[1];
-    return this._location[0] = this._locFinder[0].getLocation(s), this._location[1] = this._locFinder[1].getLocation(s), this._location[2] = this._locFinder[2].getLocation(s), he.hasLocation(this._location, v.BOUNDARY) ? !0 : this.isValidResult(o, this._location);
+    return this._location[0] = this._locFinder[0].getLocation(s), this._location[1] = this._locFinder[1].getLocation(s), this._location[2] = this._locFinder[2].getLocation(s), he.hasLocation(this._location, y.BOUNDARY) ? !0 : this.isValidResult(o, this._location);
   }
 };
 he.prototype.addTestPts = function(t) {
@@ -13809,7 +13809,7 @@ he.prototype.addTestPts = function(t) {
   this._testCoords.addAll(e.getPoints(5 * this._boundaryDistanceTolerance));
 };
 he.prototype.isValidResult = function(t, e) {
-  var r = B.isResultOfOp(e[0], e[1], t), i = e[2] === v.INTERIOR, o = !(r ^ i);
+  var r = B.isResultOfOp(e[0], e[1], t), i = e[2] === y.INTERIOR, o = !(r ^ i);
   return o || this.reportResult(t, e, r), o;
 };
 he.prototype.getInvalidLocation = function() {
@@ -13895,7 +13895,7 @@ var yt = function() {
 yt.prototype.reduceToGeometries = function(t) {
   for (var e = this, r = new S(), i = t.iterator(); i.hasNext(); ) {
     var o = i.next(), s = null;
-    M(o, Ne) ? s = e.unionTree(o) : o instanceof T && (s = o), r.add(s);
+    T(o, Ne) ? s = e.unionTree(o) : o instanceof D && (s = o), r.add(s);
   }
   return r;
 };
@@ -13987,7 +13987,7 @@ yt.prototype.getClass = function() {
   return yt;
 };
 yt.restrictToPolygons = function(t) {
-  if (M(t, Tr))
+  if (T(t, Tr))
     return t;
   var e = _r.getPolygons(t);
   return e.size() === 1 ? e.get(0) : t.getFactory().createMultiPolygon(k.toPolygonArray(e));
@@ -14267,15 +14267,15 @@ function Vi(n, t, e, r) {
 function ba(n, t, e, r, i) {
   var o = [], s = [], a, u;
   if (n.forEach(function(g) {
-    if (!((y = g.length - 1) <= 0)) {
-      var y, m = g[0], _ = g[y], I;
-      if (zi(m, _)) {
-        for (i.lineStart(), a = 0; a < y; ++a)
-          i.point((m = g[a])[0], m[1]);
+    if (!((m = g.length - 1) <= 0)) {
+      var m, v = g[0], E = g[m], I;
+      if (zi(v, E)) {
+        for (i.lineStart(), a = 0; a < m; ++a)
+          i.point((v = g[a])[0], v[1]);
         i.lineEnd();
         return;
       }
-      o.push(I = new Vi(m, g, null, !0)), s.push(I.o = new Vi(m, null, I, !1)), o.push(I = new Vi(_, g, null, !1)), s.push(I.o = new Vi(_, null, I, !0));
+      o.push(I = new Vi(v, g, null, !0)), s.push(I.o = new Vi(v, null, I, !1)), o.push(I = new Vi(E, g, null, !1)), s.push(I.o = new Vi(E, null, I, !0));
     }
   }), !!o.length) {
     for (s.sort(t), Ds(o), Ds(s), a = 0, u = s.length; a < u; ++a)
@@ -14374,7 +14374,7 @@ function sl(n, t, e, r) {
     return f !== h ? f - h : f === 0 ? c[1] - l[1] : f === 1 ? l[0] - c[0] : f === 2 ? l[1] - c[1] : c[0] - l[0];
   }
   return function(l) {
-    var c = l, f = Pa(), h, p, g, y, m, _, I, C, x, b, P, D = {
+    var c = l, f = Pa(), h, p, g, m, v, E, I, C, x, P, R, F = {
       point: G,
       lineStart: nt,
       lineEnd: ct,
@@ -14384,38 +14384,38 @@ function sl(n, t, e, r) {
     function G(X, ft) {
       i(X, ft) && c.point(X, ft);
     }
-    function A() {
+    function M() {
       for (var X = 0, ft = 0, Gt = p.length; ft < Gt; ++ft)
         for (var pe = p[ft], Te = 1, ii = pe.length, Pr = pe[0], un, br, Mi = Pr[0], wn = Pr[1]; Te < ii; ++Te)
           un = Mi, br = wn, Pr = pe[Te], Mi = Pr[0], wn = Pr[1], br <= r ? wn > r && (Mi - un) * (r - br) > (wn - br) * (n - un) && ++X : wn <= r && (Mi - un) * (r - br) < (wn - br) * (n - un) && --X;
       return X;
     }
     function et() {
-      c = f, h = [], p = [], P = !0;
+      c = f, h = [], p = [], R = !0;
     }
     function K() {
-      var X = A(), ft = P && X, Gt = (h = Oa(h)).length;
+      var X = M(), ft = R && X, Gt = (h = Oa(h)).length;
       (ft || Gt) && (l.polygonStart(), ft && (l.lineStart(), o(null, null, 1, l), l.lineEnd()), Gt && ba(h, a, X, o, l), l.polygonEnd()), c = l, h = p = g = null;
     }
     function nt() {
-      D.point = w, p && p.push(g = []), b = !0, x = !1, I = C = NaN;
+      F.point = w, p && p.push(g = []), P = !0, x = !1, I = C = NaN;
     }
     function ct() {
-      h && (w(y, m), _ && x && f.rejoin(), h.push(f.result())), D.point = G, x && c.lineEnd();
+      h && (w(m, v), E && x && f.rejoin(), h.push(f.result())), F.point = G, x && c.lineEnd();
     }
     function w(X, ft) {
       var Gt = i(X, ft);
-      if (p && g.push([X, ft]), b)
-        y = X, m = ft, _ = Gt, b = !1, Gt && (c.lineStart(), c.point(X, ft));
+      if (p && g.push([X, ft]), P)
+        m = X, v = ft, E = Gt, P = !1, Gt && (c.lineStart(), c.point(X, ft));
       else if (Gt && x)
         c.point(X, ft);
       else {
         var pe = [I = Math.max(ki, Math.min(ui, I)), C = Math.max(ki, Math.min(ui, C))], Te = [X = Math.max(ki, Math.min(ui, X)), ft = Math.max(ki, Math.min(ui, ft))];
-        nl(pe, Te, n, t, e, r) ? (x || (c.lineStart(), c.point(pe[0], pe[1])), c.point(Te[0], Te[1]), Gt || c.lineEnd(), P = !1) : Gt && (c.lineStart(), c.point(X, ft), P = !1);
+        nl(pe, Te, n, t, e, r) ? (x || (c.lineStart(), c.point(pe[0], pe[1])), c.point(Te[0], Te[1]), Gt || c.lineEnd(), R = !1) : Gt && (c.lineStart(), c.point(X, ft), R = !1);
       }
       I = X, C = ft, x = Gt;
     }
-    return D;
+    return F;
   };
 }
 var Co = an();
@@ -14424,15 +14424,15 @@ function al(n, t) {
   Co.reset();
   for (var a = 0, u = n.length; a < u; ++a)
     if (c = (l = n[a]).length)
-      for (var l, c, f = l[c - 1], h = f[0], p = f[1] / 2 + xs, g = It(p), y = Et(p), m = 0; m < c; ++m, h = I, g = x, y = b, f = _) {
-        var _ = l[m], I = _[0], C = _[1] / 2 + xs, x = It(C), b = Et(C), P = I - h, D = P >= 0 ? 1 : -1, G = D * P, A = G > Z, et = g * x;
-        if (Co.add(Qn(et * D * It(G), y * b + et * Et(G))), o += A ? P + D * Sr : P, A ^ h >= e ^ I >= e) {
-          var K = $i(Jn(f), Jn(_));
+      for (var l, c, f = l[c - 1], h = f[0], p = f[1] / 2 + xs, g = It(p), m = Et(p), v = 0; v < c; ++v, h = I, g = x, m = P, f = E) {
+        var E = l[v], I = E[0], C = E[1] / 2 + xs, x = It(C), P = Et(C), R = I - h, F = R >= 0 ? 1 : -1, G = F * R, M = G > Z, et = g * x;
+        if (Co.add(Qn(et * F * It(G), m * P + et * Et(G))), o += M ? R + F * Sr : R, M ^ h >= e ^ I >= e) {
+          var K = $i(Jn(f), Jn(E));
           Fo(K);
           var nt = $i(i, K);
           Fo(nt);
-          var ct = (A ^ P >= 0 ? -1 : 1) * In(nt[2]);
-          (r > ct || r === ct && (K[0] || K[1])) && (s += A ^ P >= 0 ? 1 : -1);
+          var ct = (M ^ R >= 0 ? -1 : 1) * In(nt[2]);
+          (r > ct || r === ct && (K[0] || K[1])) && (s += M ^ R >= 0 ? 1 : -1);
         }
       }
   return (o < -at || o < at && Co < -at) ^ s & 1;
@@ -14461,56 +14461,56 @@ an();
 function Da(n, t, e, r) {
   return function(i, o) {
     var s = t(o), a = i.invert(r[0], r[1]), u = Pa(), l = t(u), c = !1, f, h, p, g = {
-      point: y,
-      lineStart: _,
+      point: m,
+      lineStart: E,
       lineEnd: I,
       polygonStart: function() {
-        g.point = C, g.lineStart = x, g.lineEnd = b, h = [], f = [];
+        g.point = C, g.lineStart = x, g.lineEnd = P, h = [], f = [];
       },
       polygonEnd: function() {
-        g.point = y, g.lineStart = _, g.lineEnd = I, h = Oa(h);
-        var P = al(f, a);
-        h.length ? (c || (o.polygonStart(), c = !0), ba(h, cl, P, e, o)) : P && (c || (o.polygonStart(), c = !0), o.lineStart(), e(null, null, 1, o), o.lineEnd()), c && (o.polygonEnd(), c = !1), h = f = null;
+        g.point = m, g.lineStart = E, g.lineEnd = I, h = Oa(h);
+        var R = al(f, a);
+        h.length ? (c || (o.polygonStart(), c = !0), ba(h, cl, R, e, o)) : R && (c || (o.polygonStart(), c = !0), o.lineStart(), e(null, null, 1, o), o.lineEnd()), c && (o.polygonEnd(), c = !1), h = f = null;
       },
       sphere: function() {
         o.polygonStart(), o.lineStart(), e(null, null, 1, o), o.lineEnd(), o.polygonEnd();
       }
     };
-    function y(P, D) {
-      var G = i(P, D);
-      n(P = G[0], D = G[1]) && o.point(P, D);
+    function m(R, F) {
+      var G = i(R, F);
+      n(R = G[0], F = G[1]) && o.point(R, F);
     }
-    function m(P, D) {
-      var G = i(P, D);
+    function v(R, F) {
+      var G = i(R, F);
       s.point(G[0], G[1]);
     }
-    function _() {
-      g.point = m, s.lineStart();
+    function E() {
+      g.point = v, s.lineStart();
     }
     function I() {
-      g.point = y, s.lineEnd();
+      g.point = m, s.lineEnd();
     }
-    function C(P, D) {
-      p.push([P, D]);
-      var G = i(P, D);
+    function C(R, F) {
+      p.push([R, F]);
+      var G = i(R, F);
       l.point(G[0], G[1]);
     }
     function x() {
       l.lineStart(), p = [];
     }
-    function b() {
+    function P() {
       C(p[0][0], p[0][1]), l.lineEnd();
-      var P = l.clean(), D = u.result(), G, A = D.length, et, K, nt;
-      if (p.pop(), f.push(p), p = null, !!A) {
-        if (P & 1) {
-          if (K = D[0], (et = K.length - 1) > 0) {
+      var R = l.clean(), F = u.result(), G, M = F.length, et, K, nt;
+      if (p.pop(), f.push(p), p = null, !!M) {
+        if (R & 1) {
+          if (K = F[0], (et = K.length - 1) > 0) {
             for (c || (o.polygonStart(), c = !0), o.lineStart(), G = 0; G < et; ++G)
               o.point((nt = K[G])[0], nt[1]);
             o.lineEnd();
           }
           return;
         }
-        A > 1 && P & 2 && D.push(D.pop().concat(D.shift())), h.push(D.filter(ll));
+        M > 1 && R & 2 && F.push(F.pop().concat(F.shift())), h.push(F.filter(ll));
       }
     }
     return g;
@@ -14571,20 +14571,20 @@ function gl(n, t) {
     return Et(c) * Et(f) > e;
   }
   function a(c) {
-    var f, h, p, g, y;
+    var f, h, p, g, m;
     return {
       lineStart: function() {
-        g = p = !1, y = 1;
+        g = p = !1, m = 1;
       },
-      point: function(m, _) {
-        var I = [m, _], C, x = s(m, _), b = r ? x ? 0 : l(m, _) : x ? l(m + (m < 0 ? Z : -Z), _) : 0;
+      point: function(v, E) {
+        var I = [v, E], C, x = s(v, E), P = r ? x ? 0 : l(v, E) : x ? l(v + (v < 0 ? Z : -Z), E) : 0;
         if (!f && (g = p = x) && c.lineStart(), x !== p && (C = u(f, I), (!C || zi(f, C) || zi(I, C)) && (I[0] += at, I[1] += at, x = s(I[0], I[1]))), x !== p)
-          y = 0, x ? (c.lineStart(), C = u(I, f), c.point(C[0], C[1])) : (C = u(f, I), c.point(C[0], C[1]), c.lineEnd()), f = C;
+          m = 0, x ? (c.lineStart(), C = u(I, f), c.point(C[0], C[1])) : (C = u(f, I), c.point(C[0], C[1]), c.lineEnd()), f = C;
         else if (i && f && r ^ x) {
-          var P;
-          !(b & h) && (P = u(I, f, !0)) && (y = 0, r ? (c.lineStart(), c.point(P[0][0], P[0][1]), c.point(P[1][0], P[1][1]), c.lineEnd()) : (c.point(P[1][0], P[1][1]), c.lineEnd(), c.lineStart(), c.point(P[0][0], P[0][1])));
+          var R;
+          !(P & h) && (R = u(I, f, !0)) && (m = 0, r ? (c.lineStart(), c.point(R[0][0], R[0][1]), c.point(R[1][0], R[1][1]), c.lineEnd()) : (c.point(R[1][0], R[1][1]), c.lineEnd(), c.lineStart(), c.point(R[0][0], R[0][1])));
         }
-        x && (!f || !zi(f, I)) && c.point(I[0], I[1]), f = I, p = x, h = b;
+        x && (!f || !zi(f, I)) && c.point(I[0], I[1]), f = I, p = x, h = P;
       },
       lineEnd: function() {
         p && c.lineEnd(), f = null;
@@ -14592,27 +14592,27 @@ function gl(n, t) {
       // Rejoin first and last segments if there were intersections and the first
       // and last points were visible.
       clean: function() {
-        return y | (g && p) << 1;
+        return m | (g && p) << 1;
       }
     };
   }
   function u(c, f, h) {
-    var p = Jn(c), g = Jn(f), y = [1, 0, 0], m = $i(p, g), _ = Bi(m, m), I = m[0], C = _ - I * I;
+    var p = Jn(c), g = Jn(f), m = [1, 0, 0], v = $i(p, g), E = Bi(v, v), I = v[0], C = E - I * I;
     if (!C)
       return !h && c;
-    var x = e * _ / C, b = -e * I / C, P = $i(y, m), D = Gi(y, x), G = Gi(m, b);
-    Io(D, G);
-    var A = P, et = Bi(D, A), K = Bi(A, A), nt = et * et - K * (Bi(D, D) - 1);
+    var x = e * E / C, P = -e * I / C, R = $i(m, v), F = Gi(m, x), G = Gi(v, P);
+    Io(F, G);
+    var M = R, et = Bi(F, M), K = Bi(M, M), nt = et * et - K * (Bi(F, F) - 1);
     if (!(nt < 0)) {
-      var ct = ni(nt), w = Gi(A, (-et - ct) / K);
-      if (Io(w, D), w = Ao(w), !h)
+      var ct = ni(nt), w = Gi(M, (-et - ct) / K);
+      if (Io(w, F), w = Ao(w), !h)
         return w;
       var X = c[0], ft = f[0], Gt = c[1], pe = f[1], Te;
       ft < X && (Te = X, X = ft, ft = Te);
       var ii = ft - X, Pr = Ut(ii - Z) < at, un = Pr || ii < at;
       if (!Pr && pe < Gt && (Te = Gt, Gt = pe, pe = Te), un ? Pr ? Gt + pe > 0 ^ w[1] < (Ut(w[0] - X) < at ? Gt : pe) : Gt <= w[1] && w[1] <= pe : ii > Z ^ (X <= w[0] && w[0] <= ft)) {
-        var br = Gi(A, (-et + ct) / K);
-        return Io(br, D), [w, Ao(br)];
+        var br = Gi(M, (-et + ct) / K);
+        return Io(br, F), [w, Ao(br)];
       }
     }
   }
@@ -14674,48 +14674,48 @@ function yl(n) {
   });
 }
 function ml(n, t) {
-  function e(r, i, o, s, a, u, l, c, f, h, p, g, y, m) {
-    var _ = l - r, I = c - i, C = _ * _ + I * I;
-    if (C > 4 * t && y--) {
-      var x = s + h, b = a + p, P = u + g, D = ni(x * x + b * b + P * P), G = In(P /= D), A = Ut(Ut(P) - 1) < at || Ut(o - f) < at ? (o + f) / 2 : Qn(b, x), et = n(A, G), K = et[0], nt = et[1], ct = K - r, w = nt - i, X = I * ct - _ * w;
-      (X * X / C > t || Ut((_ * ct + I * w) / C - 0.5) > 0.3 || s * h + a * p + u * g < vl) && (e(r, i, o, s, a, u, K, nt, A, x /= D, b /= D, P, y, m), m.point(K, nt), e(K, nt, A, x, b, P, l, c, f, h, p, g, y, m));
+  function e(r, i, o, s, a, u, l, c, f, h, p, g, m, v) {
+    var E = l - r, I = c - i, C = E * E + I * I;
+    if (C > 4 * t && m--) {
+      var x = s + h, P = a + p, R = u + g, F = ni(x * x + P * P + R * R), G = In(R /= F), M = Ut(Ut(R) - 1) < at || Ut(o - f) < at ? (o + f) / 2 : Qn(P, x), et = n(M, G), K = et[0], nt = et[1], ct = K - r, w = nt - i, X = I * ct - E * w;
+      (X * X / C > t || Ut((E * ct + I * w) / C - 0.5) > 0.3 || s * h + a * p + u * g < vl) && (e(r, i, o, s, a, u, K, nt, M, x /= F, P /= F, R, m, v), v.point(K, nt), e(K, nt, M, x, P, R, l, c, f, h, p, g, m, v));
     }
   }
   return function(r) {
-    var i, o, s, a, u, l, c, f, h, p, g, y, m = {
-      point: _,
+    var i, o, s, a, u, l, c, f, h, p, g, m, v = {
+      point: E,
       lineStart: I,
       lineEnd: x,
       polygonStart: function() {
-        r.polygonStart(), m.lineStart = b;
+        r.polygonStart(), v.lineStart = P;
       },
       polygonEnd: function() {
-        r.polygonEnd(), m.lineStart = I;
+        r.polygonEnd(), v.lineStart = I;
       }
     };
-    function _(G, A) {
-      G = n(G, A), r.point(G[0], G[1]);
+    function E(G, M) {
+      G = n(G, M), r.point(G[0], G[1]);
     }
     function I() {
-      f = NaN, m.point = C, r.lineStart();
+      f = NaN, v.point = C, r.lineStart();
     }
-    function C(G, A) {
-      var et = Jn([G, A]), K = n(G, A);
-      e(f, h, c, p, g, y, f = K[0], h = K[1], c = G, p = et[0], g = et[1], y = et[2], Fs, r), r.point(f, h);
+    function C(G, M) {
+      var et = Jn([G, M]), K = n(G, M);
+      e(f, h, c, p, g, m, f = K[0], h = K[1], c = G, p = et[0], g = et[1], m = et[2], Fs, r), r.point(f, h);
     }
     function x() {
-      m.point = _, r.lineEnd();
+      v.point = E, r.lineEnd();
     }
-    function b() {
-      I(), m.point = P, m.lineEnd = D;
+    function P() {
+      I(), v.point = R, v.lineEnd = F;
     }
-    function P(G, A) {
-      C(i = G, A), o = f, s = h, a = p, u = g, l = y, m.point = C;
+    function R(G, M) {
+      C(i = G, M), o = f, s = h, a = p, u = g, l = m, v.point = C;
     }
-    function D() {
-      e(f, h, c, p, g, y, o, s, i, a, u, l, Fs, r), m.lineEnd = x, x();
+    function F() {
+      e(f, h, c, p, g, m, o, s, i, a, u, l, Fs, r), v.lineEnd = x, x();
     }
-    return m;
+    return v;
   };
 }
 var _l = Ta({
@@ -14729,8 +14729,8 @@ function El(n) {
   })();
 }
 function Il(n) {
-  var t, e = 150, r = 480, i = 250, o, s, a = 0, u = 0, l = 0, c = 0, f = 0, h, p, g = null, y = As, m = null, _, I, C, x = Ts, b = 0.5, P = Bs(K, b), D, G;
-  function A(w) {
+  var t, e = 150, r = 480, i = 250, o, s, a = 0, u = 0, l = 0, c = 0, f = 0, h, p, g = null, m = As, v = null, E, I, C, x = Ts, P = 0.5, R = Bs(K, P), F, G;
+  function M(w) {
     return w = p(w[0] * Ae, w[1] * Ae), [w[0] * e + o, s - w[1] * e];
   }
   function et(w) {
@@ -14739,26 +14739,26 @@ function Il(n) {
   function K(w, X) {
     return w = t(w, X), [w[0] * e + o, s - w[1] * e];
   }
-  A.stream = function(w) {
-    return D && G === w ? D : D = _l(y(h, P(x(G = w))));
-  }, A.clipAngle = function(w) {
-    return arguments.length ? (y = +w ? gl(g = w * Ae, 6 * Ae) : (g = null, As), ct()) : g * Xr;
-  }, A.clipExtent = function(w) {
-    return arguments.length ? (x = w == null ? (m = _ = I = C = null, Ts) : sl(m = +w[0][0], _ = +w[0][1], I = +w[1][0], C = +w[1][1]), ct()) : m == null ? null : [[m, _], [I, C]];
-  }, A.scale = function(w) {
+  M.stream = function(w) {
+    return F && G === w ? F : F = _l(m(h, R(x(G = w))));
+  }, M.clipAngle = function(w) {
+    return arguments.length ? (m = +w ? gl(g = w * Ae, 6 * Ae) : (g = null, As), ct()) : g * Xr;
+  }, M.clipExtent = function(w) {
+    return arguments.length ? (x = w == null ? (v = E = I = C = null, Ts) : sl(v = +w[0][0], E = +w[0][1], I = +w[1][0], C = +w[1][1]), ct()) : v == null ? null : [[v, E], [I, C]];
+  }, M.scale = function(w) {
     return arguments.length ? (e = +w, nt()) : e;
-  }, A.translate = function(w) {
+  }, M.translate = function(w) {
     return arguments.length ? (r = +w[0], i = +w[1], nt()) : [r, i];
-  }, A.center = function(w) {
+  }, M.center = function(w) {
     return arguments.length ? (a = w[0] % 360 * Ae, u = w[1] % 360 * Ae, nt()) : [a * Xr, u * Xr];
-  }, A.rotate = function(w) {
+  }, M.rotate = function(w) {
     return arguments.length ? (l = w[0] % 360 * Ae, c = w[1] % 360 * Ae, f = w.length > 2 ? w[2] % 360 * Ae : 0, nt()) : [l * Xr, c * Xr, f * Xr];
-  }, A.precision = function(w) {
-    return arguments.length ? (P = Bs(K, b = w * w), ct()) : ni(b);
-  }, A.fitExtent = function(w, X) {
-    return Ma(A, w, X);
-  }, A.fitSize = function(w, X) {
-    return dl(A, w, X);
+  }, M.precision = function(w) {
+    return arguments.length ? (R = Bs(K, P = w * w), ct()) : ni(P);
+  }, M.fitExtent = function(w, X) {
+    return Ma(M, w, X);
+  }, M.fitSize = function(w, X) {
+    return dl(M, w, X);
   };
   function nt() {
     p = wa(h = el(l, c, f), t);
@@ -14766,10 +14766,10 @@ function Il(n) {
     return o = r - w[0] * e, s = i + w[1] * e, ct();
   }
   function ct() {
-    return D = G = null, A;
+    return F = G = null, M;
   }
   return function() {
-    return t = n.apply(this, arguments), A.invert = t.invert && et, nt();
+    return t = n.apply(this, arguments), M.invert = t.invert && et, nt();
   };
 }
 function Aa(n) {
@@ -14843,9 +14843,9 @@ function Ui(n, t, e, r) {
   var i = n.properties || {}, o = n.type === "Feature" ? n.geometry : n;
   if (o.type === "GeometryCollection") {
     var s = [];
-    return Zs(n, function(y) {
-      var m = Ui(y, t, e, r);
-      m && s.push(m);
+    return Zs(n, function(m) {
+      var v = Ui(m, t, e, r);
+      v && s.push(v);
     }), bo(s);
   }
   var a = Sl(o), u = {
@@ -14965,114 +14965,114 @@ function Pl(n, t, e = !0, r = !0, i = {}, o = {}, s = {
   n.loaded() ? h() : n.once("load", () => {
     h();
   });
-  const p = (_) => {
+  const p = (v) => {
     a == null || a({
       type: "mapClick",
-      coordinates: [_.lngLat.lng, _.lngLat.lat]
+      coordinates: [v.lngLat.lng, v.lngLat.lat]
     });
   }, g = () => {
-    let _;
-    const I = n.getZoom() > 9 ? [(_ = n.getCenter().wrap()).lng, _.lat] : void 0;
-    u !== I && (u = I, a == null || a({ type: "proximityChange", proximity: I }));
+    let v;
+    const E = n.getZoom() > 9 ? [(v = n.getCenter().wrap()).lng, v.lat] : void 0;
+    u !== E && (u = E, a == null || a({ type: "proximityChange", proximity: E }));
   };
-  function y(_ = !1) {
+  function m(v = !1) {
     if (!t)
       throw new Error();
-    const I = document.createElement("div");
-    return _ && I.classList.add("marker-interactive"), new Mu({
+    const E = document.createElement("div");
+    return v && E.classList.add("marker-interactive"), new Mu({
       props: { displayIn: "maplibre" },
-      target: I
-    }), new t.Marker({ element: I, offset: [1, -13] });
+      target: E
+    }), new t.Marker({ element: E, offset: [1, -13] });
   }
   return {
-    setEventHandler(_) {
-      _ ? (a = _, n.on("moveend", g), g(), n.on("click", p)) : (n.off("moveend", g), a == null || a({ type: "proximityChange", proximity: void 0 }), a = void 0, n.off("click", p));
+    setEventHandler(v) {
+      v ? (a = v, n.on("moveend", g), g(), n.on("click", p)) : (n.off("moveend", g), a == null || a({ type: "proximityChange", proximity: void 0 }), a = void 0, n.off("click", p));
     },
-    flyTo(_, I) {
-      n.flyTo({ center: _, zoom: I, ...i });
+    flyTo(v, E) {
+      n.flyTo({ center: v, zoom: E, ...i });
     },
-    fitBounds(_, I, C) {
+    fitBounds(v, E, I) {
       n.fitBounds(
         [
-          [_[0], _[1]],
-          [_[2], _[3]]
+          [v[0], v[1]],
+          [v[2], v[3]]
         ],
-        { padding: I, maxZoom: C, ...o }
+        { padding: E, maxZoom: I, ...o }
       );
     },
-    indicateReverse(_) {
-      n.getCanvasContainer().style.cursor = _ ? "crosshair" : "";
+    indicateReverse(v) {
+      n.getCanvasContainer().style.cursor = v ? "crosshair" : "";
     },
-    setReverseMarker(_) {
-      !t || !e || (f ? _ ? f.setLngLat(_) : (f.remove(), f = void 0) : _ && (f = (typeof e == "object" ? new t.Marker(e) : y()).setLngLat(_).addTo(n), f.getElement().classList.add("marker-reverse")));
+    setReverseMarker(v) {
+      !t || !e || (f ? v ? f.setLngLat(v) : (f.remove(), f = void 0) : v && (f = (typeof e == "object" ? new t.Marker(e) : m()).setLngLat(v).addTo(n), f.getElement().classList.add("marker-reverse")));
     },
-    setMarkers(_, I) {
+    setMarkers(v, E) {
       if (!e)
         return;
-      function C(x) {
-        var b;
-        (b = n.getSource("full-geom")) == null || b.setData(x);
+      function I(C) {
+        var x;
+        (x = n.getSource("full-geom")) == null || x.setData(C);
       }
-      for (const x of l)
-        x.remove();
-      if (l.length = 0, C(zs), !!t) {
-        if (I) {
-          let x = !1;
-          if (I.geometry.type === "GeometryCollection") {
-            const b = I.geometry.geometries.filter(
+      for (const C of l)
+        C.remove();
+      if (l.length = 0, I(zs), !!t) {
+        if (E) {
+          let C = !1;
+          if (E.geometry.type === "GeometryCollection") {
+            const x = E.geometry.geometries.filter(
               (P) => P.type === "Polygon" || P.type === "MultiPolygon"
             );
-            if (b.length > 0) {
-              let P = b.pop();
-              for (const D of b)
-                P = gu(P, D);
-              ks({ ...I, geometry: P }, C), x = !0;
+            if (x.length > 0) {
+              let P = x.pop();
+              for (const R of x)
+                P = gu(P, R);
+              ks({ ...E, geometry: P }, I), C = !0;
             } else {
-              const P = I.geometry.geometries.filter(
-                (D) => D.type === "LineString" || D.type === "MultiLineString"
+              const P = E.geometry.geometries.filter(
+                (R) => R.type === "LineString" || R.type === "MultiLineString"
               );
-              P.length > 0 && (C({
-                ...I,
+              P.length > 0 && (I({
+                ...E,
                 geometry: { type: "GeometryCollection", geometries: P }
-              }), x = !0);
+              }), C = !0);
             }
           }
-          if (!x) {
-            if (I.geometry.type === "Polygon" || I.geometry.type === "MultiPolygon")
-              ks(I, C);
-            else if (I.geometry.type === "LineString" || I.geometry.type === "MultiLineString") {
-              C(I);
+          if (!C) {
+            if (E.geometry.type === "Polygon" || E.geometry.type === "MultiPolygon")
+              ks(E, I);
+            else if (E.geometry.type === "LineString" || E.geometry.type === "MultiLineString") {
+              I(E);
               return;
             }
           }
           e && l.push(
-            (typeof e == "object" ? new t.Marker(e) : y()).setLngLat(I.center).addTo(n)
+            (typeof e == "object" ? new t.Marker(e) : m()).setLngLat(E.center).addTo(n)
           );
         }
         if (r)
-          for (const x of _ ?? []) {
-            if (x === I)
+          for (const C of v ?? []) {
+            if (C === E)
               continue;
-            const b = (typeof r == "object" ? new t.Marker(r) : y(!0)).setLngLat(x.center).setPopup(
+            const x = (typeof r == "object" ? new t.Marker(r) : m(!0)).setLngLat(C.center).setPopup(
               new t.Popup({
                 offset: [1, -27],
                 closeButton: !1,
                 closeOnMove: !0,
                 className: "maptiler-gc-popup"
-              }).setText(x.place_name.replace(/,.*/, ""))
-            ).addTo(n), P = b.getElement();
-            P.addEventListener("click", (D) => {
-              D.stopPropagation(), a == null || a({ type: "markerClick", id: x.id });
+              }).setText(C.place_name.replace(/,.*/, ""))
+            ).addTo(n), P = x.getElement();
+            P.addEventListener("click", (R) => {
+              R.stopPropagation(), a == null || a({ type: "markerClick", id: C.id });
             }), P.addEventListener("mouseenter", () => {
-              a == null || a({ type: "markerMouseEnter", id: x.id }), b.togglePopup();
+              a == null || a({ type: "markerMouseEnter", id: C.id }), x.togglePopup();
             }), P.addEventListener("mouseleave", () => {
-              a == null || a({ type: "markerMouseLeave", id: x.id }), b.togglePopup();
-            }), l.push(b);
+              a == null || a({ type: "markerMouseLeave", id: C.id }), x.togglePopup();
+            }), l.push(x);
           }
       }
     },
-    setSelectedMarker(_) {
-      c && c.getElement().classList.toggle("marker-selected", !1), c = _ > -1 ? l[_] : void 0, c == null || c.getElement().classList.toggle("marker-selected", !0);
+    setSelectedMarker(v) {
+      c && c.getElement().classList.toggle("marker-selected", !1), c = v > -1 ? l[v] : void 0, c == null || c.getElement().classList.toggle("marker-selected", !0);
     }
   };
 }

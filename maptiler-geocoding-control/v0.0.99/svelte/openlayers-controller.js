@@ -123,7 +123,7 @@ export function createOpenLayersMapController(map, flyToOptions = {}, flyToBound
             coordinates: toLonLat(e.coordinate, map.getView().getProjection()),
         });
     };
-    const ctrl = {
+    return {
         setEventHandler(handler) {
             if (handler) {
                 eventHandler = handler;
@@ -277,5 +277,4 @@ export function createOpenLayersMapController(map, flyToOptions = {}, flyToBound
             prevSelected = index;
         },
     };
-    return ctrl;
 }
