@@ -1,0 +1,164 @@
+{
+  "name": "@maptiler/geocoding-control",
+  "version": "1.2.3",
+  "description": "The Javascript & TypeScript Map Control component for MapTiler Geocoding service. Easy to be integrated into any JavaScript mapping application.",
+  "type": "module",
+  "author": {
+    "name": "Martin Ždila",
+    "email": "martin.zdila@maptiler.com"
+  },
+  "license": "BSD-3-Clause",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/maptiler/maptiler-geocoding-control"
+  },
+  "bugs": {
+    "url": "https://github.com/maptiler/maptiler-geocoding-control/issues"
+  },
+  "keywords": [
+    "geocoding",
+    "forward-geocoding",
+    "reverse-geocoding",
+    "maptiler",
+    "leaflet",
+    "maplibre",
+    "map",
+    "search",
+    "leaflet-control",
+    "maplibre-control",
+    "control",
+    "react",
+    "svelte"
+  ],
+  "scripts": {
+    "dev": "vite --host",
+    "build": "npm run check && concurrently --names \"SVELTE  ,MAPLIBRE,MAPTILER,MAPLIB-C,LEAFLET ,LEAFLE-C,OL      ,OL-C    ,REACT   ,TYPES   ,VANILLA \" \"npm run build-svelte\" \"npm run build-maplibre\" \"npm run build-maptilersdk\" \"npm run build-maplibre-controller\" \"npm run build-leaflet\" \"npm run build-leaflet-controller\" \"npm run build-openlayers\" \"npm run build-openlayers-controller\" \"npm run build-react\" \"npm run build-vanilla\" \"npm run build-types\" && npm run cjs2js && cp LICENSE README.md package.json dist && cp -r dist.svelte dist/svelte",
+    "build-svelte": "svelte-package -i src -o dist.svelte && VITE_LIB_VERSION=$npm_package_version node replace-env-vars.js",
+    "build-maptilersdk": "FLAVOUR=maptilersdk vite build",
+    "build-maplibre": "FLAVOUR=maplibre vite build",
+    "build-maplibre-controller": "FLAVOUR=maplibregl-controller vite build",
+    "build-leaflet": "FLAVOUR=leaflet vite build",
+    "build-leaflet-controller": "FLAVOUR=leaflet-controller vite build",
+    "build-openlayers": "FLAVOUR=openlayers vite build",
+    "build-openlayers-controller": "FLAVOUR=openlayers-controller vite build",
+    "build-react": "FLAVOUR=react vite build",
+    "build-vanilla": "FLAVOUR=vanilla vite build",
+    "build-types": "tsc --outDir dist --declaration --emitDeclarationOnly -p tsconfig.dist.json",
+    "cjs2js": "renamer --find '/\\bcjs\\b/' --replace js dist/*cjs*",
+    "clean": "rm -rf dist dist.svelte",
+    "pack": "npm run clean && npm run build && cd dist && npm pack",
+    "pub": "npm run clean && npm run build && cd dist && npm publish",
+    "pub-next": "npm run clean && npm run build && cd dist && npm publish --tag next",
+    "cdn-pr": "npm run clean && npm run build && ./create-cdn-pr.sh",
+    "preview": "vite preview",
+    "check": "svelte-check --tsconfig ./tsconfig.json"
+  },
+  "exports": {
+    "./leaflet": {
+      "import": "./leaflet.js",
+      "require": "./leaflet.umd.js"
+    },
+    "./leaflet-controller": {
+      "import": "./leaflet-controller.js",
+      "require": "./leaflet-controller.umd.js"
+    },
+    "./openlayers": {
+      "import": "./openlayers.js",
+      "require": "./openlayers.umd.js"
+    },
+    "./openlayers-controller": {
+      "import": "./openlayers-controller.js",
+      "require": "./openlayers-controller.umd.js"
+    },
+    "./maplibregl": {
+      "import": "./maplibregl.js",
+      "require": "./maplibregl.umd.js"
+    },
+    "./maptilersdk": {
+      "import": "./maptilersdk.js",
+      "require": "./maptilersdk.umd.js"
+    },
+    "./maplibregl-controller": {
+      "import": "./maplibregl-controller.js",
+      "require": "./maplibregl-controller.umd.js"
+    },
+    "./react": {
+      "import": "./react.js",
+      "require": "./react.umd.js"
+    },
+    "./vanilla": {
+      "import": "./vanilla.js",
+      "require": "./vanilla.umd.js"
+    },
+    "./style.css": {
+      "import": "./style.css",
+      "require": "./style.css"
+    },
+    "./svelte/GeocodingControl.svelte": {
+      "types": "./svelte/GeocodingControl.svelte.d.ts",
+      "svelte": "./svelte/GeocodingControl.svelte"
+    },
+    "./svelte/*": "./svelte/*",
+    "./types": "./types.d.ts"
+  },
+  "devDependencies": {
+    "@maptiler/sdk": "^2.0.3",
+    "@sveltejs/package": "^2.3.1",
+    "@sveltejs/vite-plugin-svelte": "^3.1.0",
+    "@tsconfig/svelte": "^5.0.4",
+    "@turf/buffer": "^6.5.0",
+    "@turf/difference": "^6.5.0",
+    "@turf/union": "^6.5.0",
+    "@types/geojson": "^7946.0.14",
+    "@types/leaflet": "^1.9.12",
+    "@types/react": "^18.3.1",
+    "@types/react-dom": "^18.3.0",
+    "concurrently": "^8.2.2",
+    "dotenv": "^16.4.5",
+    "esm-env": "^1.0.0",
+    "leaflet": "^1.9.4",
+    "maplibre-gl": "^4.2.0",
+    "prettier": "^3.2.5",
+    "prettier-plugin-organize-imports": "^3.2.4",
+    "prettier-plugin-svelte": "^3.2.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "renamer": "^5.0.0",
+    "replace-in-file": "^7.1.0",
+    "sass": "^1.77.0",
+    "svelte": "^4.2.16",
+    "svelte-check": "^3.7.1",
+    "svelte-preprocess": "^5.1.4",
+    "tslib": "^2.6.2",
+    "typescript": "^5.4.5",
+    "vite": "^5.2.11"
+  },
+  "peerDependencies": {
+    "@maptiler/sdk": "^1 || ^2",
+    "leaflet": "^1.9 || ^1.8 || ^1.7",
+    "maplibre-gl": "^2 || ^3 || ^4",
+    "ol": "^7.5.2",
+    "react": "^17 || ^18",
+    "svelte": "^4.2"
+  },
+  "peerDependenciesMeta": {
+    "@maptiler/sdk": {
+      "optional": true
+    },
+    "leaflet": {
+      "optional": true
+    },
+    "maplibre-gl": {
+      "optional": true
+    },
+    "react": {
+      "optional": true
+    },
+    "ol": {
+      "optional": true
+    }
+  },
+  "dependencies": {
+    "geo-coordinates-parser": "^1.7.0"
+  }
+}
