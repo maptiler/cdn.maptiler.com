@@ -6,7 +6,7 @@ export declare function createLeafletMapController(map: L.Map, marker?: boolean 
     fitBounds(bbox: BBox, padding: number, maxZoom?: number): void;
     indicateReverse(reverse: boolean): void;
     setReverseMarker(coordinates?: Position): void;
-    setMarkers(markedFeatures: Feature[] | undefined, picked: Feature | undefined): void;
+    setFeatures(markedFeatures: Feature[] | undefined, picked: Feature | undefined, showPolygonMarker: boolean): void;
     setSelectedMarker(index: number): void;
     getCenterAndZoom(): [number, number, number];
 };

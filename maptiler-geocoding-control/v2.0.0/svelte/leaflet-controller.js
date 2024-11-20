@@ -109,7 +109,7 @@ export function createLeafletMapController(map, marker = true, showResultMarkers
                 }
             }
         },
-        setMarkers(markedFeatures, picked) {
+        setFeatures(markedFeatures, picked, showPolygonMarker) {
             function setData(data) {
                 resultLayer.clearLayers();
                 if (data) {
@@ -176,6 +176,9 @@ export function createLeafletMapController(map, marker = true, showResultMarkers
                     picked.geometry.type === "MultiLineString") {
                     setData(picked);
                     return; // no pin for (multi)linestrings
+                }
+                if (!showPolygonMarker && picked.geometry.type !== "Point") {
+                    return;
                 }
                 if (marker instanceof Function) {
                     const m = marker(map, picked);

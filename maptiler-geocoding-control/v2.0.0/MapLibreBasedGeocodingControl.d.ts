@@ -2,7 +2,7 @@ import type { Evented, FitBoundsOptions, FlyToOptions, Map, Marker, MarkerOption
 import type { SvelteComponent } from "svelte";
 import GeocodingControlComponent from "./GeocodingControl.svelte";
 import { type FullGeometryStyle, type MapLibreGL } from "./maplibregl-controller";
-import type { ControlOptions, Feature } from "./types";
+import type { ControlOptions, Feature, FeatureCollection } from "./types";
 export { createMapLibreGlMapController, type MapLibreGL, } from "./maplibregl-controller";
 export type MapLibreBaseControlOptions = Omit<ControlOptions, "apiKey"> & {
     /**
@@ -52,7 +52,7 @@ export type MapLibreBaseControlOptions = Omit<ControlOptions, "apiKey"> & {
      *
      * - If `false` or `null` then no full geometry is drawn.
      * - If `true` or `undefined` then default-styled full geometry is drawn.
-     * - If an object then it must represent the style and will be used to style the full geometry.
+     * - If an T then it must represent the style and will be used to style the full geometry.
      *
      * Default is the default style.
      */
@@ -60,30 +60,2619 @@ export type MapLibreBaseControlOptions = Omit<ControlOptions, "apiKey"> & {
 };
 export type Props<T> = T extends SvelteComponent<infer P> ? P : never;
 type EventedConstructor = new (...args: ConstructorParameters<typeof Evented>) => Evented;
-export declare function crateBaseClass(Evented: EventedConstructor, maplibreGl: MapLibreGL, getExtraProps?: (map: Map, div: HTMLElement) => Partial<Props<GeocodingControlComponent>>): {
-    new <T extends MapLibreBaseControlOptions>(options?: T): {
-        "__#1@#gc"?: GeocodingControlComponent;
-        "__#1@#options": T;
-        onAddInt(map: Map): HTMLElement;
-        setOptions(options: T): void;
-        setQuery(value: string, submit?: boolean): void;
-        clearMap(): void;
-        clearList(): void;
-        setReverseMode(value: boolean): void;
-        focus(): void;
-        blur(): void;
-        onRemove(): void;
-        _listeners: import("maplibre-gl").Listeners;
-        _oneTimeListeners: import("maplibre-gl").Listeners;
-        _eventedParent: Evented;
-        _eventedParentData: any | (() => any);
-        on(type: string, listener: import("maplibre-gl").Listener): any;
-        off(type: string, listener: import("maplibre-gl").Listener): any;
-        once(type: string, listener?: import("maplibre-gl").Listener): Promise<any> | any;
-        fire(event: {
-            readonly type: string;
-        } | string, properties?: any): any;
-        listens(type: string): boolean;
-        setEventedParent(parent?: Evented | null, data?: any | (() => any)): any;
+export declare function crateClasses<OPTS extends MapLibreBaseControlOptions>(Evented: EventedConstructor, maplibreGl: MapLibreGL, getExtraProps?: (map: Map, div: HTMLElement) => Partial<Props<GeocodingControlComponent>>): {
+    MapLibreBasedGeocodingControl: {
+        new (options?: OPTS): {
+            "__#1@#gc"?: GeocodingControlComponent;
+            "__#1@#options": OPTS;
+            onAddInt(map: Map): HTMLElement;
+            on<T extends "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle">(type: T, listener: (ev: {
+                select: {
+                    feature: Feature | undefined;
+                    readonly type: "select";
+                    readonly target: any;
+                };
+                featureslisted: {
+                    features: Feature[] | undefined;
+                    readonly type: "featureslisted";
+                    readonly target: any;
+                };
+                featuresmarked: {
+                    features: Feature[] | undefined;
+                    readonly type: "featuresmarked";
+                    readonly target: any;
+                };
+                optionsvisibilitychange: {
+                    optionsVisible: boolean;
+                    readonly type: "optionsvisibilitychange";
+                    readonly target: any;
+                };
+                pick: {
+                    feature: Feature | undefined;
+                    readonly type: "pick";
+                    readonly target: any;
+                };
+                querychange: {
+                    query: string;
+                    readonly type: "querychange";
+                    readonly target: any;
+                };
+                response: {
+                    url: string;
+                    featureCollection: FeatureCollection;
+                    readonly type: "response";
+                    readonly target: any;
+                };
+                reversetoggle: {
+                    reverse: boolean;
+                    readonly type: "reversetoggle";
+                    readonly target: any;
+                };
+            }[T]) => void): any;
+            once<T extends "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle">(type: T, listener: (ev: {
+                select: {
+                    feature: Feature | undefined;
+                    readonly type: "select";
+                    readonly target: any;
+                };
+                featureslisted: {
+                    features: Feature[] | undefined;
+                    readonly type: "featureslisted";
+                    readonly target: any;
+                };
+                featuresmarked: {
+                    features: Feature[] | undefined;
+                    readonly type: "featuresmarked";
+                    readonly target: any;
+                };
+                optionsvisibilitychange: {
+                    optionsVisible: boolean;
+                    readonly type: "optionsvisibilitychange";
+                    readonly target: any;
+                };
+                pick: {
+                    feature: Feature | undefined;
+                    readonly type: "pick";
+                    readonly target: any;
+                };
+                querychange: {
+                    query: string;
+                    readonly type: "querychange";
+                    readonly target: any;
+                };
+                response: {
+                    url: string;
+                    featureCollection: FeatureCollection;
+                    readonly type: "response";
+                    readonly target: any;
+                };
+                reversetoggle: {
+                    reverse: boolean;
+                    readonly type: "reversetoggle";
+                    readonly target: any;
+                };
+            }[T]) => void): any;
+            off<T extends "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle">(type: T, listener: (ev: {
+                select: {
+                    feature: Feature | undefined;
+                    readonly type: "select";
+                    readonly target: any;
+                };
+                featureslisted: {
+                    features: Feature[] | undefined;
+                    readonly type: "featureslisted";
+                    readonly target: any;
+                };
+                featuresmarked: {
+                    features: Feature[] | undefined;
+                    readonly type: "featuresmarked";
+                    readonly target: any;
+                };
+                optionsvisibilitychange: {
+                    optionsVisible: boolean;
+                    readonly type: "optionsvisibilitychange";
+                    readonly target: any;
+                };
+                pick: {
+                    feature: Feature | undefined;
+                    readonly type: "pick";
+                    readonly target: any;
+                };
+                querychange: {
+                    query: string;
+                    readonly type: "querychange";
+                    readonly target: any;
+                };
+                response: {
+                    url: string;
+                    featureCollection: FeatureCollection;
+                    readonly type: "response";
+                    readonly target: any;
+                };
+                reversetoggle: {
+                    reverse: boolean;
+                    readonly type: "reversetoggle";
+                    readonly target: any;
+                };
+            }[T]) => void): any;
+            listens(type: "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle"): boolean;
+            setOptions(options: OPTS): void;
+            setQuery(value: string, submit?: boolean): void;
+            clearMap(): void;
+            clearList(): void;
+            setReverseMode(value: boolean): void;
+            focus(): void;
+            blur(): void;
+            onRemove(): void;
+            _listeners: import("maplibre-gl").Listeners;
+            _oneTimeListeners: import("maplibre-gl").Listeners;
+            _eventedParent: Evented;
+            _eventedParentData: any | (() => any);
+            fire(event: {
+                readonly type: string;
+            } | string, properties?: any): any;
+            setEventedParent(parent?: Evented | null, data?: any | (() => any)): any;
+        };
+    };
+    events: {
+        SelectEvent: {
+            new (target: {
+                "__#1@#gc"?: GeocodingControlComponent;
+                "__#1@#options": OPTS;
+                onAddInt(map: Map): HTMLElement;
+                on<T extends "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle">(type: T, listener: (ev: {
+                    select: {
+                        feature: Feature | undefined;
+                        readonly type: "select";
+                        readonly target: any;
+                    };
+                    featureslisted: {
+                        features: Feature[] | undefined;
+                        readonly type: "featureslisted";
+                        readonly target: any;
+                    };
+                    featuresmarked: {
+                        features: Feature[] | undefined;
+                        readonly type: "featuresmarked";
+                        readonly target: any;
+                    };
+                    optionsvisibilitychange: {
+                        optionsVisible: boolean;
+                        readonly type: "optionsvisibilitychange";
+                        readonly target: any;
+                    };
+                    pick: {
+                        feature: Feature | undefined;
+                        readonly type: "pick";
+                        readonly target: any;
+                    };
+                    querychange: {
+                        query: string;
+                        readonly type: "querychange";
+                        readonly target: any;
+                    };
+                    response: {
+                        url: string;
+                        featureCollection: FeatureCollection;
+                        readonly type: "response";
+                        readonly target: any;
+                    };
+                    reversetoggle: {
+                        reverse: boolean;
+                        readonly type: "reversetoggle";
+                        readonly target: any;
+                    };
+                }[T]) => void): any;
+                once<T extends "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle">(type: T, listener: (ev: {
+                    select: {
+                        feature: Feature | undefined;
+                        readonly type: "select";
+                        readonly target: any;
+                    };
+                    featureslisted: {
+                        features: Feature[] | undefined;
+                        readonly type: "featureslisted";
+                        readonly target: any;
+                    };
+                    featuresmarked: {
+                        features: Feature[] | undefined;
+                        readonly type: "featuresmarked";
+                        readonly target: any;
+                    };
+                    optionsvisibilitychange: {
+                        optionsVisible: boolean;
+                        readonly type: "optionsvisibilitychange";
+                        readonly target: any;
+                    };
+                    pick: {
+                        feature: Feature | undefined;
+                        readonly type: "pick";
+                        readonly target: any;
+                    };
+                    querychange: {
+                        query: string;
+                        readonly type: "querychange";
+                        readonly target: any;
+                    };
+                    response: {
+                        url: string;
+                        featureCollection: FeatureCollection;
+                        readonly type: "response";
+                        readonly target: any;
+                    };
+                    reversetoggle: {
+                        reverse: boolean;
+                        readonly type: "reversetoggle";
+                        readonly target: any;
+                    };
+                }[T]) => void): any;
+                off<T extends "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle">(type: T, listener: (ev: {
+                    select: {
+                        feature: Feature | undefined;
+                        readonly type: "select";
+                        readonly target: any;
+                    };
+                    featureslisted: {
+                        features: Feature[] | undefined;
+                        readonly type: "featureslisted";
+                        readonly target: any;
+                    };
+                    featuresmarked: {
+                        features: Feature[] | undefined;
+                        readonly type: "featuresmarked";
+                        readonly target: any;
+                    };
+                    optionsvisibilitychange: {
+                        optionsVisible: boolean;
+                        readonly type: "optionsvisibilitychange";
+                        readonly target: any;
+                    };
+                    pick: {
+                        feature: Feature | undefined;
+                        readonly type: "pick";
+                        readonly target: any;
+                    };
+                    querychange: {
+                        query: string;
+                        readonly type: "querychange";
+                        readonly target: any;
+                    };
+                    response: {
+                        url: string;
+                        featureCollection: FeatureCollection;
+                        readonly type: "response";
+                        readonly target: any;
+                    };
+                    reversetoggle: {
+                        reverse: boolean;
+                        readonly type: "reversetoggle";
+                        readonly target: any;
+                    };
+                }[T]) => void): any;
+                listens(type: "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle"): boolean;
+                setOptions(options: OPTS): void;
+                setQuery(value: string, submit?: boolean): void;
+                clearMap(): void;
+                clearList(): void;
+                setReverseMode(value: boolean): void;
+                focus(): void;
+                blur(): void;
+                onRemove(): void;
+                _listeners: import("maplibre-gl").Listeners;
+                _oneTimeListeners: import("maplibre-gl").Listeners;
+                _eventedParent: Evented;
+                _eventedParentData: any | (() => any);
+                fire(event: {
+                    readonly type: string;
+                } | string, properties?: any): any;
+                setEventedParent(parent?: Evented | null, data?: any | (() => any)): any;
+            }, details: {
+                feature: Feature | undefined;
+            }): {
+                feature: Feature | undefined;
+                readonly type: "select";
+                readonly target: {
+                    "__#1@#gc"?: GeocodingControlComponent;
+                    "__#1@#options": OPTS;
+                    onAddInt(map: Map): HTMLElement;
+                    on<T extends "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle">(type: T, listener: (ev: {
+                        select: {
+                            feature: Feature | undefined;
+                            readonly type: "select";
+                            readonly target: any;
+                        };
+                        featureslisted: {
+                            features: Feature[] | undefined;
+                            readonly type: "featureslisted";
+                            readonly target: any;
+                        };
+                        featuresmarked: {
+                            features: Feature[] | undefined;
+                            readonly type: "featuresmarked";
+                            readonly target: any;
+                        };
+                        optionsvisibilitychange: {
+                            optionsVisible: boolean;
+                            readonly type: "optionsvisibilitychange";
+                            readonly target: any;
+                        };
+                        pick: {
+                            feature: Feature | undefined;
+                            readonly type: "pick";
+                            readonly target: any;
+                        };
+                        querychange: {
+                            query: string;
+                            readonly type: "querychange";
+                            readonly target: any;
+                        };
+                        response: {
+                            url: string;
+                            featureCollection: FeatureCollection;
+                            readonly type: "response";
+                            readonly target: any;
+                        };
+                        reversetoggle: {
+                            reverse: boolean;
+                            readonly type: "reversetoggle";
+                            readonly target: any;
+                        };
+                    }[T]) => void): any;
+                    once<T extends "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle">(type: T, listener: (ev: {
+                        select: {
+                            feature: Feature | undefined;
+                            readonly type: "select";
+                            readonly target: any;
+                        };
+                        featureslisted: {
+                            features: Feature[] | undefined;
+                            readonly type: "featureslisted";
+                            readonly target: any;
+                        };
+                        featuresmarked: {
+                            features: Feature[] | undefined;
+                            readonly type: "featuresmarked";
+                            readonly target: any;
+                        };
+                        optionsvisibilitychange: {
+                            optionsVisible: boolean;
+                            readonly type: "optionsvisibilitychange";
+                            readonly target: any;
+                        };
+                        pick: {
+                            feature: Feature | undefined;
+                            readonly type: "pick";
+                            readonly target: any;
+                        };
+                        querychange: {
+                            query: string;
+                            readonly type: "querychange";
+                            readonly target: any;
+                        };
+                        response: {
+                            url: string;
+                            featureCollection: FeatureCollection;
+                            readonly type: "response";
+                            readonly target: any;
+                        };
+                        reversetoggle: {
+                            reverse: boolean;
+                            readonly type: "reversetoggle";
+                            readonly target: any;
+                        };
+                    }[T]) => void): any;
+                    off<T extends "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle">(type: T, listener: (ev: {
+                        select: {
+                            feature: Feature | undefined;
+                            readonly type: "select";
+                            readonly target: any;
+                        };
+                        featureslisted: {
+                            features: Feature[] | undefined;
+                            readonly type: "featureslisted";
+                            readonly target: any;
+                        };
+                        featuresmarked: {
+                            features: Feature[] | undefined;
+                            readonly type: "featuresmarked";
+                            readonly target: any;
+                        };
+                        optionsvisibilitychange: {
+                            optionsVisible: boolean;
+                            readonly type: "optionsvisibilitychange";
+                            readonly target: any;
+                        };
+                        pick: {
+                            feature: Feature | undefined;
+                            readonly type: "pick";
+                            readonly target: any;
+                        };
+                        querychange: {
+                            query: string;
+                            readonly type: "querychange";
+                            readonly target: any;
+                        };
+                        response: {
+                            url: string;
+                            featureCollection: FeatureCollection;
+                            readonly type: "response";
+                            readonly target: any;
+                        };
+                        reversetoggle: {
+                            reverse: boolean;
+                            readonly type: "reversetoggle";
+                            readonly target: any;
+                        };
+                    }[T]) => void): any;
+                    listens(type: "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle"): boolean;
+                    setOptions(options: OPTS): void;
+                    setQuery(value: string, submit?: boolean): void;
+                    clearMap(): void;
+                    clearList(): void;
+                    setReverseMode(value: boolean): void;
+                    focus(): void;
+                    blur(): void;
+                    onRemove(): void;
+                    _listeners: import("maplibre-gl").Listeners;
+                    _oneTimeListeners: import("maplibre-gl").Listeners;
+                    _eventedParent: Evented;
+                    _eventedParentData: any | (() => any);
+                    fire(event: {
+                        readonly type: string;
+                    } | string, properties?: any): any;
+                    setEventedParent(parent?: Evented | null, data?: any | (() => any)): any;
+                };
+            };
+        };
+        FeaturesListedEvent: {
+            new (target: {
+                "__#1@#gc"?: GeocodingControlComponent;
+                "__#1@#options": OPTS;
+                onAddInt(map: Map): HTMLElement;
+                on<T extends "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle">(type: T, listener: (ev: {
+                    select: {
+                        feature: Feature | undefined;
+                        readonly type: "select";
+                        readonly target: any;
+                    };
+                    featureslisted: {
+                        features: Feature[] | undefined;
+                        readonly type: "featureslisted";
+                        readonly target: any;
+                    };
+                    featuresmarked: {
+                        features: Feature[] | undefined;
+                        readonly type: "featuresmarked";
+                        readonly target: any;
+                    };
+                    optionsvisibilitychange: {
+                        optionsVisible: boolean;
+                        readonly type: "optionsvisibilitychange";
+                        readonly target: any;
+                    };
+                    pick: {
+                        feature: Feature | undefined;
+                        readonly type: "pick";
+                        readonly target: any;
+                    };
+                    querychange: {
+                        query: string;
+                        readonly type: "querychange";
+                        readonly target: any;
+                    };
+                    response: {
+                        url: string;
+                        featureCollection: FeatureCollection;
+                        readonly type: "response";
+                        readonly target: any;
+                    };
+                    reversetoggle: {
+                        reverse: boolean;
+                        readonly type: "reversetoggle";
+                        readonly target: any;
+                    };
+                }[T]) => void): any;
+                once<T extends "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle">(type: T, listener: (ev: {
+                    select: {
+                        feature: Feature | undefined;
+                        readonly type: "select";
+                        readonly target: any;
+                    };
+                    featureslisted: {
+                        features: Feature[] | undefined;
+                        readonly type: "featureslisted";
+                        readonly target: any;
+                    };
+                    featuresmarked: {
+                        features: Feature[] | undefined;
+                        readonly type: "featuresmarked";
+                        readonly target: any;
+                    };
+                    optionsvisibilitychange: {
+                        optionsVisible: boolean;
+                        readonly type: "optionsvisibilitychange";
+                        readonly target: any;
+                    };
+                    pick: {
+                        feature: Feature | undefined;
+                        readonly type: "pick";
+                        readonly target: any;
+                    };
+                    querychange: {
+                        query: string;
+                        readonly type: "querychange";
+                        readonly target: any;
+                    };
+                    response: {
+                        url: string;
+                        featureCollection: FeatureCollection;
+                        readonly type: "response";
+                        readonly target: any;
+                    };
+                    reversetoggle: {
+                        reverse: boolean;
+                        readonly type: "reversetoggle";
+                        readonly target: any;
+                    };
+                }[T]) => void): any;
+                off<T extends "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle">(type: T, listener: (ev: {
+                    select: {
+                        feature: Feature | undefined;
+                        readonly type: "select";
+                        readonly target: any;
+                    };
+                    featureslisted: {
+                        features: Feature[] | undefined;
+                        readonly type: "featureslisted";
+                        readonly target: any;
+                    };
+                    featuresmarked: {
+                        features: Feature[] | undefined;
+                        readonly type: "featuresmarked";
+                        readonly target: any;
+                    };
+                    optionsvisibilitychange: {
+                        optionsVisible: boolean;
+                        readonly type: "optionsvisibilitychange";
+                        readonly target: any;
+                    };
+                    pick: {
+                        feature: Feature | undefined;
+                        readonly type: "pick";
+                        readonly target: any;
+                    };
+                    querychange: {
+                        query: string;
+                        readonly type: "querychange";
+                        readonly target: any;
+                    };
+                    response: {
+                        url: string;
+                        featureCollection: FeatureCollection;
+                        readonly type: "response";
+                        readonly target: any;
+                    };
+                    reversetoggle: {
+                        reverse: boolean;
+                        readonly type: "reversetoggle";
+                        readonly target: any;
+                    };
+                }[T]) => void): any;
+                listens(type: "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle"): boolean;
+                setOptions(options: OPTS): void;
+                setQuery(value: string, submit?: boolean): void;
+                clearMap(): void;
+                clearList(): void;
+                setReverseMode(value: boolean): void;
+                focus(): void;
+                blur(): void;
+                onRemove(): void;
+                _listeners: import("maplibre-gl").Listeners;
+                _oneTimeListeners: import("maplibre-gl").Listeners;
+                _eventedParent: Evented;
+                _eventedParentData: any | (() => any);
+                fire(event: {
+                    readonly type: string;
+                } | string, properties?: any): any;
+                setEventedParent(parent?: Evented | null, data?: any | (() => any)): any;
+            }, features: Feature[] | undefined): {
+                features: Feature[] | undefined;
+                readonly type: "featureslisted";
+                readonly target: {
+                    "__#1@#gc"?: GeocodingControlComponent;
+                    "__#1@#options": OPTS;
+                    onAddInt(map: Map): HTMLElement;
+                    on<T extends "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle">(type: T, listener: (ev: {
+                        select: {
+                            feature: Feature | undefined;
+                            readonly type: "select";
+                            readonly target: any;
+                        };
+                        featureslisted: {
+                            features: Feature[] | undefined;
+                            readonly type: "featureslisted";
+                            readonly target: any;
+                        };
+                        featuresmarked: {
+                            features: Feature[] | undefined;
+                            readonly type: "featuresmarked";
+                            readonly target: any;
+                        };
+                        optionsvisibilitychange: {
+                            optionsVisible: boolean;
+                            readonly type: "optionsvisibilitychange";
+                            readonly target: any;
+                        };
+                        pick: {
+                            feature: Feature | undefined;
+                            readonly type: "pick";
+                            readonly target: any;
+                        };
+                        querychange: {
+                            query: string;
+                            readonly type: "querychange";
+                            readonly target: any;
+                        };
+                        response: {
+                            url: string;
+                            featureCollection: FeatureCollection;
+                            readonly type: "response";
+                            readonly target: any;
+                        };
+                        reversetoggle: {
+                            reverse: boolean;
+                            readonly type: "reversetoggle";
+                            readonly target: any;
+                        };
+                    }[T]) => void): any;
+                    once<T extends "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle">(type: T, listener: (ev: {
+                        select: {
+                            feature: Feature | undefined;
+                            readonly type: "select";
+                            readonly target: any;
+                        };
+                        featureslisted: {
+                            features: Feature[] | undefined;
+                            readonly type: "featureslisted";
+                            readonly target: any;
+                        };
+                        featuresmarked: {
+                            features: Feature[] | undefined;
+                            readonly type: "featuresmarked";
+                            readonly target: any;
+                        };
+                        optionsvisibilitychange: {
+                            optionsVisible: boolean;
+                            readonly type: "optionsvisibilitychange";
+                            readonly target: any;
+                        };
+                        pick: {
+                            feature: Feature | undefined;
+                            readonly type: "pick";
+                            readonly target: any;
+                        };
+                        querychange: {
+                            query: string;
+                            readonly type: "querychange";
+                            readonly target: any;
+                        };
+                        response: {
+                            url: string;
+                            featureCollection: FeatureCollection;
+                            readonly type: "response";
+                            readonly target: any;
+                        };
+                        reversetoggle: {
+                            reverse: boolean;
+                            readonly type: "reversetoggle";
+                            readonly target: any;
+                        };
+                    }[T]) => void): any;
+                    off<T extends "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle">(type: T, listener: (ev: {
+                        select: {
+                            feature: Feature | undefined;
+                            readonly type: "select";
+                            readonly target: any;
+                        };
+                        featureslisted: {
+                            features: Feature[] | undefined;
+                            readonly type: "featureslisted";
+                            readonly target: any;
+                        };
+                        featuresmarked: {
+                            features: Feature[] | undefined;
+                            readonly type: "featuresmarked";
+                            readonly target: any;
+                        };
+                        optionsvisibilitychange: {
+                            optionsVisible: boolean;
+                            readonly type: "optionsvisibilitychange";
+                            readonly target: any;
+                        };
+                        pick: {
+                            feature: Feature | undefined;
+                            readonly type: "pick";
+                            readonly target: any;
+                        };
+                        querychange: {
+                            query: string;
+                            readonly type: "querychange";
+                            readonly target: any;
+                        };
+                        response: {
+                            url: string;
+                            featureCollection: FeatureCollection;
+                            readonly type: "response";
+                            readonly target: any;
+                        };
+                        reversetoggle: {
+                            reverse: boolean;
+                            readonly type: "reversetoggle";
+                            readonly target: any;
+                        };
+                    }[T]) => void): any;
+                    listens(type: "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle"): boolean;
+                    setOptions(options: OPTS): void;
+                    setQuery(value: string, submit?: boolean): void;
+                    clearMap(): void;
+                    clearList(): void;
+                    setReverseMode(value: boolean): void;
+                    focus(): void;
+                    blur(): void;
+                    onRemove(): void;
+                    _listeners: import("maplibre-gl").Listeners;
+                    _oneTimeListeners: import("maplibre-gl").Listeners;
+                    _eventedParent: Evented;
+                    _eventedParentData: any | (() => any);
+                    fire(event: {
+                        readonly type: string;
+                    } | string, properties?: any): any;
+                    setEventedParent(parent?: Evented | null, data?: any | (() => any)): any;
+                };
+            };
+        };
+        FeaturesMarkedEvent: {
+            new (target: {
+                "__#1@#gc"?: GeocodingControlComponent;
+                "__#1@#options": OPTS;
+                onAddInt(map: Map): HTMLElement;
+                on<T extends "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle">(type: T, listener: (ev: {
+                    select: {
+                        feature: Feature | undefined;
+                        readonly type: "select";
+                        readonly target: any;
+                    };
+                    featureslisted: {
+                        features: Feature[] | undefined;
+                        readonly type: "featureslisted";
+                        readonly target: any;
+                    };
+                    featuresmarked: {
+                        features: Feature[] | undefined;
+                        readonly type: "featuresmarked";
+                        readonly target: any;
+                    };
+                    optionsvisibilitychange: {
+                        optionsVisible: boolean;
+                        readonly type: "optionsvisibilitychange";
+                        readonly target: any;
+                    };
+                    pick: {
+                        feature: Feature | undefined;
+                        readonly type: "pick";
+                        readonly target: any;
+                    };
+                    querychange: {
+                        query: string;
+                        readonly type: "querychange";
+                        readonly target: any;
+                    };
+                    response: {
+                        url: string;
+                        featureCollection: FeatureCollection;
+                        readonly type: "response";
+                        readonly target: any;
+                    };
+                    reversetoggle: {
+                        reverse: boolean;
+                        readonly type: "reversetoggle";
+                        readonly target: any;
+                    };
+                }[T]) => void): any;
+                once<T extends "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle">(type: T, listener: (ev: {
+                    select: {
+                        feature: Feature | undefined;
+                        readonly type: "select";
+                        readonly target: any;
+                    };
+                    featureslisted: {
+                        features: Feature[] | undefined;
+                        readonly type: "featureslisted";
+                        readonly target: any;
+                    };
+                    featuresmarked: {
+                        features: Feature[] | undefined;
+                        readonly type: "featuresmarked";
+                        readonly target: any;
+                    };
+                    optionsvisibilitychange: {
+                        optionsVisible: boolean;
+                        readonly type: "optionsvisibilitychange";
+                        readonly target: any;
+                    };
+                    pick: {
+                        feature: Feature | undefined;
+                        readonly type: "pick";
+                        readonly target: any;
+                    };
+                    querychange: {
+                        query: string;
+                        readonly type: "querychange";
+                        readonly target: any;
+                    };
+                    response: {
+                        url: string;
+                        featureCollection: FeatureCollection;
+                        readonly type: "response";
+                        readonly target: any;
+                    };
+                    reversetoggle: {
+                        reverse: boolean;
+                        readonly type: "reversetoggle";
+                        readonly target: any;
+                    };
+                }[T]) => void): any;
+                off<T extends "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle">(type: T, listener: (ev: {
+                    select: {
+                        feature: Feature | undefined;
+                        readonly type: "select";
+                        readonly target: any;
+                    };
+                    featureslisted: {
+                        features: Feature[] | undefined;
+                        readonly type: "featureslisted";
+                        readonly target: any;
+                    };
+                    featuresmarked: {
+                        features: Feature[] | undefined;
+                        readonly type: "featuresmarked";
+                        readonly target: any;
+                    };
+                    optionsvisibilitychange: {
+                        optionsVisible: boolean;
+                        readonly type: "optionsvisibilitychange";
+                        readonly target: any;
+                    };
+                    pick: {
+                        feature: Feature | undefined;
+                        readonly type: "pick";
+                        readonly target: any;
+                    };
+                    querychange: {
+                        query: string;
+                        readonly type: "querychange";
+                        readonly target: any;
+                    };
+                    response: {
+                        url: string;
+                        featureCollection: FeatureCollection;
+                        readonly type: "response";
+                        readonly target: any;
+                    };
+                    reversetoggle: {
+                        reverse: boolean;
+                        readonly type: "reversetoggle";
+                        readonly target: any;
+                    };
+                }[T]) => void): any;
+                listens(type: "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle"): boolean;
+                setOptions(options: OPTS): void;
+                setQuery(value: string, submit?: boolean): void;
+                clearMap(): void;
+                clearList(): void;
+                setReverseMode(value: boolean): void;
+                focus(): void;
+                blur(): void;
+                onRemove(): void;
+                _listeners: import("maplibre-gl").Listeners;
+                _oneTimeListeners: import("maplibre-gl").Listeners;
+                _eventedParent: Evented;
+                _eventedParentData: any | (() => any);
+                fire(event: {
+                    readonly type: string;
+                } | string, properties?: any): any;
+                setEventedParent(parent?: Evented | null, data?: any | (() => any)): any;
+            }, features: Feature[] | undefined): {
+                features: Feature[] | undefined;
+                readonly type: "featuresmarked";
+                readonly target: {
+                    "__#1@#gc"?: GeocodingControlComponent;
+                    "__#1@#options": OPTS;
+                    onAddInt(map: Map): HTMLElement;
+                    on<T extends "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle">(type: T, listener: (ev: {
+                        select: {
+                            feature: Feature | undefined;
+                            readonly type: "select";
+                            readonly target: any;
+                        };
+                        featureslisted: {
+                            features: Feature[] | undefined;
+                            readonly type: "featureslisted";
+                            readonly target: any;
+                        };
+                        featuresmarked: {
+                            features: Feature[] | undefined;
+                            readonly type: "featuresmarked";
+                            readonly target: any;
+                        };
+                        optionsvisibilitychange: {
+                            optionsVisible: boolean;
+                            readonly type: "optionsvisibilitychange";
+                            readonly target: any;
+                        };
+                        pick: {
+                            feature: Feature | undefined;
+                            readonly type: "pick";
+                            readonly target: any;
+                        };
+                        querychange: {
+                            query: string;
+                            readonly type: "querychange";
+                            readonly target: any;
+                        };
+                        response: {
+                            url: string;
+                            featureCollection: FeatureCollection;
+                            readonly type: "response";
+                            readonly target: any;
+                        };
+                        reversetoggle: {
+                            reverse: boolean;
+                            readonly type: "reversetoggle";
+                            readonly target: any;
+                        };
+                    }[T]) => void): any;
+                    once<T extends "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle">(type: T, listener: (ev: {
+                        select: {
+                            feature: Feature | undefined;
+                            readonly type: "select";
+                            readonly target: any;
+                        };
+                        featureslisted: {
+                            features: Feature[] | undefined;
+                            readonly type: "featureslisted";
+                            readonly target: any;
+                        };
+                        featuresmarked: {
+                            features: Feature[] | undefined;
+                            readonly type: "featuresmarked";
+                            readonly target: any;
+                        };
+                        optionsvisibilitychange: {
+                            optionsVisible: boolean;
+                            readonly type: "optionsvisibilitychange";
+                            readonly target: any;
+                        };
+                        pick: {
+                            feature: Feature | undefined;
+                            readonly type: "pick";
+                            readonly target: any;
+                        };
+                        querychange: {
+                            query: string;
+                            readonly type: "querychange";
+                            readonly target: any;
+                        };
+                        response: {
+                            url: string;
+                            featureCollection: FeatureCollection;
+                            readonly type: "response";
+                            readonly target: any;
+                        };
+                        reversetoggle: {
+                            reverse: boolean;
+                            readonly type: "reversetoggle";
+                            readonly target: any;
+                        };
+                    }[T]) => void): any;
+                    off<T extends "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle">(type: T, listener: (ev: {
+                        select: {
+                            feature: Feature | undefined;
+                            readonly type: "select";
+                            readonly target: any;
+                        };
+                        featureslisted: {
+                            features: Feature[] | undefined;
+                            readonly type: "featureslisted";
+                            readonly target: any;
+                        };
+                        featuresmarked: {
+                            features: Feature[] | undefined;
+                            readonly type: "featuresmarked";
+                            readonly target: any;
+                        };
+                        optionsvisibilitychange: {
+                            optionsVisible: boolean;
+                            readonly type: "optionsvisibilitychange";
+                            readonly target: any;
+                        };
+                        pick: {
+                            feature: Feature | undefined;
+                            readonly type: "pick";
+                            readonly target: any;
+                        };
+                        querychange: {
+                            query: string;
+                            readonly type: "querychange";
+                            readonly target: any;
+                        };
+                        response: {
+                            url: string;
+                            featureCollection: FeatureCollection;
+                            readonly type: "response";
+                            readonly target: any;
+                        };
+                        reversetoggle: {
+                            reverse: boolean;
+                            readonly type: "reversetoggle";
+                            readonly target: any;
+                        };
+                    }[T]) => void): any;
+                    listens(type: "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle"): boolean;
+                    setOptions(options: OPTS): void;
+                    setQuery(value: string, submit?: boolean): void;
+                    clearMap(): void;
+                    clearList(): void;
+                    setReverseMode(value: boolean): void;
+                    focus(): void;
+                    blur(): void;
+                    onRemove(): void;
+                    _listeners: import("maplibre-gl").Listeners;
+                    _oneTimeListeners: import("maplibre-gl").Listeners;
+                    _eventedParent: Evented;
+                    _eventedParentData: any | (() => any);
+                    fire(event: {
+                        readonly type: string;
+                    } | string, properties?: any): any;
+                    setEventedParent(parent?: Evented | null, data?: any | (() => any)): any;
+                };
+            };
+        };
+        OptionsVisibilityChangeEvent: {
+            new (target: {
+                "__#1@#gc"?: GeocodingControlComponent;
+                "__#1@#options": OPTS;
+                onAddInt(map: Map): HTMLElement;
+                on<T extends "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle">(type: T, listener: (ev: {
+                    select: {
+                        feature: Feature | undefined;
+                        readonly type: "select";
+                        readonly target: any;
+                    };
+                    featureslisted: {
+                        features: Feature[] | undefined;
+                        readonly type: "featureslisted";
+                        readonly target: any;
+                    };
+                    featuresmarked: {
+                        features: Feature[] | undefined;
+                        readonly type: "featuresmarked";
+                        readonly target: any;
+                    };
+                    optionsvisibilitychange: {
+                        optionsVisible: boolean;
+                        readonly type: "optionsvisibilitychange";
+                        readonly target: any;
+                    };
+                    pick: {
+                        feature: Feature | undefined;
+                        readonly type: "pick";
+                        readonly target: any;
+                    };
+                    querychange: {
+                        query: string;
+                        readonly type: "querychange";
+                        readonly target: any;
+                    };
+                    response: {
+                        url: string;
+                        featureCollection: FeatureCollection;
+                        readonly type: "response";
+                        readonly target: any;
+                    };
+                    reversetoggle: {
+                        reverse: boolean;
+                        readonly type: "reversetoggle";
+                        readonly target: any;
+                    };
+                }[T]) => void): any;
+                once<T extends "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle">(type: T, listener: (ev: {
+                    select: {
+                        feature: Feature | undefined;
+                        readonly type: "select";
+                        readonly target: any;
+                    };
+                    featureslisted: {
+                        features: Feature[] | undefined;
+                        readonly type: "featureslisted";
+                        readonly target: any;
+                    };
+                    featuresmarked: {
+                        features: Feature[] | undefined;
+                        readonly type: "featuresmarked";
+                        readonly target: any;
+                    };
+                    optionsvisibilitychange: {
+                        optionsVisible: boolean;
+                        readonly type: "optionsvisibilitychange";
+                        readonly target: any;
+                    };
+                    pick: {
+                        feature: Feature | undefined;
+                        readonly type: "pick";
+                        readonly target: any;
+                    };
+                    querychange: {
+                        query: string;
+                        readonly type: "querychange";
+                        readonly target: any;
+                    };
+                    response: {
+                        url: string;
+                        featureCollection: FeatureCollection;
+                        readonly type: "response";
+                        readonly target: any;
+                    };
+                    reversetoggle: {
+                        reverse: boolean;
+                        readonly type: "reversetoggle";
+                        readonly target: any;
+                    };
+                }[T]) => void): any;
+                off<T extends "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle">(type: T, listener: (ev: {
+                    select: {
+                        feature: Feature | undefined;
+                        readonly type: "select";
+                        readonly target: any;
+                    };
+                    featureslisted: {
+                        features: Feature[] | undefined;
+                        readonly type: "featureslisted";
+                        readonly target: any;
+                    };
+                    featuresmarked: {
+                        features: Feature[] | undefined;
+                        readonly type: "featuresmarked";
+                        readonly target: any;
+                    };
+                    optionsvisibilitychange: {
+                        optionsVisible: boolean;
+                        readonly type: "optionsvisibilitychange";
+                        readonly target: any;
+                    };
+                    pick: {
+                        feature: Feature | undefined;
+                        readonly type: "pick";
+                        readonly target: any;
+                    };
+                    querychange: {
+                        query: string;
+                        readonly type: "querychange";
+                        readonly target: any;
+                    };
+                    response: {
+                        url: string;
+                        featureCollection: FeatureCollection;
+                        readonly type: "response";
+                        readonly target: any;
+                    };
+                    reversetoggle: {
+                        reverse: boolean;
+                        readonly type: "reversetoggle";
+                        readonly target: any;
+                    };
+                }[T]) => void): any;
+                listens(type: "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle"): boolean;
+                setOptions(options: OPTS): void;
+                setQuery(value: string, submit?: boolean): void;
+                clearMap(): void;
+                clearList(): void;
+                setReverseMode(value: boolean): void;
+                focus(): void;
+                blur(): void;
+                onRemove(): void;
+                _listeners: import("maplibre-gl").Listeners;
+                _oneTimeListeners: import("maplibre-gl").Listeners;
+                _eventedParent: Evented;
+                _eventedParentData: any | (() => any);
+                fire(event: {
+                    readonly type: string;
+                } | string, properties?: any): any;
+                setEventedParent(parent?: Evented | null, data?: any | (() => any)): any;
+            }, optionsVisible: boolean): {
+                optionsVisible: boolean;
+                readonly type: "optionsvisibilitychange";
+                readonly target: {
+                    "__#1@#gc"?: GeocodingControlComponent;
+                    "__#1@#options": OPTS;
+                    onAddInt(map: Map): HTMLElement;
+                    on<T extends "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle">(type: T, listener: (ev: {
+                        select: {
+                            feature: Feature | undefined;
+                            readonly type: "select";
+                            readonly target: any;
+                        };
+                        featureslisted: {
+                            features: Feature[] | undefined;
+                            readonly type: "featureslisted";
+                            readonly target: any;
+                        };
+                        featuresmarked: {
+                            features: Feature[] | undefined;
+                            readonly type: "featuresmarked";
+                            readonly target: any;
+                        };
+                        optionsvisibilitychange: {
+                            optionsVisible: boolean;
+                            readonly type: "optionsvisibilitychange";
+                            readonly target: any;
+                        };
+                        pick: {
+                            feature: Feature | undefined;
+                            readonly type: "pick";
+                            readonly target: any;
+                        };
+                        querychange: {
+                            query: string;
+                            readonly type: "querychange";
+                            readonly target: any;
+                        };
+                        response: {
+                            url: string;
+                            featureCollection: FeatureCollection;
+                            readonly type: "response";
+                            readonly target: any;
+                        };
+                        reversetoggle: {
+                            reverse: boolean;
+                            readonly type: "reversetoggle";
+                            readonly target: any;
+                        };
+                    }[T]) => void): any;
+                    once<T extends "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle">(type: T, listener: (ev: {
+                        select: {
+                            feature: Feature | undefined;
+                            readonly type: "select";
+                            readonly target: any;
+                        };
+                        featureslisted: {
+                            features: Feature[] | undefined;
+                            readonly type: "featureslisted";
+                            readonly target: any;
+                        };
+                        featuresmarked: {
+                            features: Feature[] | undefined;
+                            readonly type: "featuresmarked";
+                            readonly target: any;
+                        };
+                        optionsvisibilitychange: {
+                            optionsVisible: boolean;
+                            readonly type: "optionsvisibilitychange";
+                            readonly target: any;
+                        };
+                        pick: {
+                            feature: Feature | undefined;
+                            readonly type: "pick";
+                            readonly target: any;
+                        };
+                        querychange: {
+                            query: string;
+                            readonly type: "querychange";
+                            readonly target: any;
+                        };
+                        response: {
+                            url: string;
+                            featureCollection: FeatureCollection;
+                            readonly type: "response";
+                            readonly target: any;
+                        };
+                        reversetoggle: {
+                            reverse: boolean;
+                            readonly type: "reversetoggle";
+                            readonly target: any;
+                        };
+                    }[T]) => void): any;
+                    off<T extends "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle">(type: T, listener: (ev: {
+                        select: {
+                            feature: Feature | undefined;
+                            readonly type: "select";
+                            readonly target: any;
+                        };
+                        featureslisted: {
+                            features: Feature[] | undefined;
+                            readonly type: "featureslisted";
+                            readonly target: any;
+                        };
+                        featuresmarked: {
+                            features: Feature[] | undefined;
+                            readonly type: "featuresmarked";
+                            readonly target: any;
+                        };
+                        optionsvisibilitychange: {
+                            optionsVisible: boolean;
+                            readonly type: "optionsvisibilitychange";
+                            readonly target: any;
+                        };
+                        pick: {
+                            feature: Feature | undefined;
+                            readonly type: "pick";
+                            readonly target: any;
+                        };
+                        querychange: {
+                            query: string;
+                            readonly type: "querychange";
+                            readonly target: any;
+                        };
+                        response: {
+                            url: string;
+                            featureCollection: FeatureCollection;
+                            readonly type: "response";
+                            readonly target: any;
+                        };
+                        reversetoggle: {
+                            reverse: boolean;
+                            readonly type: "reversetoggle";
+                            readonly target: any;
+                        };
+                    }[T]) => void): any;
+                    listens(type: "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle"): boolean;
+                    setOptions(options: OPTS): void;
+                    setQuery(value: string, submit?: boolean): void;
+                    clearMap(): void;
+                    clearList(): void;
+                    setReverseMode(value: boolean): void;
+                    focus(): void;
+                    blur(): void;
+                    onRemove(): void;
+                    _listeners: import("maplibre-gl").Listeners;
+                    _oneTimeListeners: import("maplibre-gl").Listeners;
+                    _eventedParent: Evented;
+                    _eventedParentData: any | (() => any);
+                    fire(event: {
+                        readonly type: string;
+                    } | string, properties?: any): any;
+                    setEventedParent(parent?: Evented | null, data?: any | (() => any)): any;
+                };
+            };
+        };
+        PickEvent: {
+            new (target: {
+                "__#1@#gc"?: GeocodingControlComponent;
+                "__#1@#options": OPTS;
+                onAddInt(map: Map): HTMLElement;
+                on<T extends "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle">(type: T, listener: (ev: {
+                    select: {
+                        feature: Feature | undefined;
+                        readonly type: "select";
+                        readonly target: any;
+                    };
+                    featureslisted: {
+                        features: Feature[] | undefined;
+                        readonly type: "featureslisted";
+                        readonly target: any;
+                    };
+                    featuresmarked: {
+                        features: Feature[] | undefined;
+                        readonly type: "featuresmarked";
+                        readonly target: any;
+                    };
+                    optionsvisibilitychange: {
+                        optionsVisible: boolean;
+                        readonly type: "optionsvisibilitychange";
+                        readonly target: any;
+                    };
+                    pick: {
+                        feature: Feature | undefined;
+                        readonly type: "pick";
+                        readonly target: any;
+                    };
+                    querychange: {
+                        query: string;
+                        readonly type: "querychange";
+                        readonly target: any;
+                    };
+                    response: {
+                        url: string;
+                        featureCollection: FeatureCollection;
+                        readonly type: "response";
+                        readonly target: any;
+                    };
+                    reversetoggle: {
+                        reverse: boolean;
+                        readonly type: "reversetoggle";
+                        readonly target: any;
+                    };
+                }[T]) => void): any;
+                once<T extends "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle">(type: T, listener: (ev: {
+                    select: {
+                        feature: Feature | undefined;
+                        readonly type: "select";
+                        readonly target: any;
+                    };
+                    featureslisted: {
+                        features: Feature[] | undefined;
+                        readonly type: "featureslisted";
+                        readonly target: any;
+                    };
+                    featuresmarked: {
+                        features: Feature[] | undefined;
+                        readonly type: "featuresmarked";
+                        readonly target: any;
+                    };
+                    optionsvisibilitychange: {
+                        optionsVisible: boolean;
+                        readonly type: "optionsvisibilitychange";
+                        readonly target: any;
+                    };
+                    pick: {
+                        feature: Feature | undefined;
+                        readonly type: "pick";
+                        readonly target: any;
+                    };
+                    querychange: {
+                        query: string;
+                        readonly type: "querychange";
+                        readonly target: any;
+                    };
+                    response: {
+                        url: string;
+                        featureCollection: FeatureCollection;
+                        readonly type: "response";
+                        readonly target: any;
+                    };
+                    reversetoggle: {
+                        reverse: boolean;
+                        readonly type: "reversetoggle";
+                        readonly target: any;
+                    };
+                }[T]) => void): any;
+                off<T extends "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle">(type: T, listener: (ev: {
+                    select: {
+                        feature: Feature | undefined;
+                        readonly type: "select";
+                        readonly target: any;
+                    };
+                    featureslisted: {
+                        features: Feature[] | undefined;
+                        readonly type: "featureslisted";
+                        readonly target: any;
+                    };
+                    featuresmarked: {
+                        features: Feature[] | undefined;
+                        readonly type: "featuresmarked";
+                        readonly target: any;
+                    };
+                    optionsvisibilitychange: {
+                        optionsVisible: boolean;
+                        readonly type: "optionsvisibilitychange";
+                        readonly target: any;
+                    };
+                    pick: {
+                        feature: Feature | undefined;
+                        readonly type: "pick";
+                        readonly target: any;
+                    };
+                    querychange: {
+                        query: string;
+                        readonly type: "querychange";
+                        readonly target: any;
+                    };
+                    response: {
+                        url: string;
+                        featureCollection: FeatureCollection;
+                        readonly type: "response";
+                        readonly target: any;
+                    };
+                    reversetoggle: {
+                        reverse: boolean;
+                        readonly type: "reversetoggle";
+                        readonly target: any;
+                    };
+                }[T]) => void): any;
+                listens(type: "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle"): boolean;
+                setOptions(options: OPTS): void;
+                setQuery(value: string, submit?: boolean): void;
+                clearMap(): void;
+                clearList(): void;
+                setReverseMode(value: boolean): void;
+                focus(): void;
+                blur(): void;
+                onRemove(): void;
+                _listeners: import("maplibre-gl").Listeners;
+                _oneTimeListeners: import("maplibre-gl").Listeners;
+                _eventedParent: Evented;
+                _eventedParentData: any | (() => any);
+                fire(event: {
+                    readonly type: string;
+                } | string, properties?: any): any;
+                setEventedParent(parent?: Evented | null, data?: any | (() => any)): any;
+            }, feature: Feature | undefined): {
+                feature: Feature | undefined;
+                readonly type: "pick";
+                readonly target: {
+                    "__#1@#gc"?: GeocodingControlComponent;
+                    "__#1@#options": OPTS;
+                    onAddInt(map: Map): HTMLElement;
+                    on<T extends "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle">(type: T, listener: (ev: {
+                        select: {
+                            feature: Feature | undefined;
+                            readonly type: "select";
+                            readonly target: any;
+                        };
+                        featureslisted: {
+                            features: Feature[] | undefined;
+                            readonly type: "featureslisted";
+                            readonly target: any;
+                        };
+                        featuresmarked: {
+                            features: Feature[] | undefined;
+                            readonly type: "featuresmarked";
+                            readonly target: any;
+                        };
+                        optionsvisibilitychange: {
+                            optionsVisible: boolean;
+                            readonly type: "optionsvisibilitychange";
+                            readonly target: any;
+                        };
+                        pick: {
+                            feature: Feature | undefined;
+                            readonly type: "pick";
+                            readonly target: any;
+                        };
+                        querychange: {
+                            query: string;
+                            readonly type: "querychange";
+                            readonly target: any;
+                        };
+                        response: {
+                            url: string;
+                            featureCollection: FeatureCollection;
+                            readonly type: "response";
+                            readonly target: any;
+                        };
+                        reversetoggle: {
+                            reverse: boolean;
+                            readonly type: "reversetoggle";
+                            readonly target: any;
+                        };
+                    }[T]) => void): any;
+                    once<T extends "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle">(type: T, listener: (ev: {
+                        select: {
+                            feature: Feature | undefined;
+                            readonly type: "select";
+                            readonly target: any;
+                        };
+                        featureslisted: {
+                            features: Feature[] | undefined;
+                            readonly type: "featureslisted";
+                            readonly target: any;
+                        };
+                        featuresmarked: {
+                            features: Feature[] | undefined;
+                            readonly type: "featuresmarked";
+                            readonly target: any;
+                        };
+                        optionsvisibilitychange: {
+                            optionsVisible: boolean;
+                            readonly type: "optionsvisibilitychange";
+                            readonly target: any;
+                        };
+                        pick: {
+                            feature: Feature | undefined;
+                            readonly type: "pick";
+                            readonly target: any;
+                        };
+                        querychange: {
+                            query: string;
+                            readonly type: "querychange";
+                            readonly target: any;
+                        };
+                        response: {
+                            url: string;
+                            featureCollection: FeatureCollection;
+                            readonly type: "response";
+                            readonly target: any;
+                        };
+                        reversetoggle: {
+                            reverse: boolean;
+                            readonly type: "reversetoggle";
+                            readonly target: any;
+                        };
+                    }[T]) => void): any;
+                    off<T extends "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle">(type: T, listener: (ev: {
+                        select: {
+                            feature: Feature | undefined;
+                            readonly type: "select";
+                            readonly target: any;
+                        };
+                        featureslisted: {
+                            features: Feature[] | undefined;
+                            readonly type: "featureslisted";
+                            readonly target: any;
+                        };
+                        featuresmarked: {
+                            features: Feature[] | undefined;
+                            readonly type: "featuresmarked";
+                            readonly target: any;
+                        };
+                        optionsvisibilitychange: {
+                            optionsVisible: boolean;
+                            readonly type: "optionsvisibilitychange";
+                            readonly target: any;
+                        };
+                        pick: {
+                            feature: Feature | undefined;
+                            readonly type: "pick";
+                            readonly target: any;
+                        };
+                        querychange: {
+                            query: string;
+                            readonly type: "querychange";
+                            readonly target: any;
+                        };
+                        response: {
+                            url: string;
+                            featureCollection: FeatureCollection;
+                            readonly type: "response";
+                            readonly target: any;
+                        };
+                        reversetoggle: {
+                            reverse: boolean;
+                            readonly type: "reversetoggle";
+                            readonly target: any;
+                        };
+                    }[T]) => void): any;
+                    listens(type: "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle"): boolean;
+                    setOptions(options: OPTS): void;
+                    setQuery(value: string, submit?: boolean): void;
+                    clearMap(): void;
+                    clearList(): void;
+                    setReverseMode(value: boolean): void;
+                    focus(): void;
+                    blur(): void;
+                    onRemove(): void;
+                    _listeners: import("maplibre-gl").Listeners;
+                    _oneTimeListeners: import("maplibre-gl").Listeners;
+                    _eventedParent: Evented;
+                    _eventedParentData: any | (() => any);
+                    fire(event: {
+                        readonly type: string;
+                    } | string, properties?: any): any;
+                    setEventedParent(parent?: Evented | null, data?: any | (() => any)): any;
+                };
+            };
+        };
+        QueryChangeEvent: {
+            new (target: {
+                "__#1@#gc"?: GeocodingControlComponent;
+                "__#1@#options": OPTS;
+                onAddInt(map: Map): HTMLElement;
+                on<T extends "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle">(type: T, listener: (ev: {
+                    select: {
+                        feature: Feature | undefined;
+                        readonly type: "select";
+                        readonly target: any;
+                    };
+                    featureslisted: {
+                        features: Feature[] | undefined;
+                        readonly type: "featureslisted";
+                        readonly target: any;
+                    };
+                    featuresmarked: {
+                        features: Feature[] | undefined;
+                        readonly type: "featuresmarked";
+                        readonly target: any;
+                    };
+                    optionsvisibilitychange: {
+                        optionsVisible: boolean;
+                        readonly type: "optionsvisibilitychange";
+                        readonly target: any;
+                    };
+                    pick: {
+                        feature: Feature | undefined;
+                        readonly type: "pick";
+                        readonly target: any;
+                    };
+                    querychange: {
+                        query: string;
+                        readonly type: "querychange";
+                        readonly target: any;
+                    };
+                    response: {
+                        url: string;
+                        featureCollection: FeatureCollection;
+                        readonly type: "response";
+                        readonly target: any;
+                    };
+                    reversetoggle: {
+                        reverse: boolean;
+                        readonly type: "reversetoggle";
+                        readonly target: any;
+                    };
+                }[T]) => void): any;
+                once<T extends "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle">(type: T, listener: (ev: {
+                    select: {
+                        feature: Feature | undefined;
+                        readonly type: "select";
+                        readonly target: any;
+                    };
+                    featureslisted: {
+                        features: Feature[] | undefined;
+                        readonly type: "featureslisted";
+                        readonly target: any;
+                    };
+                    featuresmarked: {
+                        features: Feature[] | undefined;
+                        readonly type: "featuresmarked";
+                        readonly target: any;
+                    };
+                    optionsvisibilitychange: {
+                        optionsVisible: boolean;
+                        readonly type: "optionsvisibilitychange";
+                        readonly target: any;
+                    };
+                    pick: {
+                        feature: Feature | undefined;
+                        readonly type: "pick";
+                        readonly target: any;
+                    };
+                    querychange: {
+                        query: string;
+                        readonly type: "querychange";
+                        readonly target: any;
+                    };
+                    response: {
+                        url: string;
+                        featureCollection: FeatureCollection;
+                        readonly type: "response";
+                        readonly target: any;
+                    };
+                    reversetoggle: {
+                        reverse: boolean;
+                        readonly type: "reversetoggle";
+                        readonly target: any;
+                    };
+                }[T]) => void): any;
+                off<T extends "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle">(type: T, listener: (ev: {
+                    select: {
+                        feature: Feature | undefined;
+                        readonly type: "select";
+                        readonly target: any;
+                    };
+                    featureslisted: {
+                        features: Feature[] | undefined;
+                        readonly type: "featureslisted";
+                        readonly target: any;
+                    };
+                    featuresmarked: {
+                        features: Feature[] | undefined;
+                        readonly type: "featuresmarked";
+                        readonly target: any;
+                    };
+                    optionsvisibilitychange: {
+                        optionsVisible: boolean;
+                        readonly type: "optionsvisibilitychange";
+                        readonly target: any;
+                    };
+                    pick: {
+                        feature: Feature | undefined;
+                        readonly type: "pick";
+                        readonly target: any;
+                    };
+                    querychange: {
+                        query: string;
+                        readonly type: "querychange";
+                        readonly target: any;
+                    };
+                    response: {
+                        url: string;
+                        featureCollection: FeatureCollection;
+                        readonly type: "response";
+                        readonly target: any;
+                    };
+                    reversetoggle: {
+                        reverse: boolean;
+                        readonly type: "reversetoggle";
+                        readonly target: any;
+                    };
+                }[T]) => void): any;
+                listens(type: "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle"): boolean;
+                setOptions(options: OPTS): void;
+                setQuery(value: string, submit?: boolean): void;
+                clearMap(): void;
+                clearList(): void;
+                setReverseMode(value: boolean): void;
+                focus(): void;
+                blur(): void;
+                onRemove(): void;
+                _listeners: import("maplibre-gl").Listeners;
+                _oneTimeListeners: import("maplibre-gl").Listeners;
+                _eventedParent: Evented;
+                _eventedParentData: any | (() => any);
+                fire(event: {
+                    readonly type: string;
+                } | string, properties?: any): any;
+                setEventedParent(parent?: Evented | null, data?: any | (() => any)): any;
+            }, query: string): {
+                query: string;
+                readonly type: "querychange";
+                readonly target: {
+                    "__#1@#gc"?: GeocodingControlComponent;
+                    "__#1@#options": OPTS;
+                    onAddInt(map: Map): HTMLElement;
+                    on<T extends "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle">(type: T, listener: (ev: {
+                        select: {
+                            feature: Feature | undefined;
+                            readonly type: "select";
+                            readonly target: any;
+                        };
+                        featureslisted: {
+                            features: Feature[] | undefined;
+                            readonly type: "featureslisted";
+                            readonly target: any;
+                        };
+                        featuresmarked: {
+                            features: Feature[] | undefined;
+                            readonly type: "featuresmarked";
+                            readonly target: any;
+                        };
+                        optionsvisibilitychange: {
+                            optionsVisible: boolean;
+                            readonly type: "optionsvisibilitychange";
+                            readonly target: any;
+                        };
+                        pick: {
+                            feature: Feature | undefined;
+                            readonly type: "pick";
+                            readonly target: any;
+                        };
+                        querychange: {
+                            query: string;
+                            readonly type: "querychange";
+                            readonly target: any;
+                        };
+                        response: {
+                            url: string;
+                            featureCollection: FeatureCollection;
+                            readonly type: "response";
+                            readonly target: any;
+                        };
+                        reversetoggle: {
+                            reverse: boolean;
+                            readonly type: "reversetoggle";
+                            readonly target: any;
+                        };
+                    }[T]) => void): any;
+                    once<T extends "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle">(type: T, listener: (ev: {
+                        select: {
+                            feature: Feature | undefined;
+                            readonly type: "select";
+                            readonly target: any;
+                        };
+                        featureslisted: {
+                            features: Feature[] | undefined;
+                            readonly type: "featureslisted";
+                            readonly target: any;
+                        };
+                        featuresmarked: {
+                            features: Feature[] | undefined;
+                            readonly type: "featuresmarked";
+                            readonly target: any;
+                        };
+                        optionsvisibilitychange: {
+                            optionsVisible: boolean;
+                            readonly type: "optionsvisibilitychange";
+                            readonly target: any;
+                        };
+                        pick: {
+                            feature: Feature | undefined;
+                            readonly type: "pick";
+                            readonly target: any;
+                        };
+                        querychange: {
+                            query: string;
+                            readonly type: "querychange";
+                            readonly target: any;
+                        };
+                        response: {
+                            url: string;
+                            featureCollection: FeatureCollection;
+                            readonly type: "response";
+                            readonly target: any;
+                        };
+                        reversetoggle: {
+                            reverse: boolean;
+                            readonly type: "reversetoggle";
+                            readonly target: any;
+                        };
+                    }[T]) => void): any;
+                    off<T extends "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle">(type: T, listener: (ev: {
+                        select: {
+                            feature: Feature | undefined;
+                            readonly type: "select";
+                            readonly target: any;
+                        };
+                        featureslisted: {
+                            features: Feature[] | undefined;
+                            readonly type: "featureslisted";
+                            readonly target: any;
+                        };
+                        featuresmarked: {
+                            features: Feature[] | undefined;
+                            readonly type: "featuresmarked";
+                            readonly target: any;
+                        };
+                        optionsvisibilitychange: {
+                            optionsVisible: boolean;
+                            readonly type: "optionsvisibilitychange";
+                            readonly target: any;
+                        };
+                        pick: {
+                            feature: Feature | undefined;
+                            readonly type: "pick";
+                            readonly target: any;
+                        };
+                        querychange: {
+                            query: string;
+                            readonly type: "querychange";
+                            readonly target: any;
+                        };
+                        response: {
+                            url: string;
+                            featureCollection: FeatureCollection;
+                            readonly type: "response";
+                            readonly target: any;
+                        };
+                        reversetoggle: {
+                            reverse: boolean;
+                            readonly type: "reversetoggle";
+                            readonly target: any;
+                        };
+                    }[T]) => void): any;
+                    listens(type: "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle"): boolean;
+                    setOptions(options: OPTS): void;
+                    setQuery(value: string, submit?: boolean): void;
+                    clearMap(): void;
+                    clearList(): void;
+                    setReverseMode(value: boolean): void;
+                    focus(): void;
+                    blur(): void;
+                    onRemove(): void;
+                    _listeners: import("maplibre-gl").Listeners;
+                    _oneTimeListeners: import("maplibre-gl").Listeners;
+                    _eventedParent: Evented;
+                    _eventedParentData: any | (() => any);
+                    fire(event: {
+                        readonly type: string;
+                    } | string, properties?: any): any;
+                    setEventedParent(parent?: Evented | null, data?: any | (() => any)): any;
+                };
+            };
+        };
+        ResponseEvent: {
+            new (target: {
+                "__#1@#gc"?: GeocodingControlComponent;
+                "__#1@#options": OPTS;
+                onAddInt(map: Map): HTMLElement;
+                on<T extends "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle">(type: T, listener: (ev: {
+                    select: {
+                        feature: Feature | undefined;
+                        readonly type: "select";
+                        readonly target: any;
+                    };
+                    featureslisted: {
+                        features: Feature[] | undefined;
+                        readonly type: "featureslisted";
+                        readonly target: any;
+                    };
+                    featuresmarked: {
+                        features: Feature[] | undefined;
+                        readonly type: "featuresmarked";
+                        readonly target: any;
+                    };
+                    optionsvisibilitychange: {
+                        optionsVisible: boolean;
+                        readonly type: "optionsvisibilitychange";
+                        readonly target: any;
+                    };
+                    pick: {
+                        feature: Feature | undefined;
+                        readonly type: "pick";
+                        readonly target: any;
+                    };
+                    querychange: {
+                        query: string;
+                        readonly type: "querychange";
+                        readonly target: any;
+                    };
+                    response: {
+                        url: string;
+                        featureCollection: FeatureCollection;
+                        readonly type: "response";
+                        readonly target: any;
+                    };
+                    reversetoggle: {
+                        reverse: boolean;
+                        readonly type: "reversetoggle";
+                        readonly target: any;
+                    };
+                }[T]) => void): any;
+                once<T extends "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle">(type: T, listener: (ev: {
+                    select: {
+                        feature: Feature | undefined;
+                        readonly type: "select";
+                        readonly target: any;
+                    };
+                    featureslisted: {
+                        features: Feature[] | undefined;
+                        readonly type: "featureslisted";
+                        readonly target: any;
+                    };
+                    featuresmarked: {
+                        features: Feature[] | undefined;
+                        readonly type: "featuresmarked";
+                        readonly target: any;
+                    };
+                    optionsvisibilitychange: {
+                        optionsVisible: boolean;
+                        readonly type: "optionsvisibilitychange";
+                        readonly target: any;
+                    };
+                    pick: {
+                        feature: Feature | undefined;
+                        readonly type: "pick";
+                        readonly target: any;
+                    };
+                    querychange: {
+                        query: string;
+                        readonly type: "querychange";
+                        readonly target: any;
+                    };
+                    response: {
+                        url: string;
+                        featureCollection: FeatureCollection;
+                        readonly type: "response";
+                        readonly target: any;
+                    };
+                    reversetoggle: {
+                        reverse: boolean;
+                        readonly type: "reversetoggle";
+                        readonly target: any;
+                    };
+                }[T]) => void): any;
+                off<T extends "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle">(type: T, listener: (ev: {
+                    select: {
+                        feature: Feature | undefined;
+                        readonly type: "select";
+                        readonly target: any;
+                    };
+                    featureslisted: {
+                        features: Feature[] | undefined;
+                        readonly type: "featureslisted";
+                        readonly target: any;
+                    };
+                    featuresmarked: {
+                        features: Feature[] | undefined;
+                        readonly type: "featuresmarked";
+                        readonly target: any;
+                    };
+                    optionsvisibilitychange: {
+                        optionsVisible: boolean;
+                        readonly type: "optionsvisibilitychange";
+                        readonly target: any;
+                    };
+                    pick: {
+                        feature: Feature | undefined;
+                        readonly type: "pick";
+                        readonly target: any;
+                    };
+                    querychange: {
+                        query: string;
+                        readonly type: "querychange";
+                        readonly target: any;
+                    };
+                    response: {
+                        url: string;
+                        featureCollection: FeatureCollection;
+                        readonly type: "response";
+                        readonly target: any;
+                    };
+                    reversetoggle: {
+                        reverse: boolean;
+                        readonly type: "reversetoggle";
+                        readonly target: any;
+                    };
+                }[T]) => void): any;
+                listens(type: "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle"): boolean;
+                setOptions(options: OPTS): void;
+                setQuery(value: string, submit?: boolean): void;
+                clearMap(): void;
+                clearList(): void;
+                setReverseMode(value: boolean): void;
+                focus(): void;
+                blur(): void;
+                onRemove(): void;
+                _listeners: import("maplibre-gl").Listeners;
+                _oneTimeListeners: import("maplibre-gl").Listeners;
+                _eventedParent: Evented;
+                _eventedParentData: any | (() => any);
+                fire(event: {
+                    readonly type: string;
+                } | string, properties?: any): any;
+                setEventedParent(parent?: Evented | null, data?: any | (() => any)): any;
+            }, url: string, featureCollection: FeatureCollection): {
+                url: string;
+                featureCollection: FeatureCollection;
+                readonly type: "response";
+                readonly target: {
+                    "__#1@#gc"?: GeocodingControlComponent;
+                    "__#1@#options": OPTS;
+                    onAddInt(map: Map): HTMLElement;
+                    on<T extends "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle">(type: T, listener: (ev: {
+                        select: {
+                            feature: Feature | undefined;
+                            readonly type: "select";
+                            readonly target: any;
+                        };
+                        featureslisted: {
+                            features: Feature[] | undefined;
+                            readonly type: "featureslisted";
+                            readonly target: any;
+                        };
+                        featuresmarked: {
+                            features: Feature[] | undefined;
+                            readonly type: "featuresmarked";
+                            readonly target: any;
+                        };
+                        optionsvisibilitychange: {
+                            optionsVisible: boolean;
+                            readonly type: "optionsvisibilitychange";
+                            readonly target: any;
+                        };
+                        pick: {
+                            feature: Feature | undefined;
+                            readonly type: "pick";
+                            readonly target: any;
+                        };
+                        querychange: {
+                            query: string;
+                            readonly type: "querychange";
+                            readonly target: any;
+                        };
+                        response: {
+                            url: string;
+                            featureCollection: FeatureCollection;
+                            readonly type: "response";
+                            readonly target: any;
+                        };
+                        reversetoggle: {
+                            reverse: boolean;
+                            readonly type: "reversetoggle";
+                            readonly target: any;
+                        };
+                    }[T]) => void): any;
+                    once<T extends "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle">(type: T, listener: (ev: {
+                        select: {
+                            feature: Feature | undefined;
+                            readonly type: "select";
+                            readonly target: any;
+                        };
+                        featureslisted: {
+                            features: Feature[] | undefined;
+                            readonly type: "featureslisted";
+                            readonly target: any;
+                        };
+                        featuresmarked: {
+                            features: Feature[] | undefined;
+                            readonly type: "featuresmarked";
+                            readonly target: any;
+                        };
+                        optionsvisibilitychange: {
+                            optionsVisible: boolean;
+                            readonly type: "optionsvisibilitychange";
+                            readonly target: any;
+                        };
+                        pick: {
+                            feature: Feature | undefined;
+                            readonly type: "pick";
+                            readonly target: any;
+                        };
+                        querychange: {
+                            query: string;
+                            readonly type: "querychange";
+                            readonly target: any;
+                        };
+                        response: {
+                            url: string;
+                            featureCollection: FeatureCollection;
+                            readonly type: "response";
+                            readonly target: any;
+                        };
+                        reversetoggle: {
+                            reverse: boolean;
+                            readonly type: "reversetoggle";
+                            readonly target: any;
+                        };
+                    }[T]) => void): any;
+                    off<T extends "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle">(type: T, listener: (ev: {
+                        select: {
+                            feature: Feature | undefined;
+                            readonly type: "select";
+                            readonly target: any;
+                        };
+                        featureslisted: {
+                            features: Feature[] | undefined;
+                            readonly type: "featureslisted";
+                            readonly target: any;
+                        };
+                        featuresmarked: {
+                            features: Feature[] | undefined;
+                            readonly type: "featuresmarked";
+                            readonly target: any;
+                        };
+                        optionsvisibilitychange: {
+                            optionsVisible: boolean;
+                            readonly type: "optionsvisibilitychange";
+                            readonly target: any;
+                        };
+                        pick: {
+                            feature: Feature | undefined;
+                            readonly type: "pick";
+                            readonly target: any;
+                        };
+                        querychange: {
+                            query: string;
+                            readonly type: "querychange";
+                            readonly target: any;
+                        };
+                        response: {
+                            url: string;
+                            featureCollection: FeatureCollection;
+                            readonly type: "response";
+                            readonly target: any;
+                        };
+                        reversetoggle: {
+                            reverse: boolean;
+                            readonly type: "reversetoggle";
+                            readonly target: any;
+                        };
+                    }[T]) => void): any;
+                    listens(type: "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle"): boolean;
+                    setOptions(options: OPTS): void;
+                    setQuery(value: string, submit?: boolean): void;
+                    clearMap(): void;
+                    clearList(): void;
+                    setReverseMode(value: boolean): void;
+                    focus(): void;
+                    blur(): void;
+                    onRemove(): void;
+                    _listeners: import("maplibre-gl").Listeners;
+                    _oneTimeListeners: import("maplibre-gl").Listeners;
+                    _eventedParent: Evented;
+                    _eventedParentData: any | (() => any);
+                    fire(event: {
+                        readonly type: string;
+                    } | string, properties?: any): any;
+                    setEventedParent(parent?: Evented | null, data?: any | (() => any)): any;
+                };
+            };
+        };
+        ReverseToggleEvent: {
+            new (target: {
+                "__#1@#gc"?: GeocodingControlComponent;
+                "__#1@#options": OPTS;
+                onAddInt(map: Map): HTMLElement;
+                on<T extends "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle">(type: T, listener: (ev: {
+                    select: {
+                        feature: Feature | undefined;
+                        readonly type: "select";
+                        readonly target: any;
+                    };
+                    featureslisted: {
+                        features: Feature[] | undefined;
+                        readonly type: "featureslisted";
+                        readonly target: any;
+                    };
+                    featuresmarked: {
+                        features: Feature[] | undefined;
+                        readonly type: "featuresmarked";
+                        readonly target: any;
+                    };
+                    optionsvisibilitychange: {
+                        optionsVisible: boolean;
+                        readonly type: "optionsvisibilitychange";
+                        readonly target: any;
+                    };
+                    pick: {
+                        feature: Feature | undefined;
+                        readonly type: "pick";
+                        readonly target: any;
+                    };
+                    querychange: {
+                        query: string;
+                        readonly type: "querychange";
+                        readonly target: any;
+                    };
+                    response: {
+                        url: string;
+                        featureCollection: FeatureCollection;
+                        readonly type: "response";
+                        readonly target: any;
+                    };
+                    reversetoggle: {
+                        reverse: boolean;
+                        readonly type: "reversetoggle";
+                        readonly target: any;
+                    };
+                }[T]) => void): any;
+                once<T extends "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle">(type: T, listener: (ev: {
+                    select: {
+                        feature: Feature | undefined;
+                        readonly type: "select";
+                        readonly target: any;
+                    };
+                    featureslisted: {
+                        features: Feature[] | undefined;
+                        readonly type: "featureslisted";
+                        readonly target: any;
+                    };
+                    featuresmarked: {
+                        features: Feature[] | undefined;
+                        readonly type: "featuresmarked";
+                        readonly target: any;
+                    };
+                    optionsvisibilitychange: {
+                        optionsVisible: boolean;
+                        readonly type: "optionsvisibilitychange";
+                        readonly target: any;
+                    };
+                    pick: {
+                        feature: Feature | undefined;
+                        readonly type: "pick";
+                        readonly target: any;
+                    };
+                    querychange: {
+                        query: string;
+                        readonly type: "querychange";
+                        readonly target: any;
+                    };
+                    response: {
+                        url: string;
+                        featureCollection: FeatureCollection;
+                        readonly type: "response";
+                        readonly target: any;
+                    };
+                    reversetoggle: {
+                        reverse: boolean;
+                        readonly type: "reversetoggle";
+                        readonly target: any;
+                    };
+                }[T]) => void): any;
+                off<T extends "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle">(type: T, listener: (ev: {
+                    select: {
+                        feature: Feature | undefined;
+                        readonly type: "select";
+                        readonly target: any;
+                    };
+                    featureslisted: {
+                        features: Feature[] | undefined;
+                        readonly type: "featureslisted";
+                        readonly target: any;
+                    };
+                    featuresmarked: {
+                        features: Feature[] | undefined;
+                        readonly type: "featuresmarked";
+                        readonly target: any;
+                    };
+                    optionsvisibilitychange: {
+                        optionsVisible: boolean;
+                        readonly type: "optionsvisibilitychange";
+                        readonly target: any;
+                    };
+                    pick: {
+                        feature: Feature | undefined;
+                        readonly type: "pick";
+                        readonly target: any;
+                    };
+                    querychange: {
+                        query: string;
+                        readonly type: "querychange";
+                        readonly target: any;
+                    };
+                    response: {
+                        url: string;
+                        featureCollection: FeatureCollection;
+                        readonly type: "response";
+                        readonly target: any;
+                    };
+                    reversetoggle: {
+                        reverse: boolean;
+                        readonly type: "reversetoggle";
+                        readonly target: any;
+                    };
+                }[T]) => void): any;
+                listens(type: "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle"): boolean;
+                setOptions(options: OPTS): void;
+                setQuery(value: string, submit?: boolean): void;
+                clearMap(): void;
+                clearList(): void;
+                setReverseMode(value: boolean): void;
+                focus(): void;
+                blur(): void;
+                onRemove(): void;
+                _listeners: import("maplibre-gl").Listeners;
+                _oneTimeListeners: import("maplibre-gl").Listeners;
+                _eventedParent: Evented;
+                _eventedParentData: any | (() => any);
+                fire(event: {
+                    readonly type: string;
+                } | string, properties?: any): any;
+                setEventedParent(parent?: Evented | null, data?: any | (() => any)): any;
+            }, reverse: boolean): {
+                reverse: boolean;
+                readonly type: "reversetoggle";
+                readonly target: {
+                    "__#1@#gc"?: GeocodingControlComponent;
+                    "__#1@#options": OPTS;
+                    onAddInt(map: Map): HTMLElement;
+                    on<T extends "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle">(type: T, listener: (ev: {
+                        select: {
+                            feature: Feature | undefined;
+                            readonly type: "select";
+                            readonly target: any;
+                        };
+                        featureslisted: {
+                            features: Feature[] | undefined;
+                            readonly type: "featureslisted";
+                            readonly target: any;
+                        };
+                        featuresmarked: {
+                            features: Feature[] | undefined;
+                            readonly type: "featuresmarked";
+                            readonly target: any;
+                        };
+                        optionsvisibilitychange: {
+                            optionsVisible: boolean;
+                            readonly type: "optionsvisibilitychange";
+                            readonly target: any;
+                        };
+                        pick: {
+                            feature: Feature | undefined;
+                            readonly type: "pick";
+                            readonly target: any;
+                        };
+                        querychange: {
+                            query: string;
+                            readonly type: "querychange";
+                            readonly target: any;
+                        };
+                        response: {
+                            url: string;
+                            featureCollection: FeatureCollection;
+                            readonly type: "response";
+                            readonly target: any;
+                        };
+                        reversetoggle: {
+                            reverse: boolean;
+                            readonly type: "reversetoggle";
+                            readonly target: any;
+                        };
+                    }[T]) => void): any;
+                    once<T extends "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle">(type: T, listener: (ev: {
+                        select: {
+                            feature: Feature | undefined;
+                            readonly type: "select";
+                            readonly target: any;
+                        };
+                        featureslisted: {
+                            features: Feature[] | undefined;
+                            readonly type: "featureslisted";
+                            readonly target: any;
+                        };
+                        featuresmarked: {
+                            features: Feature[] | undefined;
+                            readonly type: "featuresmarked";
+                            readonly target: any;
+                        };
+                        optionsvisibilitychange: {
+                            optionsVisible: boolean;
+                            readonly type: "optionsvisibilitychange";
+                            readonly target: any;
+                        };
+                        pick: {
+                            feature: Feature | undefined;
+                            readonly type: "pick";
+                            readonly target: any;
+                        };
+                        querychange: {
+                            query: string;
+                            readonly type: "querychange";
+                            readonly target: any;
+                        };
+                        response: {
+                            url: string;
+                            featureCollection: FeatureCollection;
+                            readonly type: "response";
+                            readonly target: any;
+                        };
+                        reversetoggle: {
+                            reverse: boolean;
+                            readonly type: "reversetoggle";
+                            readonly target: any;
+                        };
+                    }[T]) => void): any;
+                    off<T extends "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle">(type: T, listener: (ev: {
+                        select: {
+                            feature: Feature | undefined;
+                            readonly type: "select";
+                            readonly target: any;
+                        };
+                        featureslisted: {
+                            features: Feature[] | undefined;
+                            readonly type: "featureslisted";
+                            readonly target: any;
+                        };
+                        featuresmarked: {
+                            features: Feature[] | undefined;
+                            readonly type: "featuresmarked";
+                            readonly target: any;
+                        };
+                        optionsvisibilitychange: {
+                            optionsVisible: boolean;
+                            readonly type: "optionsvisibilitychange";
+                            readonly target: any;
+                        };
+                        pick: {
+                            feature: Feature | undefined;
+                            readonly type: "pick";
+                            readonly target: any;
+                        };
+                        querychange: {
+                            query: string;
+                            readonly type: "querychange";
+                            readonly target: any;
+                        };
+                        response: {
+                            url: string;
+                            featureCollection: FeatureCollection;
+                            readonly type: "response";
+                            readonly target: any;
+                        };
+                        reversetoggle: {
+                            reverse: boolean;
+                            readonly type: "reversetoggle";
+                            readonly target: any;
+                        };
+                    }[T]) => void): any;
+                    listens(type: "pick" | "response" | "select" | "featureslisted" | "featuresmarked" | "optionsvisibilitychange" | "querychange" | "reversetoggle"): boolean;
+                    setOptions(options: OPTS): void;
+                    setQuery(value: string, submit?: boolean): void;
+                    clearMap(): void;
+                    clearList(): void;
+                    setReverseMode(value: boolean): void;
+                    focus(): void;
+                    blur(): void;
+                    onRemove(): void;
+                    _listeners: import("maplibre-gl").Listeners;
+                    _oneTimeListeners: import("maplibre-gl").Listeners;
+                    _eventedParent: Evented;
+                    _eventedParentData: any | (() => any);
+                    fire(event: {
+                        readonly type: string;
+                    } | string, properties?: any): any;
+                    setEventedParent(parent?: Evented | null, data?: any | (() => any)): any;
+                };
+            };
+        };
     };
 };

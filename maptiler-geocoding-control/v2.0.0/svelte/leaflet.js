@@ -7,18 +7,15 @@ export { createLeafletMapController } from "./leaflet-controller";
  * for TypeScript https://www.typescriptlang.org/docs/handbook/mixins.html
  * @internal
  */
-// eslint-disable-next-line @typescript-eslint/no-unsafe-declaration-merging, @typescript-eslint/no-extraneous-class
-class EventedControl {
-    // eslint-disable-next-line @typescript-eslint/no-useless-constructor, @typescript-eslint/no-unused-vars
-    constructor(...args) { }
+// eslint-disable-next-line @typescript-eslint/no-unsafe-declaration-merging
+class EventedControl extends L.Control {
 }
-L.Util.extend(EventedControl.prototype, L.Control.prototype);
 L.Util.extend(EventedControl.prototype, L.Evented.prototype);
 export class GeocodingControl extends EventedControl {
     #gc;
     #options;
     constructor(options) {
-        super();
+        super(options);
         this.#options = options;
     }
     onAdd(map) {
@@ -26,7 +23,7 @@ export class GeocodingControl extends EventedControl {
         div.className = "leaflet-ctrl-geocoder";
         L.DomEvent.disableClickPropagation(div);
         L.DomEvent.disableScrollPropagation(div);
-        const { marker, showResultMarkers, flyTo, fullGeometryStyle, ...restOptions } = this.#options;
+        const { marker, showResultMarkers, flyTo, fullGeometryStyle, position, ...restOptions } = this.#options;
         const flyToOptions = typeof flyTo === "boolean" ? {} : flyTo;
         const mapController = createLeafletMapController(map, marker, showResultMarkers, flyToOptions, flyToOptions, fullGeometryStyle);
         this.#gc = new GeocodingControlComponent({
@@ -37,22 +34,23 @@ export class GeocodingControl extends EventedControl {
                 ...restOptions,
             },
         });
-        for (const eventName of [
-            "select",
-            "pick",
-            "featuresListed",
-            "featuresMarked",
-            "response",
-            "optionsVisibilityChange",
-            "reverseToggle",
-            "queryChange",
-        ]) {
-            this.#gc.$on(eventName, (event) => this.fire(eventName.toLowerCase(), event.detail));
+        const eventNames = {
+            select: undefined,
+            pick: undefined,
+            featureslisted: undefined,
+            featuresmarked: undefined,
+            response: undefined,
+            optionsvisibilitychange: undefined,
+            reversetoggle: undefined,
+            querychange: undefined,
+        };
+        for (const eventName in eventNames) {
+            this.#gc.$on(eventName, (event) => this.fire(eventName, event.detail));
         }
         return div;
     }
     setOptions(options) {
-        this.#options = options;
+        Object.assign(this.#options, options);
         const { marker, showResultMarkers, flyTo, fullGeometryStyle, ...restOptions } = this.#options;
         this.#gc?.$set(restOptions);
     }

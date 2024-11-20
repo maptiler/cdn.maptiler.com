@@ -1,8 +1,75 @@
 import GeocodingControlComponent from "./GeocodingControl.svelte";
 import { createMapLibreGlMapController, } from "./maplibregl-controller";
 export { createMapLibreGlMapController, } from "./maplibregl-controller";
-export function crateBaseClass(Evented, maplibreGl, getExtraProps) {
-    return class MapLibreBasedGeocodingControl extends Evented {
+export function crateClasses(Evented, maplibreGl, getExtraProps) {
+    // NOTE We can't use Maplibre `Event` - see https://github.com/maplibre/maplibre-gl-js/issues/5015
+    class Event {
+        type;
+        target;
+        constructor(target, type) {
+            this.type = type;
+            this.target = target;
+        }
+    }
+    class SelectEvent extends Event {
+        feature;
+        constructor(target, details) {
+            super(target, "select");
+            Object.assign(this, details);
+        }
+    }
+    class FeaturesListedEvent extends Event {
+        features;
+        constructor(target, features) {
+            super(target, "featureslisted");
+            this.features = features;
+        }
+    }
+    class FeaturesMarkedEvent extends Event {
+        features;
+        constructor(target, features) {
+            super(target, "featuresmarked");
+            this.features = features;
+        }
+    }
+    class OptionsVisibilityChangeEvent extends Event {
+        optionsVisible;
+        constructor(target, optionsVisible) {
+            super(target, "optionsvisibilitychange");
+            this.optionsVisible = optionsVisible;
+        }
+    }
+    class PickEvent extends Event {
+        feature;
+        constructor(target, feature) {
+            super(target, "pick");
+            this.feature = feature;
+        }
+    }
+    class QueryChangeEvent extends Event {
+        query;
+        constructor(target, query) {
+            super(target, "querychange");
+            this.query = query;
+        }
+    }
+    class ResponseEvent extends Event {
+        url;
+        featureCollection;
+        constructor(target, url, featureCollection) {
+            super(target, "response");
+            this.url = url;
+            this.featureCollection = featureCollection;
+        }
+    }
+    class ReverseToggleEvent extends Event {
+        reverse;
+        constructor(target, reverse) {
+            super(target, "reversetoggle");
+            this.reverse = reverse;
+        }
+    }
+    class MapLibreBasedGeocodingControl extends Evented {
         #gc;
         #options;
         constructor(options = {}) {
@@ -27,24 +94,46 @@ export function crateBaseClass(Evented, maplibreGl, getExtraProps) {
                 throw new Error("no apiKey provided");
             }
             this.#gc = new GeocodingControlComponent({ target: div, props });
-            for (const eventName of [
-                "select",
-                "pick",
-                "featuresListed",
-                "featuresMarked",
-                "response",
-                "optionsVisibilityChange",
-                "reverseToggle",
-                "queryChange",
-            ]) {
-                this.#gc.$on(eventName, (event) => {
-                    this.fire(eventName, event.detail);
-                });
-            }
+            this.#gc.$on("select", (event) => {
+                this.fire(new SelectEvent(this, event.detail));
+            });
+            this.#gc.$on("pick", (event) => {
+                this.fire(new PickEvent(this, event.detail.feature));
+            });
+            this.#gc.$on("featureslisted", (event) => {
+                this.fire(new FeaturesListedEvent(this, event.detail.features));
+            });
+            this.#gc.$on("featuresmarked", (event) => {
+                this.fire(new FeaturesMarkedEvent(this, event.detail.features));
+            });
+            this.#gc.$on("response", (event) => {
+                this.fire(new ResponseEvent(this, event.detail.url, event.detail.featureCollection));
+            });
+            this.#gc.$on("optionsvisibilitychange", (event) => {
+                this.fire(new OptionsVisibilityChangeEvent(this, event.detail.optionsVisible));
+            });
+            this.#gc.$on("reversetoggle", (event) => {
+                this.fire(new ReverseToggleEvent(this, event.detail.reverse));
+            });
+            this.#gc.$on("querychange", (event) => {
+                this.fire(new QueryChangeEvent(this, event.detail.query));
+            });
             return div;
         }
+        on(type, listener) {
+            return super.on(type, listener);
+        }
+        once(type, listener) {
+            return super.once(type, listener);
+        }
+        off(type, listener) {
+            return super.off(type, listener);
+        }
+        listens(type) {
+            return super.listens(type);
+        }
         setOptions(options) {
-            this.#options = options;
+            Object.assign(this.#options, options);
             const { marker, showResultMarkers, flyTo, fullGeometryStyle, ...restOptions } = this.#options;
             this.#gc?.$set(restOptions);
         }
@@ -69,5 +158,19 @@ export function crateBaseClass(Evented, maplibreGl, getExtraProps) {
         onRemove() {
             this.#gc?.$destroy();
         }
+    }
+    const events = {
+        SelectEvent,
+        FeaturesListedEvent,
+        FeaturesMarkedEvent,
+        OptionsVisibilityChangeEvent,
+        PickEvent,
+        QueryChangeEvent,
+        ResponseEvent,
+        ReverseToggleEvent,
+    };
+    return {
+        MapLibreBasedGeocodingControl,
+        events,
     };
 }

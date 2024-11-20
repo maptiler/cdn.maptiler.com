@@ -13,7 +13,7 @@ export declare function createMapLibreGlMapController(map: Map, maplibregl?: Map
     fitBounds(bbox: BBox, padding: number, maxZoom?: number): void;
     indicateReverse(reverse: boolean): void;
     setReverseMarker(coordinates?: Position): void;
-    setMarkers(markedFeatures: Feature[] | undefined, picked: Feature | undefined): void;
+    setFeatures(markedFeatures: Feature[] | undefined, picked: Feature | undefined, showPolygonMarker: boolean): void;
     setSelectedMarker(index: number): void;
     getCenterAndZoom(): [number, number, number];
 };

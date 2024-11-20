@@ -9,7 +9,7 @@ export declare function createOpenLayersMapController(map: Map, flyToOptions?: A
     fitBounds(bbox: BBox, padding: number, maxZoom: number): void;
     indicateReverse(reverse: boolean): void;
     setReverseMarker(coordinates?: Position): void;
-    setMarkers(markedFeatures: FeatureType[] | undefined, picked: FeatureType | undefined): void;
+    setFeatures(markedFeatures: FeatureType[] | undefined, picked: FeatureType | undefined, showPolygonMarker: boolean): void;
     setSelectedMarker(index: number): void;
     getCenterAndZoom(): [number, x: number, y: number] | undefined;
 };

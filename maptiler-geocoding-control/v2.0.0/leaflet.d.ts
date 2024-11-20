@@ -1,5 +1,5 @@
 import * as L from "leaflet";
-import type { ControlOptions, Feature } from "./types";
+import type { ControlOptions, DispatcherType, Feature } from "./types";
 export { createLeafletMapController } from "./leaflet-controller";
 type LeafletControlOptions = ControlOptions & L.ControlOptions & {
     /**
@@ -54,15 +54,37 @@ type LeafletControlOptions = ControlOptions & L.ControlOptions & {
      */
     fullGeometryStyle?: null | boolean | L.PathOptions | L.StyleFunction;
 };
+type LeafletEvent<T> = {
+    type: T;
+    target: GeocodingControl;
+    sourceTarget: GeocodingControl;
+};
+type CustomEventMap = {
+    [T in keyof DispatcherType]: DispatcherType[T] & LeafletEvent<T>;
+};
 /**
  * Leaflet mixins https://leafletjs.com/reference.html#class
  * for TypeScript https://www.typescriptlang.org/docs/handbook/mixins.html
  * @internal
  */
-declare class EventedControl {
-    constructor(...args: unknown[]);
+declare class EventedControl extends L.Control {
 }
-interface EventedControl extends L.Control, L.Evented {
+interface EventedControl extends L.Control {
+    on<T extends keyof CustomEventMap>(type: T, fn: (event: CustomEventMap[T]) => void, context?: unknown): this;
+    addEventListener<T extends keyof CustomEventMap>(type: T, fn: (event: CustomEventMap[T]) => void, context?: unknown): this;
+    once<T extends keyof CustomEventMap>(type: T, fn: (event: CustomEventMap[T]) => void, context?: unknown): this;
+    addOneTimeEventListener<T extends keyof CustomEventMap>(type: T, fn: (event: CustomEventMap[T]) => void, context?: unknown): this;
+    off<T extends keyof CustomEventMap>(type?: T, fn?: (event: CustomEventMap[T]) => void, context?: unknown): this;
+    off(eventMap?: {
+        [T in keyof CustomEventMap]?: (event: CustomEventMap[T]) => void;
+    }): this;
+    removeEventListener<T extends keyof CustomEventMap>(type?: T, fn?: (event: CustomEventMap[T]) => void, context?: unknown): this;
+    listens<T extends keyof CustomEventMap>(type: T, fn: (event: CustomEventMap[T]) => void, context?: unknown, propagate?: boolean): boolean;
+    fire(type: string, data?: unknown, propagate?: boolean): this;
+    addEventParent(obj: L.Evented): this;
+    removeEventParent(obj: L.Evented): this;
+    fireEvent(type: string, data?: unknown, propagate?: boolean): this;
+    hasEventListeners<T extends keyof CustomEventMap>(type: T): boolean;
 }
 export declare class GeocodingControl extends EventedControl {
     #private;

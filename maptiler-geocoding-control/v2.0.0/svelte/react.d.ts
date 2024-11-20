@@ -1,5 +1,5 @@
-import type { ControlOptions, DispatcherType, MapController } from "./types";
-type EventNames = keyof DispatcherType;
+import type { ControlOptions, DispatcherTypeCC, MapController } from "./types";
+type EventNames = keyof DispatcherTypeCC;
 type EventHandlerFnName<T extends EventNames> = `on${Capitalize<T>}`;
 type CallbackProperties<T> = {
     [K in keyof T as EventHandlerFnName<Extract<K, EventNames>>]?: (event: T[K]) => void;
@@ -7,7 +7,7 @@ type CallbackProperties<T> = {
 type MapControllerProp = {
     mapController?: MapController;
 };
-export type Props = ControlOptions & CallbackProperties<DispatcherType> & MapControllerProp;
+export type Props = ControlOptions & CallbackProperties<DispatcherTypeCC> & MapControllerProp;
 export type Methods = {
     blur(): void;
     focus(): void;
@@ -15,5 +15,5 @@ export type Methods = {
     clearMap(): void;
     clearList(): void;
 };
-declare const ReactGeocodingControl: import("react").ForwardRefExoticComponent<ControlOptions & CallbackProperties<DispatcherType> & MapControllerProp & import("react").RefAttributes<Methods>>;
+declare const ReactGeocodingControl: import("react").ForwardRefExoticComponent<ControlOptions & CallbackProperties<DispatcherTypeCC> & MapControllerProp & import("react").RefAttributes<Methods>>;
 export { ReactGeocodingControl as GeocodingControl };

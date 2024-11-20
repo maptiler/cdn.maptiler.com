@@ -11,6 +11,7 @@ const eventNames = [
     "select",
 ];
 const propertyNames = [
+    "adjustUrlQuery",
     "apiKey",
     "bbox",
     "clearButtonTitle",
@@ -19,25 +20,24 @@ const propertyNames = [
     "country",
     "debounceSearch",
     "enableReverse",
-    "reverseActive",
     "errorMessage",
+    "excludeTypes",
     "filter",
     "fuzzyMatch",
     "language",
     "limit",
+    "mapController",
     "minLength",
     "noResultsMessage",
+    "pickedResultStyle",
     "placeholder",
     "proximity",
+    "reverseActive",
     "reverseButtonTitle",
-    "showFullGeometry",
     "showPlaceType",
     "showResultsWhileTyping",
-    "adjustUrlQuery",
     "types",
-    "excludeTypes",
     "zoom",
-    "mapController",
 ];
 function getEventFnName(name) {
     return ("on" +

@@ -1,7 +1,7 @@
 import * as maptilersdk from "@maptiler/sdk";
-import { crateBaseClass, } from "./MapLibreBasedGeocodingControl";
+import { crateClasses, } from "./MapLibreBasedGeocodingControl";
 export { createMapLibreGlMapController } from "./maplibregl-controller";
-const Base = crateBaseClass(maptilersdk.Evented, maptilersdk, (map, div) => {
+const { MapLibreBasedGeocodingControl, events } = crateClasses(maptilersdk.Evented, maptilersdk, (map, div) => {
     const sdkConfig = {};
     if (!("getSdkConfig" in map && typeof map.getSdkConfig === "function")) {
         throw new Error("MapTiler SDK not detected");
@@ -15,8 +15,16 @@ const Base = crateBaseClass(maptilersdk.Evented, maptilersdk, (map, div) => {
     div.className += " maptiler-ctrl";
     return sdkConfig;
 });
-export class GeocodingControl extends Base {
+export class GeocodingControl extends MapLibreBasedGeocodingControl {
     onAdd(map) {
         return super.onAddInt(map);
     }
 }
+export const SelectEvent = events.SelectEvent;
+export const FeaturesListedEvent = events.FeaturesListedEvent;
+export const FeaturesMarkedEvent = events.FeaturesMarkedEvent;
+export const OptionsVisibilityChangeEvent = events.OptionsVisibilityChangeEvent;
+export const PickEvent = events.PickEvent;
+export const QueryChangeEvent = events.QueryChangeEvent;
+export const ResponseEvent = events.ResponseEvent;
+export const ReverseToggleEvent = events.ReverseToggleEvent;

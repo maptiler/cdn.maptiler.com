@@ -1,7 +1,10 @@
 import type { Map } from "ol";
+import type { ObjectEvent } from "ol/Object";
+import type { CombinedOnSignature, EventTypes } from "ol/Observable";
 import type { AnimationOptions, FitOptions } from "ol/View";
 import { Control } from "ol/control";
 import type { Options } from "ol/control/Control";
+import type { EventsKey } from "ol/events";
 import BaseEvent from "ol/events/Event";
 import type { StyleLike } from "ol/style/Style";
 import type { FlatStyleLike } from "ol/style/flat";
@@ -11,8 +14,26 @@ type OpenLayersControlOptions = ControlOptions & Options & {
     flyTo?: boolean | (AnimationOptions & FitOptions);
     fullGeometryStyle?: StyleLike | FlatStyleLike;
 };
+type CustomEventMap = {
+    select: SelectEvent;
+    featureslisted: FeaturesListedEvent;
+    featuresmarked: FeaturesMarkedEvent;
+    optionsvisibilitychange: OptionsVisibilityChangeEvent;
+    pick: PickEvent;
+    querychange: QueryChangeEvent;
+    response: ResponseEvent;
+    reversetoggle: ReverseToggleEvent;
+};
+type CustomObjectOnSignature<ReturnType> = {
+    <K extends keyof CustomEventMap>(type: K, listener: (evt: CustomEventMap[K]) => void): ReturnType;
+} & {
+    (type: "propertychange", listener: (evt: ObjectEvent) => void): ReturnType;
+} & CombinedOnSignature<EventTypes | "propertychange" | keyof CustomEventMap, ReturnType>;
 export declare class GeocodingControl extends Control {
     #private;
+    on: CustomObjectOnSignature<EventsKey>;
+    once: CustomObjectOnSignature<EventsKey>;
+    un: CustomObjectOnSignature<EventsKey>;
     constructor(options: OpenLayersControlOptions);
     setMap(map: Map | null): void;
     setOptions(options: OpenLayersControlOptions): void;
