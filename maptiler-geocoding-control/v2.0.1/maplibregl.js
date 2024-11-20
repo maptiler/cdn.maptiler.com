@@ -4,8 +4,8 @@ var Gt = (i) => {
 };
 var un = (i, e, t) => e in i ? ln(i, e, { enumerable: !0, configurable: !0, writable: !0, value: t }) : i[e] = t;
 var ee = (i, e, t) => un(i, typeof e != "symbol" ? e + "" : e, t), jt = (i, e, t) => e.has(i) || Gt("Cannot " + t);
-var Z = (i, e, t) => (jt(i, e, "read from private field"), t ? t.call(i) : e.get(i)), wt = (i, e, t) => e.has(i) ? Gt("Cannot add the same private member more than once") : e instanceof WeakSet ? e.add(i) : e.set(i, t), _t = (i, e, t, n) => (jt(i, e, "write to private field"), n ? n.call(i, t) : e.set(i, t), t);
-import * as qt from "@maptiler/sdk";
+var Z = (i, e, t) => (jt(i, e, "read from private field"), t ? t.call(i) : e.get(i)), _t = (i, e, t) => e.has(i) ? Gt("Cannot add the same private member more than once") : e instanceof WeakSet ? e.add(i) : e.set(i, t), wt = (i, e, t, n) => (jt(i, e, "write to private field"), n ? n.call(i, t) : e.set(i, t), t);
+import * as qt from "maplibre-gl";
 function z() {
 }
 function an(i, e) {
@@ -106,7 +106,7 @@ function mn() {
 function $(i, e, t, n) {
   return i.addEventListener(e, t, n), () => i.removeEventListener(e, t, n);
 }
-function yn(i) {
+function vn(i) {
   return function(e) {
     return e.preventDefault(), i.call(this, e);
   };
@@ -114,7 +114,7 @@ function yn(i) {
 function b(i, e, t) {
   t == null ? i.removeAttribute(e) : i.getAttribute(e) !== t && i.setAttribute(e, t);
 }
-function vn(i) {
+function yn(i) {
   return Array.from(i.childNodes);
 }
 function Ge(i, e) {
@@ -165,10 +165,10 @@ function Vt(i, e) {
 }
 const Ae = [], Mt = [];
 let We = [];
-const Yt = [], wn = /* @__PURE__ */ Promise.resolve();
+const Yt = [], _n = /* @__PURE__ */ Promise.resolve();
 let Ct = !1;
-function _n() {
-  Ct || (Ct = !0, wn.then(Ti));
+function wn() {
+  Ct || (Ct = !0, _n.then(Ti));
 }
 function kt(i) {
   We.push(i);
@@ -243,31 +243,31 @@ function xn(i, e) {
   });
 }
 function Mn(i, e, t, n, r, s, u, o, c, l, d, a) {
-  let f = i.length, g = s.length, v = f;
-  const _ = {};
-  for (; v--; ) _[i[v].key] = v;
-  const h = [], y = /* @__PURE__ */ new Map(), p = /* @__PURE__ */ new Map(), E = [];
-  for (v = g; v--; ) {
-    const w = a(r, s, v), L = t(w);
+  let f = i.length, g = s.length, y = f;
+  const w = {};
+  for (; y--; ) w[i[y].key] = y;
+  const h = [], v = /* @__PURE__ */ new Map(), p = /* @__PURE__ */ new Map(), E = [];
+  for (y = g; y--; ) {
+    const _ = a(r, s, y), L = t(_);
     let k = u.get(L);
-    k ? E.push(() => k.p(w, e)) : (k = l(L, w), k.c()), y.set(L, h[v] = k), L in _ && p.set(L, Math.abs(v - _[L]));
+    k ? E.push(() => k.p(_, e)) : (k = l(L, _), k.c()), v.set(L, h[y] = k), L in w && p.set(L, Math.abs(y - w[L]));
   }
   const S = /* @__PURE__ */ new Set(), M = /* @__PURE__ */ new Set();
-  function C(w) {
-    j(w, 1), w.m(o, d), u.set(w.key, w), d = w.first, g--;
+  function C(_) {
+    j(_, 1), _.m(o, d), u.set(_.key, _), d = _.first, g--;
   }
   for (; f && g; ) {
-    const w = h[g - 1], L = i[f - 1], k = w.key, O = L.key;
-    w === L ? (d = w.first, f--, g--) : y.has(O) ? !u.has(k) || S.has(k) ? C(w) : M.has(O) ? f-- : p.get(k) > p.get(O) ? (M.add(k), C(w)) : (S.add(O), f--) : (c(L, u), f--);
+    const _ = h[g - 1], L = i[f - 1], k = _.key, O = L.key;
+    _ === L ? (d = _.first, f--, g--) : v.has(O) ? !u.has(k) || S.has(k) ? C(_) : M.has(O) ? f-- : p.get(k) > p.get(O) ? (M.add(k), C(_)) : (S.add(O), f--) : (c(L, u), f--);
   }
   for (; f--; ) {
-    const w = i[f];
-    y.has(w.key) || c(w, u);
+    const _ = i[f];
+    v.has(_.key) || c(_, u);
   }
   for (; g; ) C(h[g - 1]);
   return me(E), h;
 }
-function we(i) {
+function _e(i) {
   i && i.c();
 }
 function he(i, e, t) {
@@ -282,7 +282,7 @@ function ge(i, e) {
   t.fragment !== null && (Sn(t.after_update), me(t.on_destroy), t.fragment && t.fragment.d(e), t.on_destroy = t.fragment = null, t.ctx = []);
 }
 function Cn(i, e) {
-  i.$$.dirty[0] === -1 && (Ae.push(i), _n(), i.$$.dirty.fill(0)), i.$$.dirty[e / 31 | 0] |= 1 << e % 31;
+  i.$$.dirty[0] === -1 && (Ae.push(i), wn(), i.$$.dirty.fill(0)), i.$$.dirty[e / 31 | 0] |= 1 << e % 31;
 }
 function Se(i, e, t, n, r, s, u = null, o = [-1]) {
   const c = je;
@@ -311,11 +311,11 @@ function Se(i, e, t, n, r, s, u = null, o = [-1]) {
   u && u(l.root);
   let d = !1;
   if (l.ctx = t ? t(i, e.props || {}, (a, f, ...g) => {
-    const v = g.length ? g[0] : f;
-    return l.ctx && r(l.ctx[a], l.ctx[a] = v) && (!l.skip_bound && l.bound[a] && l.bound[a](v), d && Cn(i, a)), f;
+    const y = g.length ? g[0] : f;
+    return l.ctx && r(l.ctx[a], l.ctx[a] = y) && (!l.skip_bound && l.bound[a] && l.bound[a](y), d && Cn(i, a)), f;
   }) : [], l.update(), d = !0, me(l.before_update), l.fragment = n ? n(l.ctx) : !1, e.target) {
     if (e.hydrate) {
-      const a = vn(e.target);
+      const a = yn(e.target);
       l.fragment && l.fragment.l(a), a.forEach(B);
     } else
       l.fragment && l.fragment.c();
@@ -714,13 +714,13 @@ function Dn(i) {
     i[0].id.startsWith("poi.") || !/*imageUrl*/
     i[5]) && !/*isReverse*/
     i[7]
-  ), v, _, h = (
+  ), y, w, h = (
     /*isReverse*/
     (i[7] ? "" : (
       /*feature*/
       i[0].place_name.replace(/[^,]*,?\s*/, "")
     )) + ""
-  ), y, p, E;
+  ), v, p, E;
   function S(L, k) {
     return k & /*feature*/
     1 && (t = null), k & /*feature*/
@@ -739,10 +739,10 @@ function Dn(i) {
       )))))
     );
   }
-  let M = S(i, -1), C = M(i), w = g && Xt(i);
+  let M = S(i, -1), C = M(i), _ = g && Xt(i);
   return {
     c() {
-      e = A("li"), C.c(), u = ie(), o = A("span"), c = A("span"), l = A("span"), a = Ee(d), f = ie(), w && w.c(), v = ie(), _ = A("span"), y = Ee(h), b(l, "class", "primary svelte-ltkwvy"), b(c, "class", "svelte-ltkwvy"), b(_, "class", "line2 svelte-ltkwvy"), b(o, "class", "texts svelte-ltkwvy"), b(e, "tabindex", "0"), b(
+      e = A("li"), C.c(), u = ie(), o = A("span"), c = A("span"), l = A("span"), a = Ee(d), f = ie(), _ && _.c(), y = ie(), w = A("span"), v = Ee(h), b(l, "class", "primary svelte-ltkwvy"), b(c, "class", "svelte-ltkwvy"), b(w, "class", "line2 svelte-ltkwvy"), b(o, "class", "texts svelte-ltkwvy"), b(e, "tabindex", "0"), b(
         e,
         "data-selected",
         /*selected*/
@@ -755,7 +755,7 @@ function Dn(i) {
       );
     },
     m(L, k) {
-      U(L, e, k), C.m(e, null), P(e, u), P(e, o), P(o, c), P(c, l), P(l, a), P(c, f), w && w.m(c, null), P(o, v), P(o, _), P(_, y), p || (E = [
+      U(L, e, k), C.m(e, null), P(e, u), P(e, o), P(o, c), P(c, l), P(l, a), P(c, f), _ && _.m(c, null), P(o, y), P(o, w), P(w, v), p || (E = [
         $(
           e,
           "mouseenter",
@@ -789,12 +789,12 @@ function Dn(i) {
       L[0].id.startsWith("postal_code.") && (!/*feature*/
       L[0].id.startsWith("poi.") || !/*imageUrl*/
       L[5]) && !/*isReverse*/
-      L[7]), g ? w ? w.p(L, k) : (w = Xt(L), w.c(), w.m(c, null)) : w && (w.d(1), w = null), k & /*feature*/
+      L[7]), g ? _ ? _.p(L, k) : (_ = Xt(L), _.c(), _.m(c, null)) : _ && (_.d(1), _ = null), k & /*feature*/
       1 && h !== (h = /*isReverse*/
       (L[7] ? "" : (
         /*feature*/
         L[0].place_name.replace(/[^,]*,?\s*/, "")
-      )) + "") && Ge(y, h), k & /*selected*/
+      )) + "") && Ge(v, h), k & /*selected*/
       2 && b(
         e,
         "data-selected",
@@ -811,7 +811,7 @@ function Dn(i) {
     i: z,
     o: z,
     d(L) {
-      L && B(e), C.d(), w && w.d(), p = !1, me(E);
+      L && B(e), C.d(), _ && _.d(), p = !1, me(E);
     }
   };
 }
@@ -819,28 +819,28 @@ function Un(i, e, t) {
   var E;
   let n, r, { feature: s } = e, { selected: u = !1 } = e, { showPlaceType: o } = e, { missingIconsCache: c } = e, { iconsBaseUrl: l } = e;
   const d = (E = s.properties) == null ? void 0 : E.categories;
-  let a, f, g = 0, v = s.place_type[0] === "reverse";
-  function _() {
+  let a, f, g = 0, y = s.place_type[0] === "reverse";
+  function w() {
     f && c.add(f), t(10, g++, g);
   }
   function h(S) {
     Vt.call(this, i, S);
   }
-  function y(S) {
+  function v(S) {
     Vt.call(this, i, S);
   }
-  const p = () => _();
+  const p = () => w();
   return i.$$set = (S) => {
     "feature" in S && t(0, s = S.feature), "selected" in S && t(1, u = S.selected), "showPlaceType" in S && t(2, o = S.showPlaceType), "missingIconsCache" in S && t(9, c = S.missingIconsCache), "iconsBaseUrl" in S && t(3, l = S.iconsBaseUrl);
   }, i.$$.update = () => {
-    var S, M, C, w;
+    var S, M, C, _;
     if (i.$$.dirty & /*loadIconAttempt, index, category, iconsBaseUrl, imageUrl, missingIconsCache*/
     3640)
       do
         t(11, n--, n), t(4, a = d == null ? void 0 : d[n]), t(5, f = a ? l + a.replace(/ /g, "_") + ".svg" : void 0);
       while (n > -1 && (!f || c.has(f)));
     i.$$.dirty & /*feature*/
-    1 && t(6, r = ((M = (S = s.properties) == null ? void 0 : S.categories) == null ? void 0 : M.join(", ")) ?? ((w = (C = s.properties) == null ? void 0 : C.place_type_name) == null ? void 0 : w[0]) ?? s.place_type[0]);
+    1 && t(6, r = ((M = (S = s.properties) == null ? void 0 : S.categories) == null ? void 0 : M.join(", ")) ?? ((_ = (C = s.properties) == null ? void 0 : C.place_type_name) == null ? void 0 : _[0]) ?? s.place_type[0]);
   }, t(11, n = (d == null ? void 0 : d.length) ?? 0), [
     s,
     u,
@@ -849,13 +849,13 @@ function Un(i, e, t) {
     a,
     f,
     r,
-    v,
-    _,
+    y,
+    w,
     c,
     g,
     n,
     h,
-    y,
+    v,
     p
   ];
 }
@@ -1055,14 +1055,14 @@ function er(i) {
     i == "DD" && (c = `${r}° ${u}, ${s}° ${o}`);
     const l = Math.floor(r), d = Math.floor(s), a = (r - l) * 60, f = (s - d) * 60;
     if (i == "DM") {
-      let g = ni(a, 3).toFixed(3).padStart(6, "0"), v = ni(f, 3).toFixed(3).padStart(6, "0");
-      g.endsWith(".000") && v.endsWith(".000") && (g = g.replace(/\.000$/, ""), v = v.replace(/\.000$/, "")), c = `${l}° ${g}' ${u}, ${d}° ${v}' ${o}`;
+      let g = ni(a, 3).toFixed(3).padStart(6, "0"), y = ni(f, 3).toFixed(3).padStart(6, "0");
+      g.endsWith(".000") && y.endsWith(".000") && (g = g.replace(/\.000$/, ""), y = y.replace(/\.000$/, "")), c = `${l}° ${g}' ${u}, ${d}° ${y}' ${o}`;
     }
     if (i == "DMS") {
-      const g = Math.floor(a), v = Math.floor(f);
-      let _ = ((a - g) * 60).toFixed(1).padStart(4, "0"), h = ((f - v) * 60).toFixed(1).padStart(4, "0");
-      const y = g.toString().padStart(2, "0"), p = v.toString().padStart(2, "0");
-      _.endsWith(".0") && h.endsWith(".0") && (_ = _.replace(/\.0$/, ""), h = h.replace(/\.0$/, "")), c = `${l}° ${y}' ${_}" ${u}, ${d}° ${p}' ${h}" ${o}`;
+      const g = Math.floor(a), y = Math.floor(f);
+      let w = ((a - g) * 60).toFixed(1).padStart(4, "0"), h = ((f - y) * 60).toFixed(1).padStart(4, "0");
+      const v = g.toString().padStart(2, "0"), p = y.toString().padStart(2, "0");
+      w.endsWith(".0") && h.endsWith(".0") && (w = w.replace(/\.0$/, ""), h = h.replace(/\.0$/, "")), c = `${l}° ${v}' ${w}" ${u}, ${d}° ${p}' ${h}" ${o}`;
     }
     return c;
   } else
@@ -1123,25 +1123,25 @@ function Ot(i, e) {
     l.test(r) && t > 0 && (t = -1 * t), l = /W|WEST/i, l.test(s) && n > 0 && (n = -1 * n);
     const d = o[0].trim();
     let a, f;
-    const g = /[,/;\u0020]/g, v = d.match(g);
-    if (v == null) {
-      const y = Math.floor(i.length / 2);
-      a = d.substring(0, y).trim(), f = d.substring(y).trim();
+    const g = /[,/;\u0020]/g, y = d.match(g);
+    if (y == null) {
+      const v = Math.floor(i.length / 2);
+      a = d.substring(0, v).trim(), f = d.substring(v).trim();
     } else {
-      let y;
-      v.length % 2 == 1 ? y = Math.floor(v.length / 2) : y = v.length / 2 - 1;
+      let v;
+      y.length % 2 == 1 ? v = Math.floor(y.length / 2) : v = y.length / 2 - 1;
       let p = 0;
-      if (y == 0)
-        p = d.indexOf(v[0]), a = d.substring(0, p).trim(), f = d.substring(p + 1).trim();
+      if (v == 0)
+        p = d.indexOf(y[0]), a = d.substring(0, p).trim(), f = d.substring(p + 1).trim();
       else {
         let E = 0, S = 0;
-        for (; E <= y; )
-          p = d.indexOf(v[E], S), S = p + 1, E++;
+        for (; E <= v; )
+          p = d.indexOf(y[E], S), S = p + 1, E++;
         a = d.substring(0, p).trim(), f = d.substring(p + 1).trim();
       }
     }
-    const _ = a.split(".");
-    if (_.length == 2 && _[1] == 0 && _[1].length != 2)
+    const w = a.split(".");
+    if (w.length == 2 && w[1] == 0 && w[1].length != 2)
       throw new Error("invalid coordinates format");
     const h = f.split(".");
     if (h.length == 2 && h[1] == 0 && h[1].length != 2)
@@ -1583,7 +1583,7 @@ function oi(i) {
   let e, t;
   return e = new jn({}), {
     c() {
-      we(e.$$.fragment);
+      _e(e.$$.fragment);
     },
     m(n, r) {
       he(e, n, r), t = !0;
@@ -1603,7 +1603,7 @@ function li(i) {
   let e, t, n, r, s;
   return t = new Vn({}), {
     c() {
-      e = A("button"), we(t.$$.fragment), b(e, "type", "button"), b(
+      e = A("button"), _e(t.$$.fragment), b(e, "type", "button"), b(
         e,
         "title",
         /*reverseButtonTitle*/
@@ -1721,7 +1721,7 @@ function fr(i) {
   let e, t, n, r, s, u;
   return t = new Ii({}), {
     c() {
-      e = A("div"), we(t.$$.fragment), n = ie(), r = A("div"), s = Ee(
+      e = A("div"), _e(t.$$.fragment), n = ie(), r = A("div"), s = Ee(
         /*noResultsMessage*/
         i[7]
       ), b(r, "class", "svelte-bz0zu3"), b(e, "class", "no-results svelte-bz0zu3");
@@ -1769,10 +1769,10 @@ function hr(i) {
   let e, t, n, r, s, u, o, c, l, d, a;
   return t = new Ii({}), c = new Pi({}), {
     c() {
-      e = A("div"), we(t.$$.fragment), n = ie(), r = A("div"), s = Ee(
+      e = A("div"), _e(t.$$.fragment), n = ie(), r = A("div"), s = Ee(
         /*errorMessage*/
         i[6]
-      ), u = ie(), o = A("button"), we(c.$$.fragment), b(r, "class", "svelte-bz0zu3"), b(o, "class", "svelte-bz0zu3"), b(e, "class", "error svelte-bz0zu3");
+      ), u = ie(), o = A("button"), _e(c.$$.fragment), b(r, "class", "svelte-bz0zu3"), b(o, "class", "svelte-bz0zu3"), b(e, "class", "error svelte-bz0zu3");
     },
     m(f, g) {
       U(f, e, g), he(t, e, null), P(e, n), P(e, r), P(r, s), P(e, u), P(e, o), he(c, o, null), l = !0, d || (a = $(
@@ -1849,7 +1849,7 @@ function ui(i, e) {
     key: i,
     first: null,
     c() {
-      t = mn(), we(n.$$.fragment), this.first = t;
+      t = mn(), _e(n.$$.fragment), this.first = t;
     },
     m(o, c) {
       U(o, t, c), he(n, o, c), r = !0;
@@ -1880,9 +1880,9 @@ function ui(i, e) {
   };
 }
 function gr(i) {
-  let e, t, n, r, s, u, o, c, l, d, a, f, g, v, _, h, y, p, E, S, M, C = !1;
+  let e, t, n, r, s, u, o, c, l, d, a, f, g, y, w, h, v, p, E, S, M, C = !1;
   s = new Kn({}), a = new Pi({});
-  let w = (
+  let _ = (
     /*abortController*/
     i[19] && oi()
   ), L = (
@@ -1916,9 +1916,9 @@ function gr(i) {
       )
     );
   }
-  return ~(h = X(i)) && (y = N[h] = G[h](i)), {
+  return ~(h = X(i)) && (v = N[h] = G[h](i)), {
     c() {
-      e = ie(), t = A("form"), n = A("div"), r = A("button"), we(s.$$.fragment), u = ie(), o = A("input"), c = ie(), l = A("div"), d = A("button"), we(a.$$.fragment), f = ie(), w && w.c(), g = ie(), L && L.c(), v = ie(), O && O.c(), _ = ie(), y && y.c(), b(r, "class", "search-button svelte-bz0zu3"), b(r, "type", "button"), b(
+      e = ie(), t = A("form"), n = A("div"), r = A("button"), _e(s.$$.fragment), u = ie(), o = A("input"), c = ie(), l = A("div"), d = A("button"), _e(a.$$.fragment), f = ie(), _ && _.c(), g = ie(), L && L.c(), y = ie(), O && O.c(), w = ie(), v && v.c(), b(r, "class", "search-button svelte-bz0zu3"), b(r, "type", "button"), b(
         o,
         "placeholder",
         /*placeholder*/
@@ -1954,7 +1954,7 @@ function gr(i) {
         o,
         /*searchValue*/
         i[1]
-      ), P(n, c), P(n, l), P(l, d), he(a, d, null), P(l, f), w && w.m(l, null), P(n, g), L && L.m(n, null), P(n, v), O && O.m(n, null), P(t, _), ~h && N[h].m(t, null), E = !0, S || (M = [
+      ), P(n, c), P(n, l), P(l, d), he(a, d, null), P(l, f), _ && _.m(l, null), P(n, g), L && L.m(n, null), P(n, y), O && O.m(n, null), P(t, w), ~h && N[h].m(t, null), E = !0, S || (M = [
         $(
           r,
           "click",
@@ -1997,7 +1997,7 @@ function gr(i) {
           /*click_handler_1*/
           i[68]
         ),
-        $(t, "submit", yn(
+        $(t, "submit", vn(
           /*handleOnSubmit*/
           i[21]
         ))
@@ -2029,9 +2029,9 @@ function gr(i) {
         /*clearButtonTitle*/
         x[3]
       ), /*abortController*/
-      x[19] ? w ? W[0] & /*abortController*/
-      524288 && j(w, 1) : (w = oi(), w.c(), j(w, 1), w.m(l, null)) : w && (nt(), V(w, 1, 1, () => {
-        w = null;
+      x[19] ? _ ? W[0] & /*abortController*/
+      524288 && j(_, 1) : (_ = oi(), _.c(), j(_, 1), _.m(l, null)) : _ && (nt(), V(_, 1, 1, () => {
+        _ = null;
       }), rt()), (!E || W[0] & /*searchValue*/
       2) && re(
         l,
@@ -2040,7 +2040,7 @@ function gr(i) {
         x[1] !== ""
       ), /*enableReverse*/
       x[5] === "button" ? L ? (L.p(x, W), W[0] & /*enableReverse*/
-      32 && j(L, 1)) : (L = li(x), L.c(), j(L, 1), L.m(n, v)) : L && (nt(), V(L, 1, 1, () => {
+      32 && j(L, 1)) : (L = li(x), L.c(), j(L, 1), L.m(n, y)) : L && (nt(), V(L, 1, 1, () => {
         L = null;
       }), rt()), O && O.p && (!E || W[1] & /*$$scope*/
       536870912) && hn(
@@ -2062,9 +2062,9 @@ function gr(i) {
         null
       );
       let se = h;
-      h = X(x), h === se ? ~h && N[h].p(x, W) : (y && (nt(), V(N[se], 1, 1, () => {
+      h = X(x), h === se ? ~h && N[h].p(x, W) : (v && (nt(), V(N[se], 1, 1, () => {
         N[se] = null;
-      }), rt()), ~h ? (y = N[h], y ? y.p(x, W) : (y = N[h] = G[h](x), y.c()), j(y, 1), y.m(t, null)) : y = null), (!E || W[0] & /*className*/
+      }), rt()), ~h ? (v = N[h], v ? v.p(x, W) : (v = N[h] = G[h](x), v.c()), j(v, 1), v.m(t, null)) : v = null), (!E || W[0] & /*className*/
       4 && p !== (p = Zt(
         /*className*/
         x[2]
@@ -2078,13 +2078,13 @@ function gr(i) {
       );
     },
     i(x) {
-      E || (j(C), j(s.$$.fragment, x), j(a.$$.fragment, x), j(w), j(L), j(O, x), j(y), E = !0);
+      E || (j(C), j(s.$$.fragment, x), j(a.$$.fragment, x), j(_), j(L), j(O, x), j(v), E = !0);
     },
     o(x) {
-      V(C), V(s.$$.fragment, x), V(a.$$.fragment, x), V(w), V(L), V(O, x), V(y), E = !1;
+      V(C), V(s.$$.fragment, x), V(a.$$.fragment, x), V(_), V(L), V(O, x), V(v), E = !1;
     },
     d(x) {
-      x && (B(e), B(t)), ge(s), i[63](null), ge(a), w && w.d(), L && L.d(), O && O.d(x), ~h && N[h].d(), S = !1, me(M);
+      x && (B(e), B(t)), ge(s), i[63](null), ge(a), _ && _.d(), L && L.d(), O && O.d(x), ~h && N[h].d(), S = !1, me(M);
     }
   };
 }
@@ -2114,7 +2114,7 @@ function mr(i, e, t) {
     "poi.restaurant": 18,
     "poi.aerodrome": 13
   };
-  let { class: c = void 0 } = e, { apiKey: l } = e, { bbox: d = void 0 } = e, { clearButtonTitle: a = "clear" } = e, { clearOnBlur: f = !1 } = e, { collapsed: g = !1 } = e, { country: v = void 0 } = e, { debounceSearch: _ = 200 } = e, { enableReverse: h = "never" } = e, { errorMessage: y = "Something went wrong…" } = e, { filter: p = () => !0 } = e, { flyTo: E = !0 } = e, { fuzzyMatch: S = !0 } = e, { language: M = void 0 } = e, { limit: C = void 0 } = e, { mapController: w = void 0 } = e, { minLength: L = 2 } = e, { noResultsMessage: k = "Oops! Looks like you're trying to predict something that's not quite right. We can't seem to find what you're looking for. Maybe try double-checking your spelling or try a different search term. Keep on typing - we'll do our best to get you where you need to go!" } = e, { placeholder: O = "Search" } = e, { proximity: G = [{ type: "server-geolocation" }] } = e, { reverseActive: N = h === "always" } = e, { reverseButtonTitle: X = "toggle reverse geocoding" } = e, { searchValue: x = "" } = e, { pickedResultStyle: W = "full-geometry" } = e, { showPlaceType: se = "if-needed" } = e, { showResultsWhileTyping: fe = !0 } = e, { selectFirst: Re = !0 } = e, { flyToSelected: at = !1 } = e, { markerOnSelected: Ve = !0 } = e, { types: Ce = void 0 } = e, { exhaustiveReverseGeocoding: ct = !1 } = e, { excludeTypes: Ye = !1 } = e, { zoom: Ke = o } = e, { apiUrl: ft = "https://api.maptiler.com/geocoding" } = e, { fetchParameters: dt = {} } = e, { iconsBaseUrl: Bt = "https://cdn.maptiler.com/maptiler-geocoding-control/v2.0.0/icons/" } = e, { adjustUrlQuery: ht = () => {
+  let { class: c = void 0 } = e, { apiKey: l } = e, { bbox: d = void 0 } = e, { clearButtonTitle: a = "clear" } = e, { clearOnBlur: f = !1 } = e, { collapsed: g = !1 } = e, { country: y = void 0 } = e, { debounceSearch: w = 200 } = e, { enableReverse: h = "never" } = e, { errorMessage: v = "Something went wrong…" } = e, { filter: p = () => !0 } = e, { flyTo: E = !0 } = e, { fuzzyMatch: S = !0 } = e, { language: M = void 0 } = e, { limit: C = void 0 } = e, { mapController: _ = void 0 } = e, { minLength: L = 2 } = e, { noResultsMessage: k = "Oops! Looks like you're trying to predict something that's not quite right. We can't seem to find what you're looking for. Maybe try double-checking your spelling or try a different search term. Keep on typing - we'll do our best to get you where you need to go!" } = e, { placeholder: O = "Search" } = e, { proximity: G = [{ type: "server-geolocation" }] } = e, { reverseActive: N = h === "always" } = e, { reverseButtonTitle: X = "toggle reverse geocoding" } = e, { searchValue: x = "" } = e, { pickedResultStyle: W = "full-geometry" } = e, { showPlaceType: se = "if-needed" } = e, { showResultsWhileTyping: fe = !0 } = e, { selectFirst: Re = !0 } = e, { flyToSelected: at = !1 } = e, { markerOnSelected: Ve = !0 } = e, { types: Ce = void 0 } = e, { exhaustiveReverseGeocoding: ct = !1 } = e, { excludeTypes: Ye = !1 } = e, { zoom: Ke = o } = e, { apiUrl: ft = "https://api.maptiler.com/geocoding" } = e, { fetchParameters: dt = {} } = e, { iconsBaseUrl: Bt = "https://cdn.maptiler.com/maptiler-geocoding-control/v2.0.1/icons/" } = e, { adjustUrlQuery: ht = () => {
   } } = e;
   function Di() {
     ue.focus();
@@ -2123,7 +2123,7 @@ function mr(i, e, t) {
     ue.blur();
   }
   function Dt(m, F = !0, H = !1) {
-    t(1, x = m), F ? (t(15, D = -1), Ft()) : (vt(!H, H), setTimeout(() => {
+    t(1, x = m), F ? (t(15, D = -1), Ft()) : (yt(!H, H), setTimeout(() => {
       ue.focus(), ue.select();
     }));
   }
@@ -2134,16 +2134,16 @@ function mr(i, e, t) {
     t(55, q = []), t(56, R = void 0);
   }
   let Te = !1, I, q, R, Ut = "", ue, D = -1, ae, Xe = [], ke, Pe, Je, gt;
-  const ji = /* @__PURE__ */ new Set(), ye = En();
+  const ji = /* @__PURE__ */ new Set(), ve = En();
   bn(() => {
-    w && (w.setEventHandler(void 0), w.indicateReverse(!1), w.setSelectedMarker(-1), w.setFeatures(void 0, void 0, !1));
+    _ && (_.setEventHandler(void 0), _.indicateReverse(!1), _.setSelectedMarker(-1), _.setFeatures(void 0, void 0, !1));
   });
   function Ft(m) {
     if (Pe && (clearTimeout(Pe), Pe = void 0), D > -1 && I)
       t(56, R = I[D]), t(1, x = R.place_type[0] === "reverse" ? R.place_name : R.place_name.replace(/,.*/, "")), t(18, ae = void 0), t(55, q = void 0), t(15, D = -1);
     else if (x) {
       const F = m || !mt(x);
-      yt(x, { exact: !0 }).then(() => {
+      vt(x, { exact: !0 }).then(() => {
         t(55, q = I), t(56, R = void 0), F && qi();
       }).catch((H) => t(18, ae = H));
     }
@@ -2155,14 +2155,14 @@ function mr(i, e, t) {
       return !1;
     }
   }
-  async function yt(m, { byId: F = !1, exact: H = !1 } = {}) {
+  async function vt(m, { byId: F = !1, exact: H = !1 } = {}) {
     t(18, ae = void 0), ke == null || ke.abort();
     const te = new AbortController();
     t(19, ke = te);
     try {
       const T = mt(m), Q = new URLSearchParams();
-      if (M !== void 0 && Q.set("language", Array.isArray(M) ? M.join(",") : M ?? ""), Ce && Q.set("types", Ce.join(",")), Ye && Q.set("excludeTypes", String(Ye)), d && Q.set("bbox", d.map(($e) => $e.toFixed(6)).join(",")), v && Q.set("country", Array.isArray(v) ? v.join(",") : v), !F && !T) {
-        const $e = await Jn(w, G, te);
+      if (M !== void 0 && Q.set("language", Array.isArray(M) ? M.join(",") : M ?? ""), Ce && Q.set("types", Ce.join(",")), Ye && Q.set("excludeTypes", String(Ye)), d && Q.set("bbox", d.map(($e) => $e.toFixed(6)).join(",")), y && Q.set("country", Array.isArray(y) ? y.join(",") : y), !F && !T) {
+        const $e = await Jn(_, G, te);
         $e && Q.set("proximity", $e), (H || !fe) && Q.set("autocomplete", "false"), Q.set("fuzzyMatch", String(S));
       }
       C !== void 0 && (ct || !T || (Ce == null ? void 0 : Ce.length) === 1) && Q.set("limit", String(C)), Q.set("key", l), ht(Q);
@@ -2176,7 +2176,7 @@ function mr(i, e, t) {
       if (!bt.ok)
         throw new Error(await bt.text());
       const Et = await bt.json();
-      ye("response", { url: ce, featureCollection: Et }), F ? (t(14, I = void 0), t(56, R = Et.features[0]), Xe = [R]) : (t(14, I = Et.features.filter(p)), T && I.unshift({
+      ve("response", { url: ce, featureCollection: Et }), F ? (t(14, I = void 0), t(56, R = Et.features[0]), Xe = [R]) : (t(14, I = Et.features.filter(p)), T && I.unshift({
         type: "Feature",
         properties: {},
         id: "reverse_" + T.decimalLongitude + "_" + T.decimalLatitude,
@@ -2215,7 +2215,7 @@ function mr(i, e, t) {
         for (const ce of [0, 1, 2, 3])
           m[ce] = Math[ce < 2 ? "min" : "max"](m[ce], ((te = T.bbox) == null ? void 0 : te[ce]) ?? T.center[ce % 2]);
     }
-    w && q.length > 0 && (R && m[0] === m[2] && m[1] === m[3] ? w.flyTo(R.center, ze(R)) : w.fitBounds(ot(m), 50, H));
+    _ && q.length > 0 && (R && m[0] === m[2] && m[1] === m[3] ? _.flyTo(R.center, ze(R)) : _.fitBounds(ot(m), 50, H));
   }
   function ze(m) {
     var H;
@@ -2239,16 +2239,16 @@ function mr(i, e, t) {
     let F = m.key === "ArrowDown" ? 1 : m.key === "ArrowUp" ? -1 : 0;
     F && (D === (Re ? 0 : -1) && F === -1 && t(15, D = I.length), t(15, D += F), D >= I.length && t(15, D = -1), D < 0 && Re && t(15, D = 0), m.preventDefault());
   }
-  function vt(m = !0, F = !1) {
+  function yt(m = !0, F = !1) {
     if (t(18, ae = void 0), fe || F) {
       if (Pe && clearTimeout(Pe), x.length < L)
         return;
       const H = x;
       Pe = window.setTimeout(
         () => {
-          yt(H).catch((te) => t(18, ae = te));
+          vt(H).catch((te) => t(18, ae = te));
         },
-        m ? _ : 0
+        m ? w : 0
       );
     } else
       t(14, I = void 0), t(18, ae = void 0);
@@ -2265,14 +2265,14 @@ function mr(i, e, t) {
   function Yi() {
     x = this.value, t(1, x), t(13, Te), t(28, f);
   }
-  const Ki = () => t(13, Te = !0), Xi = () => t(13, Te = !1), Ji = () => vt(), $i = () => {
+  const Ki = () => t(13, Te = !0), Xi = () => t(13, Te = !1), Ji = () => yt(), $i = () => {
     t(1, x = ""), ue.focus();
   }, en = () => t(0, N = !N), tn = () => t(18, ae = void 0), nn = (m) => t(15, D = m), rn = (m) => pt(m), sn = () => {
     Re || t(15, D = -1);
   }, on = () => {
   };
   return i.$$set = (m) => {
-    "class" in m && t(2, c = m.class), "apiKey" in m && t(26, l = m.apiKey), "bbox" in m && t(27, d = m.bbox), "clearButtonTitle" in m && t(3, a = m.clearButtonTitle), "clearOnBlur" in m && t(28, f = m.clearOnBlur), "collapsed" in m && t(4, g = m.collapsed), "country" in m && t(29, v = m.country), "debounceSearch" in m && t(30, _ = m.debounceSearch), "enableReverse" in m && t(5, h = m.enableReverse), "errorMessage" in m && t(6, y = m.errorMessage), "filter" in m && t(31, p = m.filter), "flyTo" in m && t(32, E = m.flyTo), "fuzzyMatch" in m && t(33, S = m.fuzzyMatch), "language" in m && t(34, M = m.language), "limit" in m && t(35, C = m.limit), "mapController" in m && t(36, w = m.mapController), "minLength" in m && t(37, L = m.minLength), "noResultsMessage" in m && t(7, k = m.noResultsMessage), "placeholder" in m && t(8, O = m.placeholder), "proximity" in m && t(38, G = m.proximity), "reverseActive" in m && t(0, N = m.reverseActive), "reverseButtonTitle" in m && t(9, X = m.reverseButtonTitle), "searchValue" in m && t(1, x = m.searchValue), "pickedResultStyle" in m && t(39, W = m.pickedResultStyle), "showPlaceType" in m && t(10, se = m.showPlaceType), "showResultsWhileTyping" in m && t(40, fe = m.showResultsWhileTyping), "selectFirst" in m && t(11, Re = m.selectFirst), "flyToSelected" in m && t(41, at = m.flyToSelected), "markerOnSelected" in m && t(42, Ve = m.markerOnSelected), "types" in m && t(43, Ce = m.types), "exhaustiveReverseGeocoding" in m && t(44, ct = m.exhaustiveReverseGeocoding), "excludeTypes" in m && t(45, Ye = m.excludeTypes), "zoom" in m && t(46, Ke = m.zoom), "apiUrl" in m && t(47, ft = m.apiUrl), "fetchParameters" in m && t(48, dt = m.fetchParameters), "iconsBaseUrl" in m && t(12, Bt = m.iconsBaseUrl), "adjustUrlQuery" in m && t(49, ht = m.adjustUrlQuery), "$$scope" in m && t(60, u = m.$$scope);
+    "class" in m && t(2, c = m.class), "apiKey" in m && t(26, l = m.apiKey), "bbox" in m && t(27, d = m.bbox), "clearButtonTitle" in m && t(3, a = m.clearButtonTitle), "clearOnBlur" in m && t(28, f = m.clearOnBlur), "collapsed" in m && t(4, g = m.collapsed), "country" in m && t(29, y = m.country), "debounceSearch" in m && t(30, w = m.debounceSearch), "enableReverse" in m && t(5, h = m.enableReverse), "errorMessage" in m && t(6, v = m.errorMessage), "filter" in m && t(31, p = m.filter), "flyTo" in m && t(32, E = m.flyTo), "fuzzyMatch" in m && t(33, S = m.fuzzyMatch), "language" in m && t(34, M = m.language), "limit" in m && t(35, C = m.limit), "mapController" in m && t(36, _ = m.mapController), "minLength" in m && t(37, L = m.minLength), "noResultsMessage" in m && t(7, k = m.noResultsMessage), "placeholder" in m && t(8, O = m.placeholder), "proximity" in m && t(38, G = m.proximity), "reverseActive" in m && t(0, N = m.reverseActive), "reverseButtonTitle" in m && t(9, X = m.reverseButtonTitle), "searchValue" in m && t(1, x = m.searchValue), "pickedResultStyle" in m && t(39, W = m.pickedResultStyle), "showPlaceType" in m && t(10, se = m.showPlaceType), "showResultsWhileTyping" in m && t(40, fe = m.showResultsWhileTyping), "selectFirst" in m && t(11, Re = m.selectFirst), "flyToSelected" in m && t(41, at = m.flyToSelected), "markerOnSelected" in m && t(42, Ve = m.markerOnSelected), "types" in m && t(43, Ce = m.types), "exhaustiveReverseGeocoding" in m && t(44, ct = m.exhaustiveReverseGeocoding), "excludeTypes" in m && t(45, Ye = m.excludeTypes), "zoom" in m && t(46, Ke = m.zoom), "apiUrl" in m && t(47, ft = m.apiUrl), "fetchParameters" in m && t(48, dt = m.fetchParameters), "iconsBaseUrl" in m && t(12, Bt = m.iconsBaseUrl), "adjustUrlQuery" in m && t(49, ht = m.adjustUrlQuery), "$$scope" in m && t(60, u = m.$$scope);
   }, i.$$.update = () => {
     if (i.$$.dirty[0] & /*enableReverse*/
     32 && t(0, N = h === "always"), i.$$.dirty[0] & /*focused, clearOnBlur*/
@@ -2281,14 +2281,14 @@ function mr(i, e, t) {
     }), i.$$.dirty[0] & /*searchValue, listFeatures*/
     16386 | i.$$.dirty[1] & /*minLength*/
     64 && x.length < L && (t(56, R = void 0), t(14, I = void 0), t(18, ae = void 0), t(55, q = I)), i.$$.dirty[1] & /*pickedResultStyle, picked*/
-    33554688 && W !== "marker-only" && R && !R.address && R.geometry.type === "Point" && R.place_type[0] !== "reverse" && yt(R.id, { byId: !0 }).catch((m) => t(18, ae = m)), i.$$.dirty[1] & /*mapController, picked, prevIdToFly, flyTo*/
-    100663330 && (w && R && R.id !== gt && E && (!R.bbox || R.bbox[0] === R.bbox[2] && R.bbox[1] === R.bbox[3] ? w.flyTo(R.center, ze(R)) : w.fitBounds(ot(R.bbox), 50, ze(R)), t(14, I = void 0), t(55, q = void 0), t(15, D = -1)), t(57, gt = R == null ? void 0 : R.id)), i.$$.dirty[0] & /*selectFirst, listFeatures*/
+    33554688 && W !== "marker-only" && R && !R.address && R.geometry.type === "Point" && R.place_type[0] !== "reverse" && vt(R.id, { byId: !0 }).catch((m) => t(18, ae = m)), i.$$.dirty[1] & /*mapController, picked, prevIdToFly, flyTo*/
+    100663330 && (_ && R && R.id !== gt && E && (!R.bbox || R.bbox[0] === R.bbox[2] && R.bbox[1] === R.bbox[3] ? _.flyTo(R.center, ze(R)) : _.fitBounds(ot(R.bbox), 50, ze(R)), t(14, I = void 0), t(55, q = void 0), t(15, D = -1)), t(57, gt = R == null ? void 0 : R.id)), i.$$.dirty[0] & /*selectFirst, listFeatures*/
     18432 && Re && I != null && I.length && t(15, D = 0), i.$$.dirty[0] & /*searchValue*/
     2 && t(15, D = -1), i.$$.dirty[0] & /*listFeatures*/
     16384 | i.$$.dirty[1] & /*markedFeatures*/
     16777216 && q !== I && t(55, q = void 0), i.$$.dirty[0] & /*reverseActive, listFeatures, focusedDelayed*/
     81921 | i.$$.dirty[1] & /*mapController, markedFeatures*/
-    16777248 && w && w.setEventHandler((m) => {
+    16777248 && _ && _.setEventHandler((m) => {
       switch (m.type) {
         case "mapClick":
           N && Qi(m.coordinates);
@@ -2308,30 +2308,30 @@ function mr(i, e, t) {
       }
     }), i.$$.dirty[0] & /*listFeatures, selectedItemIndex*/
     49152 && t(58, r = I == null ? void 0 : I[D]), i.$$.dirty[1] & /*mapController, selected, flyTo, flyToSelected*/
-    134218786 && w && r && E && at && w.flyTo(r.center, ze(r)), i.$$.dirty[1] & /*pickedResultStyle*/
+    134218786 && _ && r && E && at && _.flyTo(r.center, ze(r)), i.$$.dirty[1] & /*pickedResultStyle*/
     256 && t(59, n = W === "full-geometry-including-polygon-center-marker"), i.$$.dirty[1] & /*markerOnSelected, mapController, showPolygonMarker*/
-    268437536 && (Ve || w == null || w.setFeatures(void 0, void 0, n)), i.$$.dirty[1] & /*mapController, markerOnSelected, markedFeatures, selected, showPolygonMarker*/
-    419432480 && w && Ve && !q && (w.setFeatures(r ? [r] : void 0, void 0, n), w.setSelectedMarker(r ? 0 : -1)), i.$$.dirty[1] & /*mapController, markedFeatures, picked, showPolygonMarker*/
-    318767136 && w && w.setFeatures(q, R, n), i.$$.dirty[0] & /*selectedItemIndex*/
+    268437536 && (Ve || _ == null || _.setFeatures(void 0, void 0, n)), i.$$.dirty[1] & /*mapController, markerOnSelected, markedFeatures, selected, showPolygonMarker*/
+    419432480 && _ && Ve && !q && (_.setFeatures(r ? [r] : void 0, void 0, n), _.setSelectedMarker(r ? 0 : -1)), i.$$.dirty[1] & /*mapController, markedFeatures, picked, showPolygonMarker*/
+    318767136 && _ && _.setFeatures(q, R, n), i.$$.dirty[0] & /*selectedItemIndex*/
     32768 | i.$$.dirty[1] & /*markedFeatures, mapController*/
-    16777248 && q && w && w.setSelectedMarker(D), i.$$.dirty[0] & /*searchValue*/
+    16777248 && q && _ && _.setSelectedMarker(D), i.$$.dirty[0] & /*searchValue*/
     2 | i.$$.dirty[1] & /*mapController*/
-    32 && w) {
+    32 && _) {
       const m = mt(x);
-      w.setReverseMarker(m ? [m.decimalLongitude, m.decimalLatitude] : void 0);
+      _.setReverseMarker(m ? [m.decimalLongitude, m.decimalLatitude] : void 0);
     }
     i.$$.dirty[1] & /*selected*/
-    134217728 && ye("select", { feature: r }), i.$$.dirty[1] & /*picked*/
-    33554432 && ye("pick", { feature: R }), i.$$.dirty[0] & /*focusedDelayed, listFeatures*/
-    81920 && ye("optionsvisibilitychange", {
+    134217728 && ve("select", { feature: r }), i.$$.dirty[1] & /*picked*/
+    33554432 && ve("pick", { feature: R }), i.$$.dirty[0] & /*focusedDelayed, listFeatures*/
+    81920 && ve("optionsvisibilitychange", {
       optionsVisible: Je && !!I
     }), i.$$.dirty[0] & /*listFeatures*/
-    16384 && ye("featureslisted", { features: I }), i.$$.dirty[1] & /*markedFeatures*/
-    16777216 && ye("featuresmarked", { features: q }), i.$$.dirty[0] & /*reverseActive*/
-    1 && ye("reversetoggle", { reverse: N }), i.$$.dirty[0] & /*searchValue*/
-    2 && ye("querychange", { query: x }), i.$$.dirty[0] & /*reverseActive*/
+    16384 && ve("featureslisted", { features: I }), i.$$.dirty[1] & /*markedFeatures*/
+    16777216 && ve("featuresmarked", { features: q }), i.$$.dirty[0] & /*reverseActive*/
+    1 && ve("reversetoggle", { reverse: N }), i.$$.dirty[0] & /*searchValue*/
+    2 && ve("querychange", { query: x }), i.$$.dirty[0] & /*reverseActive*/
     1 | i.$$.dirty[1] & /*mapController*/
-    32 && w && w.indicateReverse(N);
+    32 && _ && _.indicateReverse(N);
   }, [
     N,
     x,
@@ -2339,7 +2339,7 @@ function mr(i, e, t) {
     a,
     g,
     h,
-    y,
+    v,
     k,
     O,
     X,
@@ -2356,20 +2356,20 @@ function mr(i, e, t) {
     ji,
     Ft,
     Zi,
-    vt,
+    yt,
     pt,
     o,
     l,
     d,
     f,
-    v,
-    _,
+    y,
+    w,
     p,
     E,
     S,
     M,
     C,
-    w,
+    _,
     L,
     G,
     W,
@@ -2410,7 +2410,7 @@ function mr(i, e, t) {
     on
   ];
 }
-let yr = class extends xe {
+let vr = class extends xe {
   constructor(e) {
     super(), Se(
       this,
@@ -2539,7 +2539,7 @@ MERCHANTABLITY OR NON-INFRINGEMENT.
 See the Apache Version 2.0 License for specific language governing permissions
 and limitations under the License.
 ***************************************************************************** */
-function vr(i, e) {
+function yr(i, e) {
   var t = { label: 0, sent: function() {
     if (s[0] & 1) throw s[1];
     return s[1];
@@ -2599,7 +2599,7 @@ function vr(i, e) {
     return { value: l[0] ? l[1] : void 0, done: !0 };
   }
 }
-var _e = (
+var we = (
   /** @class */
   /* @__PURE__ */ function() {
     function i(e, t) {
@@ -2611,8 +2611,8 @@ var _e = (
 function pr(i, e) {
   return i > e ? 1 : i < e ? -1 : 0;
 }
-function ve(i, e, t) {
-  for (var n = new _e(null, null), r = n, s = n; ; ) {
+function ye(i, e, t) {
+  for (var n = new we(null, null), r = n, s = n; ; ) {
     var u = t(i, e.key);
     if (u < 0) {
       if (e.left === null)
@@ -2638,24 +2638,24 @@ function ve(i, e, t) {
   return r.right = e.left, s.left = e.right, e.left = n.right, e.right = n.left, e;
 }
 function St(i, e, t, n) {
-  var r = new _e(i, e);
+  var r = new we(i, e);
   if (t === null)
     return r.left = r.right = null, r;
-  t = ve(i, t, n);
+  t = ye(i, t, n);
   var s = n(i, t.key);
   return s < 0 ? (r.left = t.left, r.right = t, t.left = null) : s >= 0 && (r.right = t.right, r.left = t, t.right = null), r;
 }
 function ai(i, e, t) {
   var n = null, r = null;
   if (e) {
-    e = ve(i, e, t);
+    e = ye(i, e, t);
     var s = t(e.key, i);
     s === 0 ? (n = e.left, r = e.right) : s < 0 ? (r = e.right, e.right = null, n = e) : (n = e.left, e.left = null, r = e);
   }
   return { left: n, right: r };
 }
 function br(i, e, t) {
-  return e === null ? i : (i === null || (e = ve(i.key, e, t), e.left = i), e);
+  return e === null ? i : (i === null || (e = ye(i.key, e, t), e.left = i), e);
 }
 function Nt(i, e, t, n, r) {
   if (i) {
@@ -2674,9 +2674,9 @@ var Wt = (
     return i.prototype.insert = function(e, t) {
       return this._size++, this._root = St(e, t, this._root, this._comparator);
     }, i.prototype.add = function(e, t) {
-      var n = new _e(e, t);
+      var n = new we(e, t);
       this._root === null && (n.left = n.right = null, this._size++, this._root = n);
-      var r = this._comparator, s = ve(e, this._root, r), u = r(e, s.key);
+      var r = this._comparator, s = ye(e, this._root, r), u = r(e, s.key);
       return u === 0 ? this._root = s : (u < 0 ? (n.left = s.left, n.right = s, s.left = null) : u > 0 && (n.right = s.right, n.left = s, s.right = null), this._size++, this._root = n), this._root;
     }, i.prototype.remove = function(e) {
       this._root = this._remove(e, this._root, this._comparator);
@@ -2684,15 +2684,15 @@ var Wt = (
       var r;
       if (t === null)
         return null;
-      t = ve(e, t, n);
+      t = ye(e, t, n);
       var s = n(e, t.key);
-      return s === 0 ? (t.left === null ? r = t.right : (r = ve(e, t.left, n), r.right = t.right), this._size--, r) : t;
+      return s === 0 ? (t.left === null ? r = t.right : (r = ye(e, t.left, n), r.right = t.right), this._size--, r) : t;
     }, i.prototype.pop = function() {
       var e = this._root;
       if (e) {
         for (; e.left; )
           e = e.left;
-        return this._root = ve(e.key, this._root, this._comparator), this._root = this._remove(e.key, this._root, this._comparator), { key: e.key, data: e.data };
+        return this._root = ye(e.key, this._root, this._comparator), this._root = this._remove(e.key, this._root, this._comparator), { key: e.key, data: e.data };
       }
       return null;
     }, i.prototype.findStatic = function(e) {
@@ -2704,7 +2704,7 @@ var Wt = (
       }
       return null;
     }, i.prototype.find = function(e) {
-      return this._root && (this._root = ve(e, this._root, this._comparator), this._comparator(e, this._root.key) !== 0) ? null : this._root;
+      return this._root && (this._root = ye(e, this._root, this._comparator), this._comparator(e, this._root.key) !== 0) ? null : this._root;
     }, i.prototype.contains = function(e) {
       for (var t = this._root, n = this._comparator; t; ) {
         var r = n(e, t.key);
@@ -2797,14 +2797,14 @@ var Wt = (
     }, i.prototype.clear = function() {
       return this._root = null, this._size = 0, this;
     }, i.prototype.toList = function() {
-      return wr(this._root);
+      return _r(this._root);
     }, i.prototype.load = function(e, t, n) {
       t === void 0 && (t = []), n === void 0 && (n = !1);
       var r = e.length, s = this._comparator;
       if (n && Pt(e, t, 0, r - 1, s), this._root === null)
         this._root = Rt(e, t, 0, r), this._size = r;
       else {
-        var u = _r(this.toList(), Er(e, t), s);
+        var u = wr(this.toList(), Er(e, t), s);
         r = this._size + r, this._root = Tt({ head: u }, 0, r);
       }
       return this;
@@ -2837,7 +2837,7 @@ var Wt = (
       return ai(e, this._root, this._comparator);
     }, i.prototype[Symbol.iterator] = function() {
       var e, t, n;
-      return vr(this, function(r) {
+      return yr(this, function(r) {
         switch (r.label) {
           case 0:
             e = this._root, t = [], n = !1, r.label = 1;
@@ -2864,18 +2864,18 @@ var Wt = (
 function Rt(i, e, t, n) {
   var r = n - t;
   if (r > 0) {
-    var s = t + Math.floor(r / 2), u = i[s], o = e[s], c = new _e(u, o);
+    var s = t + Math.floor(r / 2), u = i[s], o = e[s], c = new we(u, o);
     return c.left = Rt(i, e, t, s), c.right = Rt(i, e, s + 1, n), c;
   }
   return null;
 }
 function Er(i, e) {
-  for (var t = new _e(null, null), n = t, r = 0; r < i.length; r++)
-    n = n.next = new _e(i[r], e[r]);
+  for (var t = new we(null, null), n = t, r = 0; r < i.length; r++)
+    n = n.next = new we(i[r], e[r]);
   return n.next = null, t.next;
 }
-function wr(i) {
-  for (var e = i, t = [], n = !1, r = new _e(null, null), s = r; !n; )
+function _r(i) {
+  for (var e = i, t = [], n = !1, r = new we(null, null), s = r; !n; )
     e ? (t.push(e), e = e.left) : t.length > 0 ? (e = s = s.next = t.pop(), e = e.right) : n = !0;
   return s.next = null, r.next;
 }
@@ -2887,8 +2887,8 @@ function Tt(i, e, t) {
   }
   return null;
 }
-function _r(i, e, t) {
-  for (var n = new _e(null, null), r = n, s = i, u = e; s !== null && u !== null; )
+function wr(i, e, t) {
+  for (var n = new we(null, null), r = n, s = i, u = e; s !== null && u !== null; )
     t(s.key, u.key) < 0 ? (r.next = s, s = s.next) : (r.next = u, u = u.next), r = r.next;
   return s !== null ? r.next = s : u !== null && (r.next = u), n.next;
 }
@@ -2933,16 +2933,16 @@ function He(i) {
 }
 const xr = (3 + 16 * de) * de, Mr = (2 + 12 * de) * de, Cr = (9 + 64 * de) * de * de, Oe = He(4), ci = He(8), fi = He(12), di = He(16), J = He(4);
 function kr(i, e, t, n, r, s, u) {
-  let o, c, l, d, a, f, g, v, _, h, y, p, E, S, M, C, w, L;
+  let o, c, l, d, a, f, g, y, w, h, v, p, E, S, M, C, _, L;
   const k = i - r, O = t - r, G = e - s, N = n - s;
-  S = k * N, f = Y * k, g = f - (f - k), v = k - g, f = Y * N, _ = f - (f - N), h = N - _, M = v * h - (S - g * _ - v * _ - g * h), C = G * O, f = Y * G, g = f - (f - G), v = G - g, f = Y * O, _ = f - (f - O), h = O - _, w = v * h - (C - g * _ - v * _ - g * h), y = M - w, a = M - y, Oe[0] = M - (y + a) + (a - w), p = S + y, a = p - S, E = S - (p - a) + (y - a), y = E - C, a = E - y, Oe[1] = E - (y + a) + (a - C), L = p + y, a = L - p, Oe[2] = p - (L - a) + (y - a), Oe[3] = L;
+  S = k * N, f = Y * k, g = f - (f - k), y = k - g, f = Y * N, w = f - (f - N), h = N - w, M = y * h - (S - g * w - y * w - g * h), C = G * O, f = Y * G, g = f - (f - G), y = G - g, f = Y * O, w = f - (f - O), h = O - w, _ = y * h - (C - g * w - y * w - g * h), v = M - _, a = M - v, Oe[0] = M - (v + a) + (a - _), p = S + v, a = p - S, E = S - (p - a) + (v - a), v = E - C, a = E - v, Oe[1] = E - (v + a) + (a - C), L = p + v, a = L - p, Oe[2] = p - (L - a) + (v - a), Oe[3] = L;
   let X = Sr(4, Oe), x = Mr * u;
   if (X >= x || -X >= x || (a = i - k, o = i - (k + a) + (a - r), a = t - O, l = t - (O + a) + (a - r), a = e - G, c = e - (G + a) + (a - s), a = n - N, d = n - (N + a) + (a - s), o === 0 && c === 0 && l === 0 && d === 0) || (x = Cr * u + Lr * Math.abs(X), X += k * d + N * o - (G * l + O * c), X >= x || -X >= x)) return X;
-  S = o * N, f = Y * o, g = f - (f - o), v = o - g, f = Y * N, _ = f - (f - N), h = N - _, M = v * h - (S - g * _ - v * _ - g * h), C = c * O, f = Y * c, g = f - (f - c), v = c - g, f = Y * O, _ = f - (f - O), h = O - _, w = v * h - (C - g * _ - v * _ - g * h), y = M - w, a = M - y, J[0] = M - (y + a) + (a - w), p = S + y, a = p - S, E = S - (p - a) + (y - a), y = E - C, a = E - y, J[1] = E - (y + a) + (a - C), L = p + y, a = L - p, J[2] = p - (L - a) + (y - a), J[3] = L;
+  S = o * N, f = Y * o, g = f - (f - o), y = o - g, f = Y * N, w = f - (f - N), h = N - w, M = y * h - (S - g * w - y * w - g * h), C = c * O, f = Y * c, g = f - (f - c), y = c - g, f = Y * O, w = f - (f - O), h = O - w, _ = y * h - (C - g * w - y * w - g * h), v = M - _, a = M - v, J[0] = M - (v + a) + (a - _), p = S + v, a = p - S, E = S - (p - a) + (v - a), v = E - C, a = E - v, J[1] = E - (v + a) + (a - C), L = p + v, a = L - p, J[2] = p - (L - a) + (v - a), J[3] = L;
   const W = xt(4, Oe, 4, J, ci);
-  S = k * d, f = Y * k, g = f - (f - k), v = k - g, f = Y * d, _ = f - (f - d), h = d - _, M = v * h - (S - g * _ - v * _ - g * h), C = G * l, f = Y * G, g = f - (f - G), v = G - g, f = Y * l, _ = f - (f - l), h = l - _, w = v * h - (C - g * _ - v * _ - g * h), y = M - w, a = M - y, J[0] = M - (y + a) + (a - w), p = S + y, a = p - S, E = S - (p - a) + (y - a), y = E - C, a = E - y, J[1] = E - (y + a) + (a - C), L = p + y, a = L - p, J[2] = p - (L - a) + (y - a), J[3] = L;
+  S = k * d, f = Y * k, g = f - (f - k), y = k - g, f = Y * d, w = f - (f - d), h = d - w, M = y * h - (S - g * w - y * w - g * h), C = G * l, f = Y * G, g = f - (f - G), y = G - g, f = Y * l, w = f - (f - l), h = l - w, _ = y * h - (C - g * w - y * w - g * h), v = M - _, a = M - v, J[0] = M - (v + a) + (a - _), p = S + v, a = p - S, E = S - (p - a) + (v - a), v = E - C, a = E - v, J[1] = E - (v + a) + (a - C), L = p + v, a = L - p, J[2] = p - (L - a) + (v - a), J[3] = L;
   const se = xt(W, ci, 4, J, fi);
-  S = o * d, f = Y * o, g = f - (f - o), v = o - g, f = Y * d, _ = f - (f - d), h = d - _, M = v * h - (S - g * _ - v * _ - g * h), C = c * l, f = Y * c, g = f - (f - c), v = c - g, f = Y * l, _ = f - (f - l), h = l - _, w = v * h - (C - g * _ - v * _ - g * h), y = M - w, a = M - y, J[0] = M - (y + a) + (a - w), p = S + y, a = p - S, E = S - (p - a) + (y - a), y = E - C, a = E - y, J[1] = E - (y + a) + (a - C), L = p + y, a = L - p, J[2] = p - (L - a) + (y - a), J[3] = L;
+  S = o * d, f = Y * o, g = f - (f - o), y = o - g, f = Y * d, w = f - (f - d), h = d - w, M = y * h - (S - g * w - y * w - g * h), C = c * l, f = Y * c, g = f - (f - c), y = c - g, f = Y * l, w = f - (f - l), h = l - w, _ = y * h - (C - g * w - y * w - g * h), v = M - _, a = M - v, J[0] = M - (v + a) + (a - _), p = S + v, a = p - S, E = S - (p - a) + (v - a), v = E - C, a = E - v, J[1] = E - (v + a) + (a - C), L = p + v, a = L - p, J[2] = p - (L - a) + (v - a), J[3] = L;
   const fe = xt(se, fi, 4, J, di);
   return di[fe - 1];
 }
@@ -3026,17 +3026,17 @@ const Ze = new Tr(), st = (i, e) => i.x * e.y - i.y * e.x, Ai = (i, e) => i.x * 
     y: t.y - i.y
   };
   return Ai(r, n) / lt(r) / lt(n);
-}, yi = (i, e, t) => e.y === 0 ? null : {
+}, vi = (i, e, t) => e.y === 0 ? null : {
   x: i.x + e.x / e.y * (t - i.y),
   y: t
-}, vi = (i, e, t) => e.x === 0 ? null : {
+}, yi = (i, e, t) => e.x === 0 ? null : {
   x: t,
   y: i.y + e.y / e.x * (t - i.x)
 }, Or = (i, e, t, n) => {
-  if (e.x === 0) return vi(t, n, i.x);
-  if (n.x === 0) return vi(i, e, t.x);
-  if (e.y === 0) return yi(t, n, i.y);
-  if (n.y === 0) return yi(i, e, t.y);
+  if (e.x === 0) return yi(t, n, i.x);
+  if (n.x === 0) return yi(i, e, t.x);
+  if (e.y === 0) return vi(t, n, i.y);
+  if (n.y === 0) return vi(i, e, t.y);
   const r = st(e, n);
   if (r == 0) return null;
   const s = {
@@ -3173,9 +3173,9 @@ class be {
       if (a > 0) return -1;
     }
     if (s !== u) {
-      const a = l - o, f = s - n, g = d - c, v = u - r;
-      if (a > f && g < v) return 1;
-      if (a < f && g > v) return -1;
+      const a = l - o, f = s - n, g = d - c, y = u - r;
+      if (a > f && g < y) return 1;
+      if (a < f && g > y) return -1;
     }
     return s > u ? 1 : s < u || l < d ? -1 : l > d ? 1 : e.id < t.id ? -1 : e.id > t.id ? 1 : 0;
   }
@@ -3517,21 +3517,21 @@ class ut {
         for (; ; ) {
           const f = o.getAvailableLinkedEvents();
           if (f.length === 0) {
-            const _ = l[0].point, h = l[l.length - 1].point;
-            throw new Error(`Unable to complete output ring starting at [${_.x}, ${_.y}]. Last matching segment found ends at [${h.x}, ${h.y}].`);
+            const w = l[0].point, h = l[l.length - 1].point;
+            throw new Error(`Unable to complete output ring starting at [${w.x}, ${w.y}]. Last matching segment found ends at [${h.x}, ${h.y}].`);
           }
           if (f.length === 1) {
             c = f[0].otherSE;
             break;
           }
           let g = null;
-          for (let _ = 0, h = a.length; _ < h; _++)
-            if (a[_].point === o.point) {
-              g = _;
+          for (let w = 0, h = a.length; w < h; w++)
+            if (a[w].point === o.point) {
+              g = w;
               break;
             }
           if (g !== null) {
-            const _ = a.splice(g)[0], h = l.splice(_.index);
+            const w = a.splice(g)[0], h = l.splice(w.index);
             h.unshift(h[0].otherSE), t.push(new ut(h.reverse()));
             continue;
           }
@@ -3539,8 +3539,8 @@ class ut {
             index: l.length,
             point: o.point
           });
-          const v = o.getLeftmostComparator(u);
-          c = f.sort(v)[0].otherSE;
+          const y = o.getLeftmostComparator(u);
+          c = f.sort(y)[0].otherSE;
           break;
         }
       t.push(new ut(l));
@@ -3659,7 +3659,7 @@ class Br {
         const a = o.getIntersection(t);
         if (a !== null && (t.isAnEndpoint(a) || (l = a), !o.isAnEndpoint(a))) {
           const f = this._splitSafely(o, a);
-          for (let g = 0, v = f.length; g < v; g++)
+          for (let g = 0, y = f.length; g < y; g++)
             n.push(f[g]);
         }
       }
@@ -3668,7 +3668,7 @@ class Br {
         const a = c.getIntersection(t);
         if (a !== null && (t.isAnEndpoint(a) || (d = a), !c.isAnEndpoint(a))) {
           const f = this._splitSafely(c, a);
-          for (let g = 0, v = f.length; g < v; g++)
+          for (let g = 0, y = f.length; g < y; g++)
             n.push(f[g]);
         }
       }
@@ -3676,7 +3676,7 @@ class Br {
         let a = null;
         l === null ? a = d : d === null ? a = l : a = ne.comparePoints(l, d) <= 0 ? l : d, this.queue.remove(t.rightSE), n.push(t.rightSE);
         const f = t.split(a);
-        for (let g = 0, v = f.length; g < v; g++)
+        for (let g = 0, y = f.length; g < y; g++)
           n.push(f[g]);
       }
       n.length > 0 ? (this.tree.remove(t), n.push(e)) : (this.segments.push(t), t.prev = o);
@@ -3710,7 +3710,7 @@ class Br {
     return r.push(n), e.consumedBy === void 0 && this.tree.add(e), r;
   }
 }
-const wi = typeof process < "u" && process.env.POLYGON_CLIPPING_MAX_QUEUE_SIZE || 1e6, Dr = typeof process < "u" && process.env.POLYGON_CLIPPING_MAX_SWEEPLINE_SEGMENTS || 1e6;
+const _i = typeof process < "u" && process.env.POLYGON_CLIPPING_MAX_QUEUE_SIZE || 1e6, Dr = typeof process < "u" && process.env.POLYGON_CLIPPING_MAX_SWEEPLINE_SEGMENTS || 1e6;
 class Ur {
   run(e, t, n) {
     oe.type = e, Ze.reset();
@@ -3726,14 +3726,14 @@ class Ur {
     if (oe.type === "intersection")
       for (let a = 0, f = r.length; a < f; a++) {
         const g = r[a];
-        for (let v = a + 1, _ = r.length; v < _; v++)
-          if (It(g.bbox, r[v].bbox) === null) return [];
+        for (let y = a + 1, w = r.length; y < w; y++)
+          if (It(g.bbox, r[y].bbox) === null) return [];
       }
     const s = new Wt(ne.compare);
     for (let a = 0, f = r.length; a < f; a++) {
       const g = r[a].getSweepEvents();
-      for (let v = 0, _ = g.length; v < _; v++)
-        if (s.insert(g[v]), s.size > wi)
+      for (let y = 0, w = g.length; y < w; y++)
+        if (s.insert(g[y]), s.size > _i)
           throw new Error("Infinite loop when putting segment endpoints in a priority queue (queue size too big).");
     }
     const u = new Br(s);
@@ -3744,14 +3744,14 @@ class Ur {
         const g = a.segment;
         throw new Error(`Unable to pop() ${a.isLeft ? "left" : "right"} SweepEvent [${a.point.x}, ${a.point.y}] from segment #${g.id} [${g.leftSE.point.x}, ${g.leftSE.point.y}] -> [${g.rightSE.point.x}, ${g.rightSE.point.y}] from queue.`);
       }
-      if (s.size > wi)
+      if (s.size > _i)
         throw new Error("Infinite loop when passing sweep line over endpoints (queue size too big).");
       if (u.segments.length > Dr)
         throw new Error("Infinite loop when passing sweep line over endpoints (too many sweep line segments).");
       const f = u.process(a);
-      for (let g = 0, v = f.length; g < v; g++) {
-        const _ = f[g];
-        _.consumedBy === void 0 && s.insert(_);
+      for (let g = 0, y = f.length; g < y; g++) {
+        const w = f[g];
+        w.consumedBy === void 0 && s.insert(w);
       }
       o = s.size, c = s.pop();
     }
@@ -3785,8 +3785,8 @@ var Wi = {
 };
 function zi(i, e, t) {
   if (i !== null)
-    for (var n, r, s, u, o, c, l, d = 0, a = 0, f, g = i.type, v = g === "FeatureCollection", _ = g === "Feature", h = v ? i.features.length : 1, y = 0; y < h; y++) {
-      l = v ? i.features[y].geometry : _ ? i.geometry : i, f = l ? l.type === "GeometryCollection" : !1, o = f ? l.geometries.length : 1;
+    for (var n, r, s, u, o, c, l, d = 0, a = 0, f, g = i.type, y = g === "FeatureCollection", w = g === "Feature", h = y ? i.features.length : 1, v = 0; v < h; v++) {
+      l = y ? i.features[v].geometry : w ? i.geometry : i, f = l ? l.type === "GeometryCollection" : !1, o = f ? l.geometries.length : 1;
       for (var p = 0; p < o; p++) {
         var E = 0, S = 0;
         if (u = f ? l.geometries[p] : l, u !== null) {
@@ -3799,7 +3799,7 @@ function zi(i, e, t) {
               if (e(
                 c,
                 a,
-                y,
+                v,
                 E,
                 S
               ) === !1)
@@ -3812,7 +3812,7 @@ function zi(i, e, t) {
                 if (e(
                   c[n],
                   a,
-                  y,
+                  v,
                   E,
                   S
                 ) === !1)
@@ -3828,7 +3828,7 @@ function zi(i, e, t) {
                   if (e(
                     c[n][r],
                     a,
-                    y,
+                    v,
                     E,
                     S
                   ) === !1)
@@ -3846,7 +3846,7 @@ function zi(i, e, t) {
                     if (e(
                       c[n][r][s],
                       a,
-                      y,
+                      v,
                       E,
                       S
                     ) === !1)
@@ -3871,9 +3871,9 @@ function zi(i, e, t) {
     }
 }
 function zt(i, e) {
-  var t, n, r, s, u, o, c, l, d, a, f = 0, g = i.type === "FeatureCollection", v = i.type === "Feature", _ = g ? i.features.length : 1;
-  for (t = 0; t < _; t++) {
-    for (o = g ? i.features[t].geometry : v ? i.geometry : i, l = g ? i.features[t].properties : v ? i.properties : {}, d = g ? i.features[t].bbox : v ? i.bbox : void 0, a = g ? i.features[t].id : v ? i.id : void 0, c = o ? o.type === "GeometryCollection" : !1, u = c ? o.geometries.length : 1, r = 0; r < u; r++) {
+  var t, n, r, s, u, o, c, l, d, a, f = 0, g = i.type === "FeatureCollection", y = i.type === "Feature", w = g ? i.features.length : 1;
+  for (t = 0; t < w; t++) {
+    for (o = g ? i.features[t].geometry : y ? i.geometry : i, l = g ? i.features[t].properties : y ? i.properties : {}, d = g ? i.features[t].bbox : y ? i.bbox : void 0, a = g ? i.features[t].id : y ? i.id : void 0, c = o ? o.type === "GeometryCollection" : !1, u = c ? o.geometries.length : 1, r = 0; r < u; r++) {
       if (s = c ? o.geometries[r] : o, s === null) {
         if (e(
           null,
@@ -3975,7 +3975,7 @@ function Hr(i, e = {}) {
     t[0] > n[0] && (t[0] = n[0]), t[1] > n[1] && (t[1] = n[1]), t[2] < n[0] && (t[2] = n[0]), t[3] < n[1] && (t[3] = n[1]);
   }), t;
 }
-var _i = Hr;
+var wi = Hr;
 function Vr(i) {
   const e = [];
   if (zt(i, (r) => {
@@ -4013,10 +4013,10 @@ function Li(i, e) {
   if (!t)
     return;
   t.properties = { isMask: !0 };
-  const n = ot(_i(i)), r = (n[2] - n[0]) / 360 / 1e3, s = n[0] < -180, u = n[2] > 180, o = Xr(i);
+  const n = ot(wi(i)), r = (n[2] - n[0]) / 360 / 1e3, s = n[0] < -180, u = n[2] > 180, o = Xr(i);
   if (o.features.length > 1 && (s || u))
     for (const c of o.features) {
-      const l = ot(_i(c));
+      const l = ot(wi(c));
       if (u && l[0] < -180 + r)
         for (const d of c.geometry.coordinates)
           for (const a of d)
@@ -4065,9 +4065,9 @@ function Jr(i, e, t = !0, n = !0, r = {}, s = {}, u = Si) {
     const h = u ? u === !0 ? Si : u : void 0;
     if (!(h != null && h.fill) && !(h != null && h.line))
       return;
-    const y = i.getSource(tt);
-    if (y)
-      y.setData(a ?? Qe([]));
+    const v = i.getSource(tt);
+    if (v)
+      v.setData(a ?? Qe([]));
     else if (a)
       i.addSource(tt, {
         type: "geojson",
@@ -4095,51 +4095,51 @@ function Jr(i, e, t = !0, n = !0, r = {}, s = {}, u = Si) {
       a && f();
     });
   });
-  const v = (h) => {
+  const y = (h) => {
     o == null || o({
       type: "mapClick",
       coordinates: [h.lngLat.lng, h.lngLat.lat]
     });
   };
-  function _(h = !1) {
+  function w(h = !1) {
     if (!e)
       throw new Error();
-    const y = document.createElement("div");
-    return h && y.classList.add("marker-interactive"), new Zn({
+    const v = document.createElement("div");
+    return h && v.classList.add("marker-interactive"), new Zn({
       props: { displayIn: "maplibre" },
-      target: y
-    }), new e.Marker({ element: y, offset: [1, -13] });
+      target: v
+    }), new e.Marker({ element: v, offset: [1, -13] });
   }
   return {
     setEventHandler(h) {
-      h ? (o = h, i.on("click", v)) : (o = void 0, i.off("click", v));
+      h ? (o = h, i.on("click", y)) : (o = void 0, i.off("click", y));
     },
-    flyTo(h, y) {
-      i.flyTo({ center: h, ...y ? { zoom: y } : {}, ...r });
+    flyTo(h, v) {
+      i.flyTo({ center: h, ...v ? { zoom: v } : {}, ...r });
     },
-    fitBounds(h, y, p) {
+    fitBounds(h, v, p) {
       i.fitBounds(
         [
           [h[0], h[1]],
           [h[2], h[3]]
         ],
-        { padding: y, ...p ? { maxZoom: p } : {}, ...s }
+        { padding: v, ...p ? { maxZoom: p } : {}, ...s }
       );
     },
     indicateReverse(h) {
       i.getCanvasContainer().style.cursor = h ? "crosshair" : "";
     },
     setReverseMarker(h) {
-      !e || !t || (d ? h ? d.setLngLat(h) : (d.remove(), d = void 0) : h && (t instanceof Function ? d = t(i) ?? void 0 : (d = (typeof t == "object" ? new e.Marker(t) : _()).setLngLat(h).addTo(i), d.getElement().classList.add("marker-reverse"))));
+      !e || !t || (d ? h ? d.setLngLat(h) : (d.remove(), d = void 0) : h && (t instanceof Function ? d = t(i) ?? void 0 : (d = (typeof t == "object" ? new e.Marker(t) : w()).setLngLat(h).addTo(i), d.getElement().classList.add("marker-reverse"))));
     },
-    setFeatures(h, y, p) {
+    setFeatures(h, v, p) {
       for (const E of c)
         E.remove();
       if (c.length = 0, g(void 0), !!e) {
-        if (y) {
+        if (v) {
           let E = !1;
-          if (y.geometry.type === "GeometryCollection") {
-            const S = y.geometry.geometries.filter(
+          if (v.geometry.type === "GeometryCollection") {
+            const S = v.geometry.geometries.filter(
               (M) => M.type === "Polygon" || M.type === "MultiPolygon"
             );
             e: if (S.length > 0) {
@@ -4150,48 +4150,48 @@ function Jr(i, e, t = !0, n = !0, r = {}, s = {}, u = Si) {
                 break e;
               Li(
                 {
-                  ...y,
+                  ...v,
                   geometry: M.geometry
                 },
                 g
               ), E = !0;
             } else {
-              const M = y.geometry.geometries.filter(
+              const M = v.geometry.geometries.filter(
                 (C) => C.type === "LineString" || C.type === "MultiLineString"
               );
               M.length > 0 && (g({
-                ...y,
+                ...v,
                 geometry: { type: "GeometryCollection", geometries: M }
               }), E = !0);
             }
           }
           if (!E) {
-            if (y.geometry.type === "Polygon" || y.geometry.type === "MultiPolygon")
-              Li(y, g);
-            else if (y.geometry.type === "LineString" || y.geometry.type === "MultiLineString") {
-              g(y);
+            if (v.geometry.type === "Polygon" || v.geometry.type === "MultiPolygon")
+              Li(v, g);
+            else if (v.geometry.type === "LineString" || v.geometry.type === "MultiLineString") {
+              g(v);
               return;
             }
           }
-          if (!p && y.geometry.type !== "Point")
+          if (!p && v.geometry.type !== "Point")
             return;
           if (t instanceof Function) {
-            const S = t(i, y);
+            const S = t(i, v);
             S && c.push(S);
           } else t && c.push(
-            typeof t == "object" ? new e.Marker(t) : _().setLngLat(y.center).addTo(i)
+            typeof t == "object" ? new e.Marker(t) : w().setLngLat(v.center).addTo(i)
           );
         }
         if (n)
           for (const E of h ?? []) {
-            if (E === y)
+            if (E === v)
               continue;
             let S;
             if (n instanceof Function) {
               if (S = n(i, E), !S)
                 continue;
             } else
-              S = (typeof n == "object" ? new e.Marker(n) : _(!0)).setLngLat(E.center).setPopup(
+              S = (typeof n == "object" ? new e.Marker(n) : w(!0)).setLngLat(E.center).setPopup(
                 new e.Popup({
                   offset: [1, -27],
                   closeButton: !1,
@@ -4222,12 +4222,12 @@ function Jr(i, e, t = !0, n = !0, r = {}, s = {}, u = Si) {
   };
 }
 function $r(i, e, t) {
-  var v, _;
+  var y, w;
   class n {
-    constructor(y, p) {
+    constructor(v, p) {
       ee(this, "type");
       ee(this, "target");
-      this.type = p, this.target = y;
+      this.type = p, this.target = v;
     }
   }
   class r extends n {
@@ -4290,9 +4290,9 @@ function $r(i, e, t) {
   class f extends i {
     constructor(p = {}) {
       super();
-      wt(this, v);
-      wt(this, _);
-      _t(this, _, p);
+      _t(this, y);
+      _t(this, w);
+      wt(this, w, p);
     }
     onAddInt(p) {
       const E = document.createElement("div");
@@ -4301,9 +4301,9 @@ function $r(i, e, t) {
         marker: S,
         showResultMarkers: M,
         flyTo: C,
-        fullGeometryStyle: w,
+        fullGeometryStyle: _,
         ...L
-      } = Z(this, _), k = typeof C == "boolean" ? {} : C, G = {
+      } = Z(this, w), k = typeof C == "boolean" ? {} : C, G = {
         mapController: Jr(
           p,
           e,
@@ -4311,7 +4311,7 @@ function $r(i, e, t) {
           M,
           k,
           k,
-          w
+          _
         ),
         flyTo: C === void 0 ? !0 : !!C,
         apiKey: "",
@@ -4321,15 +4321,15 @@ function $r(i, e, t) {
       };
       if (!G.apiKey)
         throw new Error("no apiKey provided");
-      return _t(this, v, new yr({ target: E, props: G })), Z(this, v).$on("select", (N) => {
+      return wt(this, y, new vr({ target: E, props: G })), Z(this, y).$on("select", (N) => {
         this.fire(new r(this, N.detail));
-      }), Z(this, v).$on("pick", (N) => {
+      }), Z(this, y).$on("pick", (N) => {
         this.fire(new c(this, N.detail.feature));
-      }), Z(this, v).$on("featureslisted", (N) => {
+      }), Z(this, y).$on("featureslisted", (N) => {
         this.fire(new s(this, N.detail.features));
-      }), Z(this, v).$on("featuresmarked", (N) => {
+      }), Z(this, y).$on("featuresmarked", (N) => {
         this.fire(new u(this, N.detail.features));
-      }), Z(this, v).$on("response", (N) => {
+      }), Z(this, y).$on("response", (N) => {
         this.fire(
           new d(
             this,
@@ -4337,13 +4337,13 @@ function $r(i, e, t) {
             N.detail.featureCollection
           )
         );
-      }), Z(this, v).$on("optionsvisibilitychange", (N) => {
+      }), Z(this, y).$on("optionsvisibilitychange", (N) => {
         this.fire(
           new o(this, N.detail.optionsVisible)
         );
-      }), Z(this, v).$on("reversetoggle", (N) => {
+      }), Z(this, y).$on("reversetoggle", (N) => {
         this.fire(new a(this, N.detail.reverse));
-      }), Z(this, v).$on("querychange", (N) => {
+      }), Z(this, y).$on("querychange", (N) => {
         this.fire(new l(this, N.detail.query));
       }), E;
     }
@@ -4361,46 +4361,46 @@ function $r(i, e, t) {
     }
     setOptions(p) {
       var L;
-      Object.assign(Z(this, _), p);
+      Object.assign(Z(this, w), p);
       const {
         marker: E,
         showResultMarkers: S,
         flyTo: M,
         fullGeometryStyle: C,
-        ...w
-      } = Z(this, _);
-      (L = Z(this, v)) == null || L.$set(w);
+        ..._
+      } = Z(this, w);
+      (L = Z(this, y)) == null || L.$set(_);
     }
     setQuery(p, E = !0) {
       var S;
-      (S = Z(this, v)) == null || S.setQuery(p, E);
+      (S = Z(this, y)) == null || S.setQuery(p, E);
     }
     clearMap() {
       var p;
-      (p = Z(this, v)) == null || p.clearMap();
+      (p = Z(this, y)) == null || p.clearMap();
     }
     clearList() {
       var p;
-      (p = Z(this, v)) == null || p.clearList();
+      (p = Z(this, y)) == null || p.clearList();
     }
     setReverseMode(p) {
       var E;
-      (E = Z(this, v)) == null || E.$set({ reverseActive: p });
+      (E = Z(this, y)) == null || E.$set({ reverseActive: p });
     }
     focus() {
       var p;
-      (p = Z(this, v)) == null || p.focus();
+      (p = Z(this, y)) == null || p.focus();
     }
     blur() {
       var p;
-      (p = Z(this, v)) == null || p.blur();
+      (p = Z(this, y)) == null || p.blur();
     }
     onRemove() {
       var p;
-      (p = Z(this, v)) == null || p.$destroy();
+      (p = Z(this, y)) == null || p.$destroy();
     }
   }
-  return v = new WeakMap(), _ = new WeakMap(), {
+  return y = new WeakMap(), w = new WeakMap(), {
     MapLibreBasedGeocodingControl: f,
     events: {
       SelectEvent: r,
@@ -4416,16 +4416,7 @@ function $r(i, e, t) {
 }
 const { MapLibreBasedGeocodingControl: es, events: Me } = $r(
   qt.Evented,
-  qt,
-  (i, e) => {
-    const t = {};
-    if (!("getSdkConfig" in i && typeof i.getSdkConfig == "function"))
-      throw new Error("MapTiler SDK not detected");
-    const { primaryLanguage: n, apiKey: r } = i.getSdkConfig();
-    t.apiKey = r;
-    const s = /^([a-z]{2})($|_|-)/.exec(n);
-    return s && (t.language = s[1]), e.className += " maptiler-ctrl", t;
-  }
+  qt
 );
 class ns extends es {
   onAdd(e) {
@@ -4445,4 +4436,4 @@ export {
   rs as SelectEvent,
   Jr as createMapLibreGlMapController
 };
-//# sourceMappingURL=maptilersdk.js.map
+//# sourceMappingURL=maplibregl.js.map

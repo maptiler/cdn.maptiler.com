@@ -73,7 +73,7 @@ export let zoom = ZOOM_DEFAULTS;
 export let apiUrl = "https://api.maptiler.com/geocoding";
 export let fetchParameters = {};
 export let iconsBaseUrl = "https://cdn.maptiler.com/maptiler-geocoding-control/v" +
-    "2.0.0" +
+    "2.0.1" +
     "/icons/";
 export let adjustUrlQuery = () => { };
 export function focus() {
