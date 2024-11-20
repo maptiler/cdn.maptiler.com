@@ -33,7 +33,7 @@ export type MapController = {
     flyTo(center: Position, zoom?: number): void;
     fitBounds(bbox: BBox, padding: number, maxZoom?: number): void;
     indicateReverse(reverse: boolean): void;
-    setMarkers(features: Feature[] | undefined, picked: Feature | undefined): void;
+    setFeatures(features: Feature[] | undefined, picked: Feature | undefined, showPolygonMarker: boolean): void;
     setReverseMarker(coordinates?: Position): void;
     setSelectedMarker(index: number): void;
     getCenterAndZoom(): [zoom: number, lon: number, lat: number] | undefined;
@@ -68,43 +68,51 @@ export type ControlOptions = {
     /**
      * Sets the amount of time, in milliseconds, to wait before querying the server when a user types into the Geocoder input box.
      * This parameter may be useful for reducing the total number of API calls made for a single query.
+     *
      * Default value is `200`.
      */
     debounceSearch?: number;
     /**
      * Search results closer to the proximity point will be given higher priority. First matching rule from the array will be used.
      * Set to `null` to disable the proximity.
+     *
      * Default value is `[{ type: "server-geolocation" }]`.
      */
     proximity?: ProximityRule[] | null;
     /**
      * Override the default placeholder attribute value.
+     *
      * Default value is `"Search"`.
      */
     placeholder?: string;
     /**
      * Override the default error message.
+     *
      * Default value is `"Something went wrong…"`.
      */
     errorMessage?: string;
     /**
      * Override the default message if no results are found.
+     *
      * Default value is `"Oops! Looks like you're trying to predict something that's not quite right. We can't seem to find what you're looking for. Maybe try double-checking your spelling or try a different search term. Keep on typing - we'll do our best to get you where you need to go!"`.
      */
     noResultsMessage?: string;
     /**
      * Minimum number of characters to enter before results are shown.
+     *
      * Default value is `2`.
      */
     minLength?: number;
     /**
      * A bounding box argument: this is a bounding box given as an array in the format [minX, minY, maxX, maxY].
      * Search results will be limited to the bounding box.
+     *
      * Default value is `undefined`.
      */
     bbox?: BBox;
     /**
      * Maximum number of results to show.
+     *
      * Default value is `5`.
      */
     limit?: number;
@@ -113,128 +121,144 @@ export type ControlOptions = {
      * Options are IETF language tags comprised of a mandatory ISO 639-1 language code and optionally one or more IETF subtags for country or script.
      * More than one value can also be specified, separated by commas.
      * Set to `null` or empty string for disabling language-specific searching.
-     * Defaults to the browser's language settings.
-     * Default value is `undefined`.
+     *
+     * Default value is `undefined` which means to use the browser's language settings.
      */
     language?: string | string[] | null;
     /**
      * If `false`, indicates that search will only occur on enter key press.
      * If `true`, indicates that the Geocoder will search on the input box being updated above the minLength option.
+     *
      * Default value is `false`.
      */
     showResultsWhileTyping?: boolean;
     /**
      * Set to `false` to disable fuzzy search.
-     * Default value is `true`
+     *
+     * Default value is `true`.
      */
     fuzzyMatch?: boolean;
     /**
      * On geocoded result what zoom level should the map animate to when a bbox in the response isn't present or is a point.
      * If a bbox is present and not a point then the map will fit to the bbox.
      *
-     * Value can be a number (deprecated) or key-value pairs, where key is a &lt;type&gt; or &lt;type&gt;.&lt;categoy&gt; and value is the zoom level.
+     * Value is key-value pairs, where key is a &lt;type&gt; or &lt;type&gt;.&lt;categoy&gt; and the value is the zoom level.
      *
      * Default value is `GeocodingControl.ZOOM_DEFAULTS`.
      */
-    zoom?: number | Record<string, number>;
-    /**
-     * On geocoded result what max zoom level should the map animate to when a bbox in the response isn't present or is a point.
-     * Used for small features.
-     *
-     * If a bbox is present and not a point then the map will fit to the bbox.
-     *
-     * @deprecated use `zoom` option
-     */
-    maxZoom?: number;
+    zoom?: Record<string, number>;
     /**
      * If `true`, the geocoder control will collapse until hovered or in focus.
+     *
      * Default value is `false`.
      */
     collapsed?: boolean;
     /**
      * If true, the geocoder control will clear its value when the input blurs.
+     *
      * Default value is `false`.
      */
     clearOnBlur?: boolean;
     /**
      * A function which accepts a Feature in the Carmen GeoJSON format to filter out results from the Geocoding API response before they are included in the suggestions list.
      * Return true to keep the item, false otherwise.
+     *
+     * Default value is a function returning always `true`.
      */
     filter?: (feature: Feature) => boolean;
     /**
      * Class of the root element.
+     *
      * Default value is `undefined`.
      */
     class?: string;
     /**
-     * Set to `true` to enable reverse geocoding button with title. Set to `"always"` to reverse geocoding be always active.
-     * Default value is `false`
+     * Set to `button` to enable reverse geocoding button with title. Set to `"always"` to reverse geocoding be always active.
+     *
+     * Default value is `"never"`.
      */
-    enableReverse?: boolean | "always";
+    enableReverse?: EnableReverse;
     /**
-     * Toggle reverse mode.
+     * Reverse mode active.
+     *
      * Default value is `false`.
      */
     reverseActive?: boolean;
     /**
-     * Reverse toggle button title.
+     * Title of the reverse toggle button.
+     *
      * Default value is `"toggle reverse geocoding"`.
      */
     reverseButtonTitle?: string;
     /**
-     * Clear button title.
+     * Title of the clear button.
+     *
      * Default value is `"clear"`.
      */
     clearButtonTitle?: string;
     /**
-     * Set to `false` to hide place/POI type. If set to `"always"` then type is shown for all items.
-     * If set to `"ifNeeded"` then type is shown only for places/POIs not determined from the icon.
-     * Default value is `"ifNeeded"`.
+     * Set to `"never"` to hide place/POI type. If set to `"always"` then type is shown for all items.
+     * If set to `"if-needed"` then type is shown only for places/POIs not determined from the icon.
+     *
+     * Default value is `"if-needed"`.
      */
-    showPlaceType?: false | "always" | "ifNeeded";
+    showPlaceType?: ShowPlaceType;
     /**
-     * Set to `true` to show full feature geometry of the chosen result. Otherwise only marker will be shown.
+     * Style of the picked result on the map:
+     *
+     * - `"marker-only"` - show only marker at the center of the feature
+     * - `"full-geometry"` - show full feature geometry of the chosen result
+     * - `"full-geometry-including-polygon-center-marker"` - show full feature geometry of the chosen result together with a marker in the center of polygon feature
+     *
      * Default value is `true`.
      */
-    showFullGeometry?: boolean;
+    pickedResultStyle?: PickedResultStyle;
     /**
      * Limit search to specified country(ies).
+     *
      * Default value is `undefined` - use all countries.
      */
     country?: string | string[];
     /**
      * Filter of feature types to return.
+     *
      * Default value is `undefined` - all available feature types are returned.
      */
     types?: string[];
     /**
      * Use `limit` value for reverse geocoding even if `types` is not an array with a single element.
      * Will work only if enabled on the server.
+     *
      * Default value is `false`.
      */
     exhaustiveReverseGeocoding?: boolean;
     /**
      * If set to `true` then use all types except for those listed in `types`.
+     *
      * Default value is `false`.
      */
     excludeTypes?: boolean;
     /**
      * Geocoding API URL.
+     *
      * Default value is MapTiler Geocoding API URL.
      */
     apiUrl?: string;
     /**
      * Extra fetch parameters.
+     *
      * Default value is `undefined`.
      */
     fetchParameters?: RequestInit;
     /**
      * Base URL for POI icons.
+     *
      * Default value is `"icons/"` for Svelte apps, otherwise `"https://cdn.maptiler.com/maptiler-geocoding-control/v${version}/icons/"`.
      */
     iconsBaseUrl?: string;
     /**
      * Function to adjust URL search parameters.
+     *
      * Default value is empty function.
      */
     adjustUrlQuery?: (sp: URLSearchParams) => void;
@@ -257,16 +281,41 @@ export type ControlOptions = {
      */
     markerOnSelected?: boolean;
 };
-export type DispatcherType = {
-    featuresListed: Feature[] | undefined;
-    featuresMarked: Feature[] | undefined;
-    optionsVisibilityChange: boolean;
-    pick: Feature | undefined;
-    queryChange: string;
+export type PickedResultStyle = "marker-only" | "full-geometry" | "full-geometry-including-polygon-center-marker";
+export type EnableReverse = "never" | "always" | "button";
+export type ShowPlaceType = "never" | "always" | "if-needed";
+export type DispatcherTypeCC = {
+    featuresListed: {
+        features: Feature[] | undefined;
+    };
+    featuresMarked: {
+        features: Feature[] | undefined;
+    };
+    optionsVisibilityChange: {
+        optionsVisible: boolean;
+    };
+    pick: {
+        feature: Feature | undefined;
+    };
+    queryChange: {
+        query: string;
+    };
     response: {
         url: string;
         featureCollection: FeatureCollection;
     };
-    reverseToggle: boolean;
-    select: Feature | undefined;
+    reverseToggle: {
+        reverse: boolean;
+    };
+    select: {
+        feature: Feature | undefined;
+    };
 };
+export type DispatcherType = {
+    [T in keyof DispatcherTypeCC as Lowercase<T>]: DispatcherTypeCC[T];
+};
+export type RedefineType<OriginalType, UpdatedType extends {
+    [K in keyof OriginalType]: OriginalType[K];
+} & {
+    [K in Exclude<keyof UpdatedType, keyof OriginalType>]: never;
+}> = UpdatedType;

@@ -43,7 +43,7 @@ export let clearOnBlur = false;
 export let collapsed = false;
 export let country = undefined;
 export let debounceSearch = 200;
-export let enableReverse = false;
+export let enableReverse = "never";
 export let errorMessage = "Something went wrong…";
 export let filter = () => true;
 export let flyTo = true;
@@ -60,8 +60,8 @@ export let proximity = [
 export let reverseActive = enableReverse === "always";
 export let reverseButtonTitle = "toggle reverse geocoding";
 export let searchValue = "";
-export let showFullGeometry = true;
-export let showPlaceType = "ifNeeded";
+export let pickedResultStyle = "full-geometry";
+export let showPlaceType = "if-needed";
 export let showResultsWhileTyping = true;
 export let selectFirst = true;
 export let flyToSelected = false;
@@ -70,7 +70,6 @@ export let types = undefined;
 export let exhaustiveReverseGeocoding = false;
 export let excludeTypes = false;
 export let zoom = ZOOM_DEFAULTS;
-export let maxZoom = undefined;
 export let apiUrl = "https://api.maptiler.com/geocoding";
 export let fetchParameters = {};
 export let iconsBaseUrl = "https://cdn.maptiler.com/maptiler-geocoding-control/v" +
@@ -124,7 +123,7 @@ const dispatch = createEventDispatcher();
 $: {
     reverseActive = enableReverse === "always";
 }
-$: if (showFullGeometry &&
+$: if (pickedResultStyle !== "marker-only" &&
     picked &&
     !picked.address &&
     picked.geometry.type === "Point" &&
@@ -149,19 +148,21 @@ $: {
 $: if (mapController && selected && flyTo && flyToSelected) {
     mapController.flyTo(selected.center, computeZoom(selected));
 }
+$: showPolygonMarker =
+    pickedResultStyle === "full-geometry-including-polygon-center-marker";
 // if markerOnSelected was dynamically changed to false
 $: if (!markerOnSelected) {
-    mapController?.setMarkers(undefined, undefined);
+    mapController?.setFeatures(undefined, undefined, showPolygonMarker);
 }
 $: if (mapController && markerOnSelected && !markedFeatures) {
-    mapController.setMarkers(selected ? [selected] : undefined, undefined);
+    mapController.setFeatures(selected ? [selected] : undefined, undefined, showPolygonMarker);
     mapController.setSelectedMarker(selected ? 0 : -1);
 }
 $: if (markedFeatures !== listFeatures) {
     markedFeatures = undefined;
 }
 $: if (mapController) {
-    mapController.setMarkers(markedFeatures, picked);
+    mapController.setFeatures(markedFeatures, picked, showPolygonMarker);
 }
 $: if (searchValue.length < minLength) {
     picked = undefined;
@@ -194,13 +195,15 @@ $: if (mapController) {
     const coords = isQueryReverse(searchValue);
     mapController.setReverseMarker(coords ? [coords.decimalLongitude, coords.decimalLatitude] : undefined);
 }
-$: dispatch("select", selected);
-$: dispatch("pick", picked);
-$: dispatch("optionsVisibilityChange", focusedDelayed && !!listFeatures);
-$: dispatch("featuresListed", listFeatures);
-$: dispatch("featuresMarked", markedFeatures);
-$: dispatch("reverseToggle", reverseActive);
-$: dispatch("queryChange", searchValue);
+$: dispatch("select", { feature: selected });
+$: dispatch("pick", { feature: picked });
+$: dispatch("optionsvisibilitychange", {
+    optionsVisible: focusedDelayed && !!listFeatures,
+});
+$: dispatch("featureslisted", { features: listFeatures });
+$: dispatch("featuresmarked", { features: markedFeatures });
+$: dispatch("reversetoggle", { reverse: reverseActive });
+$: dispatch("querychange", { query: searchValue });
 $: if (mapController) {
     mapController.indicateReverse(reverseActive);
 }
@@ -241,7 +244,7 @@ onDestroy(() => {
         mapController.setEventHandler(undefined);
         mapController.indicateReverse(false);
         mapController.setSelectedMarker(-1);
-        mapController.setMarkers(undefined, undefined);
+        mapController.setFeatures(undefined, undefined, false);
     }
 });
 function handleOnSubmit(event) {
@@ -411,12 +414,11 @@ function zoomToResults() {
     for (const feature of markedFeatures) {
         const featZoom = computeZoom(feature);
         allZoom =
-            maxZoom ??
-                (allZoom === undefined
-                    ? featZoom
-                    : featZoom === undefined
-                        ? allZoom
-                        : Math.max(allZoom, featZoom));
+            allZoom === undefined
+                ? featZoom
+                : featZoom === undefined
+                    ? allZoom
+                    : Math.max(allZoom, featZoom);
         if (fuzzyOnly || !feature.matching_text) {
             for (const i of [0, 1, 2, 3]) {
                 bbox[i] = Math[i < 2 ? "min" : "max"](bbox[i], feature.bbox?.[i] ?? feature.center[i % 2]);
@@ -437,11 +439,6 @@ function computeZoom(feature) {
         (feature.bbox[0] !== feature.bbox[2] &&
             feature.bbox[1] !== feature.bbox[3])) {
         return undefined;
-    }
-    if (typeof zoom === "number") {
-        return feature.id.startsWith("poi.") || feature.id.startsWith("address.")
-            ? maxZoom
-            : zoom;
     }
     const index = feature.id.replace(/\..*/, "");
     return ((Array.isArray(feature.properties?.categories)
@@ -550,7 +547,7 @@ function pick(feature) {
       {/if}
     </div>
 
-    {#if enableReverse === true}
+    {#if enableReverse === "button"}
       <button
         type="button"
         class:active={reverseActive}
@@ -584,6 +581,7 @@ function pick(feature) {
     </div>
   {:else if focusedDelayed && listFeatures?.length}
     <ul
+      class="options"
       on:mouseleave={() => {
         if (!selectFirst) {
           selectedItemIndex = -1;
@@ -726,10 +724,11 @@ div.no-results :global(svg) {
   height: 30px;
 }
 
-:global(.maplibregl-ctrl-bottom-left) ul,
-:global(.maplibregl-ctrl-bottom-right) ul {
+:global(.leaflet-bottom) ul.options,
+:global(.maplibregl-ctrl-bottom-left) ul.options,
+:global(.maplibregl-ctrl-bottom-right) ul.options {
   top: auto;
-  bottom: 100%;
+  bottom: calc(100% + 6px);
 }
 
 button {

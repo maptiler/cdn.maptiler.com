@@ -35,10 +35,10 @@ function Ut(r, t, e = {}) {
 }
 function Yt(r, t, e) {
   if (r !== null)
-    for (var n, i, o, u, l, c, f, p = 0, s = 0, a, h = r.type, g = h === "FeatureCollection", y = h === "Feature", x = g ? r.features.length : 1, d = 0; d < x; d++) {
-      f = g ? r.features[d].geometry : y ? r.geometry : r, a = f ? f.type === "GeometryCollection" : !1, l = a ? f.geometries.length : 1;
+    for (var n, i, o, u, l, c, f, p = 0, s = 0, a, h = r.type, g = h === "FeatureCollection", d = h === "Feature", w = g ? r.features.length : 1, y = 0; y < w; y++) {
+      f = g ? r.features[y].geometry : d ? r.geometry : r, a = f ? f.type === "GeometryCollection" : !1, l = a ? f.geometries.length : 1;
       for (var v = 0; v < l; v++) {
-        var m = 0, w = 0;
+        var x = 0, m = 0;
         if (u = a ? f.geometries[v] : f, u !== null) {
           c = u.coordinates;
           var E = u.type;
@@ -49,12 +49,12 @@ function Yt(r, t, e) {
               if (t(
                 c,
                 s,
-                d,
-                m,
-                w
+                y,
+                x,
+                m
               ) === !1)
                 return !1;
-              s++, m++;
+              s++, x++;
               break;
             case "LineString":
             case "MultiPoint":
@@ -62,14 +62,14 @@ function Yt(r, t, e) {
                 if (t(
                   c[n],
                   s,
-                  d,
-                  m,
-                  w
+                  y,
+                  x,
+                  m
                 ) === !1)
                   return !1;
-                s++, E === "MultiPoint" && m++;
+                s++, E === "MultiPoint" && x++;
               }
-              E === "LineString" && m++;
+              E === "LineString" && x++;
               break;
             case "Polygon":
             case "MultiLineString":
@@ -78,34 +78,34 @@ function Yt(r, t, e) {
                   if (t(
                     c[n][i],
                     s,
-                    d,
-                    m,
-                    w
+                    y,
+                    x,
+                    m
                   ) === !1)
                     return !1;
                   s++;
                 }
-                E === "MultiLineString" && m++, E === "Polygon" && w++;
+                E === "MultiLineString" && x++, E === "Polygon" && m++;
               }
-              E === "Polygon" && m++;
+              E === "Polygon" && x++;
               break;
             case "MultiPolygon":
               for (n = 0; n < c.length; n++) {
-                for (w = 0, i = 0; i < c[n].length; i++) {
+                for (m = 0, i = 0; i < c[n].length; i++) {
                   for (o = 0; o < c[n][i].length - p; o++) {
                     if (t(
                       c[n][i][o],
                       s,
-                      d,
-                      m,
-                      w
+                      y,
+                      x,
+                      m
                     ) === !1)
                       return !1;
                     s++;
                   }
-                  w++;
+                  m++;
                 }
-                m++;
+                x++;
               }
               break;
             case "GeometryCollection":
@@ -121,8 +121,8 @@ function Yt(r, t, e) {
     }
 }
 function vt(r, t) {
-  var e, n, i, o, u, l, c, f, p, s, a = 0, h = r.type === "FeatureCollection", g = r.type === "Feature", y = h ? r.features.length : 1;
-  for (e = 0; e < y; e++) {
+  var e, n, i, o, u, l, c, f, p, s, a = 0, h = r.type === "FeatureCollection", g = r.type === "Feature", d = h ? r.features.length : 1;
+  for (e = 0; e < d; e++) {
     for (l = h ? r.features[e].geometry : g ? r.geometry : r, f = h ? r.features[e].properties : g ? r.properties : {}, p = h ? r.features[e].bbox : g ? r.bbox : void 0, s = h ? r.features[e].id : g ? r.id : void 0, c = l ? l.type === "GeometryCollection" : !1, u = c ? l.geometries.length : 1, i = 0; i < u; i++) {
       if (o = c ? l.geometries[i] : l, o === null) {
         if (t(
@@ -693,16 +693,16 @@ function K(r) {
 }
 const me = (3 + 16 * O) * O, we = (2 + 12 * O) * O, Ee = (9 + 64 * O) * O * O, q = K(4), _t = K(8), St = K(12), Pt = K(16), P = K(4);
 function be(r, t, e, n, i, o, u) {
-  let l, c, f, p, s, a, h, g, y, x, d, v, m, w, E, b, M, _;
+  let l, c, f, p, s, a, h, g, d, w, y, v, x, m, E, b, M, _;
   const C = r - i, R = e - i, I = t - o, $ = n - o;
-  w = C * $, a = S * C, h = a - (a - C), g = C - h, a = S * $, y = a - (a - $), x = $ - y, E = g * x - (w - h * y - g * y - h * x), b = I * R, a = S * I, h = a - (a - I), g = I - h, a = S * R, y = a - (a - R), x = R - y, M = g * x - (b - h * y - g * y - h * x), d = E - M, s = E - d, q[0] = E - (d + s) + (s - M), v = w + d, s = v - w, m = w - (v - s) + (d - s), d = m - b, s = m - d, q[1] = m - (d + s) + (s - b), _ = v + d, s = _ - v, q[2] = v - (_ - s) + (d - s), q[3] = _;
+  m = C * $, a = S * C, h = a - (a - C), g = C - h, a = S * $, d = a - (a - $), w = $ - d, E = g * w - (m - h * d - g * d - h * w), b = I * R, a = S * I, h = a - (a - I), g = I - h, a = S * R, d = a - (a - R), w = R - d, M = g * w - (b - h * d - g * d - h * w), y = E - M, s = E - y, q[0] = E - (y + s) + (s - M), v = m + y, s = v - m, x = m - (v - s) + (y - s), y = x - b, s = x - y, q[1] = x - (y + s) + (s - b), _ = v + y, s = _ - v, q[2] = v - (_ - s) + (y - s), q[3] = _;
   let A = ve(4, q), D = we * u;
   if (A >= D || -A >= D || (s = r - C, l = r - (C + s) + (s - i), s = e - R, f = e - (R + s) + (s - i), s = t - I, c = t - (I + s) + (s - o), s = n - $, p = n - ($ + s) + (s - o), l === 0 && c === 0 && f === 0 && p === 0) || (D = Ee * u + xe * Math.abs(A), A += C * p + $ * l - (I * f + R * c), A >= D || -A >= D)) return A;
-  w = l * $, a = S * l, h = a - (a - l), g = l - h, a = S * $, y = a - (a - $), x = $ - y, E = g * x - (w - h * y - g * y - h * x), b = c * R, a = S * c, h = a - (a - c), g = c - h, a = S * R, y = a - (a - R), x = R - y, M = g * x - (b - h * y - g * y - h * x), d = E - M, s = E - d, P[0] = E - (d + s) + (s - M), v = w + d, s = v - w, m = w - (v - s) + (d - s), d = m - b, s = m - d, P[1] = m - (d + s) + (s - b), _ = v + d, s = _ - v, P[2] = v - (_ - s) + (d - s), P[3] = _;
+  m = l * $, a = S * l, h = a - (a - l), g = l - h, a = S * $, d = a - (a - $), w = $ - d, E = g * w - (m - h * d - g * d - h * w), b = c * R, a = S * c, h = a - (a - c), g = c - h, a = S * R, d = a - (a - R), w = R - d, M = g * w - (b - h * d - g * d - h * w), y = E - M, s = E - y, P[0] = E - (y + s) + (s - M), v = m + y, s = v - m, x = m - (v - s) + (y - s), y = x - b, s = x - y, P[1] = x - (y + s) + (s - b), _ = v + y, s = _ - v, P[2] = v - (_ - s) + (y - s), P[3] = _;
   const ee = st(4, q, 4, P, _t);
-  w = C * p, a = S * C, h = a - (a - C), g = C - h, a = S * p, y = a - (a - p), x = p - y, E = g * x - (w - h * y - g * y - h * x), b = I * f, a = S * I, h = a - (a - I), g = I - h, a = S * f, y = a - (a - f), x = f - y, M = g * x - (b - h * y - g * y - h * x), d = E - M, s = E - d, P[0] = E - (d + s) + (s - M), v = w + d, s = v - w, m = w - (v - s) + (d - s), d = m - b, s = m - d, P[1] = m - (d + s) + (s - b), _ = v + d, s = _ - v, P[2] = v - (_ - s) + (d - s), P[3] = _;
+  m = C * p, a = S * C, h = a - (a - C), g = C - h, a = S * p, d = a - (a - p), w = p - d, E = g * w - (m - h * d - g * d - h * w), b = I * f, a = S * I, h = a - (a - I), g = I - h, a = S * f, d = a - (a - f), w = f - d, M = g * w - (b - h * d - g * d - h * w), y = E - M, s = E - y, P[0] = E - (y + s) + (s - M), v = m + y, s = v - m, x = m - (v - s) + (y - s), y = x - b, s = x - y, P[1] = x - (y + s) + (s - b), _ = v + y, s = _ - v, P[2] = v - (_ - s) + (y - s), P[3] = _;
   const ne = st(ee, _t, 4, P, St);
-  w = l * p, a = S * l, h = a - (a - l), g = l - h, a = S * p, y = a - (a - p), x = p - y, E = g * x - (w - h * y - g * y - h * x), b = c * f, a = S * c, h = a - (a - c), g = c - h, a = S * f, y = a - (a - f), x = f - y, M = g * x - (b - h * y - g * y - h * x), d = E - M, s = E - d, P[0] = E - (d + s) + (s - M), v = w + d, s = v - w, m = w - (v - s) + (d - s), d = m - b, s = m - d, P[1] = m - (d + s) + (s - b), _ = v + d, s = _ - v, P[2] = v - (_ - s) + (d - s), P[3] = _;
+  m = l * p, a = S * l, h = a - (a - l), g = l - h, a = S * p, d = a - (a - p), w = p - d, E = g * w - (m - h * d - g * d - h * w), b = c * f, a = S * c, h = a - (a - c), g = c - h, a = S * f, d = a - (a - f), w = f - d, M = g * w - (b - h * d - g * d - h * w), y = E - M, s = E - y, P[0] = E - (y + s) + (s - M), v = m + y, s = v - m, x = m - (v - s) + (y - s), y = x - b, s = x - y, P[1] = x - (y + s) + (s - b), _ = v + y, s = _ - v, P[2] = v - (_ - s) + (y - s), P[3] = _;
   const re = st(ne, St, 4, P, Pt);
   return Pt[re - 1];
 }
@@ -1277,22 +1277,22 @@ class nt {
         for (; ; ) {
           const a = l.getAvailableLinkedEvents();
           if (a.length === 0) {
-            const y = f[0].point, x = f[f.length - 1].point;
-            throw new Error(`Unable to complete output ring starting at [${y.x}, ${y.y}]. Last matching segment found ends at [${x.x}, ${x.y}].`);
+            const d = f[0].point, w = f[f.length - 1].point;
+            throw new Error(`Unable to complete output ring starting at [${d.x}, ${d.y}]. Last matching segment found ends at [${w.x}, ${w.y}].`);
           }
           if (a.length === 1) {
             c = a[0].otherSE;
             break;
           }
           let h = null;
-          for (let y = 0, x = s.length; y < x; y++)
-            if (s[y].point === l.point) {
-              h = y;
+          for (let d = 0, w = s.length; d < w; d++)
+            if (s[d].point === l.point) {
+              h = d;
               break;
             }
           if (h !== null) {
-            const y = s.splice(h)[0], x = f.splice(y.index);
-            x.unshift(x[0].otherSE), e.push(new nt(x.reverse()));
+            const d = s.splice(h)[0], w = f.splice(d.index);
+            w.unshift(w[0].otherSE), e.push(new nt(w.reverse()));
             continue;
           }
           s.push({
@@ -1486,13 +1486,13 @@ class Oe {
     if (k.type === "intersection")
       for (let s = 0, a = i.length; s < a; s++) {
         const h = i[s];
-        for (let g = s + 1, y = i.length; g < y; g++)
+        for (let g = s + 1, d = i.length; g < d; g++)
           if (pt(h.bbox, i[g].bbox) === null) return [];
       }
     const o = new wt(L.compare);
     for (let s = 0, a = i.length; s < a; s++) {
       const h = i[s].getSweepEvents();
-      for (let g = 0, y = h.length; g < y; g++)
+      for (let g = 0, d = h.length; g < d; g++)
         if (o.insert(h[g]), o.size > Ot)
           throw new Error("Infinite loop when putting segment endpoints in a priority queue (queue size too big).");
     }
@@ -1510,8 +1510,8 @@ class Oe {
         throw new Error("Infinite loop when passing sweep line over endpoints (too many sweep line segments).");
       const a = u.process(s);
       for (let h = 0, g = a.length; h < g; h++) {
-        const y = a[h];
-        y.consumedBy === void 0 && o.insert(y);
+        const d = a[h];
+        d.consumedBy === void 0 && o.insert(d);
       }
       l = o.size, c = o.pop();
     }
@@ -1892,11 +1892,11 @@ function an(r, t = !0, e = !0, n = {}, i = {}, o = Tt) {
     });
   };
   function a(h, g = !1) {
-    const y = document.createElement("div");
-    return new sn({ props: { displayIn: "leaflet" }, target: y }), new T.Marker(h, {
+    const d = document.createElement("div");
+    return new sn({ props: { displayIn: "leaflet" }, target: d }), new T.Marker(h, {
       interactive: g,
       icon: new T.DivIcon({
-        html: y,
+        html: d,
         className: "",
         iconAnchor: [12, 26],
         iconSize: [25, 30],
@@ -1911,7 +1911,7 @@ function an(r, t = !0, e = !0, n = {}, i = {}, o = Tt) {
     flyTo(h, g) {
       r.flyTo([h[1], h[0]], g, { duration: 2, ...n });
     },
-    fitBounds(h, g, y) {
+    fitBounds(h, g, d) {
       r.flyToBounds(
         [
           [h[1], h[0]],
@@ -1920,7 +1920,7 @@ function an(r, t = !0, e = !0, n = {}, i = {}, o = Tt) {
         {
           padding: [g, g],
           duration: 2,
-          ...y ? { maxZoom: y } : {},
+          ...d ? { maxZoom: d } : {},
           ...i
         }
       );
@@ -1929,102 +1929,104 @@ function an(r, t = !0, e = !0, n = {}, i = {}, o = Tt) {
       r.getContainer().style.cursor = h ? "crosshair" : "";
     },
     setReverseMarker(h) {
-      var y;
+      var d;
       if (!t)
         return;
       const g = h && [h[1], h[0]];
-      f ? g ? f.setLatLng(g) : (f.remove(), f = void 0) : g && (t instanceof Function ? f = t(r) ?? void 0 : (f = (typeof t == "object" ? new T.Marker(g, t) : a(g)).addTo(r), (y = f.getElement()) == null || y.classList.add("marker-reverse")));
+      f ? g ? f.setLatLng(g) : (f.remove(), f = void 0) : g && (t instanceof Function ? f = t(r) ?? void 0 : (f = (typeof t == "object" ? new T.Marker(g, t) : a(g)).addTo(r), (d = f.getElement()) == null || d.classList.add("marker-reverse")));
     },
-    setMarkers(h, g) {
-      function y(x) {
-        p.clearLayers(), x && p.addData(x);
+    setFeatures(h, g, d) {
+      function w(y) {
+        p.clearLayers(), y && p.addData(y);
       }
-      for (const x of l)
-        x.remove();
-      if (l.length = 0, y(), g) {
-        let x = !1;
+      for (const y of l)
+        y.remove();
+      if (l.length = 0, w(), g) {
+        let y = !1;
         if (g.geometry.type === "GeometryCollection") {
-          const d = g.geometry.geometries.filter(
-            (v) => v.type === "Polygon" || v.type === "MultiPolygon"
+          const v = g.geometry.geometries.filter(
+            (x) => x.type === "Polygon" || x.type === "MultiPolygon"
           );
-          t: if (d.length > 0) {
-            const v = Jt(
-              Z(d.map((m) => V(m)))
+          t: if (v.length > 0) {
+            const x = Jt(
+              Z(v.map((m) => V(m)))
             );
-            if (!v)
+            if (!x)
               break t;
             Ft(
               {
                 ...g,
-                geometry: v.geometry
+                geometry: x.geometry
               },
-              y
-            ), x = !0;
+              w
+            ), y = !0;
           } else {
-            const v = g.geometry.geometries.filter(
+            const x = g.geometry.geometries.filter(
               (m) => m.type === "LineString" || m.type === "MultiLineString"
             );
-            v.length > 0 && (y({
+            x.length > 0 && (w({
               ...g,
-              geometry: { type: "GeometryCollection", geometries: v }
-            }), x = !0);
+              geometry: { type: "GeometryCollection", geometries: x }
+            }), y = !0);
           }
         }
-        if (!x) {
+        if (!y) {
           if (g.geometry.type === "Polygon" || g.geometry.type === "MultiPolygon")
-            Ft(g, (d) => {
-              if (!d)
+            Ft(g, (v) => {
+              if (!v)
                 return;
-              const v = [...d.features], m = gt(ut(g)), w = m[2] - m[0];
-              m[0] - w / 4 < -180 && v.push(...qt(d, -360).features), m[2] + w / 4 > 180 && v.push(...qt(d, 360).features), y(Z(v));
+              const x = [...v.features], m = gt(ut(g)), E = m[2] - m[0];
+              m[0] - E / 4 < -180 && x.push(...qt(v, -360).features), m[2] + E / 4 > 180 && x.push(...qt(v, 360).features), w(Z(x));
             });
           else if (g.geometry.type === "LineString" || g.geometry.type === "MultiLineString") {
-            y(g);
+            w(g);
             return;
           }
         }
+        if (!d && g.geometry.type !== "Point")
+          return;
         if (t instanceof Function) {
-          const d = t(r, g);
-          d && l.push(d.addTo(r));
+          const v = t(r, g);
+          v && l.push(v.addTo(r));
         } else if (t) {
-          const d = [g.center[1], g.center[0]];
+          const v = [g.center[1], g.center[0]];
           l.push(
-            typeof t == "object" ? new T.Marker(d, t) : a(d).addTo(r)
+            typeof t == "object" ? new T.Marker(v, t) : a(v).addTo(r)
           );
         }
       }
       if (e)
-        for (const x of h ?? []) {
-          if (x === g)
+        for (const y of h ?? []) {
+          if (y === g)
             continue;
-          const d = [
-            x.center[1],
-            x.center[0]
+          const v = [
+            y.center[1],
+            y.center[0]
           ];
-          let v;
+          let x;
           if (e instanceof Function) {
-            if (v = e(r, x), !v)
+            if (x = e(r, y), !x)
               continue;
           } else
-            v = (typeof e == "object" ? new T.Marker(d, e) : a(d, !0)).addTo(r).bindTooltip(
-              x.place_type[0] === "reverse" ? x.place_name : x.place_name.replace(/,.*/, ""),
+            x = (typeof e == "object" ? new T.Marker(v, e) : a(v, !0)).addTo(r).bindTooltip(
+              y.place_type[0] === "reverse" ? y.place_name : y.place_name.replace(/,.*/, ""),
               {
                 direction: "top"
               }
             );
-          const m = v.getElement();
-          m && (m.addEventListener("click", (w) => {
-            w.stopPropagation(), u == null || u({ type: "markerClick", id: x.id });
+          const m = x.getElement();
+          m && (m.addEventListener("click", (E) => {
+            E.stopPropagation(), u == null || u({ type: "markerClick", id: y.id });
           }), m.addEventListener("mouseenter", () => {
-            u == null || u({ type: "markerMouseEnter", id: x.id });
+            u == null || u({ type: "markerMouseEnter", id: y.id });
           }), m.addEventListener("mouseleave", () => {
-            u == null || u({ type: "markerMouseLeave", id: x.id });
-          }), m.classList.toggle("marker-fuzzy", !!x.matching_text)), l.push(v);
+            u == null || u({ type: "markerMouseLeave", id: y.id });
+          }), m.classList.toggle("marker-fuzzy", !!y.matching_text)), l.push(x);
         }
     },
     setSelectedMarker(h) {
-      var g, y;
-      c && ((g = c.getElement()) == null || g.classList.toggle("marker-selected", !1)), c = h > -1 ? l[h] : void 0, (y = c == null ? void 0 : c.getElement()) == null || y.classList.toggle("marker-selected", !0);
+      var g, d;
+      c && ((g = c.getElement()) == null || g.classList.toggle("marker-selected", !1)), c = h > -1 ? l[h] : void 0, (d = c == null ? void 0 : c.getElement()) == null || d.classList.toggle("marker-selected", !0);
     },
     getCenterAndZoom() {
       const h = r.getCenter();

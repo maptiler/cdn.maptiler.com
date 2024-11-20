@@ -58,7 +58,7 @@ function handleImgError() {
         {isReverse ? feature.place_name : feature.place_name.replace(/,.*/, "")}
       </span>
 
-      {#if showPlaceType === "always" || (showPlaceType && !feature.address && !feature.id.startsWith("road.") && !feature.id.startsWith("address.") && !feature.id.startsWith("postal_code.") && (!feature.id.startsWith("poi.") || !imageUrl) && !isReverse)}
+      {#if showPlaceType === "always" || (showPlaceType !== "never" && !feature.address && !feature.id.startsWith("road.") && !feature.id.startsWith("address.") && !feature.id.startsWith("postal_code.") && (!feature.id.startsWith("poi.") || !imageUrl) && !isReverse)}
         <span class="secondary">
           {placeType}
         </span>

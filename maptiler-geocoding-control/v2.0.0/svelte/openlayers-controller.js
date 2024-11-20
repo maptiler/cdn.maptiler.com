@@ -167,7 +167,7 @@ export function createOpenLayersMapController(map, flyToOptions = {}, flyToBound
                 source.addFeature(reverseMarker);
             }
         },
-        setMarkers(markedFeatures, picked) {
+        setFeatures(markedFeatures, picked, showPolygonMarker) {
             function setData(data) {
                 if (!data) {
                     return;
@@ -234,6 +234,9 @@ export function createOpenLayersMapController(map, flyToOptions = {}, flyToBound
                 else if (picked.geometry.type === "MultiLineString") {
                     source.addFeature(new OlFeature(fromWgs84(new OlMultiLineString(picked.geometry.coordinates))));
                     return; // no pin for (multi)linestrings
+                }
+                if (!showPolygonMarker && picked.geometry.type !== "Point") {
+                    return;
                 }
                 source.addFeature(new OlFeature(fromWgs84(new OlPoint(picked.center))));
             }

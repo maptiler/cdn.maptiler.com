@@ -1,5 +1,5 @@
 import { SvelteComponent } from "svelte";
-import type { BBox, Feature, FeatureCollection, MapController, ProximityRule } from "./types";
+import type { BBox, EnableReverse, Feature, FeatureCollection, MapController, PickedResultStyle, ProximityRule, ShowPlaceType } from "./types";
 declare const __propDef: {
     props: {
         ZOOM_DEFAULTS?: Record<string, number>;
@@ -11,7 +11,7 @@ declare const __propDef: {
         collapsed?: boolean;
         country?: string | string[] | undefined;
         debounceSearch?: number;
-        enableReverse?: boolean | "always";
+        enableReverse?: EnableReverse;
         errorMessage?: string;
         filter?: (feature: Feature) => boolean;
         flyTo?: boolean;
@@ -26,8 +26,8 @@ declare const __propDef: {
         reverseActive?: boolean;
         reverseButtonTitle?: string;
         searchValue?: string;
-        showFullGeometry?: boolean;
-        showPlaceType?: false | "always" | "ifNeeded";
+        pickedResultStyle?: PickedResultStyle;
+        showPlaceType?: ShowPlaceType;
         showResultsWhileTyping?: boolean;
         selectFirst?: boolean;
         flyToSelected?: boolean;
@@ -35,8 +35,7 @@ declare const __propDef: {
         types?: string[] | undefined;
         exhaustiveReverseGeocoding?: boolean;
         excludeTypes?: boolean;
-        zoom?: number | Record<string, number>;
-        maxZoom?: number | undefined;
+        zoom?: Record<string, number>;
         apiUrl?: string;
         fetchParameters?: RequestInit;
         iconsBaseUrl?: string;
@@ -48,17 +47,31 @@ declare const __propDef: {
         clearMap?: () => void;
     };
     events: {
-        featuresListed: CustomEvent<Feature<import("geojson").Geometry>[] | undefined>;
-        featuresMarked: CustomEvent<Feature<import("geojson").Geometry>[] | undefined>;
-        optionsVisibilityChange: CustomEvent<boolean>;
-        pick: CustomEvent<Feature<import("geojson").Geometry> | undefined>;
-        queryChange: CustomEvent<string>;
+        featureslisted: CustomEvent<{
+            features: Feature[] | undefined;
+        }>;
+        featuresmarked: CustomEvent<{
+            features: Feature[] | undefined;
+        }>;
+        optionsvisibilitychange: CustomEvent<{
+            optionsVisible: boolean;
+        }>;
+        pick: CustomEvent<{
+            feature: Feature | undefined;
+        }>;
+        querychange: CustomEvent<{
+            query: string;
+        }>;
         response: CustomEvent<{
             url: string;
             featureCollection: FeatureCollection;
         }>;
-        reverseToggle: CustomEvent<boolean>;
-        select: CustomEvent<Feature<import("geojson").Geometry> | undefined>;
+        reversetoggle: CustomEvent<{
+            reverse: boolean;
+        }>;
+        select: CustomEvent<{
+            feature: Feature | undefined;
+        }>;
     } & {
         [evt: string]: CustomEvent<any>;
     };

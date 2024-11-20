@@ -1,10 +1,10 @@
 import { SvelteComponent } from "svelte";
-import type { Feature } from "./types";
+import type { Feature, ShowPlaceType } from "./types";
 declare const __propDef: {
     props: {
         feature: Feature;
         selected?: boolean;
-        showPlaceType: false | "always" | "ifNeeded";
+        showPlaceType: ShowPlaceType;
         missingIconsCache: Set<string>;
         iconsBaseUrl: string;
     };

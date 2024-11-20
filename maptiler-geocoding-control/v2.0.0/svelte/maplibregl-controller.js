@@ -2,7 +2,6 @@ import { feature, featureCollection } from "@turf/helpers";
 import union from "@turf/union";
 import MarkerIcon from "./MarkerIcon.svelte";
 import { setMask } from "./mask";
-const emptyGeojson = featureCollection([]);
 const defaultGeometryStyle = {
     fill: {
         paint: {
@@ -23,55 +22,69 @@ const defaultGeometryStyle = {
         filter: ["!", ["has", "isMask"]],
     },
 };
+const RESULT_SOURCE = "mtlr-gc-full-geom";
+const RESULT_LAYER_FILL = "mtlr-gc-full-geom-fill";
+const RESULT_LAYER_LINE = "mtlr-gc-full-geom-line";
 export function createMapLibreGlMapController(map, maplibregl, marker = true, showResultMarkers = true, flyToOptions = {}, fitBoundsOptions = {}, fullGeometryStyle = defaultGeometryStyle) {
     let eventHandler;
     const markers = [];
     let selectedMarker;
     let reverseMarker;
     let savedData; // used to restore features on style switch
-    function addFullGeometryLayer() {
+    function syncFullGeometryLayer() {
+        if (!map.loaded) {
+            map.once("load", syncFullGeometryLayer);
+            return;
+        }
         const effFullGeometryStyle = !fullGeometryStyle
             ? undefined
             : fullGeometryStyle === true
                 ? defaultGeometryStyle
                 : fullGeometryStyle;
-        if (!map.getSource("full-geom") &&
-            (effFullGeometryStyle?.fill || effFullGeometryStyle?.line)) {
-            map.addSource("full-geom", {
+        if (!effFullGeometryStyle?.fill && !effFullGeometryStyle?.line) {
+            return;
+        }
+        const source = map.getSource(RESULT_SOURCE);
+        if (source) {
+            source.setData(savedData ?? featureCollection([]));
+        }
+        else if (savedData) {
+            map.addSource(RESULT_SOURCE, {
                 type: "geojson",
-                data: emptyGeojson,
+                data: savedData,
             });
         }
-        if (!map.getLayer("full-geom-fill") && effFullGeometryStyle?.fill) {
+        else {
+            return;
+        }
+        if (!map.getLayer(RESULT_LAYER_FILL) && effFullGeometryStyle?.fill) {
             map.addLayer({
                 ...effFullGeometryStyle?.fill,
-                id: "full-geom-fill",
+                id: RESULT_LAYER_FILL,
                 type: "fill",
-                source: "full-geom",
+                source: RESULT_SOURCE,
             });
         }
-        if (!map.getLayer("full-geom-line") && effFullGeometryStyle?.line) {
+        if (!map.getLayer(RESULT_LAYER_LINE) && effFullGeometryStyle?.line) {
             map.addLayer({
                 ...effFullGeometryStyle?.line,
-                id: "full-geom-line",
+                id: RESULT_LAYER_LINE,
                 type: "line",
-                source: "full-geom",
+                source: RESULT_SOURCE,
             });
         }
-        if (savedData) {
-            setData(savedData);
-        }
     }
-    if (map.loaded()) {
-        addFullGeometryLayer();
-    }
-    else {
-        map.once("load", () => {
-            addFullGeometryLayer();
-        });
+    function setAndSaveData(data) {
+        savedData = data;
+        syncFullGeometryLayer();
     }
     map.on("styledata", () => {
-        addFullGeometryLayer();
+        // timeout prevents collision with svelte-maplibre library
+        setTimeout(() => {
+            if (savedData) {
+                syncFullGeometryLayer();
+            }
+        });
     });
     const handleMapClick = (e) => {
         eventHandler?.({
@@ -92,13 +105,6 @@ export function createMapLibreGlMapController(map, maplibregl, marker = true, sh
             target: element,
         });
         return new maplibregl.Marker({ element, offset: [1, -13] });
-    }
-    function setData(data) {
-        savedData = data;
-        if (!data) {
-            return;
-        }
-        map.getSource("full-geom")?.setData(data);
     }
     return {
         setEventHandler(handler) {
@@ -150,12 +156,12 @@ export function createMapLibreGlMapController(map, maplibregl, marker = true, sh
                 }
             }
         },
-        setMarkers(markedFeatures, picked) {
+        setFeatures(markedFeatures, picked, showPolygonMarker) {
             for (const marker of markers) {
                 marker.remove();
             }
             markers.length = 0;
-            setData(emptyGeojson);
+            setAndSaveData(undefined);
             if (!maplibregl) {
                 return;
             }
@@ -171,14 +177,14 @@ export function createMapLibreGlMapController(map, maplibregl, marker = true, sh
                         setMask({
                             ...picked,
                             geometry: unioned.geometry,
-                        }, setData);
+                        }, setAndSaveData);
                         handled = true;
                     }
                     else {
                         const geometries = picked.geometry.geometries.filter((geometry) => geometry.type === "LineString" ||
                             geometry.type === "MultiLineString");
                         if (geometries.length > 0) {
-                            setData({
+                            setAndSaveData({
                                 ...picked,
                                 geometry: { type: "GeometryCollection", geometries },
                             });
@@ -191,12 +197,15 @@ export function createMapLibreGlMapController(map, maplibregl, marker = true, sh
                 }
                 else if (picked.geometry.type === "Polygon" ||
                     picked.geometry.type === "MultiPolygon") {
-                    setMask(picked, setData);
+                    setMask(picked, setAndSaveData);
                 }
                 else if (picked.geometry.type === "LineString" ||
                     picked.geometry.type === "MultiLineString") {
-                    setData(picked);
+                    setAndSaveData(picked);
                     return; // no pin for (multi)linestrings
+                }
+                if (!showPolygonMarker && picked.geometry.type !== "Point") {
+                    return;
                 }
                 if (marker instanceof Function) {
                     const m = marker(map, picked);

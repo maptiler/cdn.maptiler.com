@@ -21,45 +21,30 @@ export class GeocodingControl extends Control {
                 ...restOptions,
             },
         });
-        for (const eventName of [
-            "select",
-            "pick",
-            "featuresListed",
-            "featuresMarked",
-            "response",
-            "optionsVisibilityChange",
-            "reverseToggle",
-            "queryChange",
-        ]) {
-            this.#gc.$on(eventName, (event) => {
-                switch (eventName) {
-                    case "select":
-                        this.dispatchEvent(new SelectEvent(event.detail));
-                        break;
-                    case "featuresListed":
-                        this.dispatchEvent(new FeaturesListedEvent(event.detail));
-                        break;
-                    case "featuresMarked":
-                        this.dispatchEvent(new FeaturesMarkedEvent(event.detail));
-                        break;
-                    case "optionsVisibilityChange":
-                        this.dispatchEvent(new OptionsVisibilityChangeEvent(event.detail));
-                        break;
-                    case "pick":
-                        this.dispatchEvent(new PickEvent(event.detail));
-                        break;
-                    case "queryChange":
-                        this.dispatchEvent(new QueryChangeEvent(event.detail));
-                        break;
-                    case "response":
-                        this.dispatchEvent(new ResponseEvent(event.detail.url, event.detail.featureCollection));
-                        break;
-                    case "reverseToggle":
-                        this.dispatchEvent(new ReverseToggleEvent(event.detail));
-                        break;
-                }
-            });
-        }
+        this.#gc.$on("select", (event) => {
+            this.dispatchEvent(new SelectEvent(event.detail.feature));
+        });
+        this.#gc.$on("pick", (event) => {
+            this.dispatchEvent(new PickEvent(event.detail.feature));
+        });
+        this.#gc.$on("featureslisted", (event) => {
+            this.dispatchEvent(new FeaturesListedEvent(event.detail.features));
+        });
+        this.#gc.$on("featuresmarked", (event) => {
+            this.dispatchEvent(new FeaturesMarkedEvent(event.detail.features));
+        });
+        this.#gc.$on("response", (event) => {
+            this.dispatchEvent(new ResponseEvent(event.detail.url, event.detail.featureCollection));
+        });
+        this.#gc.$on("optionsvisibilitychange", (event) => {
+            this.dispatchEvent(new OptionsVisibilityChangeEvent(event.detail.optionsVisible));
+        });
+        this.#gc.$on("reversetoggle", (event) => {
+            this.dispatchEvent(new ReverseToggleEvent(event.detail.reverse));
+        });
+        this.#gc.$on("querychange", (event) => {
+            this.dispatchEvent(new QueryChangeEvent(event.detail.query));
+        });
         this.#options = options;
     }
     setMap(map) {
@@ -77,7 +62,7 @@ export class GeocodingControl extends Control {
         }
     }
     setOptions(options) {
-        this.#options = options;
+        Object.assign(this.#options, options);
         const { flyTo, fullGeometryStyle, ...restOptions } = this.#options;
         this.#gc?.$set({
             ...restOptions,
@@ -110,21 +95,21 @@ export class SelectEvent extends BaseEvent {
 export class FeaturesListedEvent extends BaseEvent {
     features;
     constructor(features) {
-        super("featuresListed");
+        super("featureslisted");
         this.features = features;
     }
 }
 export class FeaturesMarkedEvent extends BaseEvent {
     features;
     constructor(features) {
-        super("featuresMarked");
+        super("featuresmarked");
         this.features = features;
     }
 }
 export class OptionsVisibilityChangeEvent extends BaseEvent {
     optionsVisible;
     constructor(optionsVisible) {
-        super("optionsVisibilityChange");
+        super("optionsvisibilitychange");
         this.optionsVisible = optionsVisible;
     }
 }
@@ -138,7 +123,7 @@ export class PickEvent extends BaseEvent {
 export class QueryChangeEvent extends BaseEvent {
     query;
     constructor(query) {
-        super("queryChange");
+        super("querychange");
         this.query = query;
     }
 }
@@ -154,7 +139,7 @@ export class ResponseEvent extends BaseEvent {
 export class ReverseToggleEvent extends BaseEvent {
     reverse;
     constructor(reverse) {
-        super("reverseToggle");
+        super("reversetoggle");
         this.reverse = reverse;
     }
 }

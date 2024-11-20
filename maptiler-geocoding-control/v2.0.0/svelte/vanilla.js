@@ -1,4 +1,4 @@
-import GC from "./GeocodingControl.svelte";
+import GeocodingControlComponent from "./GeocodingControl.svelte";
 const finalizationRegistry = new FinalizationRegistry((gc) => {
     gc.$destroy();
 });
@@ -6,22 +6,31 @@ export class GeocodingControl extends EventTarget {
     #gc;
     constructor({ target, ...options }) {
         super();
-        this.#gc = new GC({
+        this.#gc = new GeocodingControlComponent({
             target,
             props: options,
         });
         for (const eventName of [
             "select",
             "pick",
-            "featuresListed",
-            "featuresMarked",
+            "featureslisted",
+            "featuresmarked",
             "response",
-            "optionsVisibilityChange",
-            "reverseToggle",
-            "queryChange",
+            "optionsvisibilitychange",
+            "reversetoggle",
+            "querychange",
         ]) {
-            this.#gc.$on(eventName, (event) => this.dispatchEvent(event));
+            this.#gc.$on(eventName, (event) => {
+                // Use the new `emit` method for type-safe dispatching
+                this.#emit(eventName, event.detail);
+            });
         }
+        this.#gc.$on("select", (event) => {
+            const geocodingEvent = new CustomEvent(event.type, {
+                detail: event.detail,
+            });
+            this.dispatchEvent(geocodingEvent);
+        });
         finalizationRegistry.register(this, this.#gc);
     }
     setOptions(options) {
@@ -41,5 +50,19 @@ export class GeocodingControl extends EventTarget {
     }
     blur() {
         this.#gc?.blur();
+    }
+    addEventListener(type, callback, options) {
+        super.addEventListener(type, callback, options);
+    }
+    removeEventListener(type, callback, options) {
+        super.removeEventListener(type, callback, options);
+    }
+    dispatchEvent(event) {
+        return super.dispatchEvent(event);
+    }
+    #emit(type, detail) {
+        return super.dispatchEvent(new CustomEvent(type, {
+            detail,
+        }));
     }
 }

@@ -43,9 +43,9 @@ function Ot(o, t, e) {
   if (o !== null)
     for (var n, r, i, u, l, c, f, a = 0, s = 0, h, g = o.type, y = g === "FeatureCollection", p = g === "Feature", d = y ? o.features.length : 1, x = 0; x < d; x++) {
       f = y ? o.features[x].geometry : p ? o.geometry : o, h = f ? f.type === "GeometryCollection" : !1, l = h ? f.geometries.length : 1;
-      for (var m = 0; m < l; m++) {
-        var v = 0, w = 0;
-        if (u = h ? f.geometries[m] : f, u !== null) {
+      for (var v = 0; v < l; v++) {
+        var w = 0, m = 0;
+        if (u = h ? f.geometries[v] : f, u !== null) {
           c = u.coordinates;
           var E = u.type;
           switch (a = 0, E) {
@@ -56,11 +56,11 @@ function Ot(o, t, e) {
                 c,
                 s,
                 x,
-                v,
-                w
+                w,
+                m
               ) === !1)
                 return !1;
-              s++, v++;
+              s++, w++;
               break;
             case "LineString":
             case "MultiPoint":
@@ -69,13 +69,13 @@ function Ot(o, t, e) {
                   c[n],
                   s,
                   x,
-                  v,
-                  w
+                  w,
+                  m
                 ) === !1)
                   return !1;
-                s++, E === "MultiPoint" && v++;
+                s++, E === "MultiPoint" && w++;
               }
-              E === "LineString" && v++;
+              E === "LineString" && w++;
               break;
             case "Polygon":
             case "MultiLineString":
@@ -85,33 +85,33 @@ function Ot(o, t, e) {
                     c[n][r],
                     s,
                     x,
-                    v,
-                    w
+                    w,
+                    m
                   ) === !1)
                     return !1;
                   s++;
                 }
-                E === "MultiLineString" && v++, E === "Polygon" && w++;
+                E === "MultiLineString" && w++, E === "Polygon" && m++;
               }
-              E === "Polygon" && v++;
+              E === "Polygon" && w++;
               break;
             case "MultiPolygon":
               for (n = 0; n < c.length; n++) {
-                for (w = 0, r = 0; r < c[n].length; r++) {
+                for (m = 0, r = 0; r < c[n].length; r++) {
                   for (i = 0; i < c[n][r].length - a; i++) {
                     if (t(
                       c[n][r][i],
                       s,
                       x,
-                      v,
-                      w
+                      w,
+                      m
                     ) === !1)
                       return !1;
                     s++;
                   }
-                  w++;
+                  m++;
                 }
-                v++;
+                w++;
               }
               break;
             case "GeometryCollection":
@@ -638,16 +638,16 @@ function Y(o) {
 }
 const re = (3 + 16 * F) * F, ie = (2 + 12 * F) * F, oe = (9 + 64 * F) * F * F, T = Y(4), dt = Y(8), vt = Y(12), mt = Y(16), P = Y(4);
 function se(o, t, e, n, r, i, u) {
-  let l, c, f, a, s, h, g, y, p, d, x, m, v, w, E, b, M, S;
+  let l, c, f, a, s, h, g, y, p, d, x, v, w, m, E, b, M, S;
   const L = o - r, I = e - r, k = t - i, C = n - i;
-  w = L * C, h = _ * L, g = h - (h - L), y = L - g, h = _ * C, p = h - (h - C), d = C - p, E = y * d - (w - g * p - y * p - g * d), b = k * I, h = _ * k, g = h - (h - k), y = k - g, h = _ * I, p = h - (h - I), d = I - p, M = y * d - (b - g * p - y * p - g * d), x = E - M, s = E - x, T[0] = E - (x + s) + (s - M), m = w + x, s = m - w, v = w - (m - s) + (x - s), x = v - b, s = v - x, T[1] = v - (x + s) + (s - b), S = m + x, s = S - m, T[2] = m - (S - s) + (x - s), T[3] = S;
+  m = L * C, h = _ * L, g = h - (h - L), y = L - g, h = _ * C, p = h - (h - C), d = C - p, E = y * d - (m - g * p - y * p - g * d), b = k * I, h = _ * k, g = h - (h - k), y = k - g, h = _ * I, p = h - (h - I), d = I - p, M = y * d - (b - g * p - y * p - g * d), x = E - M, s = E - x, T[0] = E - (x + s) + (s - M), v = m + x, s = v - m, w = m - (v - s) + (x - s), x = w - b, s = w - x, T[1] = w - (x + s) + (s - b), S = v + x, s = S - v, T[2] = v - (S - s) + (x - s), T[3] = S;
   let O = ne(4, T), q = ie * u;
   if (O >= q || -O >= q || (s = o - L, l = o - (L + s) + (s - r), s = e - I, f = e - (I + s) + (s - r), s = t - k, c = t - (k + s) + (s - i), s = n - C, a = n - (C + s) + (s - i), l === 0 && c === 0 && f === 0 && a === 0) || (q = oe * u + ee * Math.abs(O), O += L * a + C * l - (k * f + I * c), O >= q || -O >= q)) return O;
-  w = l * C, h = _ * l, g = h - (h - l), y = l - g, h = _ * C, p = h - (h - C), d = C - p, E = y * d - (w - g * p - y * p - g * d), b = c * I, h = _ * c, g = h - (h - c), y = c - g, h = _ * I, p = h - (h - I), d = I - p, M = y * d - (b - g * p - y * p - g * d), x = E - M, s = E - x, P[0] = E - (x + s) + (s - M), m = w + x, s = m - w, v = w - (m - s) + (x - s), x = v - b, s = v - x, P[1] = v - (x + s) + (s - b), S = m + x, s = S - m, P[2] = m - (S - s) + (x - s), P[3] = S;
+  m = l * C, h = _ * l, g = h - (h - l), y = l - g, h = _ * C, p = h - (h - C), d = C - p, E = y * d - (m - g * p - y * p - g * d), b = c * I, h = _ * c, g = h - (h - c), y = c - g, h = _ * I, p = h - (h - I), d = I - p, M = y * d - (b - g * p - y * p - g * d), x = E - M, s = E - x, P[0] = E - (x + s) + (s - M), v = m + x, s = v - m, w = m - (v - s) + (x - s), x = w - b, s = w - x, P[1] = w - (x + s) + (s - b), S = v + x, s = S - v, P[2] = v - (S - s) + (x - s), P[3] = S;
   const Gt = K(4, T, 4, P, dt);
-  w = L * a, h = _ * L, g = h - (h - L), y = L - g, h = _ * a, p = h - (h - a), d = a - p, E = y * d - (w - g * p - y * p - g * d), b = k * f, h = _ * k, g = h - (h - k), y = k - g, h = _ * f, p = h - (h - f), d = f - p, M = y * d - (b - g * p - y * p - g * d), x = E - M, s = E - x, P[0] = E - (x + s) + (s - M), m = w + x, s = m - w, v = w - (m - s) + (x - s), x = v - b, s = v - x, P[1] = v - (x + s) + (s - b), S = m + x, s = S - m, P[2] = m - (S - s) + (x - s), P[3] = S;
+  m = L * a, h = _ * L, g = h - (h - L), y = L - g, h = _ * a, p = h - (h - a), d = a - p, E = y * d - (m - g * p - y * p - g * d), b = k * f, h = _ * k, g = h - (h - k), y = k - g, h = _ * f, p = h - (h - f), d = f - p, M = y * d - (b - g * p - y * p - g * d), x = E - M, s = E - x, P[0] = E - (x + s) + (s - M), v = m + x, s = v - m, w = m - (v - s) + (x - s), x = w - b, s = w - x, P[1] = w - (x + s) + (s - b), S = v + x, s = S - v, P[2] = v - (S - s) + (x - s), P[3] = S;
   const Bt = K(Gt, dt, 4, P, vt);
-  w = l * a, h = _ * l, g = h - (h - l), y = l - g, h = _ * a, p = h - (h - a), d = a - p, E = y * d - (w - g * p - y * p - g * d), b = c * f, h = _ * c, g = h - (h - c), y = c - g, h = _ * f, p = h - (h - f), d = f - p, M = y * d - (b - g * p - y * p - g * d), x = E - M, s = E - x, P[0] = E - (x + s) + (s - M), m = w + x, s = m - w, v = w - (m - s) + (x - s), x = v - b, s = v - x, P[1] = v - (x + s) + (s - b), S = m + x, s = S - m, P[2] = m - (S - s) + (x - s), P[3] = S;
+  m = l * a, h = _ * l, g = h - (h - l), y = l - g, h = _ * a, p = h - (h - a), d = a - p, E = y * d - (m - g * p - y * p - g * d), b = c * f, h = _ * c, g = h - (h - c), y = c - g, h = _ * f, p = h - (h - f), d = f - p, M = y * d - (b - g * p - y * p - g * d), x = E - M, s = E - x, P[0] = E - (x + s) + (s - M), v = m + x, s = v - m, w = m - (v - s) + (x - s), x = w - b, s = w - x, P[1] = w - (x + s) + (s - b), S = v + x, s = S - v, P[2] = v - (S - s) + (x - s), P[3] = S;
   const zt = K(Bt, vt, 4, P, mt);
   return mt[zt - 1];
 }
@@ -1656,47 +1656,47 @@ function Te(o, t = {}, e = {}, n = Ie) {
         new Z(V(y, s()))
       ), l.setProperties({ isReverse: !0 }), a.addFeature(l));
     },
-    setMarkers(y, p) {
-      function d(x) {
-        var m;
-        if (x)
-          for (const v of x.features) {
-            const w = v.geometry.type === "Polygon" ? new ut(v.geometry.coordinates) : v.geometry.type === "MultiPolygon" ? new ft(v.geometry.coordinates) : null;
-            w && a.addFeature(
+    setFeatures(y, p, d) {
+      function x(v) {
+        var w;
+        if (v)
+          for (const m of v.features) {
+            const E = m.geometry.type === "Polygon" ? new ut(m.geometry.coordinates) : m.geometry.type === "MultiPolygon" ? new ft(m.geometry.coordinates) : null;
+            E && a.addFeature(
               new N({
-                isMask: !!((m = v.properties) != null && m.isMask),
-                geometry: h(w)
+                isMask: !!((w = m.properties) != null && w.isMask),
+                geometry: h(E)
               })
             );
           }
       }
       if (a.clear(), l && a.addFeature(l), p) {
-        let x = !1;
+        let v = !1;
         if (p.geometry.type === "GeometryCollection") {
-          const m = p.geometry.geometries.map(
-            (v) => v.type === "Polygon" ? new ut(v.coordinates) : v.type === "MultiPolygon" ? new ft(v.coordinates) : null
-          ).filter((v) => !!v);
-          if (m.length > 0)
+          const w = p.geometry.geometries.map(
+            (m) => m.type === "Polygon" ? new ut(m.coordinates) : m.type === "MultiPolygon" ? new ft(m.coordinates) : null
+          ).filter((m) => !!m);
+          if (w.length > 0)
             a.addFeature(
-              new N(h(new $t(m)))
-            ), x = !0;
+              new N(h(new $t(w)))
+            ), v = !0;
           else
-            for (const v of p.geometry.geometries)
-              v.type === "LineString" ? (a.addFeature(
+            for (const m of p.geometry.geometries)
+              m.type === "LineString" ? (a.addFeature(
                 new N(
-                  h(new ct(v.coordinates))
+                  h(new ct(m.coordinates))
                 )
-              ), x = !0) : v.type === "MultiLineString" && a.addFeature(
+              ), v = !0) : m.type === "MultiLineString" && a.addFeature(
                 new N(
-                  h(new ht(v.coordinates))
+                  h(new ht(m.coordinates))
                 )
-              ), x = !0;
+              ), v = !0;
         }
-        if (!x) {
+        if (!v) {
           if (p.geometry.type === "Polygon")
-            kt(p, d);
+            kt(p, x);
           else if (p.geometry.type === "MultiPolygon")
-            kt(p, d);
+            kt(p, x);
           else if (p.geometry.type === "LineString") {
             a.addFeature(
               new N(
@@ -1713,26 +1713,28 @@ function Te(o, t = {}, e = {}, n = Ie) {
             return;
           }
         }
+        if (!d && p.geometry.type !== "Point")
+          return;
         a.addFeature(new N(h(new Z(p.center))));
       }
-      for (const x of y ?? []) {
-        if (x === p)
+      for (const v of y ?? []) {
+        if (v === p)
           continue;
-        const m = new N(
-          new Z(V(x.center, s()))
+        const w = new N(
+          new Z(V(v.center, s()))
         );
-        m.setId(x.id), m.setProperties({
-          fuzzy: !!x.matching_text,
-          tooltip: x.place_type[0] === "reverse" ? x.place_name : x.place_name.replace(/,.*/, "")
-        }), a.addFeature(m);
+        w.setId(v.id), w.setProperties({
+          fuzzy: !!v.matching_text,
+          tooltip: v.place_type[0] === "reverse" ? v.place_name : v.place_name.replace(/,.*/, "")
+        }), a.addFeature(w);
       }
     },
     setSelectedMarker(y) {
-      var x, m, v;
+      var x, v, w;
       const p = a.getFeatures(), d = (x = p[0]) != null && x.getProperties().isReverse ? 1 : 0;
-      r > -1 && ((m = p[r + d]) == null || m.setProperties({
+      r > -1 && ((v = p[r + d]) == null || v.setProperties({
         isSelected: !1
-      })), y > -1 && ((v = p[y + d]) == null || v.setProperties({
+      })), y > -1 && ((w = p[y + d]) == null || w.setProperties({
         isSelected: !0
       })), r = y;
     },
