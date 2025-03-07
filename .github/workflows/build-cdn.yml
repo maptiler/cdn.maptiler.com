@@ -1,0 +1,61 @@
+name: Build and Create PR on SDK Release
+
+on:
+  repository_dispatch:
+    types: [repo_release]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Extract Repo and Tag Info
+        run: |
+          echo "SDK_REPO=${{ github.event.client_payload.repo }}" >> $GITHUB_ENV
+          echo "VERSION=${{ github.event.client_payload.tag }}" >> $GITHUB_ENV
+          echo "REPO_BUILD_DIR=${{ github.event.client_payload.build_dir }}" >> $GITHUB_ENV
+
+      - name: Clone CDN Repository
+        run: |
+          git clone https://github.com/YOUR_GITHUB_ORG/CDN_REPO.git cdn-repo
+          cd cdn-repo
+          git checkout -b update-${{ env.SDK_REPO }}-${{ env.VERSION }}
+
+      - name: Clone SDK Repository (Release Tag)
+        run: git clone --branch ${{ env.VERSION }} https://github.com/${{ env.SDK_REPO }}.git sdk-repo
+
+      - name: Install Dependencies and Build UMD
+        run: |
+          cd sdk-repo
+          npm install
+          npm run build:umd
+
+      - name: Move Built Files to CDN Structure
+        run: |
+          mkdir -p cdn-repo/${{ env.SDK_REPO }}/${{ env.VERSION }}
+          mv sdk-repo/${{env.REPO_BUILD_DIR}}/* cdn-repo/${{ env.SDK_REPO }}/${{ env.VERSION }}/
+
+      - name: Commit Changes
+        run: |
+          cd cdn-repo
+          git config --global user.name "Maptiler Automation | Github Actions"
+          git config --global user.email "contact@maptiler.com"
+          git add .
+          git commit -m "Add UMD build for ${{ env.SDK_REPO }} version ${{ env.VERSION }}"
+
+      - name: Push to New Branch
+        run: |
+          cd cdn-repo
+          git push origin update-${{ env.SDK_REPO }}-${{ env.VERSION }}
+
+      - name: Create Pull Request
+        run: |
+          PR_DATA=$(jq -n --arg title "Update ${{ env.SDK_REPO }} to ${{ env.VERSION }}" \
+                           --arg head "update-${{ env.SDK_REPO }}-${{ env.VERSION }}" \
+                           --arg base "main" \
+                           --arg body "This is an automated PR updating ${{ env.SDK_REPO }} to version ${{ env.VERSION }}." \
+                           '{title: $title, head: $head, base: $base, body: $body}')
+
+          curl -X POST -H "Authorization: token ${{ secrets.CDN_MAPTILER_TOKEN }}" \
+                       -H "Accept: application/vnd.github.v3+json" \
+                       https://api.github.com/repos/maptiler/cdn.maptiler.com/pulls \
+                       -d "$PR_DATA"
