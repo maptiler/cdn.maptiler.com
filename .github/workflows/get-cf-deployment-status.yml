@@ -66,7 +66,6 @@ jobs:
 
       - name: Get deployment logs
         id: get_logs
-        if: env.deployment_failed == 'true'
         run: |
           curl -s -H "Authorization: Bearer ${{ secrets.CF_API_TOKEN }}" \
             "https://api.cloudflare.com/client/v4/accounts/${{ secrets.CF_ACCOUNT_ID }}/pages/projects/${{ env.CLOUDFLARE_PROJECT }}/deployments/${{ env.deployment_id }}/history/logs" \
@@ -97,7 +96,6 @@ jobs:
           body-includes: Cloudflare Pages deployment failed
 
       - name: Display logs in PR
-        if: env.deployment_failed == 'true'
         uses: peter-evans/create-or-update-comment@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
