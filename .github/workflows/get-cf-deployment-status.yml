@@ -1,0 +1,123 @@
+name: Get Cloudflare deployment
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+
+env:
+  CLOUDFLARE_PROJECT: cdn-maptiler-com
+
+jobs:
+  get-cloudflare-deployment-status:
+    runs-on: [ self-hosted, clancy ]
+
+    steps:
+      - name: Get commit SHA
+        run: echo "commit_sha=${{ github.event.pull_request.head.sha }}" >> $GITHUB_ENV
+
+      - name: Fetch Cloudflare deployment
+        run: |
+          curl -s -H "Authorization: Bearer ${{ secrets.CF_API_TOKEN }}" \
+            "https://api.cloudflare.com/client/v4/accounts/${{ secrets.CF_ACCOUNT_ID }}/pages/projects/${{ env.CLOUDFLARE_PROJECT }}/deployments" > deployments.json
+
+      - name: Get Cloudflare deployment ID for this commit
+        run: |
+          for i in {1..30}; do
+            id=$(jq -r --arg sha "${{ env.commit_sha }}" '.result[] | select(.deployment_trigger.metadata.commit_hash == $sha) | .id' deployments.json | head -n1)
+
+            if [ -n "$id" ]; then
+              echo "deployment_id=$id" >> $GITHUB_ENV
+              echo "Found deployment ID: $id"
+              exit 0
+            fi
+
+            echo "Waiting for deployment to appear..."
+            sleep 10
+
+            curl -s -H "Authorization: Bearer ${{ secrets.CF_API_TOKEN }}" \
+              "https://api.cloudflare.com/client/v4/accounts/${{ secrets.CF_ACCOUNT_ID }}/pages/projects/${{ env.CLOUDFLARE_PROJECT }}/deployments" > deployments.json
+          done
+
+          echo "Deployment for this commit not found in 5 minutes"
+          exit 1
+
+      - name: Wait for deployment to finish
+        run: |
+          for i in {1..90}; do
+            status=$(curl -s -H "Authorization: Bearer ${{ secrets.CF_API_TOKEN }}" \
+              "https://api.cloudflare.com/client/v4/accounts/${{ secrets.CF_ACCOUNT_ID }}/pages/projects/${{ env.CLOUDFLARE_PROJECT }}/deployments/${{ env.deployment_id }}" \
+              | jq -r '.result.latest_stage.status')
+
+            echo "Deployment status: $status"
+            if [ "$status" = "success" ]; then
+              echo "deployment_failed=false" >> $GITHUB_ENV
+              exit 0
+            elif [ "$status" = "failure" ]; then
+              echo "deployment_failed=true" >> $GITHUB_ENV
+              exit 0
+            fi
+            sleep 10
+          done
+
+          echo "Deployment timed out after 15 minutes"
+          exit 1
+
+      - name: Get deployment logs
+        id: get_logs
+        if: env.deployment_failed == 'true'
+        run: |
+          curl -s -H "Authorization: Bearer ${{ secrets.CF_API_TOKEN }}" \
+            "https://api.cloudflare.com/client/v4/accounts/${{ secrets.CF_ACCOUNT_ID }}/pages/projects/${{ env.CLOUDFLARE_PROJECT }}/deployments/${{ env.deployment_id }}/history/logs" \
+            | jq -r '.result.data[].line' > deployment_logs.txt
+
+          curl -s -H "Authorization: Bearer ${{ secrets.CF_API_TOKEN }}" \
+            "https://api.cloudflare.com/client/v4/accounts/${{ secrets.CF_ACCOUNT_ID }}/pages/projects/${{ env.CLOUDFLARE_PROJECT }}/deployments/${{ env.deployment_id }}/history/logs" \
+            | jq -r '.result.data[0].ts' > timestamp.txt
+
+          echo "logs<<EOF" >> $GITHUB_OUTPUT
+          cat deployment_logs.txt >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+          echo "short_logs<<EOF" >> $GITHUB_OUTPUT
+          tail -n 50 deployment_logs.txt >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+          echo "timestamp<<EOF" >> $GITHUB_OUTPUT
+          cat  timestamp.txt >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Find existing comment
+        id: find_comment
+        uses: peter-evans/find-comment@v3
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          comment-author: 'github-actions[bot]'
+          body-includes: Cloudflare Pages deployment failed
+
+      - name: Display logs in PR
+        if: env.deployment_failed == 'true'
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          repository: ${{ github.repository }}
+          issue-number: ${{ github.event.pull_request.number }}
+          comment-id: ${{ steps.find_comment.outputs.comment-id }}
+          edit-mode: replace
+          body: |
+            **Cloudflare Pages deployment failed**
+
+            Commit: `${{ env.commit_sha }}`
+
+            **Last 50 lines:**
+            ```
+            ${{ steps.get_logs.outputs.short_logs }}
+            ```
+
+            <details>
+              <summary>Full log from ${{ steps.get_logs.outputs.timestamp }}:</summary>
+
+              <pre><code>${{ steps.get_logs.outputs.logs }}</code></pre>
+
+            </details>
