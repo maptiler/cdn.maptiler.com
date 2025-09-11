@@ -5,33 +5,36 @@
     xmlns:dc="http://purl.org/dc/elements/1.1/">
     <channel>
         <title>MapTiler Engine Updated!</title>
-        <link>https://maptiler.download/engine/release/appcast.xml</link>
+        <link>https://maptiler.download/desktop/release/appcast-free.xml</link>
         <description>Most recent changes with links to updates.</description>
         <language>en</language>
-        <atom:link href="https://maptiler.download/engine/release/appcast.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://maptiler.download/desktop/release/appcast-free.xml" rel="self" type="application/rss+xml" />
 
         <item>
-            <title>Version 14.1</title>
-            <pubDate>2025-08-12T12:51:35Z</pubDate>
-            <postponeLimit>2025-09-18</postponeLimit>
+            <title>Version 14.1.1</title>
+            <pubDate>2025-09-09T13:13:47Z</pubDate>
+            <postponeLimit>2025-10-11</postponeLimit>
 
             <description>
 <![CDATA[
 <h3><a href="https://www.maptiler.com/news/">MapTiler Engine 14.1</a> released. Warning for DESKTOP users!</h3>
 
-<p><strong>MapTiler Desktop (versions 11.3 and earlier) will be discontinued for all users on November 30th, 2025.</strong></p>
+<p><strong>MapTiler Desktop (versions 11.3 and earlier) will be discontinued for<br/>
+all users on November 30th, 2025.</strong></p>
 
-<p>You're invited to upgrade to the new MapTiler Engine 14.1, which offers both free and paid plans. All features can be tested during a free 14-day trial. If you
+<p>You're invited to upgrade to the new MapTiler Engine 14.1, which offers both<br/>
+free and paid plans. All features can be tested during a free 14-day trial. If you<br/>
 upgrade from the trial now, you can enjoy an exclusive <strong>50% in-app discount.</p>
 
-<p>We are here to assist you with a smooth transition. Feel free to contact us at <a href="mailto:support@maptiler.com">support@maptiler.com</a>.</p>
+<p>We are here to assist you with a smooth transition. Feel free to contact us at<br/>
+<a href="mailto:support@maptiler.com">support@maptiler.com</a>.</p>
 
 ]]>
             </description>
-            <sparkle:releaseNotesLink>https://maptiler.download/engine/release/v14.1.html</sparkle:releaseNotesLink>
-            <enclosure length="915739904" type="application/octet-stream" url="https://maptiler.download/engine/maptiler-engine-14.1-app-win-x64-setup.exe" fervor:version="14.1" fervor:platform="Q_OS_WIN32"/>
-            <enclosure length="832877296" type="application/octet-stream" url="https://maptiler.download/engine/maptiler-engine-14.1-app-linux.AppImage" fervor:version="14.1" fervor:platform="Q_OS_LINUX"/>
-            <enclosure length="1121124311" type="application/octet-stream" url="https://maptiler.download/engine/maptiler-engine-14.1-app-mac.zip" fervor:version="14.1" fervor:platform="Q_OS_MAC"/>
+            <sparkle:releaseNotesLink>https://maptiler.download/desktop/release/v14.1.1.html</sparkle:releaseNotesLink>
+            <enclosure length="915739896" type="application/octet-stream" url="https://maptiler.download/engine/maptiler-engine-14.1.1-app-win-x64-setup.exe" fervor:version="14.1.1" fervor:platform="Q_OS_WIN32"/>
+            <enclosure length="832877296" type="application/octet-stream" url="https://maptiler.download/engine/maptiler-engine-14.1.1-app-linux.AppImage" fervor:version="14.1.1" fervor:platform="Q_OS_LINUX"/>
+            <enclosure length="1121134612" type="application/octet-stream" url="https://maptiler.download/engine/maptiler-engine-14.1.1-app-mac.zip" fervor:version="14.1.1" fervor:platform="Q_OS_MAC"/>
         </item>
 
     </channel>
